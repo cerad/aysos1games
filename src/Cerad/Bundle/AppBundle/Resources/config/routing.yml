@@ -1,3 +1,14 @@
-cerad_app_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: CeradAppBundle:Default:index }
+# =================================================
+# 26 Sep 2013
+# All the s1games routes should be defined here
+#
+# Top pages
+cerad_tourn_index:
+    pattern:  /
+    defaults: { _controller: CeradTournBundle:Tourn/TournIndex:index }
+#   redirect: cerad_tourn_welcome
+
+cerad_tourn_welcome:
+    pattern:  /welcome
+    defaults: { _controller: CeradTournBundle:Tourn/TournWelcome:welcome }
+#                           @CeradTourn/Tourn/Welcome/TournWelcomeIndex.html.twig

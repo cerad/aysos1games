@@ -31,7 +31,10 @@ framework:
 twig:
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
-
+    paths:
+       #"%cerad_app_resources_dir%/views": CeradTourn # Does not currently work
+        "%kernel.root_dir%/../src/Cerad/Bundle/AppBundle/Resources/views": CeradTourn
+        
 # Assetic Configuration
 assetic:
     debug:          %kernel.debug%
