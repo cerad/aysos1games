@@ -1,0 +1,58 @@
+{# @CeradTourn/Tourn/Home/TournHomeListPeople.html.twig #}
+<br/>
+<table class="account-person-list app_table" border="1">
+    <!--<tr><th colspan="4">People Associated With This Account</th></tr>-->
+    <tr>
+        <th>Account Information</th>
+        <th>AYSO Information</th>
+        <th>Tournament Plans</th>
+    </tr>
+    {% for personPerson in userPerson.personPersons %}
+    {% set person  = personPerson.child       %}
+    {% set name    = person.name              %}
+    {% set fed     = person.fed(project.fedRoleId) %}
+    {% set org     = fed.org                  %}
+    {% set certRef = fed.certReferee          %}
+    {% set certSH  = fed.certSafeHaven        %}
+    {% set plan    = person.plan(project.id)  %}
+    <tr>
+        <td><table>
+            <tr><td>Name:</td><td>{{ name.full }}</td></tr>
+            <tr><td>Relation:</td><td>{{ personPerson.role }}</td></tr>
+            {% if personPerson.isRolePrimary %}
+            <tr><td>Account:</td><td>
+              {#<a href="{{ path('cerad_tourn_account_update') }}">#}
+                    {{ user.username }}
+              {#</a>#}
+            </td></tr>
+            <tr><td> </td></tr>
+            <tr><td colspan="2"><a href="{{ path('cerad_tourn_person_person_update', { 'id': personPerson.id }) }}">Update your account</a></td></tr>
+           {% for authens in user.authens %}
+                <tr><td>Social:</td><td>{{ authens.source }}</td></tr>
+            {% endfor %}
+            {% endif %}
+        </table></td>
+        <td><table>
+            <tr><td>AYSO ID:</td>   <td>{{ fed.id | slice(5)    }}</td></tr>
+            <tr><td>Vol Year:</td>  <td>{{ org.memYear          }}</td></tr>
+            <tr><td>Safe Haven:</td><td>{{ certSH.badge         }}</td></tr>
+            <tr><td>Ref Badge:</td> <td>{{ certRef.badgex       }}</td></tr>
+            <tr><td>Region:</td>    <td>{{ org.orgId | slice(4) }}</td></tr>
+        </table></td>
+        <td><table>
+        {% if plan.id %}
+           <tr><td>Will Attend: </td><td>{{ plan.basic.attending   }}</td></tr>
+           <tr><td>Will Referee:</td><td>{{ plan.basic.refereeing  }}</td></tr>
+            <tr><td> </td></tr>
+            <tr><td></td></tr>
+           <tr><td colspan="2"><a href="{{ path('cerad_tourn_person_plan_update',{ id: person.id }) }}">Update your plans</td></tr>
+        {% else %}
+            <tr><td> </td></tr>
+            <tr><td> </td></tr>
+           <tr><td colspan="2"><a href="{{ path('cerad_tourn_person_plan_update',{ id: person.id }) }}">Please set your plans</td></tr>
+        {% endif %}
+        </table></td>
+    </tr>
+    {% endfor %}
+</table>
+

@@ -19,6 +19,12 @@ framework:
     templating:
         engines: ['twig']
         #assets_version: SomeVersionScheme
+       # Wordpress paths        
+        packages:
+          S1Games:
+            base_urls: ["http://ayso1ref.com/"]
+          refLogin:
+            base_urls: ["http://ayso1ref.com/ref_login/"]    
     default_locale:  "%locale%"
     trusted_proxies: ~
     session:         

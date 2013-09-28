@@ -1,10 +1,10 @@
 {# @CeradTourn/Schedule/Official/ScheduleOfficialList.html.twig #}
 
 <div class="schedule-game-list">
-    <table id="schedule" border="1" style="max-width: 850px;">
+    <table class="schedule" border="1" style="max-width: 850px;">
     <thead>
-        <tr><th colspan="20">Referee Game Schedule - Count: {{ games | length }}</th></tr>
-        <tr>
+        <tr class="tbl-title" ><th colspan="20">Referee Game Schedule - Count: {{ games | length }}</th></tr>
+        <tr class="tbl-hdr">
             <th>Game</th>
             <th>DOW</th>
             <th>Time</th>
@@ -26,12 +26,12 @@
                 {% endif %}
             </td>
             <td>{{ game.dtBeg.format('D'    ) }}</td>
-            <td>{{ game.dtBeg.format('H:i A') }}</td> 
-            
+            <td>{{ game.dtBeg.format('H:i A') }}</td>
+
             <td>{{ game.field.name }}</td>
           {#<td>{{ game.levelId    }}</td>#}
             <td>{{ game.group      }}</td>
-            
+
             <td><table>
                 {% for gameTeam in game.teams %}
                     <tr>
@@ -51,8 +51,8 @@
     </table>
 </div>
 {% block javascripts %}
-<script type="text/javascript">
-    $(document).ready(function() 
+<!--<script type="text/javascript">
+    $(document).ready(function()
     {
         $('#schedule').dataTable(
         {
@@ -65,5 +65,5 @@
             "aaSorting": [[ 2, "asc" ],[ 5, "asc" ],[ 4, "asc" ]]
         });
     });
-</script>
+</script>-->
 {% endblock %}

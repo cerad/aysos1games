@@ -1,0 +1,33 @@
+{# @CeradTourn/PersonPlan/Update/PersonPlanUpdateEmailBody.html.twig   #}
+{% autoescape false %}
+{{ person.name.nick }},
+Your plans have been updated:
+
+    Account Name:{{ person.name.full }}
+
+    AYSO Region:{{ org.OrgId }}
+    ASYO ID: {{ fed.id | slice(5) }}
+    Referee Certification: {{ certReferee.badgex }}
+    Email: {{ person.email }}
+    Phone: {{ person.phone | cerad_phone }}
+
+{% set basic = plan.basic %}
+    Will Attend:  {{ basic.attending }}
+    Will Referee: {{ basic.refereeing }}
+
+  Your Notes:
+    {{ basic.notes }}
+---
+
+Update your account and tournament plans at: {{ asset('s1_13_sign-in','S1Games') }} ‎
+
+Thank you for your support,
+
+{{ assignor.name }}
+{#
+{{ project.title }}
+{{ assignor.phone }}
+{{ assignor.email }}
+#}
+
+{% endautoescape %}

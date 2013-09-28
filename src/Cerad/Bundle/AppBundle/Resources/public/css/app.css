@@ -1,0 +1,376 @@
+/*
+    Document   : app
+    Created on : Sep 10, 2013, 2:12:46 PM
+    Author     : ahundiak
+    Description:
+        Purpose of the stylesheet follows.
+*/
+root
+{
+  display: block;
+}
+
+/*
+ * http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 0.8em;
+	font: inherit;
+	vertical-align: baseline;
+
+  /*border: 1px solid;*/
+  /*border-color: #80d2ff;*/
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/*
+    * zAYSO CSS for 2014 National Games
+    * By: Rick Roberts  web.ng2014@gmail.com
+    * Version: 11 Sept 2013
+*/
+
+.sf-toolbar, .sf-toolbar *
+{
+  border:none;
+}
+
+html, body, h1, h2, h3, h4, h5, h6, p, ol, ul, li, dl, pre, code, address,
+variable, form, fieldset, blockquote, label, img
+{
+  margin: 0;
+  padding: 0;
+  font-family: Arial, 'Trebuchet MS', sans-serif;
+  font-size: small;
+}
+
+body
+{
+  min-width: 720px;
+}
+
+h3, h4, legend
+{
+  font-weight: bold;
+  font-size: 18px !important;
+}
+
+strong
+{
+  font-weight: bold;
+}
+
+em{
+  font-style: italic;
+}
+
+#layout-header *
+{
+  padding: 10px;
+}
+
+#layout-content h3
+{
+  padding: 5px 20px;
+}
+
+#layout-userinfo
+,#layout-userinfo *
+{
+  font-size:  small;
+}
+
+#layout-userinfo p#user_name
+{
+  float: right;
+  padding-top: 0;
+}
+
+#notes
+{
+  padding: 5px 10px 5px 10px;
+  font-size: inherit;
+}
+
+table {
+  font-size: inherit;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table.data{
+  table-layout: auto;
+}
+
+table colgroup col
+{
+  width: 20%;
+}
+
+table th
+{
+  width: 30%;
+  background-color: #004080;
+  color: white;
+  font-weight: bold;
+  padding: 1.1em;
+  vertical-align: middle;
+}
+
+table td
+{
+  padding: 5px;
+  height: 1.1em;
+}
+
+table.app_table > tbody > tr > td
+{
+  border: 1px solid;
+}
+
+.app_form
+{
+  margin-left: auto;
+  margin-right: auto;
+  position: relative; /* labels need this on the their parent element */
+}
+
+
+/*
+ *  http://www.texotela.co.uk/code/css/fieldsetform/
+ *  Styling fields contained within a fieldset
+ *    (nothing fancy, just lined up labels (text right-aligned) and fields).
+*/
+
+form.app_form fieldset
+{
+	padding: 0 10px;
+	margin-bottom: 6px;
+}
+
+form.app_form fieldset legend
+{
+  /*display: none;*/
+
+	font-size: 1.1em;
+	font-weight: bold;
+  color: inherit;
+}
+
+form.app_form fieldset div
+,form.app_form fieldset > label
+
+{
+  margin: 0 auto 6px auto;
+/*	border: solid #67874f 1px;
+*/	padding: 2px;
+}
+
+form.app_form fieldset > label
+{
+  margin-left: 51%;
+  font-size:small;
+}
+
+form.app_form fieldset div label
+{
+	clear: none;
+	display: block;
+	float: left;
+	width: auto;
+  min-width: 50%;
+  font-size: inherit;
+	text-align: right;
+	/*
+		increase or decrease line-height depending on font-size set in 'div.field .input'
+		trial and error needed to get it right
+	 */
+	line-height: 1.7em;
+	padding-right: 6px;
+}
+
+form.app_form fieldset div select
+{
+	clear: none;
+  text-align: left;
+  font-size: inherit;
+  height: 1.8em;
+}
+
+input[type="text"]
+,input[type="checkbox"]
+,input[type="email"]
+{
+	clear: none;
+  text-align: left;
+  font-size: inherit;
+  height: 1.1em;
+}
+
+label#checkbox_label
+{
+  display: block;
+  padding-left: 15px;
+  text-indent: -15px;
+}
+
+input#cerad_tourn_account_user_login_remember_me
+{
+  width: 13px;
+  height: 13px;
+  padding: 0;
+  margin:0;
+  vertical-align: bottom;
+  position: relative;
+  top: -1px;
+  overflow: hidden;
+}
+form.app_form fieldset div textarea
+{
+	clear: none;
+	height: 10em;
+  width: 45%;
+	padding: 2px;
+	overflow: auto;
+}
+
+form.app_form fieldset div.controls
+{
+  height:3em;
+  font: inherit;
+  width: 80%;
+  text-align: right;
+}
+
+form.app_form fieldset div.controls input[type="submit"]
+{
+  padding: 5px 20px;
+  float: right;
+  font-size: inherit;
+}
+
+fieldset.app_form input#input_button
+{
+	/*margin-left: 131px; /* 'div.field label' width + padding */*/
+	text-align: center; /* without this, button text is left-aligned in IE */
+}
+
+.app_help
+{
+  padding: 0 20px 30px 10px;
+  line-height: 1.25em;
+  display: inline-block;
+}
+
+.app_help h3
+{
+  margin-left: -20px;
+}
+
+.app_help li
+{
+  padding-top: 10px;
+  padding-left: 20px;
+}
+
+.app_help ul ul li
+{
+  list-style-type: disc;
+  padding-left: 0;
+  margin-left: 30px;
+}
+
+/*
+ *  http://www.dynamicdrive.com/style/csslibrary/item/css3_semi_opaque_menu/
+ *  13 Sept 2013
+ *
+ */
+
+div.bottombar{ /* bar that runs across the bottom of the menu */
+height: 3px;
+background: #480000;
+}
+
+ul.semiopaquemenu{ /* main menu UL */
+font-weight: bold;
+font-size: 13px;
+background: #ed2116;
+/*width:100%;*/
+padding: 6px 0 6px 8px; /* padding of the 4 sides of the menu */
+margin: 0;
+text-align: left; /* set value to "left", "center", or "right" to align menu accordingly */
+}
+
+ul.semiopaquemenu li{
+display: inline;
+}
+
+ul.semiopaquemenu li a{
+color:white;
+padding: 6px 8px 6px 8px; /* padding of the 4 sides of each menu link */
+margin-right: 15px; /* spacing between each menu link */
+text-decoration: none;
+}
+
+ul.semiopaquemenu li a:hover, ul.semiopaquemenu li a.selected{
+color: black;
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIwLjgyIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZmZmZmYiIHN0b3Atb3BhY2l0eT0iMC4xNiIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+); /* IE9+ SVG equivalent  of linear gradients */
+background: -moz-linear-gradient(top,  rgba(255,255,255,0.82) 0%, rgba(255,255,255,0.16) 100%); /* fade from white (0.82 opacty) to 0.16 opacity */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0.82)), color-stop(100%,rgba(255,255,255,0.16)));
+background: -webkit-linear-gradient(top,  rgba(255,255,255,0.82) 0%,rgba(255,255,255,0.16) 100%);
+background: -o-linear-gradient(top,  rgba(255,255,255,0.82) 0%,rgba(255,255,255,0.16) 100%);
+background: -ms-linear-gradient(top,  rgba(255,255,255,0.82) 0%,rgba(255,255,255,0.16) 100%);
+background: linear-gradient(top,  rgba(255,255,255,0.82) 0%,rgba(255,255,255,0.16) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d1ffffff', endColorstr='#29ffffff',GradientType=0 );
+-moz-box-shadow: 0 0 5px #595959; /* CSS3 box shadows */
+-webkit-box-shadow: 0 0 5px #595959;
+box-shadow: 0 0 5px #595959;
+padding-top: 12px; /* large padding to get menu item to protrude upwards */
+padding-bottom: 12px; /* large padding to get menu item to protrude downwards */
+}
+
+#error
+{
+  margin-left: 50%;
+  color: red;
+  font-weight: bold;
+}

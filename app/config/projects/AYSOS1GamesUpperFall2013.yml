@@ -16,6 +16,19 @@ AYSOS1GamesUpperFall2013:
         desc:    "AYSO Section One U16/U19 Games -- Ayala Park, Chino -- 23-24 November 2013"
                           
         results: s1games
+
+        submit:  "Emails your application to Art Hundiak and yourself."
+        prefix:   S1Games
+             
+        assignor:
+            name:  "Jody Kinsey"
+            email: "jodykinsey23@gmail.com"
+            phone:  909.262.8806
+
+        system:
+            name:  "Section One 2013 U16/U19 Playoffs"
+            email: "no.response.s1games@gmail.com"
+            phone:  ""        
         
     # ==============================================
     # For the schedule search form

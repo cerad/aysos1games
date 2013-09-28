@@ -1,39 +1,38 @@
 {# @CeradTourn/ResultsPoolPlay/ResultsPoolPlayTeams.html.twig #}
-<table border = "1">
-<tr><th colspan="16">Team Pool Standings - {{ poolKey }}</th></tr>
-<tr><td colspan="16">T=Total, GT=Games Total, GP=Games Played, GW=Games Won, WPF=Winning Percent Formula</td></tr>
-<tr>
-  <td>Pool</td>
-  <td>Team</td>
-  <td align="center">TPE</td>
-  <td align="center">WPF</td>
-  <td>&nbsp;</td>
-  <td align="center">GT</td>
-  <td align="center">GP</td>
-  <td align="center">GW</td>
-  <td align="center">TGS</td>
-  <td align="center">TGA</td>
-  <td align="center">TYC</td>
-  <td align="center">TRC</td>
-  <td align="center">TE</td>
-  <td align="center">TSP</td>
+<table class="standings" border = "1">
+<tr class="tbl-title"><th colspan="16">Team Pool Standings - {{ poolKey }}</th></tr>
+<tr class="tbl-hdr">
+  <th>Pool</th>
+  <th>Team</th>
+  <th align="center">TPE</th>
+ <th align="center">WPF</th>
+ <th>&nbsp;</th>
+ <th align="center">GT</th>
+ <th align="center">GP</th>
+ <th align="center">GW</th>
+ <th align="center">TGS</th>
+ <th align="center">TGA</th>
+ <th align="center">TYC</th>
+ <th align="center">TRC</th>
+ <th align="center">TE</th>
+ <th align="center">TSP</th>
 </tr>
 {% for report in pool.teams %}
 <tr>
-    <td>{{ report.team.group }}</td>                  
-    <td>{{ report.team.name  }}</td>                  
+    <td>{{ report.team.group }}</td>
+    <td>{{ report.team.name  }}</td>
     <td align="center">{{ report.pointsEarned    }}</td>
     <td align="center">{{ report.winPercent      }}</td>
-    <td>&nbsp;</td>              
-    <td align="center">{{ report.gamesTotal      }}</td>                  
-    <td align="center">{{ report.gamesPlayed     }}</td>                                  
-    <td align="center">{{ report.gamesWon        }}</td>                  
-    <td align="center">{{ report.goalsScored     }}</td>                  
-    <td align="center">{{ report.goalsAllowed    }}</td>                  
-    <td align="center">{{ report.playerWarnings  }}</td>                  
-    <td align="center">{{ report.playerEjections }}</td>                  
-    <td align="center">{{ report.totalEjections  }}</td>                               
-    <td align="center">{{ report.sportsmanship   }}</td>                              
+    <td>&nbsp;</td>
+    <td align="center">{{ report.gamesTotal      }}</td>
+    <td align="center">{{ report.gamesPlayed     }}</td>
+    <td align="center">{{ report.gamesWon        }}</td>
+    <td align="center">{{ report.goalsScored     }}</td>
+    <td align="center">{{ report.goalsAllowed    }}</td>
+    <td align="center">{{ report.playerWarnings  }}</td>
+    <td align="center">{{ report.playerEjections }}</td>
+    <td align="center">{{ report.totalEjections  }}</td>
+    <td align="center">{{ report.sportsmanship   }}</td>
 </tr>
-{% endfor %}       
+{% endfor %}
 </table>
