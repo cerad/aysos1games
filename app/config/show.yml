@@ -8,14 +8,12 @@ parameters:
             layout_userinfo: true
             janrain:        false  # Social network login
             wordpress:      true  # Style sheets and javascripts
-            
         s1:
             layout_header:  true
             layout_topmenu: true
             layout_userinfo: true
             janrain:        false  # Social network login
             wordpress:      true  # Style sheets and javascripts
-            
         default:
             layout_header:  false
             layout_topmenu: false
