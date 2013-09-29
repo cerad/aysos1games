@@ -8,7 +8,7 @@ padding: 0;
 float: left;
 width: 100%;
 font: bold 13px Arial;
-background: #004080 url(/bundles/ceradapp/images/bluedefault.gif) center center repeat-x; /*default background of menu bar*/
+background: #004080 url(/aysos1games/bundles/ceradapp/images/bluedefault.gif) center center repeat-x; /*default background of menu bar*/
 }
 
 .droplinebar ul li{
@@ -28,7 +28,7 @@ color: white;
 
 .droplinebar ul li a:hover, .droplinebar ul li .current{ /*background of main menu bar links onMouseover*/
 color: white;
-background: transparent url(/bundles/ceradapp/images/blueactive.gif) center center repeat-x;
+background: transparent url(/aysos1games/bundles/ceradapp/images/blueactive.gif) center center repeat-x;
 }
 
 /* Sub level menus*/

@@ -2,7 +2,7 @@ parameters:
   
     cerad_tourn_show_configs:
       
-        rick:
+        s1:
             layout_header:  true
             layout_topmenu: true
             layout_userinfo: true
@@ -10,9 +10,9 @@ parameters:
             wordpress:      true  # Style sheets and javascripts
             
         default:
-            layout_header:  true
-            layout_topmenu: true
+            layout_header:  false
+            layout_topmenu: false
             layout_userinfo: true
-            janrain:        false #true
-            wordpress:      true  #false
+            janrain:        true
+            wordpress:      false
             

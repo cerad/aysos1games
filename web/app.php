@@ -1,6 +1,6 @@
 <?php
 
-define('CERAD_TOURN_SHOW_CONFIG','default');
+define('CERAD_TOURN_SHOW_CONFIG','s1');
 
 use Symfony\Component\ClassLoader\ApcClassLoader;
 use Symfony\Component\HttpFoundation\Request;
