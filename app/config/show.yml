@@ -2,8 +2,8 @@ parameters:
   
     cerad_tourn_show_configs:
       
-        rick:
-            layout_header:  true
+        s1:
+            layout_header:  false
             layout_topmenu: true
             layout_userinfo: true
             janrain:        false  # Social network login
