@@ -6,7 +6,7 @@
 
 var droplinemenu={
 
-arrowimage: {classname: 'downarrowclass', src: '/bundles/ceradapp/images/down.gif', leftpadding: 5}, //customize down arrow image
+arrowimage: {classname: 'downarrowclass', src: '/s1games/bundles/ceradapp/images/down.gif', leftpadding: 5}, //customize down arrow image
 animateduration: {over: 200, out: 100}, //duration of slide in/ out animation, in milliseconds
 
 buildmenu:function(menuid){
