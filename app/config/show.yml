@@ -2,7 +2,7 @@ parameters:
   
     cerad_tourn_show_configs:
       
-        s1:
+        rick:
             layout_header:  false
             layout_topmenu: true
             layout_userinfo: true
