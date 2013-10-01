@@ -12,14 +12,16 @@
           {#<th>Div</th>#}
             <th>Pool</th>
             <th>Home / Away Teams</th>
+{% if is_granted('ROLE_USER') %}
             <th>Officials</th>
+{% endif %}
         </tr>
     </thead>
     <tbody>
         {% for game in games %}
         <tr id="ref-sched-{{game.num}}" class="game-status-{{game.status}}">
             <td>
-                {% if false %}
+                {% if is_granted('ROLE_USER') %}
                 <a href="{{ path('cerad_tourn_game_report_update', { 'num': game.num })}}">{{ game.num }}</a>
                 {% else %}
                 {{ game.num }}
@@ -40,18 +42,20 @@
                     </tr>
                 {% endfor %}
             </table></td>
+{% if is_granted('ROLE_USER') %}
             <td><table>
                 {% for gameOfficial in game.officials %}
                     <tr><td>{{ gameOfficial.role }}:&nbsp;</td><td>{{ gameOfficial.personNameFull }}</td></tr>
                 {% endfor %}
             </table></td>
+{% endif %}
        </tr>
         {% endfor %}{# games #}
     </tbody>
     </table>
 </div>
 {% block javascripts %}
-<!--<script type="text/javascript">
+<script type="text/javascript">
     $(document).ready(function()
     {
         $('#schedule').dataTable(
@@ -65,5 +69,5 @@
             "aaSorting": [[ 2, "asc" ],[ 5, "asc" ],[ 4, "asc" ]]
         });
     });
-</script>-->
+</script>
 {% endblock %}

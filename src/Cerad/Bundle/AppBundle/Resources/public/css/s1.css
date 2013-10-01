@@ -21,7 +21,7 @@ variable, form, fieldset, blockquote, label, img
 
 body
 {
-  width: 53%;
+  width: 100%;
 }
 
 h1 {
@@ -198,7 +198,7 @@ table.schedule
 
 .schedule-search
 {
-  display: none;
+  /*display: none;*/
 }
 
 .schedule table tr:nth-child(odd)

@@ -1,15 +1,6 @@
 {# @CeradTourn/Tourn/TopMenu/TournTopMenuIndex.html.twig   #}
 <div id="droplinetabs1" class="droplinebar">
 <ul >
-  <li>
-    <a href="">Pool Play Results</a>
-    <ul>
-      <li>  <a href="{{ path('cerad_tourn_results_poolplay', { 'div': 'AYSO_U16B_Core'}) }}">U16 Boys </a></li>
-      <li>  <a href="{{ path('cerad_tourn_results_poolplay', { 'div': 'AYSO_U16G_Core'}) }}">U16 Girls</a></li>
-      <li>  <a href="{{ path('cerad_tourn_results_poolplay', { 'div': 'AYSO_U19B_Core'}) }}">U19 Boys </a></li>
-      <li>  <a href="{{ path('cerad_tourn_results_poolplay', { 'div': 'AYSO_U19G_Core'}) }}">U19 Girls</a></li>
-    </ul>
-  </li>
 {% if is_granted('ROLE_USER') %}
   <li class="float-right">
     <a href="{{ path('cerad_tourn_user_logout') }}">Logout</a>
@@ -31,6 +22,5 @@
     <a href="{{ path('cerad_tourn_home') }}">Login</a>
   </li>
 {% endif %}
-
-</div>
 </ul>
+</div>
