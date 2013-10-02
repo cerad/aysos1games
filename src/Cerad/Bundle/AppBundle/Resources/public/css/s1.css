@@ -21,7 +21,7 @@ variable, form, fieldset, blockquote, label, img
 
 body
 {
-  width: 53%;
+  width: 100%;
 }
 
 h1 {
@@ -132,7 +132,7 @@ table colgroup col
 table th
 {
   width: 30%;
-  background-color: #004080;
+  background-color: #0066ff;
   color: white;
   font-weight: bold;
   padding: 1.1em;
@@ -198,7 +198,7 @@ table.schedule
 
 .schedule-search
 {
-  display: none;
+  /*display: none;*/
 }
 
 .schedule table tr:nth-child(odd)
@@ -210,4 +210,9 @@ input[type="submit"]
 {
   padding: 5px 20px;
   font-size: inherit;
+}
+
+.account-person-list
+{
+  width: 99%;
 }

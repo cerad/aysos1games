@@ -2,14 +2,22 @@
 {% extends '@CeradTourn/Layout.html.twig' %}
 
 {% block content %}
-<h2>Game Report:
-{{ game.dtBeg.format('D') }}, {{ game.dtBeg.format('g:i A') }},
-{{ game.field.name }}, {{ game.levelId }}, #{{ game.num }}
-</h2>
+
 <form
     action="{{ path('cerad_tourn_game_report_update', { 'num': game.num }) }}"
     method="post" {{ form_enctype(form) }}
 >
+
+{% set homeTeam     = game.homeTeam %}
+{% set awayTeam     = game.awayTeam %}
+{% set homeTeamForm = form.homeTeamReport %}
+{% set awayTeamForm = form.awayTeamReport %}
+
+<h2>Game #{{ game.num }} Report:
+{{ game.dtBeg.format('D') }}, {{ game.dtBeg.format('g:i A') }},
+{{ game.homeTeam.name }} vs {{ game.awayTeam.name }} on {{ game.field.name }}
+</h2>
+
 {% set homeTeam     = game.homeTeam %}
 {% set awayTeam     = game.awayTeam %}
 {% set homeTeamForm = form.homeTeamReport %}
