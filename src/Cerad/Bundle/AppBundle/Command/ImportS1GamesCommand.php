@@ -157,11 +157,14 @@ class ImportS1GamesCommand extends ContainerAwareCommand
             $officials = array(1 => 'CR', 2 => 'AR 1', 3 => 'AR 2');
             foreach($officials as $slot => $role)
             {
-              //$official = $game->getOfficialForSlot($slot);
-                $official = $game->createGameOfficial();
-                $official->setSlot($slot);
-                $official->setRole($role);
-                $game->addOfficial($official);
+                $official = $game->getOfficialForSlot($slot);
+                if (!$official)
+                {
+                    $official = $game->createGameOfficial();
+                    $official->setSlot($slot);
+                    $official->setRole($role);
+                    $game->addOfficial($official);
+                }
             }
             // $pool = $row['pool'];
             $gameRepo->save($game);
