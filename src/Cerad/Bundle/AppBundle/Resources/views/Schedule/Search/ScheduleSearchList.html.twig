@@ -1,0 +1,73 @@
+{# @CeradTourn/Schedule/Search/ScheduleSearchList.html.twig #}
+
+<div class="schedule-game-list">
+    <table class="schedule" border="1" style="max-width: 850px;">
+    <thead>
+        <tr class="tbl-title" ><th colspan="20">Referee Game Schedule - Count: {{ games | length }}</th></tr>
+        <tr class="tbl-hdr">
+            <th>Game</th>
+            <th>DOW</th>
+            <th>Time</th>
+            <th>Field</th>
+          {#<th>Div</th>#}
+            <th>Pool</th>
+            <th>Home / Away Teams</th>
+{% if is_granted('ROLE_USER') %}
+            <th>Searchs</th>
+{% endif %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for game in games %}
+        <tr id="ref-sched-{{game.num}}" class="game-status-{{game.status}}">
+            <td>
+                {% if false %}
+                <a href="{{ path('cerad_tourn_game_report_update', { 'num': game.num })}}">{{ game.num }}</a>
+                {% else %}
+                {{ game.num }}
+                {% endif %}
+            </td>
+            <td>{{ game.dtBeg.format('D'    ) }}</td>
+            <td>{{ game.dtBeg.format('H:i A') }}</td>
+
+            <td>{{ game.field.name }}</td>
+          {#<td>{{ game.levelId    }}</td>#}
+            <td>{{ game.group      }}</td>
+
+            <td><table>
+                {% for gameTeam in game.teams %}
+                    <tr>
+                      {#<td>{{ gameTeam.group | slice(8) }}:&nbsp;</td>#}
+                        <td>{{ gameTeam.name }}</td>
+                    </tr>
+                {% endfor %}
+            </table></td>
+{% if is_granted('ROLE_USER') %}
+            <td><table>
+                {% for gameSearch in game.officials %}
+                    <tr><td>{{ gameSearch.role }}:&nbsp;</td><td>{{ gameSearch.personNameFull }}</td></tr>
+                {% endfor %}
+            </table></td>
+{% endif %}
+       </tr>
+        {% endfor %}{# games #}
+    </tbody>
+    </table>
+</div>
+{% block javascripts %}
+<script type="text/javascript">
+    $(document).ready(function()
+    {
+        $('.schedule').dataTable(
+        {
+            "bPaginate": false,
+            "bLengthChange": false,
+            "bFilter": false,
+            "bSort": true,
+            "bInfo": false,
+            "bAutoWidth": false,
+            "aaSorting": [[ 2, "asc" ],[ 5, "asc" ],[ 4, "asc" ]]
+        });
+    });
+</script>
+{% endblock %}

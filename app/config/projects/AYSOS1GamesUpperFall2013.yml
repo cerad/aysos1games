@@ -53,6 +53,21 @@ AYSOS1GamesUpperFall2013:
           'AYSO_U19B_Core': U19B
           'AYSO_U19G_Core': U19G
           
+      fields:
+        type:   checkbox
+        label: Fields
+        default:  ['Ayala 7','Ayala 8','Ayala 9','Ayala 10','Ayala 11','Ayala 12','Ayala 13','Ayala 14','Ayala 15']
+        choices:
+          'Ayala 7' : Ayala7
+          'Ayala 8' : Ayala8
+          'Ayala 9' : Ayala9
+          'Ayala 10': Ayala10
+          'Ayala 11': Ayala11
+          'Ayala 12': Ayala12
+          'Ayala 13': Ayala13
+          'Ayala 14': Ayala14
+          'Ayala 15': Ayala15
+          
      #genders:
      #  type:    checkbox
      #  label:   Genders
