@@ -72,7 +72,7 @@ hr
 
 form
 {
-  padding: 20px 0 0 0;
+  padding: 20px 0 20px 0;
 }
 
 #layout-header td
@@ -131,12 +131,7 @@ table colgroup col
 
 table th
 {
-  width: 30%;
-  background-color: #0066ff;
-  color: white;
-  font-weight: bold;
-  padding: 1.1em;
-  vertical-align: middle;
+  padding: 0;
 }
 
 table td
@@ -215,4 +210,68 @@ input[type="submit"]
 .account-person-list
 {
   width: 99%;
+}
+
+form#cerad_tourn_schedule_official_search
+,form#cerad_tourn_schedule_search
+{
+  padding-top: 0;
+}
+
+form#cerad_tourn_schedule_official_search fieldset
+,form#cerad_tourn_schedule_search fieldset
+{
+  padding-left: 2%;
+  line-height: 2em;
+}
+
+form#cerad_tourn_schedule_official_search fieldset div label
+,form#cerad_tourn_schedule_search fieldset div label
+{
+  padding-right: 2em;
+  padding-left: 1%;
+}
+
+form#cerad_tourn_schedule_official_search fieldset div div
+,form#cerad_tourn_schedule_search fieldset div div
+{
+  padding-left: 1%;
+  padding-bottom: 10px;
+}
+
+form#cerad_tourn_schedule_official_search fieldset div input[type="text"]
+,form#cerad_tourn_schedule_search fieldset div input[type="text"]
+{
+  position: absolute;
+  left: 12em;
+}
+
+form#cerad_tourn_schedule_official_search input[type="submit"]
+,form#cerad_tourn_schedule_search input[type="submit"]
+{
+  float: right;
+  margin-right: 10%;
+}
+
+form#cerad_tourn_schedule_official_search #list_filters
+,form#cerad_tourn_schedule_search #list_filters
+{
+  display: none;
+}
+
+form#cerad_tourn_schedule_official_search .required
+,form#cerad_tourn_schedule_search .required
+{
+  font-weight: bold;
+  font-size: 1.1em;
+  text-decoration: underline;
+}
+
+@media print
+{
+  .sf-toolbar
+  ,.sf-toolbar *
+  {
+    display:none;
+  }
 }

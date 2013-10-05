@@ -47,7 +47,7 @@ AYSOS1GamesUpperFall2013:
         label:    Levels
         default: ['AYSO_U16B_Core','AYSO_U16G_Core','AYSO_U19B_Core','AYSO_U19G_Core']
         choices:
-         #'All':            All
+          'All'     : All
           'AYSO_U16B_Core': U16B
           'AYSO_U16G_Core': U16G
           'AYSO_U19B_Core': U19B
@@ -58,6 +58,7 @@ AYSOS1GamesUpperFall2013:
         label: Fields
         default:  ['Ayala 7','Ayala 8','Ayala 9','Ayala 10','Ayala 11','Ayala 12','Ayala 13','Ayala 14','Ayala 15']
         choices:
+          'All'     : All
           'Ayala 7' : Ayala7
           'Ayala 8' : Ayala8
           'Ayala 9' : Ayala9

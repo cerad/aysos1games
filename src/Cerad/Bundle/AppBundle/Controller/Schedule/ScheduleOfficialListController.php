@@ -6,9 +6,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 use Cerad\Bundle\TournBundle\Controller\BaseController as MyBaseController;
 
-class ScheduleSearchListController extends MyBaseController
+class ScheduleOfficialListController extends MyBaseController
 {
-    const SESSION_SCHEDULE_SEARCH = 'ScheduleSearchSearch';
+    const SESSION_SCHEDULE_OFFICIAL_SEARCH = 'ScheduleOfficialSearch';
 
     /* =====================================================
      * Wanted to just use GET but the dates mess up
@@ -20,7 +20,7 @@ class ScheduleSearchListController extends MyBaseController
         $model = $this->getModel($request);
 
         // The form stuff
-        $searchFormType = $this->get('cerad_tourn.schedule_search.form_type');
+        $searchFormType = $this->get('cerad_tourn.schedule_official_search.form_type');
         $searchForm = $this->createForm($searchFormType,$model);
 
         $searchForm->handleRequest($request);
@@ -29,9 +29,9 @@ class ScheduleSearchListController extends MyBaseController
         {
             $modelPosted = $searchForm->getData();
 
-            $request->getSession()->set(self::SESSION_SCHEDULE_SEARCH,$modelPosted);
+            $request->getSession()->set(self::SESSION_SCHEDULE_OFFICIAL_SEARCH,$modelPosted);
 
-            return $this->redirect('cerad_tourn_schedule_list');
+            return $this->redirect('cerad_tourn_schedule_official_list');
         }
 
         // Query for the games
@@ -41,10 +41,10 @@ class ScheduleSearchListController extends MyBaseController
         // Spreadsheet
         if ($_format == 'xls')
         {
-            $export = $this->get('cerad_tourn.schedule_search.export_xls');
+            $export = $this->get('cerad_tourn.schedule_official.export_xls');
             $response = new Response($export->generate($games));
 
-            $outFileName = date('YmdHi') . '_schedule' . '.xls';
+            $outFileName = date('YmdHi') . 'ref_schedule' . '.xls';
 
             $response->headers->set('Content-Type',       'application/vnd.ms-excel');
             $response->headers->set('Content-Disposition', sprintf('attachment; filename="%s"',$outFileName));
@@ -53,10 +53,10 @@ class ScheduleSearchListController extends MyBaseController
         // csv processing
         if ($_format == 'csv')
         {
-            $export = $this->get('cerad_tourn.schedule_search.export_csv');
+            $export = $this->get('cerad_tourn.schedule_official.export_csv');
             $response = new Response($export->generate($games));
 
-            $outFileName = date('YmdHi') . '_schedule' . '.csv';
+            $outFileName = date('YmdHi') . 'ref_schedule' . '.csv';
 
             $response->headers->set('Content-Type',       'text/csv;');
             $response->headers->set('Content-Disposition', sprintf('attachment; filename="%s"',$outFileName));
@@ -69,7 +69,7 @@ class ScheduleSearchListController extends MyBaseController
         $tplData['games']   = $games;
         $tplData['isAdmin'] = false;
         $tplData['project'] = $this->getProject();
-        return $this->render('@CeradTourn/Schedule/Search/ScheduleSearchIndex.html.twig',$tplData);
+        return $this->render('@CeradTourn/Schedule/Official/ScheduleOfficialIndex.html.twig',$tplData);
     }
     public function getModel(Request $request)
     {
@@ -81,21 +81,23 @@ class ScheduleSearchListController extends MyBaseController
         $model['teams' ]  = array();
         $model['fields']  = array();
 
-        $model['searches'] = $searches = $project->getSearches();
+        $searches = $project->getSearches();
 
         foreach($searches as $name => $search)
         {
             $model[$name] = $search['default']; // Array of defaults
         }
-//print_r($model['fields']); die();
+        //print_r($model['searches']); die();
 
         // Merge form session
         $session = $request->getSession();
-        if ($session->has(self::SESSION_SCHEDULE_SEARCH))
+        if ($session->has(self::SESSION_SCHEDULE_OFFICIAL_SEARCH))
         {
-            $modelSession = $session->get(self::SESSION_SCHEDULE_SEARCH);
+            $modelSession = $session->get(self::SESSION_SCHEDULE_OFFICIAL_SEARCH);
             $model = array_merge($model,$modelSession);
         }
+        // Do this after merge, otherwise changes get overwritten
+        $model['searches'] = $searches;
 
         // Done
         return $model;

@@ -1,7 +1,7 @@
 {# @CeradTourn/Schedule/Official/ScheduleOfficialList.html.twig #}
 
 <div class="schedule-game-list">
-    <table id="schedule" border="1" style="max-width: 850px;">
+    <table class="schedule" border="1" style="max-width: 850px;">
     <thead>
         <tr class="tbl-title" ><th colspan="20">Referee Game Schedule - Count: {{ games | length }}</th></tr>
         <tr class="tbl-hdr">
@@ -13,7 +13,9 @@
             <th>Pool</th>
             <th>Home / Away Teams</th>
 {% if is_granted('ROLE_USER') %}
-            <th>Officials</th>
+            <th>Referee</th>
+            <th>AR1</th>
+            <th>AR2</th>
 {% endif %}
         </tr>
     </thead>
@@ -43,11 +45,9 @@
                 {% endfor %}
             </table></td>
 {% if is_granted('ROLE_USER') %}
-            <td><table>
-                {% for gameOfficial in game.officials %}
-                    <tr><td>{{ gameOfficial.role }}:&nbsp;</td><td>{{ gameOfficial.personNameFull }}</td></tr>
-                {% endfor %}
-            </table></td>
+            {% for gameOfficial in game.officials %}
+                <td>{{ gameOfficial.personNameFull }}</td>
+            {% endfor %}
 {% endif %}
        </tr>
         {% endfor %}{# games #}
@@ -55,19 +55,24 @@
     </table>
 </div>
 {% block javascripts %}
-<script type="text/javascript">
-    $(document).ready(function()
+    <script type="text/javascript">
+$(document).ready(function()
+{
+    // checkbox all functionality
+    $('.cerad-checkbox-all').change(Cerad.checkboxAll);
+/*
+    // Support using datatables
+    $('#schedule').dataTable(
     {
-        $('#schedule').dataTable(
-        {
-            "bPaginate": false,
-            "bLengthChange": false,
-            "bFilter": false,
-            "bSort": true,
-            "bInfo": false,
-            "bAutoWidth": false,
-            "aaSorting": [[ 2, "asc" ],[ 5, "asc" ],[ 4, "asc" ]]
-        });
+        "bPaginate": false,
+        "bLengthChange": false,
+        "bFilter": false,
+        "bSort": true,
+        "bInfo": false,
+        "bAutoWidth": false,
+        "aaSorting": [[ 2, "asc" ],[ 5, "asc" ],[ 4, "asc" ]]
     });
+*/
+});
 </script>
 {% endblock %}

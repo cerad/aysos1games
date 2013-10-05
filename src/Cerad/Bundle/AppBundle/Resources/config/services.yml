@@ -10,3 +10,22 @@ services:
         class: Cerad\Bundle\AppBundle\FormType\Schedule\Search\SearchFormType
         tags:
             - { name: form.type, alias: cerad_schedule_search }
+
+    cerad_tourn.excel:
+        class:  Cerad\Component\Excel\Excel
+            
+    cerad_tourn.schedule_official_search.export_csv:
+        class:  Cerad\Bundle\AppBundle\Schedule\Search\ScheduleSearchExportCSV
+
+    cerad_tourn.schedule_official_search.export_xls:
+        class:  Cerad\Bundle\AppBundle\Schedule\Search\ScheduleSearchExportXLS
+        arguments:  
+            - '@cerad_tourn.excel'
+    
+    cerad_tourn.schedule_search.export_csv:
+        class:  Cerad\Bundle\AppBundle\Schedule\Search\ScheduleSearchExportCSV
+
+    cerad_tourn.schedule_search.export_xls:
+        class:  Cerad\Bundle\AppBundle\Schedule\Search\ScheduleSearchExportXLS
+        arguments:  
+            - '@cerad_tourn.excel'

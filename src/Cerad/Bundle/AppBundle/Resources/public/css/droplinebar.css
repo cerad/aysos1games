@@ -52,3 +52,11 @@ border-bottom: 1px solid navy;
 .droplinebar ul li ul li a:hover{ /*sub menu links' background color onMouseover */
 background: #004080;
 }
+
+@media print
+{
+  .droplinebar
+  {
+    display:none;
+  }
+}

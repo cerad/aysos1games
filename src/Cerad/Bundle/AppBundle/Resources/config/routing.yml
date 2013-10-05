@@ -36,8 +36,12 @@ cerad_tourn_test:
 # ===============================================
 # Schedule and results
 cerad_tourn_schedule_official_list:
-    pattern:  /schedule/official
-    defaults: { _controller: CeradTournBundle:Schedule/ScheduleOfficialList:list }
+    pattern:  /schedule/official.{_format}
+    defaults:
+        _controller: CeradAppBundle:Schedule/ScheduleOfficialList:list
+        _format: html
+    requirements:
+        _format:  html|csv|xls|pdf   
     
 cerad_tourn_schedule_team_list:
     pattern:  /schedule/team
@@ -60,9 +64,12 @@ cerad_tourn_results_poolplay:
     defaults: { _controller: CeradTournBundle:Results/PoolPlayResults:results }
 
 cerad_tourn_schedule_list:
-    pattern:  /schedule/search
-    defaults: { _controller: CeradAppBundle:Schedule/ScheduleSearchList:list }
-    
+    pattern:  /schedule/search.{_format}
+    defaults:
+        _controller: CeradAppBundle:Schedule/ScheduleSearchList:list 
+        _format: html
+    requirements:
+        _format:  html|csv|xls|pdf
   
 # ========================================================================
 # Accounts

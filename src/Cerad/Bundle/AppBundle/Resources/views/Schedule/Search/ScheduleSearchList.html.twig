@@ -12,9 +12,6 @@
           {#<th>Div</th>#}
             <th>Pool</th>
             <th>Home / Away Teams</th>
-{% if is_granted('ROLE_USER') %}
-            <th>Searchs</th>
-{% endif %}
         </tr>
     </thead>
     <tbody>
@@ -30,7 +27,7 @@
             <td>{{ game.dtBeg.format('D'    ) }}</td>
             <td>{{ game.dtBeg.format('H:i A') }}</td>
 
-            <td>{{ game.field.name }}</td>
+            <td><a href="http://goo.gl/3qyHw2" target="_parent|_blank">{{ game.field.name }}</a></td>
           {#<td>{{ game.levelId    }}</td>#}
             <td>{{ game.group      }}</td>
 
@@ -42,32 +39,30 @@
                     </tr>
                 {% endfor %}
             </table></td>
-{% if is_granted('ROLE_USER') %}
-            <td><table>
-                {% for gameSearch in game.officials %}
-                    <tr><td>{{ gameSearch.role }}:&nbsp;</td><td>{{ gameSearch.personNameFull }}</td></tr>
-                {% endfor %}
-            </table></td>
-{% endif %}
        </tr>
         {% endfor %}{# games #}
     </tbody>
     </table>
 </div>
 {% block javascripts %}
-<script type="text/javascript">
-    $(document).ready(function()
+    <script type="text/javascript">
+$(document).ready(function()
+{
+    // checkbox all functionality
+    $('.cerad-checkbox-all').change(Cerad.checkboxAll);
+/*
+    // Support using datatables
+    $('#schedule').dataTable(
     {
-        $('.schedule').dataTable(
-        {
-            "bPaginate": false,
-            "bLengthChange": false,
-            "bFilter": false,
-            "bSort": true,
-            "bInfo": false,
-            "bAutoWidth": false,
-            "aaSorting": [[ 2, "asc" ],[ 5, "asc" ],[ 4, "asc" ]]
-        });
+        "bPaginate": false,
+        "bLengthChange": false,
+        "bFilter": false,
+        "bSort": true,
+        "bInfo": false,
+        "bAutoWidth": false,
+        "aaSorting": [[ 2, "asc" ],[ 5, "asc" ],[ 4, "asc" ]]
     });
+*/
+});
 </script>
 {% endblock %}
