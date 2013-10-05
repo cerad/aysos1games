@@ -85,7 +85,7 @@ variable, form, fieldset, blockquote, label, img
 
 body
 {
-  min-width: 720px;
+  min-width: 640px;
 }
 
 h3, h4, legend
