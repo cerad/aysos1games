@@ -1,0 +1,27 @@
+{# @CeradTourn/Account/Create/AdminIndex.html.twig   #}
+{% extends '@CeradTourn/Layout.html.twig' %}
+
+{% block content %}
+
+<div class="admin">
+  <ul><h2>Account Management</h2>
+    <li><a href="">List of Accounts and Referees (empty)</a></li>
+    <li><a href="">List of People (empty)</a></li>
+    <li><a href="">Search People (empty)</a></li>
+    <li><a href="">List of Teams (empty)</a></li>
+    <li><a href="">Import AYSO Information (empty)</a></li>
+  </ul>
+  <ul><h2>Schedule Management</h2>
+    <li><a href="{{ path('cerad_tourn_schedule_list') }}">Game Schedule</a></li>
+    <li><a href="{{ path('cerad_tourn_schedule_list', { '_format': 'xls'}) }}">Game Schedule (Excel)</a></li>
+    <li><a href="{{ path('cerad_tourn_schedule_official_list') }}">Referee Schedule</a></li>
+  </ul>
+  <ul><h2>Game Management</h2>
+    <li><a href="">Update Game Schedule (empty)</a></li>
+    <li><a href="">Import Game Schedule (Excel) (empty)</a></li>
+    <li><a href="">Update Referee Schedule (empty)</a></li>
+    <li><a href="{{ url('cerad_tourn_schedule_list') }}">Enter Match Results</a></li>
+  </ul>
+</div>
+
+{% endblock %}{# end content block #}

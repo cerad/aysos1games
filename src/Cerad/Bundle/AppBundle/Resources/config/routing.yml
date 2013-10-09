@@ -33,6 +33,10 @@ cerad_tourn_test:
     defaults: { _controller: CeradTournBundle:Tourn/TournTest:test }
 #                           @CeradTourn/Tourn/Test/TournTestIndex.html.twig
 
+cerad_tourn_admin:
+    pattern:  /admin
+    defaults: { _controller: CeradAppBundle:Admin/AppAdmin:Show }
+
 # ===============================================
 # Schedule and results
 cerad_tourn_schedule_official_list:
@@ -71,6 +75,7 @@ cerad_tourn_schedule_list:
     requirements:
         _format:  html|csv|xls|pdf
   
+        
 # ========================================================================
 # Accounts
 

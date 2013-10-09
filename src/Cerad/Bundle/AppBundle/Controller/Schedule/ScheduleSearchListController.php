@@ -67,7 +67,7 @@ class ScheduleSearchListController extends MyBaseController
         $tplData = array();
         $tplData['searchForm'] = $searchForm->createView();
         $tplData['games']   = $games;
-        $tplData['isAdmin'] = false;
+        $tplData['isAdmin'] = $this->hasRoleAdmin();
         $tplData['project'] = $this->getProject();
         return $this->render('@CeradTourn/Schedule/Search/ScheduleSearchIndex.html.twig',$tplData);
     }

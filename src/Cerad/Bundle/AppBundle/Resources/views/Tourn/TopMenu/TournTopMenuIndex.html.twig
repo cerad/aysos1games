@@ -5,6 +5,11 @@
   <li class="float-right">
     <a href="{{ path('cerad_tourn_user_logout') }}">Logout</a>
   </li>
+{% if is_granted('ROLE_ADMIN') %}
+  <li class="float-right">
+    <a href="{{ path('cerad_tourn_admin') }}">Admin</a>
+  </li>
+{% endif %}
   <li class="float-right">
     <a href="{{ path('cerad_tourn_schedule_official_list') }}">My Schedule</a>
   </li>
@@ -17,6 +22,7 @@
   <li class="float-right">
     <a href="{{ path('cerad_tourn_home') }}">My Info</a>
   </li>
+
 {% else %}
   <li class="float-right">
     <a href="{{ path('cerad_tourn_home') }}">Login</a>
