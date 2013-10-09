@@ -17,12 +17,14 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
           //new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             
-            new Cerad\Bundle\TournBundle  \CeradTournBundle(),
             new Cerad\Bundle\ProjectBundle\CeradProjectBundle(),
             new Cerad\Bundle\PersonBundle \CeradPersonBundle(),
             new Cerad\Bundle\UserBundle   \CeradUserBundle(),
             new Cerad\Bundle\GameBundle   \CeradGameBundle(),
             new Cerad\Bundle\LevelBundle  \CeradLevelBundle(),
+            
+            new Cerad\Bundle\TournBundle  \CeradTournBundle(),
+            new Cerad\Bundle\TournAdminBundle\CeradTournAdminBundle(),
             new Cerad\Bundle\AppBundle    \CeradAppBundle(),
         );
 
