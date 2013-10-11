@@ -12,6 +12,7 @@ class AppAdminController extends MyBaseController
         if ($this->hasRoleUser() && !$this->hasRoleAdmin()) return $this->redirect('cerad_tourn_home');
 
         $tplData = array();
-        return $this->render('@CeradTourn/Admin/AdminIndex.html.twig', $tplData);
+        $tplName = $request->get('_template');
+        return $this->render($tplName, $tplData);
     }
 }

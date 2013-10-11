@@ -1,0 +1,59 @@
+{# @CeradTournAdmin/Persons/List/PersonsListIndex.html.twig   #}
+{% extends '@CeradTournAdmin/Layout.html.twig' %}
+
+{% block content %}
+
+<h3>{{ project.desc }}</h3>
+<table id="person-list" border="1" style="max-width: 850px;">
+<thead>
+<tr><th colspan="20">Tournament Officials - Count: {{ persons | length }}</th></tr>
+<tr>
+    <th>Update</th>
+    <th>Account</th>
+    <th>Person</th>
+    <th>AYSO Information</th>
+    <th>Plans</th>
+</tr>
+</thead>
+<tbody>
+{% for person in persons  %}
+{% set name = person.name %}
+{% set user = cerad_tourn_get_user_for_person(person) %}
+{% set personFed = person.fed(fedRoleId) %}
+{% set personOrg = personFed.orgRegion %}
+{% set certReferee = personFed.certReferee %}
+{% set certSafeHaven = personFed.certSafeHaven %}
+{% set plan = person.plan(project.id) %}
+{% set planBasic = plan.basic %}
+<tr id="person-{{person.id}}">
+    <td>
+        <a href="{{ path('cerad_tourn_admin_person_plan_update', { 'personId' : person.id }) }}">
+            Update
+        </a>
+    </td>
+    <td>
+        {{ user.username    }}<br />
+        {{ user.email       }}<br />
+        {{ user.accountName }}
+    </td>
+    <td>
+        {{ name.full    }}<br />
+        {{ person.email }}<br />
+        {{ person.phone }}
+    </td>
+    <td>
+        Vol: {{ personFed.id        }}<br />
+        Reg: {{ personOrg.orgId     }}<br />
+        SH: {{ certSafeHaven.badge }}<br />
+        REF: {{ certReferee.badge   }}<br />
+    </td>
+    <td>
+        Will Attend:  {{ planBasic.attending  }}<br />
+        Will Referee: {{ planBasic.refereeing }}<br />
+    </td>
+</tr>
+{% endfor %} {# persons #}
+</tbody>
+</table>
+    
+{% endblock %}{# end content block #}
