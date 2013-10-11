@@ -1,0 +1,22 @@
+# Put all the admin routes here
+---
+cerad_tourn_admin:
+    pattern:  /admin
+    defaults: 
+        _controller: CeradAppBundle:Admin/AppAdmin:Show
+        _template: '@CeradTournAdmin/Admin/AdminShowIndex.html.twig'
+            
+cerad_tourn_admin_persons_list:
+    pattern:  /admin/persons/list.{_format}
+    defaults:
+        _controller: CeradTournAdminBundle:Persons/PersonsList:list
+        _template: '@CeradTournAdmin/Persons/List/PersonsListIndex.html.twig'
+        _format: html
+    requirements:
+        _format:  html|csv|xls|pdf
+        
+cerad_tourn_admin_person_plan_update:
+    pattern:  /admin/person-plan/update/{personId}
+    defaults: 
+        _controller: CeradTournAdminBundle:PersonPlan/PersonPlanUpdate:update
+        _template: '@CeradTournAdmin/PersonPlan/Update/PersonPlanUpdateIndex.html.twig'

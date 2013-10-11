@@ -2,3 +2,6 @@ cerad_app:
     resource: "@CeradAppBundle/Resources/config/routing.yml"
     prefix:   /
 
+cerad_app_admin:
+    resource: "@CeradAppBundle/Resources/config/routing_admin.yml"
+    prefix:   /
