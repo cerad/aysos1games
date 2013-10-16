@@ -29,3 +29,11 @@ services:
         class:  Cerad\Bundle\AppBundle\Schedule\Search\ScheduleSearchExportXLS
         arguments:  
             - '@cerad_tourn.excel'
+    
+# Twig extensions
+    cerad_app.twig_extension:
+        class:  Cerad\Bundle\AppBundle\TwigExtension\AppExtension
+        arguments:  
+            - '@cerad_project.find_default.in_memory'
+        tags:
+            - { name: twig.extension }

@@ -1,7 +1,7 @@
 {# @CeradTourn/Tourn/TopMenu/TournTopMenuIndex.html.twig   #}
+{% if is_granted('ROLE_USER') %}
 <div id="droplinetabs1" class="droplinebar">
 <ul >
-{% if is_granted('ROLE_USER') %}
   <li class="float-right">
     <a href="{{ path('cerad_tourn_user_logout') }}">Logout</a>
   </li>
@@ -22,11 +22,12 @@
   <li class="float-right">
     <a href="{{ path('cerad_tourn_home') }}">My Info</a>
   </li>
-
+{#
 {% else %}
   <li class="float-right">
     <a href="{{ path('cerad_tourn_home') }}">Login</a>
   </li>
-{% endif %}
+#}
 </ul>
 </div>
+{% endif %}
