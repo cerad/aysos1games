@@ -16,9 +16,9 @@
 {% endblock %}
 {% endif %}
 
-{% set referer = cerad_tourn_get_referer() %}
+{% set islocal = cerad_tourn_is_local() %}
 
-{% if 'local.zayso.org' in referer %}
+{% if 'local.zayso.org' in islocal %}
 <div id="droplinetabs1" class="droplinebar">
 <ul >
   <li>
@@ -39,7 +39,10 @@
       </li>
     </ul>
   </li>
-  <li style="float:right"><a href="/s1games/"> </a></li>
+  <li style="float:right"><a href="{{ path('cerad_tourn_welcome') }}"> </a></li>
+  <li style="float:right"><a href="{{ path('cerad_tourn_contact') }}">Contact Us</a></li>
+  <li style="float:right"><a href="http://2014NationalGames/s1_13/sms">Text Alerts</a></li>
+  <li style="float:right"><a href="{{ path('cerad_tourn_welcome') }}">Login</a></li>
 </ul>
 <hr/>
 </div>
