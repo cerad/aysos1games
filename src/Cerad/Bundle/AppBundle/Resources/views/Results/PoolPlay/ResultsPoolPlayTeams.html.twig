@@ -5,24 +5,24 @@
   <th>Pool</th>
   <th>Team</th>
   <th align="center">TPE</th>
- <th align="center">WPF</th>
+<!-- <th align="center">WPF</th>-->
  <th>&nbsp;</th>
  <th align="center">GT</th>
  <th align="center">GP</th>
  <th align="center">GW</th>
- <th align="center">TGS</th>
- <th align="center">TGA</th>
- <th align="center">TYC</th>
- <th align="center">TRC</th>
+ <th align="center">GS</th>
+ <th align="center">GA</th>
+ <th align="center">YC</th>
+ <th align="center">RC</th>
  <th align="center">TE</th>
- <th align="center">TSP</th>
+ <th align="center">SP</th>
 </tr>
 {% for report in pool.teams %}
 <tr>
     <td>{{ report.team.group }}</td>
     <td>{{ report.team.name  }}</td>
     <td align="center">{{ report.pointsEarned    }}</td>
-    <td align="center">{{ report.winPercent      }}</td>
+<!--    <td align="center">{{ report.winPercent      }}</td>-->
     <td>&nbsp;</td>
     <td align="center">{{ report.gamesTotal      }}</td>
     <td align="center">{{ report.gamesPlayed     }}</td>
