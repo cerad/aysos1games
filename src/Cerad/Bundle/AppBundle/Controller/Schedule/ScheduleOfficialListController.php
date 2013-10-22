@@ -44,7 +44,7 @@ class ScheduleOfficialListController extends MyBaseController
             $export = $this->get('cerad_tourn.schedule_official.export_xls');
             $response = new Response($export->generate($games));
 
-            $outFileName = date('YmdHi') . 'ref_schedule' . '.xls';
+            $outFileName = 'ScheduleGameOfficials' . date('YmdHi') . '.xls';
 
             $response->headers->set('Content-Type',       'application/vnd.ms-excel');
             $response->headers->set('Content-Disposition', sprintf('attachment; filename="%s"',$outFileName));

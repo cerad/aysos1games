@@ -20,3 +20,9 @@ cerad_tourn_admin_person_plan_update:
     defaults: 
         _controller: CeradTournAdminBundle:PersonPlan/PersonPlanUpdate:update
         _template: '@CeradTournAdmin/PersonPlan/Update/PersonPlanUpdateIndex.html.twig'
+
+cerad_tourn_admin_schedule_officials_import:
+    pattern:  /admin/schedule-officials/import
+    defaults: 
+        _controller: CeradTournAdminBundle:Schedule/Officials/ScheduleOfficialsImport:import
+        _template: '@CeradTournAdmin/Schedule/Officials/Import/ScheduleOfficialsImportIndex.html.twig'

@@ -1,0 +1,17 @@
+{# @CeradTournAdmin/Schedule/Officials/Import/ScheduleOfficialsImportIndex.html.twig #}
+{% extends '@CeradTournAdmin/Layout.html.twig' %}
+
+{% block content %}
+{{ form_start(form) }}
+{{ form_row(form.attachment) }}
+{{ form_row(form.import) }}
+{{ form_rest(form) }}
+{{ form_end(form)  }}
+{% if results %}
+<table border="1">
+<tr><td>Import File:         </td><td>{{ results.basename }}</td></tr>
+<tr><td>Total Game Count:    </td><td>{{ results.totalGameCount }}</td></tr>
+<tr><td>Modified Slot Count: </td><td>{{ results.modifiedSlotCount }}</td></tr>
+</table>
+{% endif %}
+{% endblock %}

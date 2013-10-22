@@ -34,6 +34,12 @@ services:
         class:  Cerad\Bundle\AppBundle\Officials\ExportOfficialsXLS
         arguments:  
             - '@cerad_tourn.excel'
+            
+    cerad_tourn.schedule_officials.import_xls:
+        class:  Cerad\Bundle\TournAdminBundle\Schedule\Officials\ScheduleOfficialsImportXLS
+        arguments:  
+            - '@cerad_game.game_repository'
+            - '@cerad_person.person_repository'
     
 # Twig extensions
     cerad_app.twig_extension:
