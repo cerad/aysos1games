@@ -2,7 +2,6 @@
 <table class="standings" border = "1">
 <tr class="tbl-title"><th colspan="16">Team Pool Standings - {{ poolKey }}</th></tr>
 <tr class="tbl-hdr">
-  <th>Pool</th>
   <th>Team</th>
   <th align="center">TPE</th>
 <!-- <th align="center">WPF</th>-->
@@ -19,7 +18,6 @@
 </tr>
 {% for report in pool.teams %}
 <tr>
-    <td>{{ report.team.group }}</td>
     <td>{{ report.team.name  }}</td>
     <td align="center">{{ report.pointsEarned    }}</td>
 <!--    <td align="center">{{ report.winPercent      }}</td>-->

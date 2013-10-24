@@ -60,8 +60,12 @@ cerad_tourn_game_report_update:
     defaults: { _controller: CeradTournBundle:GameReport/GameReportUpdate:update }
 
 cerad_tourn_results_poolplay:
-    pattern:  /results/poolplay
-    defaults: { _controller: CeradTournBundle:Results/PoolPlayResults:results }
+    pattern:  /results/poolplay.{_format}
+    defaults:
+        _controller: CeradTournBundle:Results/PoolPlayResults:results
+        _format: html
+    requirements:
+        _format: html|csv|xls|pdf
 
 cerad_tourn_schedule_list:
     pattern:  /schedule/search.{_format}
