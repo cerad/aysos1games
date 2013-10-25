@@ -134,6 +134,11 @@ table th
   padding: 0;
 }
 
+#person-list th
+{
+  width: 20%;
+}
+
 table td
 {
   padding: 5px;
@@ -169,6 +174,7 @@ table.schedule
 .schedule tr:nth-child(odd)
 ,.standings tr:nth-child(odd)
 ,.results tr:nth-child(odd)
+,#person-list tr:nth-child(odd)
 {
   background: #cce6ff;
 }

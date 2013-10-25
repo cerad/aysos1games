@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {# @CeradTourn/Account/Create/AdminIndex.html.twig   #}
 {% extends '@CeradTourn/Layout.html.twig' %}
 
@@ -32,3 +33,41 @@
 </div>
 
 {% endblock %}{# end content block #}
+=======
+{# @CeradTourn/Account/Create/AdminIndex.html.twig   #}
+{% extends '@CeradTourn/Layout.html.twig' %}
+
+{% block content %}
+
+<div class="admin">
+  <ul><h2>Account Management</h2>
+<!--
+    <li><a href="">List of Accounts and Referees (empty)</a></li>
+-->
+    <li><a href="{{ path('cerad_tourn_admin_persons_list') }}">View Registered People</a></li>
+    <li><a href="{{ path('cerad_tourn_admin_persons_list', { '_format' : 'xls' }) }}">Export Registered People (Excel)</a></li>
+    <li><a href="{{ path('cerad_tourn_admin_officials_list', { '_format' : 'xls' }) }}">Export Tournament Officials (Excel)</a></li>
+
+<!--
+    <li><a href="">Search People (empty)</a></li>
+    <li><a href="">List of Teams (empty)</a></li>
+    <li><a href="">Import AYSO Information (empty)</a></li>
+-->
+  </ul>
+  <ul><h2>Schedule Management</h2>
+    <li><a href="{{ path('cerad_tourn_schedule_list') }}">View Game Schedule</a></li>
+    <li><a href="">Update Individual Game Schedule (empty)</a></li>
+    <li><a href="{{ path('cerad_tourn_schedule_list', { '_format': 'xls'}) }}">Export Game Schedule (Excel)</a></li>
+    <li><a href="">Import Game Schedule (Excel) (empty)</a></li>
+    <li><a href="{{ path('cerad_tourn_schedule_official_list') }}">View Referee Schedule</a></li>
+    <li><a href="{{ path('cerad_tourn_schedule_official_list', { '_format': 'xls'}) }}">Export Referee Schedule (Excel)</a></li>
+    <li><a href="{{ path('cerad_tourn_admin_schedule_officials_import') }}">Import Referee Schedule (Excel)</a></li>
+  </ul>
+  <ul><h2>Game Management</h2>
+    <li><a href="{{ path('cerad_tourn_schedule_list') }}">Enter Match Results</a></li>
+    <li><a href="">Export Match Results(Excel) (empty)</a></li>
+  </ul>
+</div>
+
+{% endblock %}{# end content block #}
+>>>>>>> rick
