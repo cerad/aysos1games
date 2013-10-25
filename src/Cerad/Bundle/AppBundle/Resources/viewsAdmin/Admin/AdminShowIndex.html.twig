@@ -5,16 +5,18 @@
 
 <div class="admin">
   <ul><h2>Account Management</h2>
-<!--    <li><a href="">List of Accounts and Referees (empty)</a></li>
+<!--
+    <li><a href="">List of Accounts and Referees (empty)</a></li>
 -->
     <li><a href="{{ path('cerad_tourn_admin_persons_list') }}">View Registered People</a></li>
     <li><a href="{{ path('cerad_tourn_admin_persons_list', { '_format' : 'xls' }) }}">Export Registered People (Excel)</a></li>
     <li><a href="{{ path('cerad_tourn_admin_officials_list', { '_format' : 'xls' }) }}">Export Tournament Officials (Excel)</a></li>
 
-    Export Tournament Officials (Excel)
-<!--    <li><a href="">Search People (empty)</a></li>
+<!--
+    <li><a href="">Search People (empty)</a></li>
     <li><a href="">List of Teams (empty)</a></li>
-    <li><a href="">Import AYSO Information (empty)</a></li>-->
+    <li><a href="">Import AYSO Information (empty)</a></li>
+-->
   </ul>
   <ul><h2>Schedule Management</h2>
     <li><a href="{{ path('cerad_tourn_schedule_list') }}">View Game Schedule</a></li>

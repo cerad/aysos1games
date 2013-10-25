@@ -3,8 +3,10 @@
 
 {% block content %}
 
-<h3>{{ project.desc }}</h3>
-<table id="person-list" border="1" style="max-width: 850px;">
+<div style="padding:0 2em 1em 2em; float: left;"><a href="{{ path('cerad_tourn_admin_persons_list', { '_format': 'xls'}) }}">Export to Excel</a></div>
+<div style="padding: 0 2em 1em 0; float: left;"><a href="{{ path('cerad_tourn_admin_persons_list', { '_format': 'csv'}) }}"> Export to Text</a></div>
+
+<table id="person-list" class="app_table">
 <thead>
 <tr><th colspan="20">Tournament Officials - Count: {{ persons | length }}</th></tr>
 <tr>
@@ -55,5 +57,5 @@
 {% endfor %} {# persons #}
 </tbody>
 </table>
-    
+
 {% endblock %}{# end content block #}
