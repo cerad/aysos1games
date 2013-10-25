@@ -40,6 +40,11 @@ services:
         arguments:  
             - '@cerad_game.game_repository'
             - '@cerad_person.person_repository'
+            
+    cerad_tourn.results.export_xls:
+        class:  Cerad\Bundle\AppBundle\Results\ResultsExportXLS
+        arguments:  
+            - '@cerad_tourn.excel'
     
 # Twig extensions
     cerad_app.twig_extension:

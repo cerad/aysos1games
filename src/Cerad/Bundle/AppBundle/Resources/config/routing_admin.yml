@@ -35,3 +35,20 @@ cerad_tourn_admin_officials_list:
         _format: html
     requirements:
         _format:  html|csv|xls|pdf
+        
+# ==============================================================
+# Exporting and printing the results stuff
+#
+# This if for all the results including pool play, playoffs and the champions
+#
+# Only excel is currently supported
+
+# pdf would be good as well for mailing
+#
+cerad_tourn_admin_results_export:
+    pattern:  /admin/results/export.{_format}
+    defaults:
+        _controller: CeradTournAdminBundle:Results/ResultsExport:export
+        _format: xls
+    requirements:
+        _format:  html|csv|xls|pdf
