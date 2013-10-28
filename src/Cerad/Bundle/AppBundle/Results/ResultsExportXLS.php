@@ -183,7 +183,7 @@ class ResultsExportXLS
         foreach($reports as $report)
         {
             $row++;
-            $col = 0;
+            $col = 1;
 
             $team = $report->getTeam();
 
@@ -263,7 +263,7 @@ class ResultsExportXLS
 
             //if ($gameRow != 1) $gameWS->setBreak('A' . ($gameRow - 1), \PHPExcel_Worksheet::BREAK_ROW);
 
-            if (substr($key,4,4) == 'B')
+            if (substr($key,3,1) == 'B')
             {
               $divTitle = substr($key,0,3). ' Boys';
             }

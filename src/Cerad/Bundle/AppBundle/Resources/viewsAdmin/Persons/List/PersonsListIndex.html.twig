@@ -10,7 +10,7 @@
 <thead>
 <tr><th colspan="20">Tournament Officials - Count: {{ persons | length }}</th></tr>
 <tr>
-    <th>Update</th>
+    <!--<th>Update</th>-->
     <th>Account</th>
     <th>Person</th>
     <th>AYSO Information</th>
@@ -28,20 +28,20 @@
 {% set plan = person.plan(project.id) %}
 {% set planBasic = plan.basic %}
 <tr id="person-{{person.id}}">
+    <!--<td>-->
+    <!--    <a href="{{ path('cerad_tourn_admin_person_plan_update', { 'personId' : person.id }) }}">-->
+    <!--        Update-->
+    <!--    </a>-->
+    <!--</td>-->
     <td>
-        <a href="{{ path('cerad_tourn_admin_person_plan_update', { 'personId' : person.id }) }}">
-            Update
-        </a>
+        Username: {{ user.username    }}<br />
+        Email: {{ user.email       }}<br />
+        Account Name:{{ user.accountName }}
     </td>
     <td>
-        {{ user.username    }}<br />
-        {{ user.email       }}<br />
-        {{ user.accountName }}
-    </td>
-    <td>
-        {{ name.full    }}<br />
-        {{ person.email }}<br />
-        {{ person.phone }}
+        Name: {{ name.full    }}<br />
+        Email: {{ person.email }}<br />
+        Phone: {{ person.phone }}
     </td>
     <td>
         Vol: {{ personFed.id        }}<br />

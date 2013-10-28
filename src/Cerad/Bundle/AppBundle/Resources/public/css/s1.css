@@ -46,7 +46,7 @@ h4
 {
   color: inherit;
   font-weight: bold;
-  font-size: 16px !important;
+  font-size: 14px !important;
 }
 
 h5
@@ -68,6 +68,7 @@ em{
 hr
 {
   margin: 15px auto 15px auto;
+  clear: both;
 }
 
 form
@@ -110,6 +111,14 @@ form
 {
   list-style-type: disc;
   margin-left: 40px;
+  line-height: 1.5em;
+}
+
+#notes ol li
+{
+  list-style-type: decimal;
+  margin-left: 80px;
+  line-height: 1.5em;
 }
 
 table
@@ -293,6 +302,23 @@ form#cerad_tourn_schedule_official_search .required
   margin-left: 3em;
   line-height: 2em;
   list-style: disc;
+}
+
+.import_controls
+{
+  padding-left: 40px;
+  line-height: 3em;
+}
+
+.import_controls form
+{
+  padding: 0 0 20px 0;
+}
+
+table.import_results
+{
+  padding: 0 20px;
+  width:80%
 }
 
 @media print

@@ -2,7 +2,36 @@
 {% extends '@CeradTourn/Layout.html.twig' %}
 
 {% block content %}
-
+<div class="app_table" id="notes">
+<table>
+  <thead>
+    <th colspan="4">Scoring Notes</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td width="15%">&nbsp;</td>
+      <td>
+        <ul>
+          <li>Enter score and other info then click "Save"</li>
+          <li>Status fields will update themselves</li>
+        </ul>
+      </td>
+      <td>
+          <p>Points earned will be calculated</p>
+        <ul>
+          <li>Win: 6 pts / Tie: 3 pts / Goals Scored: 1 per goal (3 pts max) / Shutout: 1 pt</li>
+          <li>Player Cautions: No impact</li>
+          <li>Player Sendoffs: -1 point per sendoff</li>
+          <li>Coach/Substitute/Spectator Ejections: -1 point per ejection</li>
+          <li>FORFEIT: Score as 1-0</li>
+        </ul>
+      </td>
+      <td width="15%">&nbsp;</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<hr>
 <form
     action="{{ path('cerad_tourn_game_report_update', { 'num': game.num }) }}"
     method="post" {{ form_enctype(form) }}
@@ -85,27 +114,24 @@ padding-left: 3%;">{{ awayTeam.role }} : {{ awayTeam.name }}</td></tr>
 <br />
 <table style="width:80%">
   <tr>
-    <td style="min-width:275px;">{{ form_row(form.game.status) }}      <td>
-    <td style="min-width:210px;">{{ form_row(form.gameReport.status) }}</td>
+    <td style="min-width:275px;">&nbsp;</td>
+    <td style="min-width:275px;">&nbsp;</td>
     <td style="min-width:100px;"><input type="submit" name="gameReportUpdate" value="Save" /></td>
     <td style="min-width:225px;"><a href="{{ path('cerad_tourn_results_poolplay') }}">Return to Pool Play Results</a></td>
-</tr></table>
+  </tr>
+</table>
+<hr>
+<table style="width:80%">
+  <tr>
+    <td style="min-width:275px;">&nbsp;</td>
+    <td style="min-width:275px;">{{ form_row(form.game.status) }}      <td>
+    <td style="min-width:210px;">{{ form_row(form.gameReport.status) }}</td>
+    <td style="min-width:275px;">&nbsp;</td>
+  </tr>
+</table>
 <div style="display: none;">{{ form_rest(form) }}</div>
 </form>
-<hr />
-<div id="notes">
-  <h3>SCORING NOTES</h3>
-  <ul>
-      <li>Enter score and othe info then press Save</li>
-      <li>Points earned will be calculated</li>
-      <li>Status fields will update themselves</li>
-      <br/>
-      <li>Player Cautions: No impact</li>
-      <li>Player Sendoffs: -1 points per sendoff</li>
-      <li>Coach/Substitute/Spectator Ejectionss: - points per ejection</li>
-      <li>FORFEIT: Score as 1-0</li>
-  </ul>
-</div>
+
 <br>
 
 {% endblock %}{# end content block #}
