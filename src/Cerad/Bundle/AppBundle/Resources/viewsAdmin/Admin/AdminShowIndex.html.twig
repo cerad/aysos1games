@@ -12,8 +12,8 @@
     <li><a href="{{ path('cerad_tourn_admin_persons_list') }}">View Registered People</a></li>
     <li><a href="{{ path('cerad_tourn_admin_persons_list', { '_format' : 'xls' }) }}">Export Registered People (Excel)</a></li>
     <li><a href="">Export Tournament Officials (Excel) (empty)</a></li>
-<!--    <li><a href="{{ path('cerad_tourn_admin_officials_list', { '_format' : 'xls' }) }}">Export Tournament Officials (Excel)</a></li>
--->
+    <!--<li><a href="{{ path('cerad_tourn_admin_officials_list', { '_format' : 'xls' }) }}">Export Tournament Officials (Excel)</a></li>-->-->
+
 <!--
     <li><a href="">Search People (empty)</a></li>
     <li><a href="">List of Teams (empty)</a></li>
@@ -25,8 +25,8 @@
     <li><a href="{{ path('cerad_tourn_schedule_list') }}">View Game Schedule</a></li>
     <li><a href="{{ path('cerad_tourn_schedule_list', { '_format': 'xls'}) }}">Export Game Schedule (Excel)</a></li>
 {% if is_granted('ROLE_SCORE_ADMIN')  %}
-    <li><a href="">Update Individual Game Schedule (empty)</a></li>
-    <li><a href="">Import Game Schedule (Excel) (empty)</a></li>
+    <!--<li><a href="">Update Individual Game Schedule</a></li>-->
+    <!--<li><a href="">Import Game Schedule (Excel)</a></li>-->
 {% endif %}
 {% if is_granted('ROLE_ASSIGNOR') %}
     <li><a href="{{ path('cerad_tourn_schedule_official_list') }}">View Referee Schedule</a></li>
