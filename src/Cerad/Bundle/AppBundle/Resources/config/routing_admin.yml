@@ -27,14 +27,14 @@ cerad_tourn_admin_schedule_officials_import:
         _controller: CeradTournAdminBundle:Schedule/Officials/ScheduleOfficialsImport:import
         _template: '@CeradTournAdmin/Schedule/Officials/Import/ScheduleOfficialsImportIndex.html.twig'
 
-cerad_tourn_admin_officials_list:
-    pattern:  /admin/officials/list.{_format}
-    defaults: 
-        _controller: CeradTournAdminBundle:Schedule/Officials/OfficialsList:list
-        _template: '@CeradTournAdmin/Schedule/Officials/List/OfficialsListIndex.html.twig'
-        _format: html
-    requirements:
-        _format:  html|csv|xls|pdf
+#cerad_tourn_admin_officials_list:
+#    pattern:  /admin/officials/list.{_format}
+#    defaults: 
+#        _controller: CeradTournAdminBundle:Schedule/Officials/OfficialsList:list
+#        _template: '@CeradTournAdmin/Schedule/Officials/List/OfficialsListIndex.html.twig'
+#        _format: html
+#    requirements:
+#        _format:  html|csv|xls|pdf
         
 # ==============================================================
 # Exporting and printing the results stuff
