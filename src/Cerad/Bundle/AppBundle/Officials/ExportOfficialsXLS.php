@@ -30,16 +30,17 @@ class ExportOfficialsXLS
         }
     }
     /* ================================================================
-     * Master sheet
+     * Master sheet of everyone
      */
-    protected function generateOfficialsSheet($ws,$project,$officials)
+    protected function generateAllSheet($ws,$project,$officials)
     {
-        $ws->setTitle('Officials');
+        $ws->setTitle('All');
         
         $headers = array_merge(
             array(
                 'ID','Status','Official','Email','Cell Phone',
                 'AYSO ID','Region','Badge','Verified','Want Mentor','Upgrading',
+                'Attend','Referee',
             )
         );
         $this->writeHeaders($ws,1,$headers);
@@ -54,6 +55,8 @@ class ExportOfficialsXLS
             $cert        = $personFed->getCertReferee();
             $plan        = $person->getPlan($project->getId());
             $basic       = $plan->getBasic();
+            
+          //if ($basic['refereeing'] == 'no') continue;
             
             $values = array();
             $values[] = $plan->getId();
@@ -78,6 +81,70 @@ class ExportOfficialsXLS
             
             $values[] = $basic['wantMentor'];
             $values[] = $cert->getUpgrading();
+            
+            $values[] = $basic['attending'];
+            $values[] = $basic['refereeing'];
+            
+            $this->setRowValues($ws,$row++,$values);
+        }
+        // Done
+        return;
+    }
+    /* ================================================================
+     * Master sheet of referees
+     */
+    protected function generateOfficialsSheet($ws,$project,$officials)
+    {
+        $ws->setTitle('Officials');
+        
+        $headers = array_merge(
+            array(
+                'ID','Status','Official','Email','Cell Phone',
+                'AYSO ID','Region','Badge','Verified','Want Mentor','Upgrading',
+                'Attend','Referee',
+            )
+        );
+        $this->writeHeaders($ws,1,$headers);
+        $row = 2;
+        
+        foreach($officials as $person)
+        {
+            $name        = $person->getName();
+            $address     = $person->getAddress();
+            $personFed   = $person->getFed($project->getFedRoleId());
+            $personOrg   = $personFed->getOrgRegion();
+            $cert        = $personFed->getCertReferee();
+            $plan        = $person->getPlan($project->getId());
+            $basic       = $plan->getBasic();
+            
+            if ($basic['refereeing'] == 'no') continue;
+            
+            $values = array();
+            $values[] = $plan->getId();
+            $values[] = $plan->getStatus();
+          //$values[] = null; // $plans->getDateTimeCreated()->format('Y-m-d H:i');
+            $values[] = $name->full;
+            $values[] = $person->getEmail();
+            $values[] = $this->phoneTransformer->transform($person->getPhone());
+            
+          //$gender = $person->getGender();
+          //$age    = $person->getAge();
+          //$gage   = $gender . $age;
+          //$values[] = $gage;
+            
+          //$city = $address->city . ', ' . $address->state;
+          //$values[] = $city;
+            
+            $values[] = substr($personFed->getId(),4);
+            $values[] = substr($personOrg->getOrgId(),4);
+            $values[] = $cert->getBadge();
+            $values[] = $cert->getVerified();
+            
+            $values[] = $basic['wantMentor'];
+            $values[] = $cert->getUpgrading();
+            
+            $values[] = $basic['attending'];
+            $values[] = $basic['refereeing'];
             
             $this->setRowValues($ws,$row++,$values);
         }
@@ -159,6 +226,8 @@ class ExportOfficialsXLS
             $plan        = $person->getPlan($project->getId());
             $basic       = $plan->getBasic();
             
+            if ($basic['refereeing'] == 'no') continue;
+            
             $values = array();
             $values[] = $plan->getStatus();
             $values[] = $person->getName()->full;
@@ -208,6 +277,9 @@ class ExportOfficialsXLS
         'Level'      => 14,
         'LE CR'      =>  6,
         'LE AR'      =>  6,
+        
+        'Attend'  => 8,
+        'Referee' => 8,
     );
     protected function writeHeaders($ws,$row,$headers)
     {
@@ -231,13 +303,14 @@ class ExportOfficialsXLS
         
         $si = 0;
         
+        $this->generateAllSheet      ($ss->createSheet($si++),$project,$officials);
         $this->generateOfficialsSheet($ss->createSheet($si++),$project,$officials);
         $this->generateNotesSheet    ($ss->createSheet($si++),$project,$officials);
       //$this->generateLodgingSheet  ($ss->createSheet($si++),$project,$officials);
       //$this->generateAvailSheet    ($ss->createSheet($si++),$project,$officials);
         
         // Finish up
-        $ss->setActiveSheetIndex(0);
+        $ss->setActiveSheetIndex(1);
         return $ss;
     }
     /* =======================================================
