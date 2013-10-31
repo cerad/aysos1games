@@ -46,7 +46,11 @@
 {{ game.dtBeg.format('D') }}, {{ game.dtBeg.format('g:i A') }},
 {{ game.homeTeam.name }} vs {{ game.awayTeam.name }} on {{ game.field.name }}
 </h2>
-
+    
+{% if formErrors %}
+<h2 style="color: red;">Form has errors, probably a negative number.</h2>
+{% endif %}
+    
 {% set homeTeam     = game.homeTeam %}
 {% set awayTeam     = game.awayTeam %}
 {% set homeTeamForm = form.homeTeamReport %}
