@@ -37,6 +37,23 @@ cerad_tourn_admin_officials_list:
         _format:  html|csv|xls|pdf
         
 # ==============================================================
+# Importing and exporting the game schedule
+cerad_tourn_admin_schedule_games_import:
+    pattern:  /admin/schedule-games/import
+    defaults: 
+        _controller: CeradTournAdminBundle:Schedule/Games/ScheduleGamesImport:import
+        _template: '@CeradTournAdmin/Schedule/Games/Import/ScheduleGamesImportIndex.html.twig'
+        
+cerad_tourn_admin_schedule_games_export:
+    pattern:  /admin/schedule-games/export.{_format}
+    defaults: 
+        _controller: CeradTournAdminBundle:Schedule/Games/ScheduleGamesExport:export
+        _template: '@CeradTournAdmin/Schedule/Games/Export/ScheduleGamesExportIndex.html.twig'
+        _format: xls
+    requirements:
+        _format:  html|csv|xls|pdf
+
+# ==============================================================
 # Exporting and printing the results stuff
 #
 # This if for all the results including pool play, playoffs and the champions
