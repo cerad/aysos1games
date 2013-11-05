@@ -42,7 +42,15 @@ cerad_tourn_schedule_official_list:
         _format: html
     requirements:
         _format:  html|csv|xls|pdf   
-    
+        
+cerad_tourn_schedule_official_assign:
+    pattern:  /schedule/official/assign/{game}/{slot}
+    defaults:
+        _controller: CeradTournBundle:Schedule/ScheduleOfficialAssign:assign
+        _template: '@CeradTourn/Schedule/Official/Assign/ScheduleOfficialAssignIndex.html.twig'
+        slot: 0
+
+
 cerad_tourn_schedule_team_list:
     pattern:  /schedule/team
     defaults: { _controller: CeradTournBundle:Schedule/ScheduleTeamList:list }

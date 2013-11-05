@@ -46,9 +46,19 @@
             </table></td>
 {% if is_granted('ROLE_USER') %}
             {% for gameOfficial in game.officials %}
-                <td>{{ gameOfficial.personNameFull }}</td>
-            {% endfor %}
-{% endif %}
+{% if is_granted('ROLE_ASSIGNOR') %}
+            {% set gameOfficialName = gameOfficial.personNameFull %}
+            {% if  gameOfficialName == null %}{% set gameOfficialName = '____' %} {% endif %}
+                <td>
+                    <a href="{{ path('cerad_tourn_schedule_official_assign', { 'game': game.num, 'slot' : gameOfficial.slot }) }}">
+                      {{ gameOfficialName }}
+                    </a>
+                </td>
+{% else %}
+                <td>{{ gameOfficial.personNameFull }}</td>                
+{% endif %} {# ROLE_ASSIGNOR #}
+            {% endfor %} {# gameOfficial #}
+{% endif %} {# ROLE_USER #}
        </tr>
         {% endfor %}{# games #}
     </tbody>
