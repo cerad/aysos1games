@@ -16,7 +16,7 @@ cerad_tourn_admin_persons_list:
         _format:  html|csv|xls|pdf
         
 cerad_tourn_admin_person_plan_update:
-    pattern:  /admin/person-plan/update/{personId}
+    pattern:  /admin/person-plan/update/{person}
     defaults: 
         _controller: CeradTournAdminBundle:PersonPlan/PersonPlanUpdate:update
         _template: '@CeradTournAdmin/PersonPlan/Update/PersonPlanUpdateIndex.html.twig'

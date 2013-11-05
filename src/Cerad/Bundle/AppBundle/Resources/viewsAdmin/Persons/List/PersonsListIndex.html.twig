@@ -21,27 +21,22 @@
 {% for person in persons  %}
 {% set name = person.name %}
 {% set user = cerad_tourn_get_user_for_person(person) %}
-{% set personFed = person.fed(fedRoleId) %}
-{% set personOrg = personFed.orgRegion %}
-{% set certReferee = personFed.certReferee %}
+{% set personFed     = person.fed(fedRoleId) %}
+{% set personOrg     = personFed.orgRegion %}
+{% set certReferee   = personFed.certReferee %}
 {% set certSafeHaven = personFed.certSafeHaven %}
-{% set plan = person.plan(project.id) %}
+{% set plan      = person.plan(project.id) %}
 {% set planBasic = plan.basic %}
 <tr id="person-{{person.id}}">
-    <!--<td>-->
-    <!--    <a href="{{ path('cerad_tourn_admin_person_plan_update', { 'personId' : person.id }) }}">-->
-    <!--        Update-->
-    <!--    </a>-->
-    <!--</td>-->
     <td>
-        Username: {{ user.username    }}<br />
+        Username: {{ user.username }}<br />
         Email: {{ user.email       }}<br />
         Account Name:{{ user.accountName }}
     </td>
     <td>
-        Name: {{ name.full    }}<br />
+        Name: <a href="{{ path('cerad_tourn_admin_person_plan_update',{ 'person' : person.id }) }}">{{ name.full }}</a><br />
         Email: {{ person.email }}<br />
-        Phone: {{ person.phone }}
+        Phone: {{ person.phone | cerad_phone }}
     </td>
     <td>
         Vol: {{ personFed.id        }}<br />
