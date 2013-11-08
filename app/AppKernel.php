@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new Cerad\Bundle\UserBundle   \CeradUserBundle(),
             new Cerad\Bundle\GameBundle   \CeradGameBundle(),
             new Cerad\Bundle\LevelBundle  \CeradLevelBundle(),
+            new Cerad\Bundle\OrgBundle    \CeradOrgBundle(),
             
             new Cerad\Bundle\TournBundle  \CeradTournBundle(),
             new Cerad\Bundle\TournAdminBundle\CeradTournAdminBundle(),

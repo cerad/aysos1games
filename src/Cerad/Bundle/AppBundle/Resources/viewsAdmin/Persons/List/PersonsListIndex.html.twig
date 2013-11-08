@@ -44,7 +44,7 @@
     </table></td>
     <td>
         Vol: {{ personFed.id | slice(5)    }}<br />
-        Reg: {{ personOrg.orgId | slice(4)    }}<br />
+        Reg: {{ personOrg.orgId | cerad_org_sar }}<br />
         MY:  <span class="aysov_mem_year-{{ personOrg.memYear }}">{{ personOrg.memYear }}</span><br />
         SH:  {{ certSafeHaven.badge }}<br />
         REF: {{ certReferee.badge   }}<br />

@@ -34,6 +34,7 @@ doctrine:
             default:
                 connection: default
                 mappings: 
+                  CeradOrgBundle: ~
                   CeradUserBundle: ~
                   CeradPersonBundle: ~
                   CeradGameBundle: ~
