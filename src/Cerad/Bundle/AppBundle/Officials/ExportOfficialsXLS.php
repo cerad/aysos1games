@@ -6,11 +6,13 @@ use Cerad\Bundle\PersonBundle\DataTransformer\PhoneTransformer;
 class ExportOfficialsXLS
 {
     protected $excel;
-
-    public function __construct($excel)
+    protected $orgRepo;
+    
+    public function __construct($excel,$orgRepo)
     {
         $this->excel = $excel;
-
+        $this->orgRepo = $orgRepo;
+        
         $this->phoneTransformer = new PhoneTransformer();
     }
     protected function setColumnWidths($ws,$widths)
@@ -39,7 +41,7 @@ class ExportOfficialsXLS
         $headers = array_merge(
             array(
                 'ID','Status','Name','Email','Cell Phone',
-                'AYSO ID','Region','Badge','Verified','Want Mentor','Upgrading',
+                'AYSO ID','Area','Region','Badge','Verified','Want Mentor','Upgrading',
                 'Attend','Referee',
             )
         );
@@ -49,7 +51,7 @@ class ExportOfficialsXLS
         foreach($officials as $person)
         {
             $name        = $person->getName();
-            $address     = $person->getAddress();
+          //$address     = $person->getAddress();
             $personFed   = $person->getFed($project->getFedRoleId());
             $personOrg   = $personFed->getOrgRegion();
             $cert        = $personFed->getCertReferee();
@@ -74,7 +76,12 @@ class ExportOfficialsXLS
           //$city = $address->city . ', ' . $address->state;
           //$values[] = $city;
 
+            $orgId = $personOrg->getOrgId();
+            $org = $this->orgRepo->find($orgId);
+            $area = $org ? substr($org->getParent(),4) : null;
+            
             $values[] = substr($personFed->getId(),4);
+            $values[] = $area;
             $values[] = substr($personOrg->getOrgId(),4);
             $values[] = $cert->getBadge();
             $values[] = $cert->getVerified();
@@ -100,7 +107,7 @@ class ExportOfficialsXLS
         $headers = array_merge(
             array(
                 'ID','Status','Official','Email','Cell Phone',
-                'AYSO ID','Region','Badge','Verified','Want Mentor','Upgrading',
+                'AYSO ID','Area','Region','Badge','Verified','Want Mentor','Upgrading',
                 'Attend','Referee',
             )
         );
@@ -110,7 +117,7 @@ class ExportOfficialsXLS
         foreach($officials as $person)
         {
             $name        = $person->getName();
-            $address     = $person->getAddress();
+          //$address     = $person->getAddress();
             $personFed   = $person->getFed($project->getFedRoleId());
             $personOrg   = $personFed->getOrgRegion();
             $cert        = $personFed->getCertReferee();
@@ -134,8 +141,13 @@ class ExportOfficialsXLS
 
           //$city = $address->city . ', ' . $address->state;
           //$values[] = $city;
-
+            
+            $orgId = $personOrg->getOrgId();
+            $org  = $this->orgRepo->find($orgId);
+            $area = $org ? substr($org->getParent(),4) : null;
+ 
             $values[] = substr($personFed->getId(),4);
+            $values[] = $area;
             $values[] = substr($personOrg->getOrgId(),4);
             $values[] = $cert->getBadge();
             $values[] = $cert->getVerified();
@@ -260,7 +272,8 @@ class ExportOfficialsXLS
         'Notes'      => 72,
         'Home City'  => 16,
         'USSF State' =>  4,
-        'Region'     => 8,
+        'Region'     =>  8,
+        'Area'       =>  8,
       //'AV Fri'     =>  8,
       //'AV Sat'     =>  8,
       //'AV Sun'     =>  8,

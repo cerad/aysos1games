@@ -34,6 +34,7 @@ services:
         class:  Cerad\Bundle\AppBundle\Officials\ExportOfficialsXLS
         arguments:  
             - '@cerad_tourn.excel'
+            - '@cerad_org.org_repository'
             
     cerad_tourn.schedule_officials.import_xls:
         class:  Cerad\Bundle\TournAdminBundle\Schedule\Officials\ScheduleOfficialsImportXLS

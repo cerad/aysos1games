@@ -1,5 +1,9 @@
 {# @CeradTourn/Schedule/Official/ScheduleOfficialList.html.twig #}
 
+<style>
+    .game_official_state-Accepted { background-color: lightgreen; }
+    .game_official_state-Approved { background-color: lightgreen; }
+</style>
 <div class="schedule-game-list">
     <table class="schedule" border="1" style="max-width: 850px;">
     <thead>
@@ -46,17 +50,19 @@
             </table></td>
 {% if is_granted('ROLE_USER') %}
             {% for gameOfficial in game.officials %}
+            <td class="game_official_state-{{ gameOfficial.state }}">
 {% if is_granted('ROLE_ASSIGNOR') %}
+            <a href="{{ path('cerad_tourn_schedule_official_assign', { 'game': game.num, 'slot' : gameOfficial.slot }) }}">
             {% set gameOfficialName = gameOfficial.personNameFull %}
-            {% if  gameOfficialName == null %}{% set gameOfficialName = '____' %} {% endif %}
-                <td>
-                    <a href="{{ path('cerad_tourn_schedule_official_assign', { 'game': game.num, 'slot' : gameOfficial.slot }) }}">
-                      {{ gameOfficialName }}
-                    </a>
-                </td>
+            {% if  gameOfficialName == null %}____
+            {% else %}
+               ({{ gameOfficial.state | slice(0,3) }}) {{ gameOfficialName }}
+            {%endif %}
+            </a>
 {% else %}
-                <td>{{ gameOfficial.personNameFull }}</td>                
+            ({{ gameOfficial.state | slice(0,3) }}) {{ gameOfficial.personNameFull }}              
 {% endif %} {# ROLE_ASSIGNOR #}
+            </td>
             {% endfor %} {# gameOfficial #}
 {% endif %} {# ROLE_USER #}
        </tr>
