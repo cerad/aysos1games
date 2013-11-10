@@ -39,8 +39,8 @@ security:
 
                 username_parameter:  cerad_tourn_account_user_login[username]
                 password_parameter:  cerad_tourn_account_user_login[password]
-               #csrf_parameter:      cerad_tourn_account_user_login[_token]
-               #csrf_provider:       form.csrf_provider
+                csrf_parameter:      cerad_tourn_account_user_login[_token]
+                csrf_provider:       form.csrf_provider
                 intention:           authenticate
                 
             logout:
