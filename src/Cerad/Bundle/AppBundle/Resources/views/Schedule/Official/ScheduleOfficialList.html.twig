@@ -15,7 +15,7 @@
             <th>Field</th>
           {#<th>Div</th>#}
             <th>Pool</th>
-            <th>Home / Away Teams</th>
+            <th>Home/Away</th>
 {% if is_granted('ROLE_USER') %}
             <th>Referee</th>
             <th>AR1</th>
@@ -60,7 +60,7 @@
             {%endif %}
             </a>
 {% else %}
-            ({{ gameOfficial.state | slice(0,3) }}) {{ gameOfficial.personNameFull }}              
+            ({{ gameOfficial.state | slice(0,3) }}) {{ gameOfficial.personNameFull }}
 {% endif %} {# ROLE_ASSIGNOR #}
             </td>
             {% endfor %} {# gameOfficial #}

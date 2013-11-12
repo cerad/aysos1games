@@ -1,0 +1,16 @@
+{# @CeradTourn/ResultsFinals/ResultsFinalsIndex.html.twig #}
+{% extends '@CeradTourn/Layout.html.twig' %}
+
+{% block content %}
+  <h2>
+  GS=Goals Scored, SP=Sportsmanship, YC=Caution, RC=Sendoff, TE=Total Ejections, PE=Points Earned
+  <br/>
+  GT=Games Total, GP=Games Played, GW=Games Won, GA=Goals Against
+  </h2>
+
+{% for poolKey, pool in pools %}
+  <hr style="border: 3px  ridge" />
+  {% include('@CeradTourn/Results/Finals/ResultsFinalsGames.html.twig') %}
+{% endfor %}
+
+{% endblock %}

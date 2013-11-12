@@ -46,11 +46,11 @@
 {{ game.dtBeg.format('D') }}, {{ game.dtBeg.format('g:i A') }},
 {{ game.homeTeam.name }} vs {{ game.awayTeam.name }} on {{ game.field.name }}
 </h2>
-    
+
 {% if formErrors %}
 <h2 style="color: red;">Form has errors, probably a negative number.</h2>
 {% endif %}
-    
+
 {% set homeTeam     = game.homeTeam %}
 {% set awayTeam     = game.awayTeam %}
 {% set homeTeamForm = form.homeTeamReport %}
@@ -121,7 +121,11 @@ padding-left: 3%;">{{ awayTeam.role }} : {{ awayTeam.name }}</td></tr>
     <td style="min-width:275px;">&nbsp;</td>
     <td style="min-width:275px;">&nbsp;</td>
     <td style="min-width:100px;"><input type="submit" name="gameReportUpdate" value="Save" /></td>
-    <td style="min-width:225px;"><a href="{{ path('cerad_tourn_results_poolplay') }}">Return to Pool Play Results</a></td>
+{% if is_granted('ROLE_ASSIGNOR') %}
+    <td style="min-width:225px;"><a href="{{ path('cerad_tourn_schedule_official_list') }}">Return to Referee Schedule</a></td>
+{% else %}
+    <td style="min-width:225px;"><a href="{{ path('cerad_tourn_schedule_list') }}">Return to Pool Play Schedule</a></td>
+{% endif %}
   </tr>
 </table>
 <hr>

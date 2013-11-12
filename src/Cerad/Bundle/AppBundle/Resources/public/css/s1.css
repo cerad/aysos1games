@@ -169,6 +169,7 @@ table.schedule
 }
 
 .app_table th
+,.assign th
 {
   line-height: 2em;
 }
@@ -217,6 +218,7 @@ table.schedule
 }
 
 .schedule table tr:nth-child(odd)
+,#person-list table tr:nth-child(odd)
 {
   background: inherit;
 }
@@ -319,6 +321,20 @@ table.import_results
 {
   padding: 0 20px;
   width:80%
+}
+
+table#person-list td
+{
+  padding: 0 5px 5px 5px;
+}
+
+#form_slots_1_role
+,#form_slots_2_role
+,#form_slots_3_role
+{
+  text-align: right;
+  border: 0;
+  background: inherit;
 }
 
 @media print

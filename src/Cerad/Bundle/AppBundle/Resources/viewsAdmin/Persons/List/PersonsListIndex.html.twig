@@ -30,31 +30,31 @@
 {% set plan      = person.plan(project.id) %}
 <tr id="person-{{person.id}}">
     <td>
-        Username: {{ user.username }}<br />
-        Email: {{ user.email       }}<br />
-        Account Name:{{ user.accountName }}
+        <p>Username: {{ user.username }}</p>
+        <p>Email: {{ user.email       }}</p>
+        <p>Account Name:{{ user.accountName }}</p>
     </td>
-    <td><table class="something" style="margin: 0 0 0 0; padding: 0 0 0 0;">
+    <td><table class="person-info">
         <tr><td>Name </td><td><a href="{{ path('cerad_tourn_admin_person_plan_update',{ 'person' : person.id }) }}">{{ name.full }}</a></td></tr>
         <tr><td>First</td><td>{{ name.first   }}</td></tr>
         <tr><td>Last </td><td>{{ name.last    }}</td></tr>
         <tr><td>Email</td><td>{{ person.email }}</td></tr>
         <tr><td>Phone</td><td>{{ person.phone | cerad_phone }}</td></tr>
-        <tr><td>G Age</td><td>{{ person.gender }} {{ person.age }}</td></tr>
+        <tr><td>Gender Age</td><td>{{ person.gender }} {{ person.age }}</td></tr>
     </table></td>
     <td>
-        Vol: {{ personFed.id | slice(5)    }}<br />
-        Reg: {{ personOrg.orgId | cerad_org_sar }}<br />
-        MY:  <span class="aysov_mem_year-{{ personOrg.memYear }}">{{ personOrg.memYear }}</span><br />
-        SH:  {{ certSafeHaven.badge }}<br />
-        REF: {{ certReferee.badge   }}<br />
+        <p>Vol: {{ personFed.id | slice(5)    }}</p>
+        <p>S/A/R: {{ personOrg.orgId | cerad_org_sar }}</p>
+        <p>MY:  <span class="aysov_mem_year-{{ personOrg.memYear }}">{{ personOrg.memYear }}</span></p>
+        <p>SH:  {{ certSafeHaven.badge }}</p>
+        <p>REF: {{ certReferee.badge   }}</p>
     </td>
     <td>
-        Will Attend:  {{ plan.willAttend  }}<br />
-        Will Referee: {{ plan.willReferee }}<br />
-        Will Mentor:  {{ plan.willMentor  }}<br />
-        Want Mentor:  {{ plan.wantMentor  }}<br />
-        Shirt Size:   {{ plan.shirtSize   }}<br />
+        <p>Will Attend:  {{ plan.willAttend  }}</p>
+        <p>Will Referee: {{ plan.willReferee }}</p>
+        <p>Will Mentor:  {{ plan.willMentor  }}</p>
+        <p>Want Mentor:  {{ plan.wantMentor  }}</p>
+        <p>Shirt Size:   {{ plan.shirtSize   }}</p>
     </td>
 </tr>
 {% endfor %} {# persons #}

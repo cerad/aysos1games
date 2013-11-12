@@ -1,7 +1,12 @@
 {# @CeradTourn/PersonPlan/Update/PersonPlanUpdateEmailBody.html.twig   #}
 {% autoescape false %}
+{% if person.name.nick is empty %}
+Thank you.  Your plans have been updated:
+{% else %}
 {{ person.name.nick }},
 Your plans have been updated:
+{% endif %}
+
 
     Account Name:{{ person.name.full }}
 

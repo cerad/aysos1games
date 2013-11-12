@@ -4,12 +4,12 @@
 <tr class="tbl-title"><th colspan="16">Game Pool Scores - {{ poolKey }}</th></tr>
 <tr class="tbl-hdr">
     <th>Num</th>
-    <th>Game</th>
+    <!--<th>Game</th>-->
     <th>Report</th>
     <th>Day & Time</th>
     <th>Field</th>
     <th>Pool</th>
-    <th>Home/Away Team</th>
+    <th>Home/Away</th>
     <th>GS</th>
     <th>SP</th>
     <th>YC</th>
@@ -28,7 +28,7 @@
 {% else %}
     <td>{{ game.num }}</td>
 {%endif %}
-    <td>{{ game.status         }}</td>
+    <!--<td>{{ game.status         }}</td>-->
     <td>{{ game.report.status  }}</td>
     <td>{{ game.dtBeg.format('D') }} {{ game.dtBeg.format('g:i A') }}</td>
     <td>{{ game.field.name     }}</td>

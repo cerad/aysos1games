@@ -83,7 +83,14 @@ cerad_tourn_schedule_list:
     requirements:
         _format:  html|csv|xls|pdf
   
-        
+cerad_tourn_results_finals:
+    pattern:  /results/finals.{_format}
+    defaults:
+        _controller: CeradAppBundle:Results/FinalsResults:results
+        _format: html
+    requirements:
+        _format: html|csv|xls|pdf
+
 # ========================================================================
 # Accounts
 

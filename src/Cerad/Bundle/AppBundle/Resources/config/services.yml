@@ -54,3 +54,10 @@ services:
             - '@cerad_project.find_default.in_memory'
         tags:
             - { name: twig.extension }
+
+    cerad_org.twig_extension:
+        class:  Cerad\Bundle\AppBundle\TwigExtension\OrgExtension
+        arguments:  
+            - '@cerad_org.org_repository'
+        tags:
+            - { name: twig.extension }            
