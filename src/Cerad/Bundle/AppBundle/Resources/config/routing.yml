@@ -56,8 +56,13 @@ cerad_tourn_schedule_team_list:
     defaults: { _controller: CeradTournBundle:Schedule/ScheduleTeamList:list }
     
 cerad_tourn_schedule_my_list:
-    pattern:  /schedule/my
-    defaults: { _controller: CeradTournBundle:Schedule/ScheduleMyList:list }
+    pattern:  /schedule/my.{_format}
+    defaults: 
+        _controller: CeradTournBundle:Schedule/ScheduleMyList:list
+        _template: '@CeradTourn/Schedule/My/ScheduleMyIndex.html.twig'
+        _format: html
+    requirements:
+        _format: html|csv|xls|pdf
     
 cerad_tourn_game_update:
     pattern:  /game/update
