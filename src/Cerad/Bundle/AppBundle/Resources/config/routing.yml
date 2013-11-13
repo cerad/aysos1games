@@ -12,6 +12,9 @@ cerad_tourn_welcome:
     pattern:  /welcome
     defaults: { _controller: CeradTournBundle:Tourn/TournWelcome:welcome }
 #                           @CeradTourn/Tourn/Welcome/TournWelcomeIndex.html.twig
+cerad_tourn_iframe:
+    pattern:  /iframe
+    defaults: { _controller: CeradTournBundle:Tourn/TournIFrame:iframe }
     
 cerad_tourn_home:
     pattern:  /home
