@@ -1,11 +1,15 @@
 /* Tablet Styling */
 @media screen and (min-device-width: 768px) and (max-device-width: 1024px)
 {
+  html
+  {
+    max-width: 680px;
+  }
+
   body
   {
     font-family: Calibri,Arial,Helvetica,sans-serif;
     font-size: 1.0em;
-    max-width: 680px;
   }
 
   #banner > img
