@@ -2,17 +2,23 @@
 {% extends '@CeradTourn/Layout.html.twig' %}
 
 {% block content %}
+  <h2>
+  GS=Goals Scored, SP=Sportsmanship, YC=Caution, RC=Sendoff, TE=Total Ejections<!--, PE=Points Earned-->
+  </h2>
 
+<hr style="border: 4px  ridge" />
 <h2>Semi-Final Games</h2>
 {% set games = gamesSF %}
 {% set desc = "Semi-Final Results" %}
 {% include('@CeradTourn/Results/Playoff/ResultsPlayoffGames.html.twig') %}
 
+<hr style="border: 4px  ridge" />
 <h2>Consolation Matches</h2>
 {% set games = gamesCM %}
 {% set desc = "Consolation Results" %}
 {% include('@CeradTourn/Results/Playoff/ResultsPlayoffGames.html.twig') %}
 
+<hr style="border: 4px  ridge" />
 <h2>Final Championship Matches</h2>
 {% set games = gamesFM %}
 {% set desc = "We are the Champions" %}

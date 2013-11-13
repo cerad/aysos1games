@@ -19,8 +19,8 @@ table.assign
     </td>
 </tr>
 {% endfor %}
-<tr><td style="clear:both; float:right; padding:10px">{{ form_widget(form.assign) }}</td></tr>
-<tr><td style="clear:both; float:right;padding:10px"><a href="{{ path('cerad_tourn_schedule_official_list') }}">Back to Schedule</a></td></tr>
+<tr><td style="height:2em; float:right; padding:10px">{{ form_widget(form.assign) }}</td></tr>
+<tr><td style="height: 2em;float:right; padding:10px; margin: 10px 0"><a href="{{ path('cerad_tourn_schedule_official_list') }}">Back to Referee Schedule</a></td></tr>
 {{ form_rest(form) }}
 {{ form_end(form)  }}
 </table>

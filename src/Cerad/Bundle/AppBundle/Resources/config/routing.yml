@@ -53,7 +53,6 @@ cerad_tourn_schedule_official_assign:
         _template: '@CeradTourn/Schedule/Official/Assign/ScheduleOfficialAssignIndex.html.twig'
         slot: 0
 
-
 cerad_tourn_schedule_team_list:
     pattern:  /schedule/team
     defaults: { _controller: CeradTournBundle:Schedule/ScheduleTeamList:list }
@@ -62,7 +61,7 @@ cerad_tourn_schedule_my_list:
     pattern:  /schedule/my.{_format}
     defaults: 
         _controller: CeradTournBundle:Schedule/ScheduleMyList:list
-        _template: '@CeradTourn/Schedule/My/ScheduleMyIndex.html.twig'
+        _template: '@CeradApp/Schedule/My/ScheduleMyIndex.html.twig'
         _format: html
     requirements:
         _format: html|csv|xls|pdf
@@ -78,7 +77,8 @@ cerad_tourn_game_report_update:
 cerad_tourn_results_poolplay:
     pattern:  /results/poolplay.{_format}
     defaults:
-        _controller: CeradTournBundle:Results/PoolPlayResults:results
+        _controller: CeradAppBundle:Results/PoolPlayResults:results
+        _template: '@CeradTourn/Results/PoolPlay/ResultsPoolPlayIndex.html.twig'
         _format: html
     requirements:
         _format: html|csv|xls|pdf
@@ -91,18 +91,18 @@ cerad_tourn_schedule_list:
     requirements:
         _format:  html|csv|xls|pdf
   
-cerad_tourn_results_finals:
-    pattern:  /results/finals.{_format}
-    defaults:
-        _controller: CeradAppBundle:Results/FinalsResults:results
-        _format: html
-    requirements:
-        _format: html|csv|xls|pdf
-        
+#cerad_tourn_results_finals:
+#    pattern:  /results/finals.{_format}
+#    defaults:
+#        _controller: CeradAppBundle:Results/FinalsResults:results
+#        _format: html
+#    requirements:
+#        _format: html|csv|xls|pdf
+#        
 cerad_tourn_results_playoff:
     pattern:  /results/playoff.{_format}
     defaults:
-        _controller: CeradTournBundle:Results/PlayoffResults:results
+        _controller: CeradAppBundle:Results/PlayoffResults:results
         _template: '@CeradTourn/Results/Playoff/ResultsPlayoffIndex.html.twig'
         _format: html
     requirements:

@@ -163,6 +163,7 @@ table.schedule
 ,.standings th
 ,.results th
 ,.scoring th
+,.my_schedule th
 {
   padding: 0 8px;
   width: auto;
@@ -179,12 +180,14 @@ table.schedule
 ,.results tr
 {
   line-height: 2em;
+  height: 2em;
 }
 
 .schedule tr:nth-child(odd)
 ,.standings tr:nth-child(odd)
 ,.results tr:nth-child(odd)
 ,#person-list tr:nth-child(odd)
+,.my_schedule tr:nth-child(odd)
 {
   background: #cce6ff;
 }
@@ -219,6 +222,7 @@ table.schedule
 
 .schedule table tr:nth-child(odd)
 ,#person-list table tr:nth-child(odd)
+,.my_schedule table tr:nth-child(odd)
 {
   background: inherit;
 }
@@ -337,10 +341,36 @@ table#person-list td
   background: inherit;
 }
 
+.my_schedule
+{
+  width:80%;
+}
+
+.my_schedule th
+{
+  width:20%;
+  line-height: 2em;
+}
+
+.my_schedule td
+{
+  text-align: left;
+}
+
+.my_schedule button[type="submit"]
+,.assign button[type="submit"]
+{
+  padding: 10px;
+}
+
 @media print
 {
   .sf-toolbar
   ,.sf-toolbar *
+  {
+    display:none;
+  }
+  .schedule-search
   {
     display:none;
   }
