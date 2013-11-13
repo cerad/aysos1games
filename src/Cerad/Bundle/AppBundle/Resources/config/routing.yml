@@ -95,6 +95,15 @@ cerad_tourn_results_finals:
         _format: html
     requirements:
         _format: html|csv|xls|pdf
+        
+cerad_tourn_results_playoff:
+    pattern:  /results/playoff.{_format}
+    defaults:
+        _controller: CeradTournBundle:Results/PlayoffResults:results
+        _template: '@CeradTourn/Results/Playoff/ResultsPlayoffIndex.html.twig'
+        _format: html
+    requirements:
+        _format: html|csv|xls|pdf
 
 # ========================================================================
 # Accounts

@@ -1,0 +1,21 @@
+{# @CeradTourn/Results/Playoff/ResultsPlayoffIndex.html.twig #}
+{% extends '@CeradTourn/Layout.html.twig' %}
+
+{% block content %}
+
+<h2>Semi-Final Games</h2>
+{% set games = gamesSF %}
+{% set desc = "Semi-Final Results" %}
+{% include('@CeradTourn/Results/Playoff/ResultsPlayoffGames.html.twig') %}
+
+<h2>Consolation Matches</h2>
+{% set games = gamesCM %}
+{% set desc = "Consolation Results" %}
+{% include('@CeradTourn/Results/Playoff/ResultsPlayoffGames.html.twig') %}
+
+<h2>Final Championship Matches</h2>
+{% set games = gamesFM %}
+{% set desc = "We are the Champions" %}
+{% include('@CeradTourn/Results/Playoff/ResultsPlayoffGames.html.twig') %}
+
+{% endblock %}
