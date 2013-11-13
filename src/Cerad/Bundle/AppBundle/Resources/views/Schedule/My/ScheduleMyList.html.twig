@@ -1,0 +1,55 @@
+{# @CeradTourn/Schedule/My/ScheduleMyList.html.twig #}
+{#
+    Example of a tabular form
+#}
+
+<table class="my_schedule">
+{{ form_start(form, { 'attr' : { 'class' : 'app_form' }}) }}
+{% if form.games|length > 0%}
+  <thead>
+    <th>Day/Time</th>
+    <th>Field</th>
+    <th>Division</th>
+    <th>Home vs Away</th>
+    <th>Assignment / Status</th>
+  </thead>
+  <tbody>
+  {% for formGame in form.games %}
+  {% set game = formGame.vars.data %}
+  <tr>
+      <!--<td>{{ game.num }}</td>-->
+      <td style="text-align: center">{{ game.dtBeg.format('D H:i A') }}
+      <td style="text-align: center">{{ game.field.name }}</td>
+      <td style="text-align: center">{{ game.group      }}</td>
+  <!--    <td><table>
+          {% for gameTeam in game.teams %}
+              <tr>
+                  <td>{{ gameTeam.name }}</td>
+              </tr>
+          {% endfor %} {# gameTeam #}
+      </table></td>
+  -->
+        <td style="text-align: center">{{ game.teams[1].name}} vs {{ game.teams[2].name}} </td>
+        <td><table>
+          {% for formGameOfficial in formGame.officials %}
+          {% set gameOfficial = formGameOfficial.vars.data %}
+          <tr>
+              <td><div style="width:3em">{{ gameOfficial.role }}</div></td>
+              <td><div style="width:10em">{{ gameOfficial.personNameFull }}</div></td>
+              <td><div style="width:15em">{{ form_widget(formGameOfficial.state) }}</div></td>
+          </tr>
+          {% endfor %} {# formGameOfficial #}
+          </table>
+      </td>
+  </tr>
+  {% endfor %} {# formGame #}
+  <tr><td colspan = "5" style="padding-top: 20px;text-align: right;">{{ form_widget(form.update) }}</td><tr>
+  {{ form_rest(form) }}
+  {{ form_end(form)  }}
+  </tbody>
+{% else %}
+<thead>
+<th>You have not been assigned any games.</th>
+</thead>
+{% endif %}
+</table>

@@ -11,7 +11,7 @@
             <th>Field</th>
           {#<th>Div</th>#}
             <th>Pool</th>
-            <th>Home / Away Teams</th>
+            <th>Home vs Away Teams</th>
         </tr>
     </thead>
     <tbody>
@@ -30,15 +30,7 @@
             <td><a href="http://goo.gl/3qyHw2" target="_parent|_blank">{{ game.field.name }}</a></td>
           {#<td>{{ game.levelId    }}</td>#}
             <td>{{ game.group      }}</td>
-
-            <td><table>
-                {% for gameTeam in game.teams %}
-                    <tr>
-                      {#<td>{{ gameTeam.group | slice(8) }}:&nbsp;</td>#}
-                        <td>{{ gameTeam.name }}</td>
-                    </tr>
-                {% endfor %}
-            </table></td>
+            <td style="text-align: center">{{ game.teams[1].name}} vs {{ game.teams[2].name}} </td>
        </tr>
         {% endfor %}{# games #}
     </tbody>

@@ -9,13 +9,13 @@
     <th>Day & Time</th>
     <th>Field</th>
     <th>Pool</th>
-    <th>Home/Away</th>
+    <th>Home vs Away</th>
     <th>GS</th>
     <th>SP</th>
     <th>YC</th>
     <th>RC</th>
     <th>TE</th>
-    <th>PE</th>
+<!--    <th>PE</th>-->
 </tr>
 </thead>
 
@@ -40,13 +40,13 @@
     {% set homeTeamReport = homeTeam.report %}
     {% set awayTeamReport = awayTeam.report %}
 
-    <td>{{ homeTeam.name }}<br/>{{ awayTeam.name }}</td>
+    <td>{{ homeTeam.name }} vs {{ awayTeam.name }}</td>
     <td>{{ homeTeamReport.goalsScored     }}<br/>{{ awayTeamReport.goalsScored     }}</td>
     <td>{{ homeTeamReport.sportsmanship   }}<br/>{{ awayTeamReport.sportsmanship   }}</td>
     <td>{{ homeTeamReport.playerWarnings  }}<br/>{{ awayTeamReport.playerWarnings  }}</td>
     <td>{{ homeTeamReport.playerEjections }}<br/>{{ awayTeamReport.playerEjections }}</td>
     <td>{{ homeTeamReport.totalEjections  }}<br/>{{ awayTeamReport.totalEjections  }}</td>
-    <td>{{ homeTeamReport.pointsEarned    }}<br/>{{ awayTeamReport.pointsEarned    }}</td>
+<!--    <td>{{ homeTeamReport.pointsEarned    }}<br/>{{ awayTeamReport.pointsEarned    }}</td>-->
   </tr>
 
 {% endfor %}

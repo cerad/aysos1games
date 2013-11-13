@@ -27,7 +27,7 @@
               {#</a>#}
             </td></tr>
             <tr><td> </td></tr>
-            <tr><td colspan="2"><a href="{{ path('cerad_tourn_person_person_update', { 'id': personPerson.id }) }}">Update your account</a></td></tr>
+            <tr><td colspan="2"><a href="{{ path('cerad_tourn_person_person_update', { 'id': personPerson.id }) }}">Update My Account</a></td></tr>
            {% for authens in user.authens %}
                 <tr><td>Social:</td><td>{{ authens.source }}</td></tr>
             {% endfor %}
@@ -46,7 +46,7 @@
            <tr><td>Will Referee:</td><td>{{ plan.basic.refereeing  }}</td></tr>
             <tr><td> </td></tr>
             <tr><td></td></tr>
-           <tr><td colspan="2"><a href="{{ path('cerad_tourn_person_plan_update',{ id: person.id }) }}">Update your plans</td></tr>
+           <tr><td colspan="2"><a href="{{ path('cerad_tourn_person_plan_update',{ id: person.id }) }}">Update My Plan</td></tr>
         {% else %}
             <tr><td> </td></tr>
             <tr><td> </td></tr>
