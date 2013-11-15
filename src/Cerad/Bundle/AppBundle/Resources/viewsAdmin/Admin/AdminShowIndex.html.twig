@@ -4,12 +4,15 @@
 {% block content %}
 
 <div class="admin">
-{% if is_granted('ROLE_ADMIN')  %}
+{% if is_granted('ROLE_ADMIN') or
+      is_granted('ROLE_ASSIGNOR') %}
   <ul><h2>Account Management</h2>
 <!--
     <li><a href="">List of Accounts and Referees (empty)</a></li>
 -->
+{% if is_granted('ROLE_ADMIN') %}
     <li><a href="{{ path('cerad_tourn_admin_persons_list') }}">View Registered People</a></li>
+{% endif %}
     <li><a href="{{ path('cerad_tourn_admin_persons_list', { '_format' : 'xls' }) }}">Export Registered People (Excel)</a></li>
     <!--<li><a href="{{ path('cerad_tourn_admin_officials_list', { '_format' : 'xls' }) }}">Export Tournament Officials (Excel)</a></li>-->
 
