@@ -4,10 +4,14 @@
 {% block content %}
 <style>
 .aysov_mem_year-FS2013 { background-color: lightgreen; }
+.certSafeHaven_badge-AYSO { background-color: lightgreen; }
+.certSafeHaven_badge-Coach { background-color: lightgreen; }
+.certSafeHaven_badge-Referee { background-color: lightgreen; }
 </style>
 <div style="padding:0 2em 1em 2em; float: left;"><a href="{{ path('cerad_tourn_admin_persons_list', { '_format': 'xls'}) }}">Export to Excel</a></div>
 <!--<div style="padding: 0 2em 1em 0; float: left;"><a href="{{ path('cerad_tourn_admin_persons_list', { '_format': 'csv'}) }}"> Export to Text</a></div>
 -->
+
 <table id="person-list" class="app_table">
 <thead>
 <tr><th colspan="20">Registered Persons List - Count: {{ persons | length }}</th></tr>
@@ -28,11 +32,13 @@
 {% set certReferee   = personFed.certReferee %}
 {% set certSafeHaven = personFed.certSafeHaven %}
 {% set plan      = person.plan(project.id) %}
+
 <tr id="person-{{person.id}}">
     <td>
         <p>Username: {{ user.username }}</p>
         <p>Email: {{ user.email       }}</p>
         <p>Account Name:{{ user.accountName }}</p>
+        <p>Role:</p>
     </td>
     <td><table class="person-info">
         <tr><td>Name </td><td><a href="{{ path('cerad_tourn_admin_person_plan_update',{ 'person' : person.id }) }}">{{ name.full }}</a></td></tr>
@@ -46,7 +52,7 @@
         <p>Vol: {{ personFed.id | slice(5)    }}</p>
         <p>S/A/R: {{ personOrg.orgId | cerad_org_sar }}</p>
         <p>MY:  <span class="aysov_mem_year-{{ personOrg.memYear }}">{{ personOrg.memYear }}</span></p>
-        <p>SH:  {{ certSafeHaven.badge }}</p>
+        <p>SH:  <span class="certSafeHaven_badge-{{ certSafeHaven.badge | default("na") }}">{{ certSafeHaven.badge }}</span></p>
         <p>REF: {{ certReferee.badge   }}</p>
     </td>
     <td>
