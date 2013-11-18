@@ -60,7 +60,7 @@ cerad_tourn_schedule_team_list:
 cerad_tourn_schedule_my_list:
     pattern:  /schedule/my.{_format}
     defaults: 
-        _controller: CeradTournBundle:Schedule/ScheduleMyList:list
+        _controller: CeradAppBundle:Schedule/ScheduleMyList:list
         _template: '@CeradApp/Schedule/My/ScheduleMyIndex.html.twig'
         _format: html
     requirements:

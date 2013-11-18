@@ -3,6 +3,10 @@
     Example of a tabular form
 #}
 
+<div style="padding:0 2em 1em 2em; float: left;"><a href="{{ path('cerad_tourn_schedule_my_list', { '_format': 'xls'}) }}">Export to Excel</a></div>
+<div style="padding:0 2em 1em 2em; float: left;"><a href="{{ path('cerad_tourn_schedule_my_list', { '_format': 'csv'}) }}">Export to Text</a></div>
+
+<div style="clear: both">
 <table class="my_schedule">
 {{ form_start(form, { 'attr' : { 'class' : 'app_form' }}) }}
 {% if form.games|length > 0%}
@@ -53,3 +57,4 @@
 </thead>
 {% endif %}
 </table>
+</div>

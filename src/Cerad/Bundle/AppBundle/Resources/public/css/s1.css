@@ -363,6 +363,11 @@ table#person-list td
   padding: 10px;
 }
 
+.my_schedule select
+{
+  width:80%;
+}
+
 @media print
 {
   .sf-toolbar
