@@ -3,16 +3,14 @@
     Example of a tabular form
 #}
 
-<div style="padding:0 2em; float: left;"><a href="{{ path('cerad_tourn_schedule_my_list', { '_format': 'xls'}) }}">Export to Excel</a></div>
-<div style="padding-right: 2em; float: left;"><a href="{{ path('cerad_tourn_schedule_my_list', { '_format': 'csv'}) }}"> Export to Text</a></div>
-<br/>
-<br/>
+<div style="padding:0 2em 1em 2em; float: left;"><a href="{{ path('cerad_tourn_schedule_my_list', { '_format': 'xls'}) }}">Export to Excel</a></div>
+<div style="padding:0 2em 1em 2em; float: left;"><a href="{{ path('cerad_tourn_schedule_my_list', { '_format': 'csv'}) }}">Export to Text</a></div>
 
+<div style="clear: both">
 <table class="my_schedule">
 {{ form_start(form, { 'attr' : { 'class' : 'app_form' }}) }}
 {% if form.games|length > 0%}
   <thead>
-    <th>Game #</th>
     <th>Day/Time</th>
     <th>Field</th>
     <th>Division</th>
@@ -23,7 +21,7 @@
   {% for formGame in form.games %}
   {% set game = formGame.vars.data %}
   <tr>
-      <td style="text-align: center">{{ game.num }}</td>
+      <!--<td>{{ game.num }}</td>-->
       <td style="text-align: center">{{ game.dtBeg.format('D H:i A') }}
       <td style="text-align: center">{{ game.field.name }}</td>
       <td style="text-align: center">{{ game.group      }}</td>
@@ -49,7 +47,7 @@
       </td>
   </tr>
   {% endfor %} {# formGame #}
-  <tr><td colspan = "6" style="padding-top: 20px;text-align: right;">{{ form_widget(form.update) }}</td><tr>
+  <tr><td colspan = "5" style="padding-top: 20px;text-align: right;">{{ form_widget(form.update) }}</td><tr>
   {{ form_rest(form) }}
   {{ form_end(form)  }}
   </tbody>
@@ -59,3 +57,4 @@
 </thead>
 {% endif %}
 </table>
+</div>
