@@ -36,14 +36,14 @@ class ScheduleMyListController extends MyBaseController
         }
 
         // Query for the games
-        $gameRepo = $this->get('cerad_game.game_repository');
-        $games = $gameRepo->queryGameSchedule($model);
+        //$gameRepo = $this->get('cerad_game.game_repository');
+        //$games = $gameRepo->queryGameSchedule($model);
 
         // Spreadsheet
         if ($_format == 'xls')
         {
             $export = $this->get('cerad_tourn.schedule_my.export_xls');
-            $response = new Response($export->generate($games));
+            $response = new Response($export->generate($model['games']));
 
             $outFileName = 'MySched' . date('YmdHi') . '.xls';
 
@@ -55,7 +55,7 @@ class ScheduleMyListController extends MyBaseController
         if ($_format == 'csv')
         {
             $export = $this->get('cerad_tourn.schedule_my.export_csv');
-            $response = new Response($export->generate($games));
+            $response = new Response($export->generate($model['games']));
 
             $outFileName = 'MySched' . date('YmdHi') . '.csv';
 
