@@ -14,14 +14,14 @@ class ResultsExportXLS
         'Team' => 21,
         'Game' =>  8,
 
-        'Score' => 8, 'Send Off' => 8, 'Points' => 8, 'Sports Points' => 8,
-        'Total Points' => 8, 'Send Off Total' => 8, 'Goals Against' => 8, 'Total Sports' => 8,
+        'Score' => 8, 'Send Off' => 8, 'Points' => 13, 'Sports Points' => 13,
+        'Total Points' => 13, 'Send Off Total' => 13, 'Goals Against' => 13, 'Total Sports' => 13,
         'Status 1' => 10, 'Status 2' => 10,  'PA' =>  4,
         'DOW Time' => 15, 'Field' =>  6, 'Pool' => 12, 'Type' =>  6,
 
-        'GS' => 8, 'SP' => 8, 'YC' => 8, 'RC' => 8, 'CE' => 8, 'PE' => 8,
+        'GS' => 8, 'Goals For' => 13, 'SP' => 8, 'YC' => 8, 'RC' => 8, 'CE' => 8, 'PE' => 8,
 
-        'TPE' => 8, 'GT'  => 8, 'GP'  => 8, 'GW'  => 8,
+        'TPE' => 8, 'GT'  => 8, 'GP'  => 8, 'Games Played'  => 13,  'GW'  => 8,
         'TGS' => 8, 'TGA' => 8, 'TYC' => 8, 'TRC' => 8, 'TCE' => 8, 'TSP' => 8,
         'WPF' => 8, 'SfP' => 8,
     );
@@ -34,7 +34,7 @@ class ResultsExportXLS
     {
         $this->excel = $excel;
     }
-    protected function setHeaders($ws,$map,$row = 1)
+    protected function setHeaders($ws,$map,$row = 0)
     {
         $col = 1;
         foreach(array_keys($map) as $header)
@@ -75,7 +75,7 @@ class ResultsExportXLS
      * Write the list of games to the spreadsheet
      *
      */
-    public function generatePoolGames($ws,$games,&$row)
+    public function generatePoolGames($ws,$games,$reports,&$row)
     {
         $map = array(
             'Pool'     => 'pool',
@@ -92,12 +92,12 @@ class ResultsExportXLS
             'Total Points' => true, 'Send Off Total' => true, 'Goals Against' => true, 'Total Sports' => true
         );
         $row = $this->setHeaders($ws,$map,$row);
-        $r = $row;
+        $topRow = $row;
 
         foreach($games as $game)
         {
             $col = 1;
-            if ( $row == $r )
+            if ( $row == $topRow )
             {
               $ws->setCellValueByColumnAndRow($col,$row,'POOL ' . substr($game->getGroup(), -1) );
             }
@@ -138,22 +138,28 @@ class ResultsExportXLS
             {
                 $report = $team->getReport();
                 $row++;
+
                 $col = 1;
 
                 $ws->setCellValueByColumnAndRow($col++,$row,$team->getName()); //Team name
-
                 $ws->setCellValueByColumnAndRow($col++,$row,$game->getNum());  // Game #
-
                 $ws->setCellValueByColumnAndRow($col++,$row,$report->getGoalsScored()); // Score
-
-                $ws->setCellValueByColumnAndRow($col++,$row,$report->getPlayerEjections() + $report->getCoachEjections()); // Sendoffs
-
-                $ws->setCellValueByColumnAndRow($col++,$row,$report->getGoalsScored() - $report->getPlayerEjections() - $report->getCoachEjections()); // Total Points
-
+                $ws->setCellValueByColumnAndRow($col++,$row,$report->getPlayerEjections() + $report->getCoachEjections() + $report->getBenchEjections() ); // Sendoffs
+                $ws->setCellValueByColumnAndRow($col++,$row,max($report->getPointsEarned(),0) ); // Total Points
                 $ws->setCellValueByColumnAndRow($col++,$row,$report->getSportsmanship()); //Sports Points
+             }
+        }
 
-                $ws->setCellValueByColumnAndRow($col++,$row,$report->getPointsEarned()); // Total Points
-            }
+        foreach($reports as $report)
+        {
+            $topRow++;
+            $col = 7;
+
+            $ws->setCellValueByColumnAndRow($col++,$topRow,max( $report->getPointsEarned(),0) );
+            $ws->setCellValueByColumnAndRow($col++,$topRow,$report->getPlayerEjections() + $report->getCoachEjections() + $report->getBenchEjections() + $report->getSpecEjections() );
+            $ws->setCellValueByColumnAndRow($col++,$topRow,$report->getGoalsAllowed());
+            $ws->setCellValueByColumnAndRow($col++,$topRow,$report->getSportsmanship());
+
         }
         return;
     }
@@ -170,13 +176,15 @@ class ResultsExportXLS
         (
             'Pool' => 'pool',
             'Team' => 'team',
-            'GS' => true, 'Send Off' => true, 'Points' => true, 'Sports Points' => true,
-            'Total Points' => true, 'Send Off Total' => true, 'Goals Against' => true, 'Total Sports' => true,
+            'Games Played'  => true,
 
-            'WPF' => true, 'TPE' => true, 'GT'  => true, 'GP'  => true, 'GW'  => true,
-            'TGS' => true, 'TGA' => true, 'TYC' => true, 'TRC' => true, 'TCE' => true,
-          //'SfP' => true, // Soccerfest points
-            'TSP' => true,
+            'Goals For' => true, 'Goals Against' => true,
+            'Send Off Total' => true, 'Total Points' => true, 'Total Sports' => true,
+
+          //  'GW'  => true,
+          //  'TGS' => true, 'TGA' => true, 'TYC' => true, 'TRC' => true, 'TCE' => true,
+          ////'SfP' => true, // Soccerfest points
+          //  'TPE' => true, 'TSP' => true,
         );
         $row = $this->setHeaders($ws,$map,$row);
 
@@ -189,21 +197,32 @@ class ResultsExportXLS
 
             $ws->setCellValueByColumnAndRow($col++,$row,$team->getGroup());
             $ws->setCellValueByColumnAndRow($col++,$row,$team->getName());
-
-            $ws->setCellValueByColumnAndRow($col++,$row,$report->getWinPercent());
-            $ws->setCellValueByColumnAndRow($col++,$row,$report->getPointsEarned());
-            $ws->setCellValueByColumnAndRow($col++,$row,$report->getGamesTotal());
-            $ws->setCellValueByColumnAndRow($col++,$row,$report->getGamesPlayed());
-            $ws->setCellValueByColumnAndRow($col++,$row,$report->getGamesWon());
+            if ( empty($report->getGamesPlayed()) ) {
+              $gp = 0;
+            }
+            else {
+              $gp = $report->getGamesPlayed();
+            }
+            $ws->setCellValueByColumnAndRow($col++,$row,$gp);
             $ws->setCellValueByColumnAndRow($col++,$row,$report->getGoalsScored());
             $ws->setCellValueByColumnAndRow($col++,$row,$report->getGoalsAllowed());
-
-            $ws->setCellValueByColumnAndRow($col++,$row,$report->getPlayerWarnings());
             $ws->setCellValueByColumnAndRow($col++,$row,$report->getPlayerEjections());
-
-            $ws->setCellValueByColumnAndRow($col++,$row,$report->getCoachEjections());
-          //$ws->setCellValueByColumnAndRow($col++,$row,$team->getSfSP());
+            $ws->setCellValueByColumnAndRow($col++,$row,max($report->getPointsEarned(),0));
             $ws->setCellValueByColumnAndRow($col++,$row,$report->getSportsmanship());
+
+            //$ws->setCellValueByColumnAndRow($col++,$row,$report->getWinPercent());
+            //$ws->setCellValueByColumnAndRow($col++,$row,$report->getGamesTotal());
+            //$ws->setCellValueByColumnAndRow($col++,$row,$report->getPointsEarned());
+
+          //  $ws->setCellValueByColumnAndRow($col++,$row,$report->getGamesWon());
+          //  $ws->setCellValueByColumnAndRow($col++,$row,$report->getGoalsScored());
+          //
+          //  $ws->setCellValueByColumnAndRow($col++,$row,$report->getPlayerWarnings());
+          //  $ws->setCellValueByColumnAndRow($col++,$row,$report->getPlayerEjections());
+          //  $ws->setCellValueByColumnAndRow($col++,$row,$report->getCoachEjections());
+          ////$ws->setCellValueByColumnAndRow($col++,$row,$team->getSfSP());
+          //  $ws->setCellValueByColumnAndRow($col++,$row,$report->getPointsEarned());
+          //  $ws->setCellValueByColumnAndRow($col++,$row,$report->getSportsmanship());
         }
         return;
     }
@@ -274,7 +293,7 @@ class ResultsExportXLS
             $gameWS->setCellValueByColumnAndRow(2, 1, $divTitle);
             $gameWS->setCellValueByColumnAndRow(10, 1, $dRec['hdr']);
             $gameWS->setCellValueByColumnAndRow(4, 2,  $dRec['title']);
-            $this->generatePoolGames($gameWS,$pool['games'],$gameRow);
+            $this->generatePoolGames($gameWS,$pool['games'],$pool['teams'],$gameRow);
             $this->FormatPlayoffSummary($gameWS);
             $gameWS->setShowGridlines(false);
             $gameWS->getPageSetup()->setPrintArea('A1:S38');
@@ -282,6 +301,19 @@ class ResultsExportXLS
             $gameWS->getPageSetup()->setHorizontalCentered(true);
 
             $this->generatePoolTeams($teamWS,$pool['teams'],$teamRow);
+
+            $styleArray = array(
+             'alignment' => array(
+               'horizontal' => \PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+              )
+            );
+            $highestColumm = $teamWS->getHighestColumn();
+            $highestRow = $teamWS->getHighestRow();
+            $rng = "A1:Z100";
+
+            $teamWS->getStyle($rng)->applyFromArray($styleArray);
+            $teamWS->setSelectedCell("A1");
+            $teamWS->getPageSetup()->setHorizontalCentered(true);
 
             $keyx2 = $key;
         }}

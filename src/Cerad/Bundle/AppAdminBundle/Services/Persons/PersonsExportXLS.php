@@ -1,5 +1,5 @@
 <?php
-namespace Cerad\Bundle\TournAdminBundle\Services\Persons;
+namespace Cerad\Bundle\AppAdminBundle\Services\Persons;
 
 use Cerad\Bundle\PersonBundle\DataTransformer\PhoneTransformer;
 
@@ -7,12 +7,12 @@ class PersonsExportXLS
 {
     protected $excel;
     protected $orgRepo;
-    
+
     public function __construct($excel,$orgRepo)
     {
         $this->excel   = $excel;
         $this->orgRepo = $orgRepo;
-        
+
         $this->phoneTransformer = new PhoneTransformer();
     }
     protected function setColumnWidths($ws,$widths)
@@ -41,7 +41,8 @@ class PersonsExportXLS
         $headers = array_merge(
             array(
                 'ID','Status','Name','Email','Cell Phone',
-                'AYSO ID','Area','Region','Badge','Verified','Want Mentor','Upgrading',
+                'AYSO ID','Area','Region','Badge','MY','Safe Haven',
+                'Verified','Want Mentor','Upgrading',
                 'Attend','Referee',
             )
         );
@@ -79,11 +80,13 @@ class PersonsExportXLS
             $orgId = $personOrg->getOrgId();
             $org = $this->orgRepo->find($orgId);
             $area = $org ? substr($org->getParent(),4) : null;
-            
+
             $values[] = substr($personFed->getId(),4);
             $values[] = $area;
             $values[] = substr($personOrg->getOrgId(),4);
             $values[] = $cert->getBadge();
+            $values[] = $personOrg->getMemYear();
+            $values[] = $personFed->getCertSafeHaven()->getBadge();
             $values[] = $cert->getVerified();
 
             $values[] = $basic['wantMentor'];
@@ -107,7 +110,8 @@ class PersonsExportXLS
         $headers = array_merge(
             array(
                 'ID','Status','Official','Email','Cell Phone',
-                'AYSO ID','Area','Region','Badge','Verified','Want Mentor','Upgrading',
+                'AYSO ID','Area','Region','Badge','MY','Safe Haven',
+                'Verified','Want Mentor','Upgrading',
                 'Attend','Referee',
             )
         );
@@ -141,15 +145,17 @@ class PersonsExportXLS
 
           //$city = $address->city . ', ' . $address->state;
           //$values[] = $city;
-            
+
             $orgId = $personOrg->getOrgId();
             $org  = $this->orgRepo->find($orgId);
             $area = $org ? substr($org->getParent(),4) : null;
- 
+
             $values[] = substr($personFed->getId(),4);
             $values[] = $area;
             $values[] = substr($personOrg->getOrgId(),4);
             $values[] = $cert->getBadge();
+            $values[] = $personOrg->getMemYear();
+            $values[] = '';//$personFed->getSafeHaven()->badge;
             $values[] = $cert->getVerified();
 
             $values[] = $basic['wantMentor'];

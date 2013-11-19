@@ -40,12 +40,16 @@
     {% set homeTeamReport = homeTeam.report %}
     {% set awayTeamReport = awayTeam.report %}
 
-    <td>{{ homeTeam.name }} vs {{ awayTeam.name }}</td>
-    <td>{{ homeTeamReport.goalsScored     }}<br/>{{ awayTeamReport.goalsScored     }}</td>
-    <td>{{ homeTeamReport.sportsmanship   }}<br/>{{ awayTeamReport.sportsmanship   }}</td>
-    <td>{{ homeTeamReport.playerWarnings  }}<br/>{{ awayTeamReport.playerWarnings  }}</td>
-    <td>{{ homeTeamReport.playerEjections }}<br/>{{ awayTeamReport.playerEjections }}</td>
-    <td>{{ homeTeamReport.totalEjections  }}<br/>{{ awayTeamReport.totalEjections  }}</td>
+    <td>{{ homeTeam.name }} <br/> {{ awayTeam.name }}</td>
+    {% if game.report.status is not empty %}
+    <td>{{ homeTeamReport.goalsScored|default(0) }}<br/>{{ awayTeamReport.goalsScored |default(0)   }}</td>
+    <td>{{ homeTeamReport.sportsmanship|default(0)  }}<br/>{{ awayTeamReport.sportsmanship|default(0)    }}</td>
+    <td>{{ homeTeamReport.playerWarnings|default(0) }}<br/>{{ awayTeamReport.playerWarnings|default(0)   }}</td>
+    <td>{{ homeTeamReport.playerEjections|default(0)  }}<br/>{{ awayTeamReport.playerEjections|default(0)  }}</td>
+    <td>{{ homeTeamReport.totalEjections|default(0)   }}<br/>{{ awayTeamReport.totalEjections|default(0)   }}</td>
+    {% else %}
+    <td colspan="5"></td>
+    {% endif %}
 <!--    <td>{{ homeTeamReport.pointsEarned    }}<br/>{{ awayTeamReport.pointsEarned    }}</td>-->
   </tr>
 

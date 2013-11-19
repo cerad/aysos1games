@@ -76,6 +76,7 @@ padding-left: 3%;">{{ awayTeam.role }} : {{ awayTeam.name }}</td></tr>
         <td>{{ form_widget(homeTeamForm.playerEjections) }}</td>
         <td style="text-align: left;">{{ form_widget(awayTeamForm.playerEjections) }}</td>
     </tr>
+   <tr><td colspan="5">&nbsp;</td></tr>
     <tr>
         <td style="text-align: right;">Coach Ejections</td>
         <td>{{ form_widget(homeTeamForm.coachEjections) }}</td>
@@ -93,6 +94,17 @@ padding-left: 3%;">{{ awayTeam.role }} : {{ awayTeam.name }}</td></tr>
     </tr>
    <tr><td colspan="5">&nbsp;</td></tr>
     <tr>
+        <td style="text-align: right;">Sportsmanship</td>
+        <td>{{ form_widget(homeTeamForm.sportsmanship) }}</td>
+        <td style="text-align: left;">{{ form_widget(awayTeamForm.sportsmanship) }}</td>
+    </tr>
+   <tr><td colspan="5">&nbsp;</td></tr>
+    <tr>
+      <td style="text-align: right;vertical-align: text-top">Notes</td>
+      <td colspan="2" style="padding-left: 12px; text-align: left;">{{ form_widget(form.gameReport.text) }}</td>
+    </tr>
+    <tr><td colspan="5">&nbsp;</td></tr>
+    <tr>
         <td style="text-align: right;">Points Earned</td>
         <td>{{ form_widget(homeTeamForm.pointsEarned) }}</td>
         <td style="text-align: left;">{{ form_widget(awayTeamForm.pointsEarned) }}</td>
@@ -101,17 +113,6 @@ padding-left: 3%;">{{ awayTeam.role }} : {{ awayTeam.name }}</td></tr>
         <td style="text-align: right;">Points Minus</td>
         <td>{{ form_widget(homeTeamForm.pointsMinus) }}</td>
         <td style="text-align: left;">{{ form_widget(awayTeamForm.pointsMinus) }}</td>
-    </tr>
-    <tr><td colspan="5">&nbsp;</td></tr>
-    <tr>
-        <td style="text-align: right;">Sportsmanship</td>
-        <td>{{ form_widget(homeTeamForm.sportsmanship) }}</td>
-        <td style="text-align: left;">{{ form_widget(awayTeamForm.sportsmanship) }}</td>
-    </tr>
-    <tr><td colspan="5">&nbsp;</td></tr>
-    <tr>
-      <td style="text-align: right;vertical-align: text-top">Notes</td>
-      <td colspan="2" style="padding-left: 20px; text-align: left;">{{ form_widget(form.gameReport.text) }}</td>
     </tr>
   </tbody>
 </table>
@@ -122,9 +123,9 @@ padding-left: 3%;">{{ awayTeam.role }} : {{ awayTeam.name }}</td></tr>
     <td style="min-width:275px;">&nbsp;</td>
     <td style="min-width:100px;"><input type="submit" name="gameReportUpdate" value="Save" /></td>
 {% if is_granted('ROLE_ASSIGNOR') %}
-    <td style="min-width:225px;"><a href="{{ path('cerad_tourn_schedule_official_list') }}">Return to Referee Schedule</a></td>
+    <td style="min-width:225px;"><a href="{{ path('cerad_tourn_schedule_official_list') }}">Return to Schedule</a></td>
 {% else %}
-    <td style="min-width:225px;"><a href="{{ path('cerad_tourn_schedule_list') }}">Return to Pool Play Schedule</a></td>
+    <td style="min-width:225px;"><a href="{{ path('cerad_tourn_schedule_list') }}">Return to Schedule</a></td>
 {% endif %}
   </tr>
 </table>
