@@ -155,7 +155,7 @@ class PersonsExportXLS
             $values[] = substr($personOrg->getOrgId(),4);
             $values[] = $cert->getBadge();
             $values[] = $personOrg->getMemYear();
-            $values[] = '';//$personFed->getSafeHaven()->badge;
+            $values[] = $personFed->getCertSafeHaven()->getBadge();
             $values[] = $cert->getVerified();
 
             $values[] = $basic['wantMentor'];
