@@ -11,8 +11,9 @@ class ResultsExportXLS
     protected $widths = array
     (
         'Pool' => 21,
-        'Team' => 21,
+        'Team' => 21, 'Team ' => 13,
         'Game' =>  8,
+        'Blank' => 3,
 
         'Score' => 8, 'Send Off' => 8, 'Points' => 13, 'Sports Points' => 13,
         'Total Points' => 13, 'Send Off Total' => 13, 'Goals Against' => 13, 'Total Sports' => 13,
@@ -61,14 +62,29 @@ class ResultsExportXLS
     //    }
     //    return $row;
     //}
-    protected function pageSetup($ws,$fitToHeight = 0)
+    protected function pageSetup($ws,$printArea,$fitToHeight = 0)
     {
+      $ws->getPageSetup()->setPrintArea($printArea);
+      $ws->getPageMargins()->setTop(0.5);
+      $ws->getPageMargins()->setRight(0.25);
+      $ws->getPageMargins()->setLeft(0.25);
+      $ws->getPageMargins()->setBottom(0.25);
+
         $ws->getPageSetup()->setOrientation(\PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
         $ws->getPageSetup()->setPaperSize  (\PHPExcel_Worksheet_PageSetup::PAPERSIZE_A4);
         $ws->getPageSetup()->setFitToPage(true);
         $ws->getPageSetup()->setFitToWidth(1);
         $ws->getPageSetup()->setFitToHeight($fitToHeight);
         $ws->setPrintGridLines(true);
+
+      $ws->getPageSetup()->setHorizontalCentered(true);
+      $ws->getPageSetup()->setVerticalCentered(true);
+      $ws->setSelectedCell("A1");
+
+      $footerText = '&R&I&10' . 'Printed on ' . date('d-M-Y').' at '. date('H:i:s T');
+      $ws->getHeaderFooter()->setOddFooter($footerText);
+      $ws->getHeaderFooter()->setEvenFooter($footerText);
+
         return;
     }
     /* =======================================================
@@ -89,7 +105,8 @@ class ResultsExportXLS
           //  'Type'     => true,
 
             'Score' => true, 'Send Off' => true, 'Points' => true, 'Sports Points' => true,
-            'Total Points' => true, 'Send Off Total' => true, 'Goals Against' => true, 'Total Sports' => true
+            'Blank' => 'blank',
+            'Team ' => true,'Total Points' => true, 'Send Off Total' => true, 'Goals Against' => true, 'Total Sports' => true
         );
         $row = $this->setHeaders($ws,$map,$row);
         $topRow = $row;
@@ -145,17 +162,22 @@ class ResultsExportXLS
                 $ws->setCellValueByColumnAndRow($col++,$row,$game->getNum());  // Game #
                 $ws->setCellValueByColumnAndRow($col++,$row,$report->getGoalsScored()); // Score
                 $ws->setCellValueByColumnAndRow($col++,$row,$report->getPlayerEjections() + $report->getCoachEjections() + $report->getBenchEjections() ); // Sendoffs
-                $ws->setCellValueByColumnAndRow($col++,$row,max($report->getPointsEarned(),0) ); // Total Points
+                $ws->setCellValueByColumnAndRow($col++,$row,$report->getPointsEarned() ); // Total Points
                 $ws->setCellValueByColumnAndRow($col++,$row,$report->getSportsmanship()); //Sports Points
              }
         }
 
+        //clear separator column header cell
+        $ws->setCellValueByColumnAndRow(7,$topRow,'');
+
         foreach($reports as $report)
         {
             $topRow++;
-            $col = 7;
+            $col = 8;
 
-            $ws->setCellValueByColumnAndRow($col++,$topRow,max( $report->getPointsEarned(),0) );
+            $team = $report->getTeam();
+            $ws->setCellValueByColumnAndRow($col++,$topRow,$team->getName());
+            $ws->setCellValueByColumnAndRow($col++,$topRow,$report->getPointsEarned() );
             $ws->setCellValueByColumnAndRow($col++,$topRow,$report->getPlayerEjections() + $report->getCoachEjections() + $report->getBenchEjections() + $report->getSpecEjections() );
             $ws->setCellValueByColumnAndRow($col++,$topRow,$report->getGoalsAllowed());
             $ws->setCellValueByColumnAndRow($col++,$topRow,$report->getSportsmanship());
@@ -197,16 +219,16 @@ class ResultsExportXLS
 
             $ws->setCellValueByColumnAndRow($col++,$row,$team->getGroup());
             $ws->setCellValueByColumnAndRow($col++,$row,$team->getName());
-            
+
             // Using empty confuses php 5.3 and 5.4
             $gp = $report->getGamesPlayed();
             if (!$gp) $gp = 0;
-            
+
             $ws->setCellValueByColumnAndRow($col++,$row,$gp);
             $ws->setCellValueByColumnAndRow($col++,$row,$report->getGoalsScored());
             $ws->setCellValueByColumnAndRow($col++,$row,$report->getGoalsAllowed());
             $ws->setCellValueByColumnAndRow($col++,$row,$report->getPlayerEjections());
-            $ws->setCellValueByColumnAndRow($col++,$row,max($report->getPointsEarned(),0));
+            $ws->setCellValueByColumnAndRow($col++,$row,$report->getPointsEarned());
             $ws->setCellValueByColumnAndRow($col++,$row,$report->getSportsmanship());
 
             //$ws->setCellValueByColumnAndRow($col++,$row,$report->getWinPercent());
@@ -268,12 +290,12 @@ class ResultsExportXLS
             else
             {
                 $gameWS = $ss->createSheet($sheetIndex++);
-                $this->pageSetup($gameWS);
+                //$this->pageSetup($gameWS);
                 $gameWS->setTitle('Games ' . substr($key,0,7));
                 $gameRow = 4;
 
                 $teamWS = $ss->createSheet($sheetIndex++);
-                $this->pageSetup($teamWS,1);
+                //$this->pageSetup($teamWS,1);
                 $teamWS->setTitle('Teams ' . substr($key,0,7));
                 $teamRow = 3;
             }
@@ -295,9 +317,8 @@ class ResultsExportXLS
             $this->generatePoolGames($gameWS,$pool['games'],$pool['teams'],$gameRow);
             $this->FormatPlayoffSummary($gameWS);
             $gameWS->setShowGridlines(false);
-            $gameWS->getPageSetup()->setPrintArea('A1:S38');
-            $gameWS->getPageSetup()->setFitToHeight(1);
-            $gameWS->getPageSetup()->setHorizontalCentered(true);
+            $gameWS->getColumnDimension('H')->setWidth(3);
+            $this->pageSetup($gameWS,"A1:U38",1);
 
             $this->generatePoolTeams($teamWS,$pool['teams'],$teamRow);
 
@@ -311,8 +332,8 @@ class ResultsExportXLS
             $rng = "A1:Z100";
 
             $teamWS->getStyle($rng)->applyFromArray($styleArray);
-            $teamWS->setSelectedCell("A1");
-            $teamWS->getPageSetup()->setHorizontalCentered(true);
+
+            $this->pageSetup($teamWS, "A1:J26", 1);
 
             $keyx2 = $key;
         }}
@@ -384,8 +405,9 @@ class ResultsExportXLS
 
     }
 
-    protected function FormatPlayoffResults($ws, $r, $r2, $c3, $c4)
+    protected function FormatPlayoffResults($ws, $r, $h, $d)
     {
+      //format the header range $h
       $styleArray = array(
         'font' => array(
           'bold' => true,
@@ -398,8 +420,9 @@ class ResultsExportXLS
          )
       );
 
-      $ws->getStyle($r)->applyFromArray($styleArray);
+      $ws->getStyle($h)->applyFromArray($styleArray);
 
+      //format the data range $d
       $styleArray = array(
         'font' => array(
           'bold' => false,
@@ -412,13 +435,11 @@ class ResultsExportXLS
         )
       );
 
-      $ws->getStyle($r2)->applyFromArray($styleArray);
+      $ws->getStyle($d)->applyFromArray($styleArray);
 
-      $ws->getStyle($c3)->getBorders()->getInside()->setBorderStyle(\PHPExcel_Style_Border::BORDER_THIN);
-      $ws->getStyle($c3)->getBorders()->getOutline()->setBorderStyle(\PHPExcel_Style_Border::BORDER_THICK);
-
-      $ws->getStyle($c4)->getBorders()->getInside()->setBorderStyle(\PHPExcel_Style_Border::BORDER_THIN);
-      $ws->getStyle($c4)->getBorders()->getOutline()->setBorderStyle(\PHPExcel_Style_Border::BORDER_THICK);
+      //format the table range $r
+      $ws->getStyle($r)->getBorders()->getInside()->setBorderStyle(\PHPExcel_Style_Border::BORDER_THIN);
+      $ws->getStyle($r)->getBorders()->getOutline()->setBorderStyle(\PHPExcel_Style_Border::BORDER_THICK);
 
     }
 
@@ -502,33 +523,33 @@ class ResultsExportXLS
     protected function AddPlayoffSummaries($ws,$dFields)
     {
 
-      $this->pFormatTitle($ws,"P4","Semi Finals");
-      $this->pFormatWP($ws,"N5","Winner Pool 1");
-      $this->pFormatWP($ws,"R5","Winner Pool 2");
-      $this->pFormatEntry ($ws,"M9:O9");
-      $this->pFormatEntry ($ws,"Q9:S9");
-      $this->pFormatField ($ws,"P11", $dFields['sf1']);
+      $this->pFormatTitle($ws,"R4","Semi Finals");
+      $this->pFormatWP($ws,"P5","Winner Pool 1");
+      $this->pFormatWP($ws,"T5","Winner Pool 2");
+      $this->pFormatEntry ($ws,"O9:Q9");
+      $this->pFormatEntry ($ws,"S9:U9");
+      $this->pFormatField ($ws,"R11", $dFields['sf1']);
 
-      $this->pFormatTitle($ws,"P13","Semi Finals");
-      $this->pFormatWP($ws,"N14","Winner Pool 3");
-      $this->pFormatWP($ws,"R14","Winner Pool 4");
-      $this->pFormatEntry ($ws,"M18:O18");
-      $this->pFormatEntry ($ws,"Q18:S18");
-      $this->pFormatField ($ws,"P20", $dFields['sf2']);
+      $this->pFormatTitle($ws,"Q13","Semi Finals");
+      $this->pFormatWP($ws,"P14","Winner Pool 3");
+      $this->pFormatWP($ws,"T14","Winner Pool 4");
+      $this->pFormatEntry ($ws,"O18:Q18");
+      $this->pFormatEntry ($ws,"S18:U18");
+      $this->pFormatField ($ws,"R20", $dFields['sf2']);
 
-      $this->pFormatTitle ($ws,"P22", "Finals", "P23", "Championship Game");
-      $this->pFormatWP ($ws,"N24","Winner Game #49");
-      $this->pFormatWP ($ws,"R24","Winner Game #50");
-      $this->pFormatEntry ($ws,"M28:O28");
-      $this->pFormatEntry ($ws,"Q28:S28");
-      $this->pFormatField ($ws,"P30", $dFields['fin']);
+      $this->pFormatTitle ($ws,"R22", "Finals", "P23", "Championship Game");
+      $this->pFormatWP ($ws,"P24","Winner Game #49");
+      $this->pFormatWP ($ws,"T24","Winner Game #50");
+      $this->pFormatEntry ($ws,"O28:Q28");
+      $this->pFormatEntry ($ws,"S28:U28");
+      $this->pFormatField ($ws,"R30", $dFields['fin']);
 
-      $this->pFormatTitle ($ws,"P31", "Consolation Game");
-      $this->pFormatWP ($ws,"N32","Winner Game #49");
-      $this->pFormatWP ($ws,"R32","Winner Game #50");
-      $this->pFormatEntry ($ws,"M36:O36");
-      $this->pFormatEntry ($ws,"Q36:S36");
-      $this->pFormatField ($ws,"P38", $dFields['con']);
+      $this->pFormatTitle ($ws,"R31", "Consolation Game");
+      $this->pFormatWP ($ws,"P32","Winner Game #49");
+      $this->pFormatWP ($ws,"T32","Winner Game #50");
+      $this->pFormatEntry ($ws,"O36:Q36");
+      $this->pFormatEntry ($ws,"S36:U36");
+      $this->pFormatField ($ws,"R38", $dFields['con']);
 
     }
 
@@ -548,10 +569,18 @@ class ResultsExportXLS
       );
 
       $this->FormatPlayoffHeader ($ws,$dRec);
-      $this->FormatPlayoffResults ($ws,"B4:K4","B5:K10","B4:G10","H4:K7"); //ws.Range("B4:K10")
-      $this->FormatPlayoffResults ($ws,"B13:K13","B14:K19","B13:G19","H13:K16"); //ws.Range("B13:K19")
-      $this->FormatPlayoffResults ($ws,"B22:K22","B23:K28","B22:G28","H22:K25");  //ws.Range("B22:K28")
-      $this->FormatPlayoffResults ($ws,"B31:K31","B32:K37","B31:G37","H31:K34"); //ws.Range("B31:K37")
+      $this->FormatPlayoffResults ($ws,"B4:G10","B4:G4","B5:G10"); //Pool 1 Results
+      $this->FormatPlayoffResults ($ws,"I4:M7","I4:M4","I5:M10");  //Pool 1 Standings
+
+      $this->FormatPlayoffResults ($ws,"B13:G19","B13:G13","B14:G19"); //Pool 2 Results
+      $this->FormatPlayoffResults ($ws,"I13:M16","I13:M13","I14:M16"); //Pool 2 Standings
+
+      $this->FormatPlayoffResults ($ws,"B22:G28","B22:G22","B23:G28");  //Pool 3 Results
+      $this->FormatPlayoffResults ($ws,"I22:M25","I22:M22","I23:M25");  //Pool 3 Standings
+
+      $this->FormatPlayoffResults ($ws,"B31:G37","B31:G31","B32:G37"); //Pool 4 Results
+      $this->FormatPlayoffResults ($ws,"I31:M34","I31:M31","I32:M34"); //Pool 4 Standings
+
       $this->AddPlayoffSummaries ($ws,$dFields);
     }
 
