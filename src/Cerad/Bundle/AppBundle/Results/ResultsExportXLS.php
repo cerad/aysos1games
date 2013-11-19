@@ -197,12 +197,11 @@ class ResultsExportXLS
 
             $ws->setCellValueByColumnAndRow($col++,$row,$team->getGroup());
             $ws->setCellValueByColumnAndRow($col++,$row,$team->getName());
-            if ( empty($report->getGamesPlayed()) ) {
-              $gp = 0;
-            }
-            else {
-              $gp = $report->getGamesPlayed();
-            }
+            
+            // Using empty confuses php 5.3 and 5.4
+            $gp = $report->getGamesPlayed();
+            if (!$gp) $gp = 0;
+            
             $ws->setCellValueByColumnAndRow($col++,$row,$gp);
             $ws->setCellValueByColumnAndRow($col++,$row,$report->getGoalsScored());
             $ws->setCellValueByColumnAndRow($col++,$row,$report->getGoalsAllowed());
