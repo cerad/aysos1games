@@ -6,7 +6,7 @@
   <th align="center">TPE</th>
 <!-- <th align="center">WPF</th>-->
  <th>&nbsp;</th>
- <th align="center">GT</th>
+ <!--<th align="center">GT</th>-->
  <th align="center">GP</th>
  <th align="center">GW</th>
  <th align="center">GS</th>
@@ -22,15 +22,15 @@
     <td align="center">{{ report.pointsEarned    }}</td>
 <!--    <td align="center">{{ report.winPercent      }}</td>-->
     <td>&nbsp;</td>
-    <td align="center">{{ report.gamesTotal      }}</td>
-    <td align="center">{{ report.gamesPlayed     }}</td>
-    <td align="center">{{ report.gamesWon        }}</td>
-    <td align="center">{{ report.goalsScored     }}</td>
-    <td align="center">{{ report.goalsAllowed    }}</td>
-    <td align="center">{{ report.playerWarnings  }}</td>
-    <td align="center">{{ report.playerEjections }}</td>
-    <td align="center">{{ report.totalEjections  }}</td>
-    <td align="center">{{ report.sportsmanship   }}</td>
+    <!--<td align="center">{{ report.gamesTotal      }}</td>-->
+    <td align="center">{{ report.gamesPlayed |default(0)    }}</td>
+    <td align="center">{{ report.gamesWon|default(0)         }}</td>
+    <td align="center">{{ report.goalsScored|default(0)      }}</td>
+    <td align="center">{{ report.goalsAllowed|default(0)     }}</td>
+    <td align="center">{{ report.playerWarnings |default(0) }}</td>
+    <td align="center">{{ report.playerEjections |default(0)}}</td>
+    <td align="center">{{ report.totalEjections |default(0) }}</td>
+    <td align="center">{{ report.sportsmanship|default(0)    }}</td>
 </tr>
 {% endfor %}
 </table>

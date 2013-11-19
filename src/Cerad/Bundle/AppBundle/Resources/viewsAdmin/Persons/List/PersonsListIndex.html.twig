@@ -32,14 +32,13 @@
 {% set certReferee   = personFed.certReferee %}
 {% set certSafeHaven = personFed.certSafeHaven %}
 {% set plan      = person.plan(project.id) %}
-{# set role = person.role #}
 
 <tr id="person-{{person.id}}">
     <td>
         <p>Username: {{ user.username }}</p>
         <p>Email: {{ user.email       }}</p>
         <p>Account Name:{{ user.accountName }}</p>
-        <!--<p>Role: {# role #}</p>-->
+        <p>Role: {{ user.roles|join(',') }}</p>
     </td>
     <td><table class="person-info">
         <tr><td>Name </td><td><a href="{{ path('cerad_tourn_admin_person_plan_update',{ 'person' : person.id }) }}">{{ name.full }}</a></td></tr>
@@ -50,11 +49,11 @@
         <tr><td style="width:7em;">Gender Age</td><td>{{ person.gender }} {{ person.age }}</td></tr>
     </table></td>
     <td>
-        <p>Vol: {{ personFed.id | slice(5)    }}</p>
+        <p>Vol: {{ personFed.id | slice(5) }}</p>
         <p>S/A/R: {{ personOrg.orgId | cerad_org_sar }}</p>
-        <p>MY:  <span class="aysov_mem_year-{{ personOrg.memYear }}">{{ personOrg.memYear }}</span></p>
-        <p>SH:  <span class="certSafeHaven_badge-{{ certSafeHaven.badge | default("na") }}">{{ certSafeHaven.badge }}</span></p>
-        <p>REF: {{ certReferee.badge   }}</p>
+        <p>MY:    <span class="aysov_mem_year-{{ personOrg.memYear }}">{{ personOrg.memYear }}</span></p>
+        <p>SH:    <span class="certSafeHaven_badge-{{ certSafeHaven.badge | default("na") }}">{{ certSafeHaven.badge }}</span></p>
+        <p>REF:   {{ certReferee.badge   }}</p>
     </td>
     <td>
         <p>Will Attend:  {{ plan.willAttend  }}</p>

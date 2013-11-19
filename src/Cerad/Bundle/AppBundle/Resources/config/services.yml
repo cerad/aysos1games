@@ -54,16 +54,16 @@ services:
         class:  Cerad\Bundle\AppBundle\Results\ResultsExportXLS
         arguments:  
             - '@cerad_tourn.excel'
-    #
-    #cerad_tourn_admin.persons.export_xls:
-    #    class: Cerad\Bundle\AppAdminBundle\Services\Persons\PersonsExportXLS
-    #    
-    ## s1games compatibility
-    #cerad_tourn.officials.export_xls:
-    #    class: Cerad\Bundle\AppAdminBundle\Services\Persons\PersonsExportXLS
-    #    arguments:  
-    #        - '@cerad_tourn.excel'
-    #        - '@cerad_org.org_repository'
+    
+    cerad_tourn_admin.persons.export_xls:
+        class: Cerad\Bundle\AppAdminBundle\Services\Persons\PersonsExportXLS
+        
+    # s1games compatibility
+    cerad_tourn.officials.export_xls:
+        class: Cerad\Bundle\AppAdminBundle\Services\Persons\PersonsExportXLS
+        arguments:  
+            - '@cerad_tourn.excel'
+            - '@cerad_org.org_repository'
 
 # Twig extensions
     cerad_app.twig_extension:
