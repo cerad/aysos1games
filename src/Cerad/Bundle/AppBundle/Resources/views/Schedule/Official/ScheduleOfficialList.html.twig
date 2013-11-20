@@ -6,21 +6,21 @@
     .game_official_state-Turnback { background-color: lightpink; }
 </style>
 <div class="schedule-game-list">
-    <table class="schedule" border="1" style="max-width: 850px;">
+    <table class="schedule" border="1" style="min-width: 900px;">
     <thead>
         <tr class="tbl-title" ><th colspan="20">Referee Game Schedule - Count: {{ games | length }}</th></tr>
         <tr class="tbl-hdr">
             <th>Game</th>
             <th>DOW</th>
-            <th>Time</th>
-            <th>Field</th>
+            <th style="width:10%">Time</th>
+            <th style="width:10%">Field</th>
           {#<th>Div</th>#}
-            <th>Pool</th>
+            <th style="width:10%">Pool</th>
             <th>Home/Away</th>
 {% if is_granted('ROLE_USER') %}
-            <th>Referee</th>
-            <th>AR1</th>
-            <th>AR2</th>
+            <th style="width:18%">Referee</th>
+            <th style="width:18%">AR1</th>
+            <th style="width:18%">AR2</th>
 {% endif %}
         </tr>
     </thead>

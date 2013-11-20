@@ -16,6 +16,7 @@ class ResultsExportXLS
         'Blank' => 3,
 
         'Score' => 8, 'Send Off' => 8, 'Points' => 13, 'Sports Points' => 13,
+        'Player Send Off Total' => 13,'Substitute Send Off Total' => 13,'Coach Ejections Total' => 13,'Spectator Ejections Total' => 13,
         'Total Points' => 13, 'Send Off Total' => 13, 'Goals Against' => 13, 'Total Sports' => 13,
         'Status 1' => 10, 'Status 2' => 10,  'PA' =>  4,
         'DOW Time' => 15, 'Field' =>  6, 'Pool' => 12, 'Type' =>  6,
@@ -161,7 +162,7 @@ class ResultsExportXLS
                 $ws->setCellValueByColumnAndRow($col++,$row,$team->getName()); //Team name
                 $ws->setCellValueByColumnAndRow($col++,$row,$game->getNum());  // Game #
                 $ws->setCellValueByColumnAndRow($col++,$row,$report->getGoalsScored()); // Score
-                $ws->setCellValueByColumnAndRow($col++,$row,$report->getPlayerEjections() + $report->getCoachEjections() + $report->getBenchEjections() ); // Sendoffs
+                $ws->setCellValueByColumnAndRow($col++,$row,$report->getPlayerEjections() + $report->getCoachEjections() + $report->getBenchEjections() + $report->getSpecEjections() ); // Sendoffs
                 $ws->setCellValueByColumnAndRow($col++,$row,$report->getPointsEarned() ); // Total Points
                 $ws->setCellValueByColumnAndRow($col++,$row,$report->getSportsmanship()); //Sports Points
              }
@@ -201,7 +202,8 @@ class ResultsExportXLS
             'Games Played'  => true,
 
             'Goals For' => true, 'Goals Against' => true,
-            'Send Off Total' => true, 'Total Points' => true, 'Total Sports' => true,
+            'Player Send Off Total' => true,'Substitute Send Off Total' => true,'Coach Ejections Total' => true,'Spectator Ejections Total' => true,
+            'Total Points' => true, 'Total Sports' => true,
 
           //  'GW'  => true,
           //  'TGS' => true, 'TGA' => true, 'TYC' => true, 'TRC' => true, 'TCE' => true,
@@ -228,6 +230,9 @@ class ResultsExportXLS
             $ws->setCellValueByColumnAndRow($col++,$row,$report->getGoalsScored());
             $ws->setCellValueByColumnAndRow($col++,$row,$report->getGoalsAllowed());
             $ws->setCellValueByColumnAndRow($col++,$row,$report->getPlayerEjections());
+            $ws->setCellValueByColumnAndRow($col++,$row,$report->getBenchEjections());
+            $ws->setCellValueByColumnAndRow($col++,$row,$report->getCoachEjections());
+            $ws->setCellValueByColumnAndRow($col++,$row,$report->getSpecEjections());
             $ws->setCellValueByColumnAndRow($col++,$row,$report->getPointsEarned());
             $ws->setCellValueByColumnAndRow($col++,$row,$report->getSportsmanship());
 
@@ -333,7 +338,7 @@ class ResultsExportXLS
 
             $teamWS->getStyle($rng)->applyFromArray($styleArray);
 
-            $this->pageSetup($teamWS, "A1:J26", 1);
+            $this->pageSetup($teamWS, "A1:M26", 1);
 
             $keyx2 = $key;
         }}

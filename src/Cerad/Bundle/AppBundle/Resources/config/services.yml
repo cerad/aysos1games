@@ -65,6 +65,14 @@ services:
             - '@cerad_tourn.excel'
             - '@cerad_org.org_repository'
 
+    cerad_tourn.schedule_official.export_csv:
+        class:  Cerad\Bundle\AppBundle\Schedule\Official\ScheduleOfficialExportCSV
+
+    cerad_tourn.schedule_official.export_xls:
+        class:  Cerad\Bundle\AppBundle\Schedule\Official\ScheduleOfficialExportXLS
+        arguments:  
+            - '@cerad_tourn.excel'
+
 # Twig extensions
     cerad_app.twig_extension:
         class:  Cerad\Bundle\AppBundle\TwigExtension\AppExtension
