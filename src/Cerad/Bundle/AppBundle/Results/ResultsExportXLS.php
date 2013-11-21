@@ -25,17 +25,17 @@ class ResultsExportXLS
     (
         'Pool' => 21,
         'Team' => 21, 'Team ' => 13,
-        'Game' =>  8,
+        'Game' =>  12,
         'Blank' => 3,
 
-        'Score' => 8, 'Send Off' => 8, 'Points' => 13, 'Sports Points' => 13,
+        'Score' => 12, 'Send Off' => 12, 'Points' => 13, 'Sports Points' => 12,
         'Player Send Off Total' => 13,'Substitute Send Off Total' => 13,'Coach Ejections Total' => 13,'Spectator Ejections Total' => 13,
         'Total Points' => 13, 'Send Off Total' => 13, 'Goals Against' => 13,
         'Status 1' => 10, 'Status 2' => 10,  'PA' =>  4,
         'DOW Time' => 15, 'Field' =>  6, 'Pool' => 12, 'Type' =>  6,
 
         'GS' => 8, 'SP' => 8, 'YC' => 8, 'RC' => 8, 'CE' => 8, 'PE' => 8,
-        'Goals Scored' => 10, 'Goals Allowed' => 10, 'Total Sports' => 10,'3 Goal Differential' => 13,
+        'Goals Scored' => 12, 'Goals Allowed' => 12, 'Total Sports' => 13,'3 Goal Differential' => 16,
 
         'TPE' => 8, 'GT'  => 8, 'GP'  => 8, 'Games Played'  => 13,  'GW'  => 8,
         'TGS' => 8, 'TGA' => 8, 'TYC' => 8, 'TRC' => 8, 'TCE' => 8, 'TSP' => 8,
@@ -326,7 +326,7 @@ class ResultsExportXLS
             }
             $gameWS->setCellValueByColumnAndRow(1, 1, $divTitle);
             $gameWS->setCellValueByColumnAndRow(10, 1, $this->dRec['hdr']);
-            $gameWS->setCellValueByColumnAndRow(4, 2,  $this->dRec['results']);
+            $gameWS->setCellValueByColumnAndRow(1, 2,  $this->dRec['results']);
             $gameWS->setCellValueByColumnAndRow(8, 2,  $this->dRec['standings']);
             $this->generatePoolGames($gameWS,$pool['games'],$pool['teams'],$gameRow);
             $this->FormatPlayoffSummary($gameWS);
@@ -387,7 +387,7 @@ class ResultsExportXLS
           'font' => array(
             'bold' => true,
             'italic' => true,
-            'size' => 24,
+            'size' => 36,
           ),
         'alignment' => array(
           'horizontal' => \PHPExcel_Style_Alignment::HORIZONTAL_LEFT,
@@ -404,7 +404,7 @@ class ResultsExportXLS
         ),
         'alignment' => array(
           'horizontal' => \PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-          'vertical'  => \PHPExcel_Style_Alignment::VERTICAL_TOP,
+          'vertical'  => \PHPExcel_Style_Alignment::VERTICAL_CENTER,
         )
       );
 
@@ -415,14 +415,16 @@ class ResultsExportXLS
       $styleArray = array(
         'font' => array(
           'bold' => true,
-          'size' => 12,
+          'size' => 16,
+          'italic' => true,
         ),
         'alignment' => array(
           'horizontal' => \PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
         )
       );
 
-      $ws->getStyle('E2')->applyFromArray($styleArray);
+      $ws->getStyle('B2')->applyFromArray($styleArray);
+      $ws->mergeCells('B2:G2');
 
       $ws->getStyle('I2')->applyFromArray($styleArray);
       $ws->mergeCells('I2:N2');
@@ -435,7 +437,7 @@ class ResultsExportXLS
       $styleArray = array(
         'font' => array(
           'bold' => true,
-          'size' => 12,
+          'size' => 16,
         ),
         'alignment' => array(
           'horizontal' => \PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
@@ -450,7 +452,7 @@ class ResultsExportXLS
       $styleArray = array(
         'font' => array(
           'bold' => false,
-          'size' => 10,
+          'size' => 14,
         ),
         'alignment' => array(
           'horizontal' => \PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
@@ -474,7 +476,7 @@ class ResultsExportXLS
       $styleArray = array(
         'font' => array(
           'bold' => true,
-          'size' => 12,
+          'size' => 16,
         ),
         'alignment' => array(
           'horizontal' => \PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
@@ -490,7 +492,7 @@ class ResultsExportXLS
         $styleArray = array(
             'font' => array(
             'bold' => true,
-            'size' => 12,
+            'size' => 16,
           ),
           'alignment' => array(
             'horizontal' => \PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
@@ -508,11 +510,12 @@ class ResultsExportXLS
       $styleArray = array(
         'font' => array(
           'bold' => true,
-          'size' => 12,
+          'size' => 16,
           'underline'=>true,
         ),
         'alignment' => array(
-          'horizontal' => \PHPExcel_Style_Alignment::HORIZONTAL_CENTER
+          'horizontal' => \PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+          'vertical' => \PHPExcel_Style_Alignment::VERTICAL_CENTER,
         )
       );
 
@@ -533,7 +536,7 @@ class ResultsExportXLS
         $styleArray = array(
           'font' => array(
           'bold' => false,
-          'size' => 10,
+          'size' => 14,
         ),
         'alignment' => array(
           'horizontal' => \PHPExcel_Style_Alignment::HORIZONTAL_CENTER
@@ -547,33 +550,33 @@ class ResultsExportXLS
     protected function AddPlayoffSummaries($ws,$dFields)
     {
 
-      $this->pFormatTitle($ws,"s2","Semi Finals");
-      $this->pFormatWP($ws,"q3","Winner Pool 1");
-      $this->pFormatWP($ws,"u3","Winner Pool 2");
+      $this->pFormatTitle($ws,"s3","Semi Finals");
+      $this->pFormatWP($ws,"q4","Winner Pool 1");
+      $this->pFormatWP($ws,"u4","Winner Pool 2");
       $this->pFormatEntry ($ws,"p7:r7");
       $this->pFormatEntry ($ws,"t7:v7");
       $this->pFormatField ($ws,"s9", $dFields['sf1']);
 
-      $this->pFormatTitle($ws,"s11","Semi Finals");
-      $this->pFormatWP($ws,"q12","Winner Pool 3");
-      $this->pFormatWP($ws,"u12","Winner Pool 4");
+      $this->pFormatTitle($ws,"s12","Semi Finals");
+      $this->pFormatWP($ws,"q13","Winner Pool 3");
+      $this->pFormatWP($ws,"u13","Winner Pool 4");
       $this->pFormatEntry ($ws,"p16:r16");
       $this->pFormatEntry ($ws,"t16:v16");
       $this->pFormatField ($ws,"s18", $dFields['sf2']);
 
-      $this->pFormatTitle ($ws,"s20", "Finals", "s21", "Championship Game");
+      $this->pFormatTitle ($ws,"s21", "Championship Match");
       $this->pFormatWP ($ws,"q22","Winner Game #49");
       $this->pFormatWP ($ws,"u22","Winner Game #50");
-      $this->pFormatEntry ($ws,"p26:r26");
-      $this->pFormatEntry ($ws,"t26:v26");
-      $this->pFormatField ($ws,"s28", $dFields['fin']);
+      $this->pFormatEntry ($ws,"p25:r25");
+      $this->pFormatEntry ($ws,"t25:v25");
+      $this->pFormatField ($ws,"s27", $dFields['fin']);
 
-      $this->pFormatTitle ($ws,"s30", "Consolation Game");
+      $this->pFormatTitle ($ws,"s30", "Consolation Match");
       $this->pFormatWP ($ws,"q31","Winner Game #49");
       $this->pFormatWP ($ws,"u31","Winner Game #50");
-      $this->pFormatEntry ($ws,"p35:r35");
-      $this->pFormatEntry ($ws,"t35:v35");
-      $this->pFormatField ($ws,"s37", $dFields['con']);
+      $this->pFormatEntry ($ws,"p34:r34");
+      $this->pFormatEntry ($ws,"t34:v34");
+      $this->pFormatField ($ws,"s36", $dFields['con']);
 
     }
 
