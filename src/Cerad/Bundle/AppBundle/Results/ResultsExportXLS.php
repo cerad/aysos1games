@@ -14,11 +14,32 @@ class ResultsExportXLS
         'standings' => 'STANDINGS',
     );
 
-    protected $dFields = array(
-      'sf1' => "Game #55 - Sunday - Nov. 24th - 10:30am - Ayala 11",
-      'sf2' => "Game #50 - Sunday - Nov. 24th - 8:30am - Ayala 10",
-      'fin' => "Game #57 - Sunday - Nov. 24th -12:30pm - Ayala 9",
+    protected $dU16BFields = array(
+      'sf1' => "Game #49 - Sunday - Nov. 24th -  8:30am - Ayala 9",
+      'sf2' => "Game #50 - Sunday - Nov. 24th -  8:30am - Ayala 10",
+      'fin' => "Game #57 - Sunday - Nov. 24th - 12:30pm - Ayala 9",
       'con' => "Game #58 - Sunday - Nov. 24th - 12:30pm - Ayala 10",
+    );
+
+    protected $dU16GFields = array(
+      'sf1' => "Game #51 - Sunday - Nov. 24th -  8:30am - Ayala 11",
+      'sf2' => "Game #52 - Sunday - Nov. 24th -  8:30am - Ayala 12",
+      'fin' => "Game #59 - Sunday - Nov. 24th - 12:30pm - Ayala 11",
+      'con' => "Game #60 - Sunday - Nov. 24th - 12:30pm - Ayala 12",
+    );
+
+    protected $dU19BFields = array(
+      'sf1' => "Game #53 - Sunday - Nov. 24th - 10:30am - Ayala 9",
+      'sf2' => "Game #54 - Sunday - Nov. 24th - 10:30am - Ayala 10",
+      'fin' => "Game #61 - Sunday - Nov. 24th -  2:30pm - Ayala 9",
+      'con' => "Game #62 - Sunday - Nov. 24th -  2:30pm - Ayala 10",
+    );
+
+    protected $dU19GFields = array(
+      'sf1' => "Game #55 - Sunday - Nov. 24th - 10:30am - Ayala 11",
+      'sf2' => "Game #56 - Sunday - Nov. 24th - 10:30am - Ayala 12",
+      'fin' => "Game #63 - Sunday - Nov. 24th -  2:30pm - Ayala 11",
+      'con' => "Game #64 - Sunday - Nov. 24th -  2:30pm - Ayala 12",
     );
 
     protected $widths = array
@@ -329,7 +350,23 @@ class ResultsExportXLS
             $gameWS->setCellValueByColumnAndRow(1, 2,  $this->dRec['results']);
             $gameWS->setCellValueByColumnAndRow(8, 2,  $this->dRec['standings']);
             $this->generatePoolGames($gameWS,$pool['games'],$pool['teams'],$gameRow);
-            $this->FormatPlayoffSummary($gameWS);
+            if ( substr($key,0,7) == 'U16B PP' )
+            {
+              $this->FormatPlayoffSummary($gameWS, $this->dU16BFields);
+            }
+            elseif ( substr($key,0,7) == 'U16G PP' )
+            {
+              $this->FormatPlayoffSummary($gameWS, $this->dU16GFields);
+            }
+            elseif ( substr($key,0,7) == 'U19B PP' )
+            {
+              $this->FormatPlayoffSummary($gameWS, $this->dU19BFields);
+            }
+            else
+            {
+              $this->FormatPlayoffSummary($gameWS, $this->dU19GFields);
+            }
+
             $gameWS->setShowGridlines(false);
             $gameWS->getColumnDimension('H')->setWidth(3);
             $this->pageSetup($gameWS,"B1:V38",1);
@@ -580,7 +617,7 @@ class ResultsExportXLS
 
     }
 
-    protected function FormatPlayoffSummary($ws)
+    protected function FormatPlayoffSummary($ws, $dFields)
     {
       $this->FormatPlayoffHeader ($ws,$this->dRec);
       $this->FormatPlayoffResults ($ws,"B4:G10","B4:G4","B5:G10"); //Pool 1 Results
@@ -595,7 +632,7 @@ class ResultsExportXLS
       $this->FormatPlayoffResults ($ws,"B31:G37","B31:G31","B32:G37"); //Pool 4 Results
       $this->FormatPlayoffResults ($ws,"I31:N34","I31:N31","I32:N34"); //Pool 4 Standings
 
-      $this->AddPlayoffSummaries ($ws,$this->dFields);
+      $this->AddPlayoffSummaries ($ws,$dFields);
     }
 
 }
