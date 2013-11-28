@@ -8,6 +8,13 @@ class ResultsExportXLS
 {
     protected $counts = array();
 
+    protected $advTeams = array(
+      'pool1' => 'i5',
+      'pool2' => 'i14',
+      'pool3' => 'i23',
+      'pool4' => 'i32',
+    );
+
     protected $dRec = array(
         'hdr' => "AYSO Section One -- U16/U19 Playoffs 2013",
         'results' => "POOL PLAY: Saturday November 23, 2013",
@@ -16,44 +23,92 @@ class ResultsExportXLS
 
     protected $dU16BFields = array(
       'sf1' => "Game #49 - Sunday - Nov. 24th -  8:30am - Ayala 9",
+      'home1' => "Winner Pool 1",
+      'home1team' => 'pool1',
+      'away1' => "Winner Pool 4",
+      'away1team' => 'pool4',
       'sf2' => "Game #50 - Sunday - Nov. 24th -  8:30am - Ayala 10",
+      'home2' => "Winner Pool 3",
+      'home2team' => 'pool3',
+      'away2' => "Winner Pool 2",
+      'away2team' => 'pool2',
       'fin' => "Game #57 - Sunday - Nov. 24th - 12:30pm - Ayala 9",
+      'homef' => "Winner Game #49",
+      'awayf' => "Winner Game#50",
       'con' => "Game #58 - Sunday - Nov. 24th - 12:30pm - Ayala 10",
+      'homec' => "Losing Team - Game #49",
+      'awayc' => "Losing Team - Game #50",
     );
 
     protected $dU16GFields = array(
       'sf1' => "Game #51 - Sunday - Nov. 24th -  8:30am - Ayala 11",
+      'home1' => "Winner Pool 1",
+      'home1team' => 'pool1',
+      'away1' => "Winner Pool 2",
+      'away1team' => 'pool2',
+      'home2' => "Winner Pool 3",
       'sf2' => "Game #52 - Sunday - Nov. 24th -  8:30am - Ayala 12",
+      'home2team' => 'pool3',
+      'away2' => "Winner Pool 4",
+      'away2team' => 'pool4',
       'fin' => "Game #59 - Sunday - Nov. 24th - 12:30pm - Ayala 11",
+      'homef' => "Winner Game #51",
+      'awayf' => "Winner Game#52",
       'con' => "Game #60 - Sunday - Nov. 24th - 12:30pm - Ayala 12",
+      'homec' => "Losing Team - Game #51",
+      'awayc' => "Losing Team - Game #52",
     );
 
     protected $dU19BFields = array(
       'sf1' => "Game #53 - Sunday - Nov. 24th - 10:30am - Ayala 9",
+      'home1' => "Winner Pool 1",
+      'home1team' => 'pool1',
+      'away1' => "Winner Pool 2",
+      'home2team' => 'pool2',
       'sf2' => "Game #54 - Sunday - Nov. 24th - 10:30am - Ayala 10",
+      'home2' => "Winner Pool 3",
+      'away1team' => 'pool3',
+      'away2' => "Winner Pool 4",
+      'away2team' => 'pool4',
       'fin' => "Game #61 - Sunday - Nov. 24th -  2:30pm - Ayala 9",
+      'homef' => "Winner Game #53",
+      'awayf' => "Winner Game#54",
       'con' => "Game #62 - Sunday - Nov. 24th -  2:30pm - Ayala 10",
+      'homec' => "Losing Team - Game #53",
+      'awayc' => "Losing Team - Game #54",
     );
 
     protected $dU19GFields = array(
       'sf1' => "Game #55 - Sunday - Nov. 24th - 10:30am - Ayala 11",
+      'home1' => "Winner Pool 1",
+      'home1team' => 'pool1',
+      'away1' => "Winner Pool 4",
+      'away1team' => 'pool4',
       'sf2' => "Game #56 - Sunday - Nov. 24th - 10:30am - Ayala 12",
+      'home2' => "Winner Pool 3",
+      'home2team' => 'pool3',
+      'away2' => "Winner Pool 2",
+      'away2team' => 'pool2',
       'fin' => "Game #63 - Sunday - Nov. 24th -  2:30pm - Ayala 11",
+      'homef' => "Winner Game #55",
+      'awayf' => "Winner Game#56",
       'con' => "Game #64 - Sunday - Nov. 24th -  2:30pm - Ayala 12",
+      'homec' => "Losing Team - Game #55",
+      'awayc' => "Losing Team - Game #56",
     );
 
     protected $widths = array
     (
-        'Pool' => 21,
-        'Team' => 21, 'Team ' => 13,
-        'Game' =>  12,
+        'Pool' => 35,
+        'Team' => 35, 'Team ' => 35,
+        'Game' =>  32,
         'Blank' => 3,
 
         'Score' => 12, 'Send Off' => 12, 'Points' => 13, 'Sports Points' => 12,
         'Player Send Off Total' => 13,'Substitute Send Off Total' => 13,'Coach Ejections Total' => 13,'Spectator Ejections Total' => 13,
         'Total Points' => 13, 'Send Off Total' => 13, 'Goals Against' => 13,
         'Status 1' => 10, 'Status 2' => 10,  'PA' =>  4,
-        'DOW Time' => 15, 'Field' =>  6, 'Pool' => 12, 'Type' =>  6,
+        'DOW Time' => 15, 'Field' =>  6, 'Type' =>  6,
 
         'GS' => 8, 'SP' => 8, 'YC' => 8, 'RC' => 8, 'CE' => 8, 'PE' => 8,
         'Goals Scored' => 12, 'Goals Allowed' => 12, 'Total Sports' => 13,'3 Goal Differential' => 16,
@@ -130,8 +185,8 @@ class ResultsExportXLS
     public function generatePoolGames($ws,$games,$reports,&$row)
     {
         $map = array(
-            'Pool'     => 'pool',
-            'Game'     => 'game',
+            'Pool'     => true,
+            'Game'     => true,
           //  'Status 1' => 'status',
           //  'Status 2' => 'status',
           //  'PA'       => 'pointsApplied',
@@ -237,8 +292,8 @@ class ResultsExportXLS
     {
         $map = array
         (
-            'Pool' => 'pool',
-            'Team' => 'team',
+            'Pool' => true,
+            'Team' => true,
             'Games Played'  => true,
 
             'Goals Scored' => true, 'Goals Allowed' => true, '3 Goal Differential' => true,
@@ -540,7 +595,7 @@ class ResultsExportXLS
       }
     }
 
-    private function pFormatWP($ws, $rng,$title)
+    private function pFormatWP($ws, $rng, $title)
     {
       $ws->setCellValue($rng, $title);
 
@@ -560,8 +615,12 @@ class ResultsExportXLS
 
     }
 
-    protected function pFormatEntry($ws,$rng)
+    protected function pFormatEntry($ws, $rng, $vrng=null, $team=null)
     {
+      if ( isset($vrng) )
+      {
+        $ws->setCellValue($vrng, $ws->getCell($team)->getValue() );
+      }
       $ws->mergeCells($rng);
 
       $ws->getStyle($rng)->getBorders()->getBottom()->setBorderStyle(\PHPExcel_Style_Border::BORDER_THIN);
@@ -588,29 +647,29 @@ class ResultsExportXLS
     {
 
       $this->pFormatTitle($ws,"s3","Semi Finals");
-      $this->pFormatWP($ws,"q4","Winner Pool 1");
-      $this->pFormatWP($ws,"u4","Winner Pool 2");
-      $this->pFormatEntry ($ws,"p7:r7");
-      $this->pFormatEntry ($ws,"t7:v7");
+      $this->pFormatWP($ws,"q4",$dFields['home1']);
+      $this->pFormatWP($ws,"u4",$dFields['away1']);
+      $this->pFormatEntry ($ws,"p7:r7","p7",$this->advTeams[$dFields['home1team']]);
+      $this->pFormatEntry ($ws,"t7:v7","t7",$this->advTeams[$dFields['away1team']]);
       $this->pFormatField ($ws,"s9", $dFields['sf1']);
 
       $this->pFormatTitle($ws,"s12","Semi Finals");
-      $this->pFormatWP($ws,"q13","Winner Pool 3");
-      $this->pFormatWP($ws,"u13","Winner Pool 4");
-      $this->pFormatEntry ($ws,"p16:r16");
-      $this->pFormatEntry ($ws,"t16:v16");
+      $this->pFormatWP($ws,"q13",$dFields['home2']);
+      $this->pFormatWP($ws,"u13",$dFields['away2']);
+      $this->pFormatEntry ($ws,"p16:r16","p16",$this->advTeams[$dFields['home2team']]);
+      $this->pFormatEntry ($ws,"t16:v16","t16",$this->advTeams[$dFields['away2team']]);
       $this->pFormatField ($ws,"s18", $dFields['sf2']);
 
       $this->pFormatTitle ($ws,"s21", "Championship Match");
-      $this->pFormatWP ($ws,"q22","Winner Game #49");
-      $this->pFormatWP ($ws,"u22","Winner Game #50");
+      $this->pFormatWP ($ws,"q22",$dFields['homef']);
+      $this->pFormatWP ($ws,"u22",$dFields['awayf']);
       $this->pFormatEntry ($ws,"p25:r25");
       $this->pFormatEntry ($ws,"t25:v25");
       $this->pFormatField ($ws,"s27", $dFields['fin']);
 
       $this->pFormatTitle ($ws,"s30", "Consolation Match");
-      $this->pFormatWP ($ws,"q31","Winner Game #49");
-      $this->pFormatWP ($ws,"u31","Winner Game #50");
+      $this->pFormatWP ($ws,"q31",$dFields['homec']);
+      $this->pFormatWP ($ws,"u31",$dFields['awayc']);
       $this->pFormatEntry ($ws,"p34:r34");
       $this->pFormatEntry ($ws,"t34:v34");
       $this->pFormatField ($ws,"s36", $dFields['con']);
