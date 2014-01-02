@@ -1,5 +1,6 @@
 parameters:
     
     cerad_level_level_files:
-        - "%cerad_level_resources_dir%/config/levels/ayso_core.yml"
-          
+        - "%kernel_dir%/config/levels/ayso_league.yml"
+        - "%kernel_dir%/config/levels/ayso_allstar.yml"
+        - "%kernel_dir%/config/levels/ayso_extra.yml"          

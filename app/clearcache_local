@@ -1,4 +1,5 @@
 #!/bin/bash
+php console cache:clear --env=dev --no-debug
 php console cache:clear --env=prod --no-debug
 php console assets:install ../../zayso/web/s1games
 php console assetic:dump   ../../zayso/web/s1games
