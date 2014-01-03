@@ -2,6 +2,7 @@
 AYSOS1GamesUpperFall2013:  
     info:
         id: AYSOS1GamesUpperFall2013
+        group: AYSOS1GamesUpper
         slugs:
             - s1games
             - s1game2013
