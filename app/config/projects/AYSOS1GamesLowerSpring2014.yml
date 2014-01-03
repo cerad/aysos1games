@@ -1,10 +1,10 @@
-  
-AYSOS1GamesUpperFall2013:  
+AYSOS1GamesLowerSpring2014:  
     info:
         id: AYSOS1GamesLowerSpring2014
+        group: AYSOS1GamesLower
         slugs:
             - s1games
-            - s1game2013
+            - s1game2014
             
         status:   Active
         verified: Yes
@@ -411,3 +411,4 @@ AYSOS1GamesUpperFall2013:
         label:   Available AS/Extra Sunday Afternoon (14:00-17:00 Kickoff)
         default: no
         choices: { no: No, yes: Yes, maybe: Not Sure }
+ 
