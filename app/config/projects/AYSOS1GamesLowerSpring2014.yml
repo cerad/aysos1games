@@ -39,32 +39,15 @@ AYSOS1GamesLowerSpring2014:
         label:    Days
         default: ['2014-02-22','2014-02-23','2014-03-01','2014-03-02']
         choices:
-          '2014-02-22': Sat
-          '2014-02-23': Sun
-          '2014-03-01': Sat
-          '2014-03-02': Sun
+          '2014-02-22': Sat 2/22
+          '2014-02-23': Sun 2/23
+          '2014-03-01': Sat 3/01
+          '2014-03-02': Sun 3/02
           
       levels:
         type:     checkbox
         label:    Levels
-        default:  ~'AYSO_U10B_League'
-                  ~'AYSO_U10G_League'
-                  ~'AYSO_U12B_League'
-                  ~'AYSO_U12G_League'
-                  ~'AYSO_U14B_League'
-                  ~'AYSO_U14G_League'
-                  #~'AYSO_U10B_AllStars'
-                  #~'AYSO_U10G_AllStars'
-                  #~'AYSO_U12B_AllStars'
-                  #~'AYSO_U12G_AllStars'
-                  #~'AYSO_U14B_AllStars'
-                  #~'AYSO_U14G_AllStars'
-                  #~'AYSO_U10B_Extra'
-                  #~'AYSO_U10G_Extra'
-                  #~'AYSO_U12B_Extra'
-                  #~'AYSO_U12G_Extra'
-                  #~'AYSO_U14B_Extra'
-                  #~'AYSO_U14G_Extra'
+        default:  All
         choices:
           'All'     : All
           'AYSO_U10B_League' : U10BLeague
@@ -89,26 +72,7 @@ AYSOS1GamesLowerSpring2014:
       fields:
         type:   checkbox
         label: Fields
-        default:  ~'Blue 1'
-                  ~'Blue 2'
-                  ~'Blue 3'
-                  ~'Blue 4'
-                  ~'Blue 5'
-                  ~'Green 1'
-                  ~'Green 2'
-                  ~'Green 3'
-                  ~'Murphy 1'
-                  ~'Murphy 2'
-                  ~'Red 1'
-                  ~'Red 2'
-                  ~'White 1'
-                  ~'White 2'
-                  ~'White 3'
-                  ~'White 4'
-                  ~'Yellow 1'
-                  ~'Yellow 2'
-                  ~'Yellow 3'
-                  ~'Yellow 4'
+        default:  All
         choices:
           'All'     : All
           'Blue 1' : 'Blue 1'
@@ -188,7 +152,7 @@ AYSOS1GamesLowerSpring2014:
       refereeing:
         type:    select
         label:   I will referee
-        default: no
+        default: yes
         choices: { no: No, yes: Yes, maybe: Not Sure }
         
       #venue:
