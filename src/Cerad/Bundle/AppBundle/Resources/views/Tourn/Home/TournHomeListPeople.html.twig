@@ -11,8 +11,6 @@
     {% set person  = personPerson.child       %}
     {% set name    = person.name              %}
     {% set fed     = person.fed(project.fedRoleId) %}
-    {% set org     = fed.org                  %}
-    {% set personOrg = fed.orgRegion %}
     {% set certRef = fed.certReferee          %}
     {% set certSH  = fed.certSafeHaven        %}
     {% set plan    = person.plan(project.id)  %}
@@ -34,16 +32,16 @@
             {% endif %}
         </table></td>
         <td><table>
-            <tr><td>AYSO ID:</td>   <td>{{ fed.id | slice(5)    }}</td></tr>
-            <tr><td>Vol Year:</td>  <td>{{ org.memYear          }}</td></tr>
+            <tr><td>AYSO ID:</td>   <td>{{ fed.fedKey | slice(5)}}</td></tr>
+            <tr><td>Vol Year:</td>  <td>{{ fed.memYear          }}</td></tr>
             <tr><td>Safe Haven:</td><td>{{ certSH.badge         }}</td></tr>
-            <tr><td>Ref Badge:</td> <td>{{ certRef.badgex       }}</td></tr>
-            <tr><td>S/A/R:</td>     <td>{{ personOrg.orgId | cerad_org_sar }}</td></tr>
+            <tr><td>Ref Badge:</td> <td>{{ certRef.badgeUser    }}</td></tr>
+            <tr><td>S/A/R:</td>     <td>{{ fed.orgKey | cerad_org_sar }}</td></tr>
         </table></td>
         <td><table>
         {% if plan.id %}
-           <tr><td>Will Attend: </td><td>{{ plan.basic.attending   }}</td></tr>
-           <tr><td>Will Referee:</td><td>{{ plan.basic.refereeing  }}</td></tr>
+           <tr><td>Will Attend: </td><td>{{ plan.basic.attendingLeague }}</td></tr>
+           <tr><td>Will Referee:</td><td>{{ plan.basic.refereeing      }}</td></tr>
             <tr><td> </td></tr>
             <tr><td></td></tr>
            <tr><td colspan="2"><a href="{{ path('cerad_tourn_person_plan_update',{ id: person.id }) }}">Update My Plan</td></tr>

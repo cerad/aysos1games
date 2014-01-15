@@ -10,9 +10,9 @@ Your plans have been updated:
 
     Account Name:{{ person.name.full }}
 
-    AYSO Region:{{ org.OrgId }}
-    ASYO ID: {{ fed.id | slice(5) }}
-    Referee Certification: {{ certReferee.badgex }}
+    AYSO Region:{{ fed.orgKey }}
+    ASYO ID: {{ fed.fedKey | slice(5) }}
+    Referee Certification: {{ certReferee.badge }}
     Email: {{ person.email }}
     Phone: {{ person.phone | cerad_phone }}
 
