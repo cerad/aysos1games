@@ -74,16 +74,17 @@ services:
             - '@cerad_tourn.excel'
 
 # Twig extensions
-    cerad_app.twig_extension:
-        class:  Cerad\Bundle\AppBundle\TwigExtension\AppExtension
-        arguments:  
-            - '@cerad_project.find_default.in_memory'
-        tags:
-            - { name: twig.extension }
+# 15 Jan 2014 - Moved to TournBundle
+   #cerad_app.twig_extension:
+   #    class:  Cerad\Bundle\AppBundle\TwigExtension\AppExtension
+   #    arguments:  
+   #        - '@cerad_project.find_default.in_memory'
+   #    tags:
+   #        - { name: twig.extension }
 
-    cerad_org.twig_extension:
-        class:  Cerad\Bundle\AppBundle\TwigExtension\OrgExtension
-        arguments:  
-            - '@cerad_org.org_repository'
-        tags:
-            - { name: twig.extension }            
+   #cerad_org.twig_extension:
+   #    class:  Cerad\Bundle\AppBundle\TwigExtension\OrgExtension
+   #    arguments:  
+   #        - '@cerad_org.org_repository'
+   #    tags:
+   #        - { name: twig.extension }            
