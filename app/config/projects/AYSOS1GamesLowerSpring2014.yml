@@ -127,27 +127,39 @@ AYSOS1GamesLowerSpring2014:
     # ==================================================
     # Basic volunteer plan
     basic:
-      attendingLeague:
+      attending:
         type:    select
-        label:   I will attend the League Playoffs
+        label:   I will attend
         default: na
         choices:
           na:    Not yet answered
           no:    No
-          yes:   Yes - For Sure
-          yesx:  Yes - If my team is selected
+          we12:  Both Weekends
+          we1:   1st weekend only - League
+          we2:   2nd weekend only - All Star/Extra
           maybe: Maybe
           
-      attendingASExtra:
-        type:    select
-        label:   I will attend the All-Star/Extra Playoffs
-        default: na
-        choices:
-          na:    Not yet answered
-          no:    No
-          yes:   Yes - For Sure
-          yesx:  Yes - If my team is selected
-          maybe: Maybe
+     #attendingLeague:
+     #  type:    select
+     #  label:   I will attend the League Playoffs
+     #  default: na
+     #  choices:
+     #    na:    Not yet answered
+     #    no:    No
+     #    yes:   Yes - For Sure
+     #    yesx:  Yes - If my team is selected
+     #    maybe: Maybe
+          
+     #attendingASExtra:
+     #  type:    select
+     #  label:   I will attend the All-Star/Extra Playoffs
+     #  default: na
+     #  choices:
+     #    na:    Not yet answered
+     #    no:    No
+     #    yes:   Yes - For Sure
+     #    yesx:  Yes - If my team is selected
+     #    maybe: Maybe
                     
       refereeing:
         type:    select

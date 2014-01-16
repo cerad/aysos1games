@@ -40,8 +40,8 @@
         </table></td>
         <td><table>
         {% if plan.id %}
-           <tr><td>Will Attend: </td><td>{{ plan.basic.attendingLeague }}</td></tr>
-           <tr><td>Will Referee:</td><td>{{ plan.basic.refereeing      }}</td></tr>
+           <tr><td>Will Attend: </td><td>{{ plan.basic.attending  }}</td></tr>
+           <tr><td>Will Referee:</td><td>{{ plan.basic.refereeing }}</td></tr>
             <tr><td> </td></tr>
             <tr><td></td></tr>
            <tr><td colspan="2"><a href="{{ path('cerad_tourn_person_plan_update',{ id: person.id }) }}">Update My Plan</td></tr>
