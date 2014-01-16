@@ -2,9 +2,12 @@ parameters:
 #    cerad_app.example.class: Cerad\Bundle\AppBundle\Example
 
 services:
-#    cerad_app.example:
-#        class: %cerad_app.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    cerad_app.schedule_games_lower.load:
+        class: Cerad\Bundle\AppBundle\Schedule\Games\LowerLoad 
+        arguments:  
+            - '%cerad_project_project_default%'
+            - '@cerad_game.game_repository'
+            - '@cerad_game.game_field_repository'
 
     cerad_tourn.schedule_search.form_type:
         class: Cerad\Bundle\AppBundle\FormType\Schedule\Search\SearchFormType
