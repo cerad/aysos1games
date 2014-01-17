@@ -48,7 +48,7 @@ AYSOS1GamesLowerSpring2014:
       programs:
         type:     checkbox
         label:    Programs
-        default:  [League,AllStars,Extra]
+        default:  ['League','AllStars','Extra']
         choices:
           All      : All
           League   : League
@@ -77,7 +77,7 @@ AYSOS1GamesLowerSpring2014:
       levels:
         type:     checkbox
         label:    Levels
-        default:  [All]
+        default:  [None]
         choices:
           'All'     : All
           'AYSO_U10B_League'   : U10BLeag
@@ -102,7 +102,7 @@ AYSOS1GamesLowerSpring2014:
       fields:
         type:    checkbox
         label:   Fields
-        default: [All]
+        default: [None]
         choices:
           'All'     : All
           'Blue 1' : 'Blue 1'
