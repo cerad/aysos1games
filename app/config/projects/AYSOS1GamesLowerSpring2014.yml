@@ -102,7 +102,7 @@ AYSOS1GamesLowerSpring2014:
       fields:
         type:    checkbox
         label:   Fields
-        default: All
+        default: [All]
         choices:
           'All'     : All
           'Blue 1' : 'Blue 1'
