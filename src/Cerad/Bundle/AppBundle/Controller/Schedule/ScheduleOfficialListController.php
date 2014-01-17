@@ -1,6 +1,8 @@
 <?php
 namespace Cerad\Bundle\AppBundle\Controller\Schedule;
-
+/* =============================================
+ * 17 Jan 2014 - Identical to CeradAdmin - Remove
+ */
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 

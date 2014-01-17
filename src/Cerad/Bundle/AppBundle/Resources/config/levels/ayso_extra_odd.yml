@@ -1,44 +1,44 @@
 # ====================================
 # Bunch of levels
 
-AYSO_U10B_Extra:
-    name:      U10B_Extra
+AYSO_U11B_Extra:
+    name:      U11B_Extra
     div:       Extra
-    age:       U10
+    age:       U11
     gender:    B
     sport:     Soccer
     domain:    AYSO
     domainSub: AYSO
         
-AYSO_U10G_Extra:
-    name:      U10G_Extra
+AYSO_U11G_Extra:
+    name:      U11G_Extra
     div:       Extra
-    age:       U10
+    age:       U11
     gender:    G
     sport:     Soccer
     domain:    AYSO
     domainSub: AYSO
     
-AYSO_U12B_Extra:
-    name:      U12B_Extra
+AYSO_U13B_Extra:
+    name:      U13B_Extra
     div:       Extra
-    age:       U12
+    age:       U13
     gender:    B
     sport:     Soccer
     domain:    AYSO
     domainSub: AYSO
         
-AYSO_U12G_Extra:
-    name:      U12G_Extra
+AYSO_U13G_Extra:
+    name:      U13G_Extra
     div:       Extra
-    age:       U12
+    age:       U13
     gender:    G
     sport:     Soccer
     domain:    AYSO
     domainSub: AYSO
     
-AYSO_U14B_Extra:
-    name:      U14B_Extra
+AYSO_U15B_Extra:
+    name:      U15B_Extra
     div:       Extra
     age:       U14
     gender:    B
@@ -46,8 +46,8 @@ AYSO_U14B_Extra:
     domain:    AYSO
     domainSub: AYSO
         
-AYSO_U14G_Extra:
-    name:      U14G_Extra
+AYSO_U15G_Extra:
+    name:      U15G_Extra
     div:       Extra
     age:       U14
     gender:    G
@@ -55,39 +55,38 @@ AYSO_U14G_Extra:
     domain:    AYSO
     domainSub: AYSO
         
-AYSO_U16B_Extra:
-    name:      U16B_Extra
+AYSO_U17B_Extra:
+    name:      U17B_Extra
     div:       Extra
-    age:       U16
+    age:       U18
     gender:    B
     sport:     Soccer
     domain:    AYSO
     domainSub: AYSO
         
-AYSO_U16G_Extra:
-    name:      U16G_Extra
+AYSO_U17G_Extra:
+    name:      U17G_Extra
     div:       Extra
-    age:       U16
+    age:       U17
     gender:    G
     sport:     Soccer
     domain:    AYSO
     domainSub: AYSO
         
-AYSO_U19B_Extra:
-    name:      U19B_Extra
+AYSO_U18B_Extra:
+    name:      U18B_Extra
     div:       Extra
-    age:       U19
+    age:       U18
     gender:    B
     sport:     Soccer
     domain:    AYSO
     domainSub: AYSO
         
-AYSO_U19G_Extra:
-    name:      U19G_Extra
+AYSO_U18G_Extra:
+    name:      U18G_Extra
     div:       Extra
-    age:       U19
+    age:       U18
     gender:    G
     sport:     Soccer
     domain:    AYSO
     domainSub: AYSO
-        

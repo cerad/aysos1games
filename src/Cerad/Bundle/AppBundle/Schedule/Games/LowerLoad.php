@@ -66,8 +66,8 @@ class LowerLoad
         $div          = $row[ 6];
         $program      = $row[ 7];
         $type         = $row[12];
-        $homeTeamArea = $row[ 8];
-        $awayTeamArea = $row[11];
+        $homeTeamName = $row[ 8];
+        $awayTeamName = $row[11];
         
         // AYSO_U14G_Extra
         $levelKey = sprintf('AYSO_%s_%s',$div,$program);
@@ -76,23 +76,23 @@ class LowerLoad
         $gameGroupType = substr($type,0,2);
         if ($gameGroupType != 'PP') 
         {
-            $gameGroup     = sprintf('%s %s',$div,$type);          // U14G SF1
-            $homeTeamGroup = sprintf('%s %s',$div,$gameGroupType); // U14G SF
-            $awayTeamGroup = sprintf('%s %s',$div,$gameGroupType);
+            $gameGroup     = sprintf('%s %s %s',$program,$div,$type);          // U14G SF1
+            $homeTeamGroup = sprintf('%s %s %s',$program,$div,$gameGroupType); // U14G SF
+            $awayTeamGroup = sprintf('%s %s %s',$program,$div,$gameGroupType);
         }
         else
         {
             // AYSO_U14G_League R1
-            $homeTeamKey = sprintf("AYSO_%s_%s %s",$div,$program,$homeTeamArea);
-            $awayTeamKey = sprintf("AYSO_%s_%s %s",$div,$program,$awayTeamArea);
+            $homeTeamKey = sprintf("AYSO_%s_%s %s",$div,$program,$homeTeamName);
+            $awayTeamKey = sprintf("AYSO_%s_%s %s",$div,$program,$awayTeamName);
             
             $homeTeamPool = $this->pools[$homeTeamKey];
             $awayTeamPool = $this->pools[$awayTeamKey];
             
-            $gameGroup = sprintf('%s PP %d',$div,$homeTeamPool['num']);
+            $gameGroup = sprintf('%s %s PP %d',$program,$div,$homeTeamPool['num']);
             
-            $homeTeamGroup = sprintf('%s PP %d-%d',$div,$homeTeamPool['num'],$homeTeamPool['index']);
-            $awayTeamGroup = sprintf('%s PP %d-%d',$div,$awayTeamPool['num'],$awayTeamPool['index']);
+            $homeTeamGroup = sprintf('%s %s PP %d-%d',$program,$div,$homeTeamPool['num'],$homeTeamPool['index']);
+            $awayTeamGroup = sprintf('%s %s PP %d-%d',$program,$div,$awayTeamPool['num'],$awayTeamPool['index']);
         }
         // Build up the game
         $gameRepo = $this->gameRepo;
@@ -124,8 +124,8 @@ class LowerLoad
         $homeTeam = $game->getHomeTeam();
         $awayTeam = $game->getAwayTeam();
             
-        $homeTeam->setName($homeTeamArea);
-        $awayTeam->setName($homeTeamArea);
+        $homeTeam->setName($homeTeamName);
+        $awayTeam->setName($awayTeamName);
             
         $homeTeam->setLevelId($levelKey);
         $awayTeam->setLevelId($levelKey);
