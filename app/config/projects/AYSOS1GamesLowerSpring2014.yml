@@ -12,7 +12,7 @@ AYSOS1GamesLowerSpring2014:
         fedId:     AYSO
         fedRoleId: AYSOV
                 
-        title:   "S1 U10/U12/U14 Games 2014"
+        title:   "AYSO Section One U10/U12/U14 Games 2014"
         desc:    "AYSO Section One U10/U12/U14 Games -- Ab Brown Complex, Riverside -- 22-23 Feb & 1-2 Mar 2014"
                           
         results: s1games
@@ -39,40 +39,70 @@ AYSOS1GamesLowerSpring2014:
         label:    Days
         default: ['2014-02-22','2014-02-23','2014-03-01','2014-03-02']
         choices:
+          'All'       : All
           '2014-02-22': Sat 2/22
           '2014-02-23': Sun 2/23
           '2014-03-01': Sat 3/01
           '2014-03-02': Sun 3/02
           
+      programs:
+        type:     checkbox
+        label:    Programs
+        default:  ['League','AllStars','Extra']
+        choices:
+          All      : All
+          League   : League
+          AllStars : All Stars
+          Extra    : Extra
+          
+      genders:
+        type:     checkbox
+        label:    Genders
+        default:  [B,G]
+        choices:
+          All:  All
+          B:    Boys
+          G:    Girls
+          
+      ages:
+        type:     checkbox
+        label:    Ages
+        default:  ['U10','U11,U12','U13,U14']
+        choices:
+          All:     All
+          U10:     U10
+          U11,U12: U12
+          U13,U14: U14
+        
       levels:
         type:     checkbox
         label:    Levels
-        default:  ['All', AYSO_U10B_League, AYSO_U10G_League]
+        default:  [None]
         choices:
           'All'     : All
-          'AYSO_U10B_League' : U10BLeague
-          'AYSO_U10G_League' : U10GLeague
-          'AYSO_U12B_League' : U12BLeague
-          'AYSO_U12G_League' : U12GLeague
-          'AYSO_U14B_League' : U14BLeague
-          'AYSO_U14G_League' : U14GLeague
+          'AYSO_U10B_League'   : U10BLeag
+          'AYSO_U10G_League'   : U10GLeag
+          'AYSO_U12B_League'   : U12BLeag
+          'AYSO_U12G_League'   : U12GLeag
+          'AYSO_U14B_League'   : U14BLeag
+          'AYSO_U14G_League'   : U14GLeag
           'AYSO_U10B_AllStars' : U10BAS
           'AYSO_U10G_AllStars' : U10GAS
           'AYSO_U12B_AllStars' : U12BAS
           'AYSO_U12G_AllStars' : U12GAS
           'AYSO_U14B_AllStars' : U14BAS
           'AYSO_U14G_AllStars' : U14GAS
-          'AYSO_U10B_Extra' : U10BEx
-          'AYSO_U10G_Extra' : U10GEx
-          'AYSO_U12B_Extra' : U12BEx
-          'AYSO_U12G_Extra' : U12GEx
-          'AYSO_U14B_Extra' : U14BEx
-          'AYSO_U14G_Extra' : U14GEx
+          'AYSO_U10B_Extra'    : U10BEx
+          'AYSO_U10G_Extra'    : U10GEx
+          'AYSO_U12B_Extra'    : U12BEx
+          'AYSO_U12G_Extra'    : U12GEx
+          'AYSO_U14B_Extra'    : U14BEx
+          'AYSO_U14G_Extra'    : U14GEx
           
       fields:
-        type:   checkbox
-        label: Fields
-        default:  ['All', 'Blue 1', 'Blue 2']
+        type:    checkbox
+        label:   Fields
+        default: [None]
         choices:
           'All'     : All
           'Blue 1' : 'Blue 1'
@@ -94,24 +124,6 @@ AYSOS1GamesLowerSpring2014:
           'Yellow 1' : 'Yellow 1'
           'Yellow 2' : 'Yellow 2'
           'Yellow 3' : 'Yellow 3'
-
-          
-     #genders:
-     #  type:    checkbox
-     #  label:   Genders
-     #  default: ~
-     #  choices:
-     #    B:   Boys
-     #    G:   Girls
-          
-     #ages:
-     #  type:    checkbox
-     #  label:   Ages
-     #  default: [U12,U16]
-     #  choices:
-     #    VIP: VIP
-     #    U16: U16
-     #    U19: U19
         
     #times: # Want this to be a select
     #  start: 0600
@@ -127,27 +139,39 @@ AYSOS1GamesLowerSpring2014:
     # ==================================================
     # Basic volunteer plan
     basic:
-      attendingLeague:
+      attending:
         type:    select
-        label:   I will attend the League Playoffs
+        label:   I will attend
         default: na
         choices:
           na:    Not yet answered
           no:    No
-          yes:   Yes - For Sure
-          yesx:  Yes - If my team is selected
+          we12:  Both Weekends
+          we1:   1st weekend only - League
+          we2:   2nd weekend only - All Star/Extra
           maybe: Maybe
           
-      attendingASExtra:
-        type:    select
-        label:   I will attend the All-Star/Extra Playoffs
-        default: na
-        choices:
-          na:    Not yet answered
-          no:    No
-          yes:   Yes - For Sure
-          yesx:  Yes - If my team is selected
-          maybe: Maybe
+     #attendingLeague:
+     #  type:    select
+     #  label:   I will attend the League Playoffs
+     #  default: na
+     #  choices:
+     #    na:    Not yet answered
+     #    no:    No
+     #    yes:   Yes - For Sure
+     #    yesx:  Yes - If my team is selected
+     #    maybe: Maybe
+          
+     #attendingASExtra:
+     #  type:    select
+     #  label:   I will attend the All-Star/Extra Playoffs
+     #  default: na
+     #  choices:
+     #    na:    Not yet answered
+     #    no:    No
+     #    yes:   Yes - For Sure
+     #    yesx:  Yes - If my team is selected
+     #    maybe: Maybe
                     
       refereeing:
         type:    select

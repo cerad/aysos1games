@@ -11,14 +11,13 @@ Your plans have been updated:
     Account Name:{{ person.name.full }}
 
     AYSO Region:{{ fed.orgKey }}
-    ASYO ID: {{ fed.id | slice(5) }}
+    ASYO ID: {{ fed.fedKey | slice(5) }}
     Referee Certification: {{ certReferee.badge }}
     Email: {{ person.email }}
     Phone: {{ person.phone | cerad_phone }}
 
 {% set basic = plan.basic %}
-    Will Attend League:  {{ basic.attendingLeague }}
-    Will Attend All-Star/Extra:  {{ basic.attendingASExtra }}
+    Will Attend:  {{ basic.attending }}
     Will Referee: {{ basic.refereeing }}
 
   Your Notes:

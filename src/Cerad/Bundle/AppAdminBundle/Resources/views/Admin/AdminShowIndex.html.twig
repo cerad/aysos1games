@@ -11,6 +11,7 @@
     <li><a href="">List of Accounts and Referees (empty)</a></li>
 -->
 {% if is_granted('ROLE_ADMIN') %}
+    <li><a href="{{ path('cerad_tourn_admin_person_feds_sync') }}">Sync eAyso Information</a></li>
     <li><a href="{{ path('cerad_tourn_admin_persons_list') }}">View Registered People</a></li>
 {% endif %}
     <li><a href="{{ path('cerad_tourn_admin_persons_list', { '_format' : 'xls' }) }}">Export Registered People (Excel)</a></li>

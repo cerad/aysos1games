@@ -38,13 +38,15 @@ cerad_tourn_test:
 
 # ===============================================
 # Schedule and results
-cerad_tourn_schedule_official_list:
-    pattern:  /schedule/official.{_format}
-    defaults:
-        _controller: CeradAppBundle:Schedule/ScheduleOfficialList:list
-        _format: html
-    requirements:
-        _format:  html|csv|xls|pdf   
+
+# 17 Jan 2014
+#cerad_tourn_schedule_official_list:
+#    pattern:  /schedule/official.{_format}
+#    defaults:
+#        _controller: CeradAppBundle:Schedule/ScheduleOfficialList:list
+#        _format: html
+#    requirements:
+#        _format:  html|csv|xls|pdf   
         
 cerad_tourn_schedule_official_assign:
     pattern:  /schedule/official/assign/{game}/{slot}
