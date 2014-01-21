@@ -216,7 +216,7 @@ cerad_tourn_person_person_update:
     
 cerad_tourn_person_persons_list:
     pattern:  /person-persons/list
-    defaults: { _controller: CeradTournBundle:PersonPersons/PersonPersonsList:list }
+    defaults: { _controller: CeradAppBundle:PersonPersons/PersonPersonsList:list }
 #                           @CeradTourn/PersonPersons/List/PersonPersonsListIndex.html.twig
     
 # 

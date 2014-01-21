@@ -1,5 +1,5 @@
 <?php
-namespace Cerad\Bundle\AppBundle\Controller\Admin;
+namespace Cerad\Bundle\AppAdminBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
 

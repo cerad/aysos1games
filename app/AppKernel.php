@@ -16,17 +16,18 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
           //new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            
+
             new Cerad\Bundle\ProjectBundle\CeradProjectBundle(),
             new Cerad\Bundle\PersonBundle \CeradPersonBundle(),
             new Cerad\Bundle\UserBundle   \CeradUserBundle(),
             new Cerad\Bundle\GameBundle   \CeradGameBundle(),
             new Cerad\Bundle\LevelBundle  \CeradLevelBundle(),
             new Cerad\Bundle\OrgBundle    \CeradOrgBundle(),
-            
+
             new Cerad\Bundle\TournBundle  \CeradTournBundle(),
             new Cerad\Bundle\TournAdminBundle\CeradTournAdminBundle(),
             new Cerad\Bundle\AppBundle    \CeradAppBundle(),
+            new Cerad\Bundle\AppAdminBundle    \CeradAppAdminBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

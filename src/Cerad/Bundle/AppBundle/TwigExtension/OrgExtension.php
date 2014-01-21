@@ -30,13 +30,13 @@ class OrgExtension extends \Twig_Extension
         );
     }
     // Return section area region
-    public function sar($orgId)
+    public function sar($orgKey)
     {
-        $org = $this->orgRepo->find($orgId);
+        $org = $this->orgRepo->find($orgKey);
 
-        if (!$org) return substr($orgId,4);
+        if (!$org) return substr($orgKey,4);
 
-        return (int) substr($org->getParent(),5,2) . '/' . substr($org->getParent(),7,1) . '/' . (int) substr($orgId,5);
+        return (int) substr($org->getParent(),5,2) . '/' . substr($org->getParent(),7,1) . '/' . (int) substr($orgKey,5);
 
     }
 

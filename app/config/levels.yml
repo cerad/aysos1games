@@ -1,8 +1,6 @@
 parameters:
     
-  kernel_dir: "%kernel.root_dir%/Cerad/Bundle/AppBundle/Resources"
-    
   cerad_level_level_files:
-    - "%kernel_dir%/config/levels/ayso_league.yml"
-    - "%kernel_dir%/config/levels/ayso_allstar.yml"
-    - "%kernel_dir%/config/levels/ayso_extra.yml"          
+    - "%cerad_app_resources_dir%/config/levels/ayso_league.yml"
+    - "%cerad_app_resources_dir%/config/levels/ayso_allstars.yml"
+    - "%cerad_app_resources_dir%/config/levels/ayso_extra.yml"          

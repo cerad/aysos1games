@@ -12,7 +12,7 @@ AYSOS1GamesLowerSpring2014:
         fedId:     AYSO
         fedRoleId: AYSOV
                 
-        title:   "AYSO Section One U10/U12/U14 Games 2014"
+        title:   "S1 U10/U12/U14 Games 2014"
         desc:    "AYSO Section One U10/U12/U14 Games -- Ab Brown Complex, Riverside -- 22-23 Feb & 1-2 Mar 2014"
                           
         results: s1games
@@ -47,7 +47,7 @@ AYSOS1GamesLowerSpring2014:
       levels:
         type:     checkbox
         label:    Levels
-        default:  All
+        default:  ['All', AYSO_U10B_League, AYSO_U10G_League]
         choices:
           'All'     : All
           'AYSO_U10B_League' : U10BLeague
@@ -72,7 +72,7 @@ AYSOS1GamesLowerSpring2014:
       fields:
         type:   checkbox
         label: Fields
-        default:  All
+        default:  ['All', 'Blue 1', 'Blue 2']
         choices:
           'All'     : All
           'Blue 1' : 'Blue 1'

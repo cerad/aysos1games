@@ -7,12 +7,12 @@ class ExportOfficialsXLS
 {
     protected $excel;
     protected $orgRepo;
-    
+
     public function __construct($excel,$orgRepo)
     {
         $this->excel = $excel;
         $this->orgRepo = $orgRepo;
-        
+
         $this->phoneTransformer = new PhoneTransformer();
     }
     protected function setColumnWidths($ws,$widths)
@@ -76,10 +76,10 @@ class ExportOfficialsXLS
           //$city = $address->city . ', ' . $address->state;
           //$values[] = $city;
 
-            $orgId = $personOrg->getOrgId();
-            $org = $this->orgRepo->find($orgId);
+            $orgKey = $personOrg->getOrgKey();
+            $org = $this->orgRepo->find($orgKey);
             $area = $org ? substr($org->getParent(),4) : null;
-            
+
             $values[] = substr($personFed->getId(),4);
             $values[] = $area;
             $values[] = substr($personOrg->getOrgId(),4);
@@ -89,7 +89,8 @@ class ExportOfficialsXLS
             $values[] = $basic['wantMentor'];
             $values[] = $cert->getUpgrading();
 
-            $values[] = $basic['attending'];
+            $values[] = $basic['attendingLeague'];
+            $values[] = $basic['attendingASExtra'];
             $values[] = $basic['refereeing'];
 
             $this->setRowValues($ws,$row++,$values);
@@ -141,11 +142,11 @@ class ExportOfficialsXLS
 
           //$city = $address->city . ', ' . $address->state;
           //$values[] = $city;
-            
-            $orgId = $personOrg->getOrgId();
-            $org  = $this->orgRepo->find($orgId);
+
+            $orgKey = $personOrg->getOrgId();
+            $org  = $this->orgRepo->find($orgKey);
             $area = $org ? substr($org->getParent(),4) : null;
- 
+
             $values[] = substr($personFed->getId(),4);
             $values[] = $area;
             $values[] = substr($personOrg->getOrgId(),4);
@@ -155,7 +156,8 @@ class ExportOfficialsXLS
             $values[] = $basic['wantMentor'];
             $values[] = $cert->getUpgrading();
 
-            $values[] = $basic['attending'];
+            $values[] = $basic['attendingLeague'];
+            $values[] = $basic['attendingASExtra'];
             $values[] = $basic['refereeing'];
 
             $this->setRowValues($ws,$row++,$values);

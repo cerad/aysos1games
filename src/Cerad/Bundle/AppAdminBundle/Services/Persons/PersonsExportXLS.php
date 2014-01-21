@@ -43,7 +43,7 @@ class PersonsExportXLS
                 'ID','Status','Name','Email','Cell Phone',
                 'AYSO ID','Area','Region','Badge','MY','Safe Haven',
                 'Verified','Want Mentor','Upgrading',
-                'Attend','Referee',
+                'Will Attend League','Will Attend AS/Extra','Referee',
             )
         );
         $this->writeHeaders($ws,1,$headers);
@@ -77,22 +77,23 @@ class PersonsExportXLS
           //$city = $address->city . ', ' . $address->state;
           //$values[] = $city;
 
-            $orgId = $personOrg->getOrgId();
-            $org = $this->orgRepo->find($orgId);
+            $orgKey = $personFed->getOrgKey();
+            $org = $this->orgRepo->find($orgKey);
             $area = $org ? substr($org->getParent(),4) : null;
 
             $values[] = substr($personFed->getId(),4);
             $values[] = $area;
-            $values[] = substr($personOrg->getOrgId(),4);
+            $values[] = substr($personFed->getOrgKey(),4);
             $values[] = $cert->getBadge();
-            $values[] = $personOrg->getMemYear();
+            $values[] = $personFed->getMemYear();
             $values[] = $personFed->getCertSafeHaven()->getBadge();
-            $values[] = $cert->getVerified();
+            $values[] = $personFed->getPersonVerified();
 
             $values[] = $basic['wantMentor'];
             $values[] = $cert->getUpgrading();
 
-            $values[] = $basic['attending'];
+            $values[] = $basic['attendingLeague'];
+            $values[] = $basic['attendingASExtra'];
             $values[] = $basic['refereeing'];
 
             $this->setRowValues($ws,$row++,$values);
@@ -112,7 +113,7 @@ class PersonsExportXLS
                 'ID','Status','Official','Email','Cell Phone',
                 'AYSO ID','Area','Region','Badge','MY','Safe Haven',
                 'Verified','Want Mentor','Upgrading',
-                'Attend','Referee',
+                'Will Attend League','Will Attend AS/Extra','Referee',
             )
         );
         $this->writeHeaders($ws,1,$headers);
@@ -146,8 +147,8 @@ class PersonsExportXLS
           //$city = $address->city . ', ' . $address->state;
           //$values[] = $city;
 
-            $orgId = $personOrg->getOrgId();
-            $org  = $this->orgRepo->find($orgId);
+            $orgKey = $personOrg->getOrgId();
+            $org  = $this->orgRepo->find($orgKey);
             $area = $org ? substr($org->getParent(),4) : null;
 
             $values[] = substr($personFed->getId(),4);
@@ -161,7 +162,8 @@ class PersonsExportXLS
             $values[] = $basic['wantMentor'];
             $values[] = $cert->getUpgrading();
 
-            $values[] = $basic['attending'];
+            $values[] = $basic['attendingLeague'];
+            $values[] = $basic['attendingASExtra'];
             $values[] = $basic['refereeing'];
 
             $this->setRowValues($ws,$row++,$values);
@@ -297,7 +299,8 @@ class PersonsExportXLS
         'LE CR'      =>  6,
         'LE AR'      =>  6,
 
-        'Attend'  => 8,
+        'AttendLeague'  => 8,
+        'AttendASExtra'  => 8,
         'Referee' => 8,
     );
     protected function writeHeaders($ws,$row,$headers)

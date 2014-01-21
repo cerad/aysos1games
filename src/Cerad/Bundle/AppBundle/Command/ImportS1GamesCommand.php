@@ -13,7 +13,7 @@ class ImportS1GamesCommand extends ContainerAwareCommand
 {
     protected $commandName = 'command';
     protected $commandDesc = 'Command Description';
-    
+
     protected function configure()
     {
         $this
@@ -25,11 +25,11 @@ class ImportS1GamesCommand extends ContainerAwareCommand
     }
     protected function getService  ($id)   { return $this->getContainer()->get($id); }
     protected function getParameter($name) { return $this->getContainer()->getParameter($name); }
-    
+
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         // Project is fixed
-        $projectId  = 'AYSOS1GamesUpperFall2013';
+        $projectId  = 'AYSOS1GamesLowerSpring2014';
 
         // The repos
         $gameRepo      = $this->getService('cerad_game.game_repository');
@@ -37,17 +37,17 @@ class ImportS1GamesCommand extends ContainerAwareCommand
 
         // Just hard code for now
         $inputFileName = $input->getArgument('importFile');
-        
+
         $excel = new Excel();
-        
+
         $reader = $excel->load($inputFileName);
-        
+
         $ws = $reader->getSheetByName('Schedule');
-        
+
         $rows = $ws->toArray();
-        
+
         $header = array_shift($rows);
-        
+
         // Process
         foreach($rows as $row)
         {
@@ -66,11 +66,11 @@ class ImportS1GamesCommand extends ContainerAwareCommand
             // ===================================================
             // Fields
             $fieldName  = $rowx['field'];
-            
+
             $fieldParts = explode(' ',$fieldName);
             $fieldVenue = $fieldParts[0];
             $fieldSort = (integer)$fieldParts[1];
-            
+
             $gameField = $gameFieldRepo->findOneByProjectName($projectId,$fieldName);
             if (!$gameField)
             {
@@ -80,7 +80,7 @@ class ImportS1GamesCommand extends ContainerAwareCommand
                 $gameField->setVenue    ($fieldVenue);
                 $gameField->setProjectId($projectId);
                 $gameFieldRepo->save($gameField);
-                
+
                 // If we didn't commit then need local cache nonsense
                 $gameFieldRepo->commit();
             }
@@ -95,7 +95,7 @@ class ImportS1GamesCommand extends ContainerAwareCommand
                 $game->setProjectId($projectId);
             }
             $game->setField($gameField);
-            
+
             // Level id
             $div = $rowx['div'];
             $levelId = 'AYSO_' . $div . '_Core';
@@ -103,23 +103,23 @@ class ImportS1GamesCommand extends ContainerAwareCommand
 
             // DateTimes
             $dt = $rowx['date'] . ' ' . $rowx['time'];
-            
+
             $dtBeg = \DateTime::createFromFormat('Y-m-d H:i:s',$dt);
             $dtEnd = clone($dtBeg);
             $dtEnd->add(new \DateInterval('PT80M'));
-                
+
             $game->setDtBeg($dtBeg);
             $game->setDtEnd($dtEnd);
-              
+
             $homeTeam = $game->getHomeTeam();
             $awayTeam = $game->getAwayTeam();
-            
+
             $homeTeam->setName($rowx['home_name']);
             $awayTeam->setName($rowx['away_name']);
-            
+
             $homeTeam->setLevelId($levelId);
             $awayTeam->setLevelId($levelId);
-            
+
             // Group nonsense
             $pool = $rowx['home_pool'];
             if ($pool)
@@ -127,10 +127,10 @@ class ImportS1GamesCommand extends ContainerAwareCommand
                 $gameGroup = sprintf('%s PP %d',$div,substr($pool,0,1));
                 $game->setGroup    ($gameGroup);
                 $game->setGroupType('PP');
-                
+
                 $homeTeamGroup = sprintf('%s PP %s',$div,$rowx['home_pool']);
                 $awayTeamGroup = sprintf('%s PP %s',$div,$rowx['away_pool']);
-                
+
                 $homeTeam->setGroup($homeTeamGroup);
                 $awayTeam->setGroup($awayTeamGroup);
             }
@@ -146,10 +146,10 @@ class ImportS1GamesCommand extends ContainerAwareCommand
                 $gameGroup = sprintf('%s %s',$div,$type);
                 $game->setGroup    ($gameGroup);
                 $game->setGroupType($type);
-                
+
                 $homeTeamGroup = sprintf('%s %s',$div,$type);
                 $awayTeamGroup = sprintf('%s %s',$div,$type);
-                
+
                 $homeTeam->setGroup($homeTeamGroup);
                 $awayTeam->setGroup($awayTeamGroup);
             }
@@ -168,7 +168,7 @@ class ImportS1GamesCommand extends ContainerAwareCommand
             }
             // $pool = $row['pool'];
             $gameRepo->save($game);
-            
+
             // For debugging
             /*
             echo sprintf("Game %2d %s %s %-8s %s %-4s v %-4s %-28s %-28s\n",
@@ -179,9 +179,9 @@ class ImportS1GamesCommand extends ContainerAwareCommand
             );*/
         }
         $gameRepo->commit();
-        
+
       //print_r($header);
-        return;    
+        return;
     }
 }
 ?>
