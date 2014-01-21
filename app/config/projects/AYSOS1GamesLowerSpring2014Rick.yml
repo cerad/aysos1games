@@ -1,0 +1,378 @@
+AYSOS1GamesLowerSpring2014:  
+    info:
+        id: AYSOS1GamesLowerSpring2014
+        group: AYSOS1GamesLower
+        slugs:
+            - s1games
+            - s1game2014
+            
+        status:   Active
+        verified: Yes
+                
+        fedId:     AYSO
+        fedRoleId: AYSOV
+                
+        title:   "S1 U10/U12/U14 Games 2014"
+        desc:    "AYSO Section One U10/U12/U14 Games -- Ab Brown Complex, Riverside -- 22-23 Feb & 1-2 Mar 2014"
+                          
+        results: s1games
+
+        submit:  "Emails your application to Art Hundiak and yourself."
+        prefix:   S1Games
+             
+        assignor:
+            name:  "Jody Kinsey"
+            email: "jodykinsey23@gmail.com"
+            phone:  909.262.8806
+
+        system:
+            name:  "Section One U10/U12/U14 Games 2014"
+            email: "no.response.s1games@gmail.com"
+            phone:  ""        
+        
+    # ==============================================
+    # For the schedule search form
+    searches:
+      
+      dates:
+        type:     checkbox
+        label:    Days
+        default: ['2014-02-22','2014-02-23','2014-03-01','2014-03-02']
+        choices:
+          '2014-02-22': Sat 2/22
+          '2014-02-23': Sun 2/23
+          '2014-03-01': Sat 3/01
+          '2014-03-02': Sun 3/02
+          
+      levels:
+        type:     checkbox
+        label:    Levels
+        default:  ['All', AYSO_U10B_League, AYSO_U10G_League]
+        choices:
+          'All'     : All
+          'AYSO_U10B_League' : U10BLeague
+          'AYSO_U10G_League' : U10GLeague
+          'AYSO_U12B_League' : U12BLeague
+          'AYSO_U12G_League' : U12GLeague
+          'AYSO_U14B_League' : U14BLeague
+          'AYSO_U14G_League' : U14GLeague
+          'AYSO_U10B_AllStars' : U10BAS
+          'AYSO_U10G_AllStars' : U10GAS
+          'AYSO_U12B_AllStars' : U12BAS
+          'AYSO_U12G_AllStars' : U12GAS
+          'AYSO_U14B_AllStars' : U14BAS
+          'AYSO_U14G_AllStars' : U14GAS
+          'AYSO_U10B_Extra' : U10BEx
+          'AYSO_U10G_Extra' : U10GEx
+          'AYSO_U12B_Extra' : U12BEx
+          'AYSO_U12G_Extra' : U12GEx
+          'AYSO_U14B_Extra' : U14BEx
+          'AYSO_U14G_Extra' : U14GEx
+          
+      fields:
+        type:   checkbox
+        label: Fields
+        default:  ['All', 'Blue 1', 'Blue 2']
+        choices:
+          'All'     : All
+          'Blue 1' : 'Blue 1'
+          'Blue 2' : 'Blue 2'
+          'Blue 3' : 'Blue 3'
+          'Blue 4' : 'Blue 4'
+          'Blue 5' : 'Blue 5'
+          'Green 1' : 'Green 1'
+          'Green 2' : 'Green 2'
+          'Green 3' : 'Green 3'
+          'Murphy 1' : 'Murphy 1'
+          'Murphy 2' : 'Murphy 2'
+          'Red 1' : 'Red 1'
+          'Red 2' : 'Red 2'
+          'White 1' : 'White 1'
+          'White 2' : 'White 2'
+          'White 3' : 'White 3'
+          'White 4' : 'White 4'
+          'Yellow 1' : 'Yellow 1'
+          'Yellow 2' : 'Yellow 2'
+          'Yellow 3' : 'Yellow 3'
+
+          
+     #genders:
+     #  type:    checkbox
+     #  label:   Genders
+     #  default: ~
+     #  choices:
+     #    B:   Boys
+     #    G:   Girls
+          
+     #ages:
+     #  type:    checkbox
+     #  label:   Ages
+     #  default: [U12,U16]
+     #  choices:
+     #    VIP: VIP
+     #    U16: U16
+     #    U19: U19
+        
+    #times: # Want this to be a select
+    #  start: 0600
+    #  end:   2000
+    
+     #venues:
+     #  type:    checkbox
+     #  label:   Venues
+     #  default: AB
+     #  choices:
+     #    AB: Ab Brown Soccer Complex, Riverside
+    
+    # ==================================================
+    # Basic volunteer plan
+    basic:
+      attendingLeague:
+        type:    select
+        label:   I will attend the League Playoffs
+        default: na
+        choices:
+          na:    Not yet answered
+          no:    No
+          yes:   Yes - For Sure
+          yesx:  Yes - If my team is selected
+          maybe: Maybe
+          
+      attendingASExtra:
+        type:    select
+        label:   I will attend the All-Star/Extra Playoffs
+        default: na
+        choices:
+          na:    Not yet answered
+          no:    No
+          yes:   Yes - For Sure
+          yesx:  Yes - If my team is selected
+          maybe: Maybe
+                    
+      refereeing:
+        type:    select
+        label:   I will referee
+        default: yes
+        choices: { no: No, yes: Yes, maybe: Not Sure }
+        
+      #venue:
+      #  type:    select
+      #  label:   I will work at
+      #  default: na
+      #  choices: 
+      #    na:    Not yet answered
+      #    core:  Torrance/Redondo Beach (CORE site)
+      #    extra: Riverside (EXTRA site)
+      #    other: Where needed (either site)
+           
+#     refLevelCR:
+#       type:    select
+#       label:   Level to center at
+#       default: na
+#       choices: { na: na, U10: U10, U12: U12, U14: U14, U16: U16, U19: U19
+             
+#     refLevelAR:
+#       type:    select
+#       label:   Level to assist at
+#       default: na
+#       choices: { na: na, U10: U10, U12: U12, U14: U14, U16: U16, U19: U19
+             
+      #willInstruct:
+      #  type:    select
+      #  label:   I am certified Instructor
+      #  default: no
+      #  choices: { no: No, ri: Referee Instructor, ari: Advanced Referee Instructor, nri: National Referee Instructor}
+      #     
+      #willAssess:
+      #  type:    select
+      #  label:   I am certified Assessor
+      #  default: no
+      #  choices: { no: No, ra: Referee Assessor, nra: National Referee Assessor}
+      #     
+      willMentor:
+        type:    select
+        label:   I will be available as a mentor
+        default: no
+        choices: { no: No, yes: Yes }
+           
+      wantMentor:
+        type:    select
+        label:   I would like to work with a mentor
+        default: no
+        choices: { no: No, yes: Yes }
+           
+      #willAssess:
+      #  type:    select
+      #  label:   I will do assessments/observations
+      #  default: no
+      #  choices: { no: No, yes: Yes, maybe: Not Sure \}
+      #     
+      #wantAssess:
+      #  type:    select
+      #  label:   I request an assessment or observation
+      #  default: no
+      #  choices: 
+      #    no:           No 
+      #    Informal:     Informal 
+      #    Intermediate: Intermediate
+      #    AdvancedCR:   Advanced CR
+      #    AdvancedAR:   Adcanced AR
+      #    AdvancedCRAR: Advanced CR and AR
+      #    NationalCR:   National CR
+      #    NationalAR:   Advanced AR
+      #    NationalCRAR: National CR and AR
+             
+      coaching:
+        type:    select
+        label:   I will coach or manage a team
+        default: no
+        choices: { no: No, yes: Yes, maybe: Not Sure }
+           
+      volunteering:
+        type:    select
+        label:   I will volunteer for other jobs
+        default: no
+        choices: { no: No, yes: Yes, maybe: Not Sure }
+           
+      playing:
+        type:    select
+        label:   I have (or am) a player in the games
+        default: no
+        choices: { no: No, yes: Yes, player: Yes - I am a player }
+           
+      #opening:
+      #  type:    select
+      #  label:   I will attend the Tuesday Night Opening Ceremony?
+      #  default: no
+      #  choices: { no: No, yesRAL: Yes in Riverside, yesTOA: Yes in Torrance, maybe: Not Sure \}
+      #  
+      #tshirt:
+      #  type:    select
+      #  label:   T-Shirt Size
+      #  default: na
+      #  choices: 
+      #    na:        na
+      #    youthm:    Youth Medium 
+      #    youthl:    Youth Large
+      #    adults:    Adult Small
+      #    adultm:    Adult Medium
+      #    adultl:    Adult Large
+      #    adultlx:   Adult Large X
+      #    adultlxx:  Adult Large XX
+      #       
+      #shuttle:
+      #  type:    select
+      #  label:   I need shuttle service during the games
+      #  default: no
+      #  choices: { no: No, yes: Yes, maybe: Not Sure \}
+      #     
+      #housing:
+      #  type:    select
+      #  label:   I would use low cost referee housing
+      #  default: no
+      #  choices: { no: No, yes: Yes, maybe: Not Sure \}
+      #     
+      #hotel:
+      #  type:  text
+      #  label: Hotel staying at
+      #  size:  30
+        
+      notes:
+        type:  textarea
+        label: Notes
+        rows:  5
+        cols:  40
+        
+    # Break out availability
+    avail:
+      
+      #AvailWen:
+      #  type:    select
+      #  label:   Available Wednesday (Jamborees)
+      #  default: no
+      #  choices: { no: No, yesAM: Yes in the Morning, yesPM: Yes in the afternoon, maybe: Not Sure }
+      #     
+      #AvailThu:
+      #  type:    select
+      #  label:   Available Thursday (Pool Play)
+      #  default: no
+      #  choices: { no: No, yesAM: Yes in the Morning, yesPM: Yes in the afternoon, maybe: Not Sure }
+      #
+      #AvailFri:
+      #  type:    select
+      #  label:   Available Friday (Pool Play)
+      #  default: no
+      #  choices: { no: No, yesAM: Yes in the Morning, yesPM: Yes in the afternoon, maybe: Not Sure }
+      #
+      AvailSat22_08-11:
+        type:    select
+        label:   Available League Saturday Morning (8:00-10:59 Kickoff)
+        default: no
+        choices: { no: No, yes: Yes, maybe: Not Sure }
+           
+      AvailSat22_11-14:
+        type:    select
+        label:   Available League Saturday Mid-day (11:0-13:59 Kickoff)
+        default: no
+        choices: { no: No, yes: Yes, maybe: Not Sure }
+
+      AvailSat22_14-17:
+        type:    select
+        label:   Available League Saturday Afternoon (14:00-17:00 Kickoff)
+        default: no
+        choices: { no: No, yes: Yes, maybe: Not Sure }
+
+      AvailSun23_08-11:
+        type:    select
+        label:   Available League Sunday Morning (8:00-10:59 Kickoff)
+        default: no
+        choices: { no: No, yes: Yes, maybe: Not Sure }
+           
+      AvailSun23_11-14:
+        type:    select
+        label:   Available League Sunday Mid-day (11:0-13:59 Kickoff)
+        default: no
+        choices: { no: No, yes: Yes, maybe: Not Sure }
+
+      AvailSun23_14-17:
+        type:    select
+        label:   Available League Sunday Afternoon (14:00-17:00 Kickoff)
+        default: no
+        choices: { no: No, yes: Yes, maybe: Not Sure }
+
+      AvailSat01_08-11:
+        type:    select
+        label:   Available AS/Extra Saturday Morning (8:00-10:59 Kickoff)
+        default: no
+        choices: { no: No, yes: Yes, maybe: Not Sure }
+           
+      AvailSat01_11-14:
+        type:    select
+        label:   Available AS/Extra Saturday Mid-day (11:0-13:59 Kickoff)
+        default: no
+        choices: { no: No, yes: Yes, maybe: Not Sure }
+
+      AvailSat01_14-17:
+        type:    select
+        label:   Available AS/Extra Saturday Afternoon (14:00-17:00 Kickoff)
+        default: no
+        choices: { no: No, yes: Yes, maybe: Not Sure }
+
+      AvailSun02_08-11:
+        type:    select
+        label:   Available AS/Extra Sunday Morning (8:00-10:59 Kickoff)
+        default: no
+        choices: { no: No, yes: Yes, maybe: Not Sure }
+           
+      AvailSun02_11-14:
+        type:    select
+        label:   Available AS/Extra Sunday Mid-day (11:0-13:59 Kickoff)
+        default: no
+        choices: { no: No, yes: Yes, maybe: Not Sure }
+
+      AvailSun02_14-17:
+        type:    select
+        label:   Available AS/Extra Sunday Afternoon (14:00-17:00 Kickoff)
+        default: no
+        choices: { no: No, yes: Yes, maybe: Not Sure }
+ 
