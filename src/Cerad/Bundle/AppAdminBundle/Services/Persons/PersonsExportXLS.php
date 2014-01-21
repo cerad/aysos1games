@@ -43,7 +43,8 @@ class PersonsExportXLS
                 'ID','Status','Name','Email','Cell Phone',
                 'AYSO ID','Area','Region','Badge','MY','Safe Haven',
                 'Verified','Want Mentor','Upgrading',
-                'Will Attend League','Will Attend AS/Extra','Referee',
+                'Will Attend League','Referee',
+              //'Will Attend League','Will Attend AS/Extra','Referee',
             )
         );
         $this->writeHeaders($ws,1,$headers);
@@ -53,8 +54,7 @@ class PersonsExportXLS
         {
             $name        = $person->getName();
           //$address     = $person->getAddress();
-            $personFed   = $person->getFed($project->getFedRoleId());
-            $personOrg   = $personFed->getOrgRegion();
+            $personFed   = $person->getFed($project->getFedRole());
             $cert        = $personFed->getCertReferee();
             $plan        = $person->getPlan($project->getId());
             $basic       = $plan->getBasic();
@@ -81,7 +81,7 @@ class PersonsExportXLS
             $org = $this->orgRepo->find($orgKey);
             $area = $org ? substr($org->getParent(),4) : null;
 
-            $values[] = substr($personFed->getId(),4);
+            $values[] = substr($personFed->getFedKey(),4);
             $values[] = $area;
             $values[] = substr($personFed->getOrgKey(),4);
             $values[] = $cert->getBadge();
@@ -92,8 +92,12 @@ class PersonsExportXLS
             $values[] = $basic['wantMentor'];
             $values[] = $cert->getUpgrading();
 
-            $values[] = $basic['attendingLeague'];
-            $values[] = $basic['attendingASExtra'];
+            /* ========================================================
+             * You can test the attending value (we1,we2,we12 to break this
+             * Into attendingLeague and attendingASExtra
+             */
+            $values[] = $basic['attending'];
+          //$values[] = $basic['attendingASExtra'];
             $values[] = $basic['refereeing'];
 
             $this->setRowValues($ws,$row++,$values);
@@ -123,8 +127,7 @@ class PersonsExportXLS
         {
             $name        = $person->getName();
           //$address     = $person->getAddress();
-            $personFed   = $person->getFed($project->getFedRoleId());
-            $personOrg   = $personFed->getOrgRegion();
+            $personFed   = $person->getFed($project->getFedRole());
             $cert        = $personFed->getCertReferee();
             $plan        = $person->getPlan($project->getId());
             $basic       = $plan->getBasic();
@@ -147,23 +150,26 @@ class PersonsExportXLS
           //$city = $address->city . ', ' . $address->state;
           //$values[] = $city;
 
-            $orgKey = $personOrg->getOrgId();
+            $orgKey = $personFed->getOrgKey();
             $org  = $this->orgRepo->find($orgKey);
             $area = $org ? substr($org->getParent(),4) : null;
 
-            $values[] = substr($personFed->getId(),4);
+            $values[] = substr($personFed->getFedKey(),4);
             $values[] = $area;
-            $values[] = substr($personOrg->getOrgId(),4);
+            $values[] = substr($personFed->getOrgKey(),4);
             $values[] = $cert->getBadge();
-            $values[] = $personOrg->getMemYear();
+            $values[] = $personFed->getMemYear();
             $values[] = $personFed->getCertSafeHaven()->getBadge();
-            $values[] = $cert->getVerified();
+            $values[] = $cert->getBadgeVerified();
 
             $values[] = $basic['wantMentor'];
             $values[] = $cert->getUpgrading();
 
-            $values[] = $basic['attendingLeague'];
-            $values[] = $basic['attendingASExtra'];
+            // See note about getting these values from attending
+          //$values[] = $basic['attendingLeague'];
+          //$values[] = $basic['attendingASExtra'];
+            $values[] = $basic['attending'];
+            $values[] = $basic['attending'];
             $values[] = $basic['refereeing'];
 
             $this->setRowValues($ws,$row++,$values);
@@ -254,7 +260,7 @@ class PersonsExportXLS
             $values[] = $person->getEmail();
             $values[] = $this->phoneTransformer->transform($person->getPhone());
             $values[] = $cert->getBadge();
-            $values[] = $cert->getVerified();
+            $values[] = $cert->getBadgeVerified();
             $values[] = $basic['notes'];
 
             $this->setRowValues($ws,$row++,$values);

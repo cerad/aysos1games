@@ -28,10 +28,9 @@
 {% set name = person.name %}
 {% set user = cerad_tourn_get_user_for_person(person) %}
 {% set personFed     = person.fed(fedRole) %}
-{% set personOrg     = personFed.orgRegion %}
 {% set certReferee   = personFed.certReferee %}
 {% set certSafeHaven = personFed.certSafeHaven %}
-{% set plan      = person.plan(project.id) %}
+{% set plan          = person.plan(project.id) %}
 
 <tr id="person-{{person.id}}">
     <td style="vertical-align: top;">
@@ -49,15 +48,14 @@
         <!--<p>Gender & Age</td><td>{{ person.gender }} {{ person.age }}</p>-->
     </td>
     <td style="vertical-align: top;">
-        <p>Vol: {{ personFed.id | slice(5) }}</p>
+        <p>Vol: {{ personFed.fedKey | slice(5) }} {{ personFed.fedKeyVerified }}</p>
         <p>S/A/R: {{ personFed.orgKey | cerad_org_sar }}</p>
-        <p>MY: <span class="aysov_mem_year-{{ personOrg.memYear }}">{{ personOrg.memYear }}</span></p>
+        <p>MY: <span class="aysov_mem_year-{{ personFed.memYear }}">{{ personFed.memYear }}</span></p>
         <p>SH: <span class="certSafeHaven_badge-{{ certSafeHaven.badge | default("na") }}">{{ certSafeHaven.badge }}</span></p>
         <p>REF: {{ certReferee.badge   }}</p>
     </td>
     <td style="vertical-align: top;">
-        <p>Will Attend League:  {{ plan.willAttendLeague  }}</p>
-        <p>Will Attend AS/Extra:  {{ plan.willAttendASExtra  }}</p>
+        <p>Will Attend:  {{ plan.willAttend  }}</p>
         <p>Will Referee: {{ plan.willReferee }}</p>
         <p>Will Mentor:  {{ plan.willMentor  }}</p>
         <p>Want Mentor:  {{ plan.wantMentor  }}</p>
