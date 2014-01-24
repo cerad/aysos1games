@@ -41,10 +41,10 @@ class PersonsExportXLS
         $headers = array_merge(
             array(
                 'ID','Status','Name','Email','Cell Phone',
-                'AYSO ID','Area','Region','Badge','MY','Safe Haven',
+                'AYSO ID','Section','Area','Region','Badge','MY','Safe Haven',
                 'Verified','Want Mentor','Upgrading',
-                'Will Attend League','Referee',
-              //'Will Attend League','Will Attend AS/Extra','Referee',
+                //'Will Attend','Referee',
+                'Will Attend League','Will Attend AS/Extra','Referee',
             )
         );
         $this->writeHeaders($ws,1,$headers);
@@ -79,11 +79,15 @@ class PersonsExportXLS
 
             $orgKey = $personFed->getOrgKey();
             $org = $this->orgRepo->find($orgKey);
-            $area = $org ? substr($org->getParent(),4) : null;
+            $section = $org ? (int) substr($org->getParent(),5,2) : null;
+            $area = $org ? substr($org->getParent(),7,1) : null;
+            $region = (int) substr($orgKey,5,4);
 
             $values[] = substr($personFed->getFedKey(),4);
+            $values[] = $section;
             $values[] = $area;
-            $values[] = substr($personFed->getOrgKey(),4);
+            $values[] = $region;
+            //$values[] = substr($personFed->getOrgKey(),4);
             $values[] = $cert->getBadge();
             $values[] = $personFed->getMemYear();
             $values[] = $personFed->getCertSafeHaven()->getBadge();
@@ -96,12 +100,17 @@ class PersonsExportXLS
              * You can test the attending value (we1,we2,we12 to break this
              * Into attendingLeague and attendingASExtra
              */
-            $values[] = $basic['attending'];
-          //$values[] = $basic['attendingASExtra'];
+            //$values[] = $basic['attending'];
+            $values[] = $basic['attendingLeague'];
+            $values[] = $basic['attendingASExtra'];
             $values[] = $basic['refereeing'];
 
             $this->setRowValues($ws,$row++,$values);
         }
+
+        $usedrange = $ws->calculateWorksheetDimension();
+        $ws->getStyle($usedrange)->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+
         // Done
         return;
     }
@@ -115,9 +124,10 @@ class PersonsExportXLS
         $headers = array_merge(
             array(
                 'ID','Status','Official','Email','Cell Phone',
-                'AYSO ID','Area','Region','Badge','MY','Safe Haven',
+                'AYSO ID','Section','Area','Region','Badge','MY','Safe Haven',
                 'Verified','Want Mentor','Upgrading',
                 'Will Attend League','Will Attend AS/Extra','Referee',
+                //'Will Attend','Referee',
             )
         );
         $this->writeHeaders($ws,1,$headers);
@@ -152,11 +162,16 @@ class PersonsExportXLS
 
             $orgKey = $personFed->getOrgKey();
             $org  = $this->orgRepo->find($orgKey);
-            $area = $org ? substr($org->getParent(),4) : null;
+            //$area = $orgKey ? substr($org->getParent(),4) : null;
+            $section = $org ? (int) substr($org->getParent(),5,2) : null;
+            $area = $org ? substr($org->getParent(),7,1) : null;
+            $region = (int) substr($orgKey,5,4);
 
             $values[] = substr($personFed->getFedKey(),4);
+            $values[] = $section;
             $values[] = $area;
-            $values[] = substr($personFed->getOrgKey(),4);
+            $values[] = $region;
+            //$values[] = substr($personFed->getOrgKey(),4);
             $values[] = $cert->getBadge();
             $values[] = $personFed->getMemYear();
             $values[] = $personFed->getCertSafeHaven()->getBadge();
@@ -166,14 +181,17 @@ class PersonsExportXLS
             $values[] = $cert->getUpgrading();
 
             // See note about getting these values from attending
-          //$values[] = $basic['attendingLeague'];
-          //$values[] = $basic['attendingASExtra'];
-            $values[] = $basic['attending'];
-            $values[] = $basic['attending'];
+            //$values[] = $basic['attending'];
+            $values[] = $basic['attendingLeague'];
+            $values[] = $basic['attendingASExtra'];
             $values[] = $basic['refereeing'];
 
             $this->setRowValues($ws,$row++,$values);
         }
+
+        $usedrange = $ws->calculateWorksheetDimension();
+        $ws->getStyle($usedrange)->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+
         // Done
         return;
     }
@@ -187,6 +205,7 @@ class PersonsExportXLS
         $headers = array_merge(
             array(
                 'Official','Email','Cell Phone','Age',
+                'Section','Area','Region',
                 'Badge','Level','LE CR','LE AR','Assess','Upgrading',
                 'Team Aff','Team Desc',
             ),
@@ -228,6 +247,10 @@ class PersonsExportXLS
             }
             $this->setRowValues($ws,$row++,$values);
         }
+
+        $usedrange = $ws->calculateWorksheetDimension();
+        $ws->getStyle($usedrange)->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+
         // Done
         return;
     }
@@ -240,7 +263,9 @@ class PersonsExportXLS
         $ws->setTitle('Notes');
 
         $headers = array(
-            'Status','Official','Email','Cell Phone','Badge','Verified','Notes');
+            'Status','Official','Email','Cell Phone',
+            'Section','Area','Region',
+            'Badge','Verified','Notes');
 
         $this->writeHeaders($ws,1,$headers);
         $row = 2;
@@ -252,6 +277,13 @@ class PersonsExportXLS
             $plan        = $person->getPlan($project->getId());
             $basic       = $plan->getBasic();
 
+            $orgKey = $personFed->getOrgKey();
+            $org  = $this->orgRepo->find($orgKey);
+            //$area = $orgKey ? substr($org->getParent(),4) : null;
+            $section = $org ? (int) substr($org->getParent(),5,2) : null;
+            $area = $org ? substr($org->getParent(),7,1) : null;
+            $region = (int) substr($orgKey,5,4);
+
             if ($basic['refereeing'] == 'no') continue;
 
             $values = array();
@@ -259,12 +291,19 @@ class PersonsExportXLS
             $values[] = $person->getName()->full;
             $values[] = $person->getEmail();
             $values[] = $this->phoneTransformer->transform($person->getPhone());
+            $values[] = $section;
+            $values[] = $area;
+            $values[] = $region;
             $values[] = $cert->getBadge();
             $values[] = $cert->getBadgeVerified();
             $values[] = $basic['notes'];
 
             $this->setRowValues($ws,$row++,$values);
         }
+
+        $usedrange = $ws->calculateWorksheetDimension();
+        $ws->getStyle($usedrange)->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+
         // Done
         return;
     }
@@ -286,8 +325,9 @@ class PersonsExportXLS
         'Notes'      => 72,
         'Home City'  => 16,
         'USSF State' =>  4,
-        'Region'     =>  8,
+        'Region'     =>  7,
         'Area'       =>  8,
+        'Section'    =>  7,
       //'AV Fri'     =>  8,
       //'AV Sat'     =>  8,
       //'AV Sun'     =>  8,

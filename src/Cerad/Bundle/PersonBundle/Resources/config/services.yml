@@ -1,0 +1,15 @@
+# PersonBundle Services
+parameters:
+
+    # Did not work for alias
+    cerad_person.entity_manager.doctrine.service: doctrine.orm.default_entity_manager
+
+services:
+
+# ==========================================================
+# AYSO Form Types
+
+    cerad_person.aysov_referee_badge.form_type:
+        class: Cerad\Bundle\PersonBundle\FormType\AYSO\RefereeBadgeFormType
+        tags:
+            - { name: form.type, alias: cerad_person_aysov_referee_badge } 

@@ -25,6 +25,8 @@
               {#</a>#}
             </td></tr>
             <tr><td> </td></tr>
+            <tr><td> </td></tr>
+            <tr><td> </td></tr>
             <tr><td colspan="2"><a href="{{ path('cerad_tourn_person_person_update', { 'id': personPerson.id }) }}">Update My Account</a></td></tr>
            {% for authens in user.authens %}
                 <tr><td>Social:</td><td>{{ authens.source }}</td></tr>
@@ -35,15 +37,16 @@
             <tr><td>AYSO ID:</td>   <td>{{ fed.fedKey | slice(5)}}</td></tr>
             <tr><td>Vol Year:</td>  <td>{{ fed.memYear          }}</td></tr>
             <tr><td>Safe Haven:</td><td>{{ certSH.badge         }}</td></tr>
-            <tr><td>Ref Badge:</td> <td>{{ certRef.badgeUser    }}</td></tr>
+            <tr><td>Ref Badge:</td> <td>{{ certRef.badgeUser | replace('_', ' ')     }}</td></tr>
             <tr><td>S/A/R:</td>     <td>{{ fed.orgKey | cerad_org_sar }}</td></tr>
         </table></td>
         <td><table>
         {% if plan.id %}
-           <tr><td>Will Attend: </td><td>{{ plan.basic.attending  }}</td></tr>
+           <tr><td>Will Attend League: </td><td>{{ plan.basic.attendingLeague  }}</td></tr>
+           <tr><td>Will Attend AS/Extra: </td><td>{{ plan.basic.attendingASExtra  }}</td></tr>
            <tr><td>Will Referee:</td><td>{{ plan.basic.refereeing }}</td></tr>
-            <tr><td> </td></tr>
-            <tr><td></td></tr>
+           <tr><td>Will Mentor:</td><td>{{ plan.basic.willMentor }}</td></tr>
+           <tr><td>Want Mentor:</td><td>{{ plan.basic.wantMentor }}</td></tr>
            <tr><td colspan="2"><a href="{{ path('cerad_tourn_person_plan_update',{ id: person.id }) }}">Update My Plan</td></tr>
         {% else %}
             <tr><td> </td></tr>

@@ -37,10 +37,10 @@ AYSOS1GamesLowerSpring2014:
       dates:
         type:     checkbox
         label:    Days
-        default: ['2014-02-22','2014-02-23','2014-03-01','2014-03-02']
+        default: ['All','2014-02-22','2014-02-23','2014-03-01','2014-03-02']
         choices:
           'All'       : All
-          '2014-02-22': Sat 2/22
+          '2014-02-22': Sat 2/23
           '2014-02-23': Sun 2/23
           '2014-03-01': Sat 3/01
           '2014-03-02': Sun 3/02
@@ -48,7 +48,7 @@ AYSOS1GamesLowerSpring2014:
       programs:
         type:     checkbox
         label:    Programs
-        default:  ['League','AllStars','Extra']
+        default:  ['All','League','AllStars','Extra']
         choices:
           All      : All
           League   : League
@@ -58,7 +58,7 @@ AYSOS1GamesLowerSpring2014:
       genders:
         type:     checkbox
         label:    Genders
-        default:  [B,G]
+        default:  [All, B,G]
         choices:
           All:  All
           B:    Boys
@@ -67,63 +67,81 @@ AYSOS1GamesLowerSpring2014:
       ages:
         type:     checkbox
         label:    Ages
-        default:  ['U10','U11,U12','U13,U14']
+        default:  [All, 'U10','U11,U12','U13,U14']
         choices:
           All:     All
           U10:     U10
           U11,U12: U12
           U13,U14: U14
         
-      levels:
+      league:
         type:     checkbox
-        label:    Levels
-        default:  [None]
+        label:    League
+        default:  [All, AYSO_U10B_League, AYSO_U10G_League, AYSO_U12B_League, AYSO_U12G_League, AYSO_U14B_League, AYSO_U14G_League]
         choices:
           'All'     : All
-          'AYSO_U10B_League'   : U10BLeag
-          'AYSO_U10G_League'   : U10GLeag
-          'AYSO_U12B_League'   : U12BLeag
-          'AYSO_U12G_League'   : U12GLeag
-          'AYSO_U14B_League'   : U14BLeag
-          'AYSO_U14G_League'   : U14GLeag
-          'AYSO_U10B_AllStars' : U10BAS
-          'AYSO_U10G_AllStars' : U10GAS
-          'AYSO_U12B_AllStars' : U12BAS
-          'AYSO_U12G_AllStars' : U12GAS
-          'AYSO_U14B_AllStars' : U14BAS
-          'AYSO_U14G_AllStars' : U14GAS
-          'AYSO_U10B_Extra'    : U10BEx
-          'AYSO_U10G_Extra'    : U10GEx
-          'AYSO_U12B_Extra'    : U12BEx
-          'AYSO_U12G_Extra'    : U12GEx
-          'AYSO_U14B_Extra'    : U14BEx
-          'AYSO_U14G_Extra'    : U14GEx
+          'AYSO_U10B_League'   : U10B
+          'AYSO_U10G_League'   : U10G
+          'AYSO_U12B_League'   : U12B
+          'AYSO_U12G_League'   : U12G
+          'AYSO_U14B_League'   : U14B
+          'AYSO_U14G_League'   : U14G
+          
+      allstar:
+        type:     checkbox
+        label:    All-Star
+        default: [All,AYSO_U10B_AllStars,AYSO_U10G_AllStars,AYSO_U12B_AllStars,AYSO_U12G_AllStars,AYSO_U14B_AllStars,AYSO_U14G_AllStars]
+        choices:
+          'All'     : All
+          'AYSO_U10B_AllStars' : U10B
+          'AYSO_U10G_AllStars' : U10G
+          'AYSO_U12B_AllStars' : U12B
+          'AYSO_U12G_AllStars' : U12G
+          'AYSO_U14B_AllStars' : U14B
+          'AYSO_U14G_AllStars' : U14G
+          
+      extra:
+        type:     checkbox
+        label:    Extra
+        default:  [All,AYSO_U10B_Extra,AYSO_U10G_Extra,AYSO_U11B_Extra,AYSO_U11G_Extra,AYSO_U12B_Extra,AYSO_U12G_Extra,AYSO_U13B_Extra,AYSO_U13G_Extra,AYSO_U14B_Extra,AYSO_U14G_Extra]
+        choices:
+          'All'     : All
+          'AYSO_U10B_Extra'    : U10B
+          'AYSO_U10G_Extra'    : U10G
+          'AYSO_U11B_Extra'    : U11B
+          'AYSO_U11G_Extra'    : U11G
+          'AYSO_U12B_Extra'    : U12B
+          'AYSO_U12G_Extra'    : U12G
+          'AYSO_U13B_Extra'    : U13B
+          'AYSO_U13G_Extra'    : U13G
+          'AYSO_U14B_Extra'    : U14B
+          'AYSO_U14G_Extra'    : U14G
           
       fields:
         type:    checkbox
         label:   Fields
-        default: [None]
+        default: [All,'Blue 1','Blue 2','Blue 3','Blue 4','Blue 5','Green 1','Green 2','Green 3','Red 1','Red 2','White 1','White 2','White 3','White 4','Yellow 1','Yellow 2','Yellow 3']
         choices:
           'All'     : All
-          'Blue 1' : 'Blue 1'
-          'Blue 2' : 'Blue 2'
-          'Blue 3' : 'Blue 3'
-          'Blue 4' : 'Blue 4'
-          'Blue 5' : 'Blue 5'
-          'Green 1' : 'Green 1'
-          'Green 2' : 'Green 2'
-          'Green 3' : 'Green 3'
-          'Murphy 1' : 'Murphy 1'
-          'Murphy 2' : 'Murphy 2'
-          'Red 1' : 'Red 1'
-          'Red 2' : 'Red 2'
-          'White 1' : 'White 1'
-          'White 2' : 'White 2'
-          'White 3' : 'White 3'
-          'White 4' : 'White 4'
-          'Yellow 1' : 'Yellow 1'
-          'Yellow 2' : 'Yellow 2'
-          'Yellow 3' : 'Yellow 3'
+          'Blue 1' : 'Blue1'
+          'Blue 2' : 'Blue2'
+          'Blue 3' : 'Blue3'
+          'Blue 4' : 'Blue4'
+          'Blue 5' : 'Blue5'
+          'Green 1' : 'Green1'
+          'Green 2' : 'Green2'
+          'Green 3' : 'Green3'
+          'Murphy 1' : 'Murphy1'
+          'Murphy 2' : 'Murphy2'
+          'Red 1' : 'Red1'
+          'Red 2' : 'Red2'
+          'White 1' : 'White1'
+          'White 2' : 'White2'
+          'White 3' : 'White3'
+          'White 4' : 'White4'
+          'Yellow 1' : 'Yellow1'
+          'Yellow 2' : 'Yellow2'
+          'Yellow 3' : 'Yellow3'
         
     #times: # Want this to be a select
     #  start: 0600

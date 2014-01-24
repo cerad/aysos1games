@@ -10,21 +10,22 @@ Your plans have been updated:
 
     Account Name:{{ person.name.full }}
 
-    AYSO Region:{{ fed.orgKey }}
-    ASYO ID: {{ fed.fedKey | slice(5) }}
-    Referee Certification: {{ certReferee.badge }}
+    AYSO Section/Area/Region:{{ fed.orgKey | cerad_org_sar }}
+    ASYO ID: {{ fed.fedKey | cerad_org_sar }}
+    Referee Certification: {{ certReferee.badge | replace('_', ' ') }}
     Email: {{ person.email }}
     Phone: {{ person.phone | cerad_phone }}
 
 {% set basic = plan.basic %}
-    Will Attend:  {{ basic.attending }}
+    Will Attend League play:  {{ basic.attendingLeague }}
+    Will Attend All-Star/Extra play:  {{ basic.attendingASExtra }}
     Will Referee: {{ basic.refereeing }}
 
   Your Notes:
     {{ basic.notes }}
 ---
 
-Update your account and tournament plans at: {{ asset('s1_13/zayso','S1Games') }} ‎
+Update your account and tournament plans at: {{ asset('zayso','S1Games') }} ‎
 
 Thank you for your support,
 

@@ -52,7 +52,7 @@
         <p>S/A/R: {{ personFed.orgKey | cerad_org_sar }}</p>
         <p>MY: <span class="aysov_mem_year-{{ personFed.memYear }}">{{ personFed.memYear }}</span></p>
         <p>SH: <span class="certSafeHaven_badge-{{ certSafeHaven.badge | default("na") }}">{{ certSafeHaven.badge }}</span></p>
-        <p>REF: {{ certReferee.badge   }}</p>
+        <p>REF: {{ certReferee.badge | replace('_', ' ') }}</p>
     </td>
     <td style="vertical-align: top;">
         <p>Will Attend:  {{ plan.willAttend  }}</p>

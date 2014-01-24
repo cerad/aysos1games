@@ -80,6 +80,10 @@ class ScheduleSearchListController extends MyBaseController
 
         $model['teams' ]  = array();
         $model['fields']  = array();
+        $model['dates' ]  = array();
+        $model['league']  = array();
+        $model['allstar']  = array();
+        $model['extra']  = array();
 
         $model['searches'] = $searches = $project->getSearches();
 
@@ -87,7 +91,7 @@ class ScheduleSearchListController extends MyBaseController
         {
             $model[$name] = $search['default']; // Array of defaults
         }
-//print_r($model['fields']); die();
+//print_r($model['dates']); die();
 
         // Merge form session
         $session = $request->getSession();

@@ -9,8 +9,8 @@ class ResultsExportXLS
     protected $counts = array();
 
     protected $dRec = array(
-        'hdr' => "AYSO Section One -- U16/U19 Playoffs 2013",
-        'results' => "POOL PLAY: Saturday November 23, 2013",
+        'hdr' => "AYSO Section One -- U10/U14 Playoffs 2014",
+        'results' => "POOL PLAY: Saturday February 22, 2014",
         'standings' => 'STANDINGS',
     );
 

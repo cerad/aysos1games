@@ -11,19 +11,27 @@
     novalidate
 >
     <fieldset>
-    <table><tr>
+    <table>
+      <tr>
       {% set items = form.dates %}
       <td>{% include '@CeradTourn/Schedule/ScheduleSearchCheckboxes.html.twig' %}</td>
-      {% set items = form.levels %}
-      <td>{% include '@CeradTourn/Schedule/ScheduleSearchCheckboxes.html.twig' %}</td>
       {% set items = form.fields %}
+      <td colspan="2">{% include '@CeradTourn/Schedule/ScheduleSearchCheckboxes.html.twig' %}</td>
+      </tr>
+      <tr>
+      {% set items = form.league %}
       <td>{% include '@CeradTourn/Schedule/ScheduleSearchCheckboxes.html.twig' %}</td>
-<div id="list_filters">
-        {{ form_row(form.numFilter)      }}
-        {{ form_row(form.teamFilter)     }}
-        {{ form_row(form.officialFilter) }}
-</div>
-    </tr></table>
+      {% set items = form.allstar %}
+      <td>{% include '@CeradTourn/Schedule/ScheduleSearchCheckboxes.html.twig' %}</td>
+      {% set items = form.extra %}
+      <td>{% include '@CeradTourn/Schedule/ScheduleSearchCheckboxes.html.twig' %}</td>
+        <!--<div id="list_filters">-->
+        <!--        {{ form_row(form.numFilter)      }}-->
+        <!--        {{ form_row(form.teamFilter)     }}-->
+        <!--        {{ form_row(form.officialFilter) }}-->
+        <!--</div>-->
+      </tr>
+    </table>
     <div style="padding:0 2em; float: left;"><a href="{{ path('cerad_tourn_schedule_list', { '_format': 'xls'}) }}">Export to Excel</a></div>
     <div style="padding-right: 2em; float: left;"><a href="{{ path('cerad_tourn_schedule_list', { '_format': 'csv'}) }}"> Export to Text</a></div>
 
@@ -32,6 +40,7 @@
         </div>
     </fieldset>
 {{ form_rest(form) }}
+
 </form>
 </div>
 {% endif %}

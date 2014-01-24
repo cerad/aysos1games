@@ -25,28 +25,86 @@
     <a href="{{ url('cerad_tourn_home') }}">Home</a>
   </li>
   <li>
-    <a href="http://goo.gl/3qyHw2" target="_blank">Fields</a>
+    <a href="http://ayso1ref.com/lib/pdf/Riverside_Ab_Brown.pdf" target="_blank">Fields</a>
   </li>
   <li><a href="{{ url('cerad_tourn_schedule_list') }}">Schedule</a>
   </li>
-
   <li><a href="{{ url('cerad_tourn_results_poolplay') }}">Pool Play</a>
     <ul>
-      <a href="{{ path('cerad_tourn_results_poolplay', { 'div': 'AYSO_U16B_Core'}) }}">U16 Boys </a>
-      <a href="{{ path('cerad_tourn_results_poolplay', { 'div': 'AYSO_U16G_Core'}) }}">U16 Girls</a>
-      <a href="{{ path('cerad_tourn_results_poolplay', { 'div': 'AYSO_U19B_Core'}) }}">U19 Boys </a>
-      <a href="{{ path('cerad_tourn_results_poolplay', { 'div': 'AYSO_U19G_Core'}) }}">U19 Girls</a>
+      <li><a href="{{ url('cerad_tourn_results_poolplay') }}">League</a>
+        <ul>
+          <a href="{{ path('cerad_tourn_results_poolplay', { 'div': 'AYSO_U10B_League'}) }}">U10 Boys </a>
+          <a href="{{ path('cerad_tourn_results_poolplay', { 'div': 'AYSO_U10G_League'}) }}">U10 Girls</a>
+          <a href="{{ path('cerad_tourn_results_poolplay', { 'div': 'AYSO_U12B_League'}) }}">U12 Boys </a>
+          <a href="{{ path('cerad_tourn_results_poolplay', { 'div': 'AYSO_U12G_League'}) }}">U12 Girls</a>
+          <a href="{{ path('cerad_tourn_results_poolplay', { 'div': 'AYSO_U14B_League'}) }}">U14 Boys </a>
+          <a href="{{ path('cerad_tourn_results_poolplay', { 'div': 'AYSO_U14G_League'}) }}">U14 Girls</a>
+        </ul>
+      </li>
+      <li><a href="{{ url('cerad_tourn_results_poolplay') }}">All-Stars</a>
+        <ul>
+          <a href="{{ path('cerad_tourn_results_poolplay', { 'div': 'AYSO_U10B_AllStars'}) }}">U10 Boys </a>
+          <a href="{{ path('cerad_tourn_results_poolplay', { 'div': 'AYSO_U10G_AllStars'}) }}">U10 Girls</a>
+          <a href="{{ path('cerad_tourn_results_poolplay', { 'div': 'AYSO_U12B_AllStars'}) }}">U12 Boys </a>
+          <a href="{{ path('cerad_tourn_results_poolplay', { 'div': 'AYSO_U12G_AllStars'}) }}">U12 Girls</a>
+          <a href="{{ path('cerad_tourn_results_poolplay', { 'div': 'AYSO_U14B_AllStars'}) }}">U14 Boys </a>
+          <a href="{{ path('cerad_tourn_results_poolplay', { 'div': 'AYSO_U14G_AllStars'}) }}">U14 Girls</a>
+        </ul>
+      </li>
+<!--
+  <li><a href="cerad_tourn_results_poolplay">Extra</a>
+        <ul>
+          <a href="{{ path('cerad_tourn_results_poolplay', { 'div': 'AYSO_U10B_Extra'}) }}">U10 Boys </a>
+          <a href="{{ path('cerad_tourn_results_poolplay', { 'div': 'AYSO_U10G_Extra'}) }}">U10 Girls</a>
+          <a href="{{ path('cerad_tourn_results_poolplay', { 'div': 'AYSO_U11B_Extra'}) }}">U11 Boys </a>
+          <a href="{{ path('cerad_tourn_results_poolplay', { 'div': 'AYSO_U11G_Extra'}) }}">U11 Girls</a>
+          <a href="{{ path('cerad_tourn_results_poolplay', { 'div': 'AYSO_U12B_Extra'}) }}">U12 Boys </a>
+          <a href="{{ path('cerad_tourn_results_poolplay', { 'div': 'AYSO_U12G_Extra'}) }}">U12 Girls</a>
+          <a href="{{ path('cerad_tourn_results_poolplay', { 'div': 'AYSO_U13B_Extra'}) }}">U13 Boys </a>
+          <a href="{{ path('cerad_tourn_results_poolplay', { 'div': 'AYSO_U14G_Extra'}) }}">U13 Girls</a>
+          <a href="{{ path('cerad_tourn_results_poolplay', { 'div': 'AYSO_U14B_Extra'}) }}">U14 Boys </a>
+          <a href="{{ path('cerad_tourn_results_poolplay', { 'div': 'AYSO_U14G_Extra'}) }}">U14 Girls</a>
+        </ul>
+      </li>
+-->
     </ul>
-  </li>
-
-  <li><a href="{{ url('cerad_tourn_results_playoff') }}">Finals</a>
+  <li><a href="{{ url('cerad_tourn_results_playoff') }}">Playoffs</a>
     <ul>
-      <a href="{{ path('cerad_tourn_results_playoff', { 'div': 'AYSO_U16B_Core'}) }}">U16 Boys </a>
-      <a href="{{ path('cerad_tourn_results_playoff', { 'div': 'AYSO_U16G_Core'}) }}">U16 Girls</a>
-      <a href="{{ path('cerad_tourn_results_playoff', { 'div': 'AYSO_U19B_Core'}) }}">U19 Boys </a>
-      <a href="{{ path('cerad_tourn_results_playoff', { 'div': 'AYSO_U19G_Core'}) }}">U19 Girls</a>
+      <li><a href="{{ url('cerad_tourn_results_playoff') }}">League</a>
+        <ul>
+          <a href="{{ path('cerad_tourn_results_playoff', { 'div': 'AYSO_U10B_League'}) }}">U10 Boys </a>
+          <a href="{{ path('cerad_tourn_results_playoff', { 'div': 'AYSO_U10G_League'}) }}">U10 Girls</a>
+          <a href="{{ path('cerad_tourn_results_playoff', { 'div': 'AYSO_U12B_League'}) }}">U12 Boys </a>
+          <a href="{{ path('cerad_tourn_results_playoff', { 'div': 'AYSO_U12G_League'}) }}">U12 Girls</a>
+          <a href="{{ path('cerad_tourn_results_playoff', { 'div': 'AYSO_U14B_League'}) }}">U14 Boys </a>
+          <a href="{{ path('cerad_tourn_results_playoff', { 'div': 'AYSO_U14G_League'}) }}">U14 Girls</a>
+        </ul>
+      </li>
+      <li><a href="{{ url('cerad_tourn_results_playoff') }}">All-Stars</a>
+        <ul>
+          <a href="{{ path('cerad_tourn_results_playoff', { 'div': 'AYSO_U10B_AllStars'}) }}">U10 Boys </a>
+          <a href="{{ path('cerad_tourn_results_playoff', { 'div': 'AYSO_U10G_AllStars'}) }}">U10 Girls</a>
+          <a href="{{ path('cerad_tourn_results_playoff', { 'div': 'AYSO_U12B_AllStars'}) }}">U12 Boys </a>
+          <a href="{{ path('cerad_tourn_results_playoff', { 'div': 'AYSO_U12G_AllStars'}) }}">U12 Girls</a>
+          <a href="{{ path('cerad_tourn_results_playoff', { 'div': 'AYSO_U14B_AllStars'}) }}">U14 Boys </a>
+          <a href="{{ path('cerad_tourn_results_playoff', { 'div': 'AYSO_U14G_AllStars'}) }}">U14 Girls</a>
+        </ul>
+      </li>
+      <li><a href="{{ url('cerad_tourn_results_playoff') }}">Extra</a>
+        <ul>
+          <a href="{{ path('cerad_tourn_results_playoff', { 'div': 'AYSO_U10B_Extra'}) }}">U10 Boys </a>
+          <a href="{{ path('cerad_tourn_results_playoff', { 'div': 'AYSO_U10G_Extra'}) }}">U10 Girls</a>
+          <a href="{{ path('cerad_tourn_results_playoff', { 'div': 'AYSO_U11B_Extra'}) }}">U11 Boys </a>
+          <a href="{{ path('cerad_tourn_results_playoff', { 'div': 'AYSO_U11G_Extra'}) }}">U11 Girls</a>
+          <a href="{{ path('cerad_tourn_results_playoff', { 'div': 'AYSO_U12B_Extra'}) }}">U12 Boys </a>
+          <a href="{{ path('cerad_tourn_results_playoff', { 'div': 'AYSO_U12G_Extra'}) }}">U12 Girls</a>
+          <a href="{{ path('cerad_tourn_results_playoff', { 'div': 'AYSO_U13B_Extra'}) }}">U13 Boys </a>
+          <a href="{{ path('cerad_tourn_results_playoff', { 'div': 'AYSO_U14G_Extra'}) }}">U13 Girls</a>
+          <a href="{{ path('cerad_tourn_results_playoff', { 'div': 'AYSO_U14B_Extra'}) }}">U14 Boys </a>
+          <a href="{{ path('cerad_tourn_results_playoff', { 'div': 'AYSO_U14G_Extra'}) }}">U14 Girls</a>
+        </ul>
+      </li>
     </ul>
-  </li>
 
   <li style="float:right"><a href="http://ayso1ref.com/s1_13/contact" target="_blank">Contact Us</a></li>
   <li style="float:right"><a href="http://ayso1ref.com/s1_13/sms" target="_blank">Text Alerts</a></li>

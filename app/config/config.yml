@@ -22,7 +22,7 @@ framework:
        # Wordpress paths        
         packages:
           S1Games:
-            base_urls: ["http://ayso1ref.com/"]
+            base_urls: ["http://ayso1ref.com/s1_games/"]
           S1refLogin:
             base_urls: ["http://ayso1ref.com/zayso/"]    
     default_locale:  "%locale%"
