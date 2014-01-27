@@ -80,8 +80,15 @@ class ScheduleOfficialListController extends MyBaseController
         $project = $this->getProject();
         $model['projects'] = array($project->getId());
 
-        $model['teams' ]  = array();
+        //$model['teams' ]  = array();
         $model['fields']  = array();
+        //$model['dates' ]  = array();
+        //$model['league']  = array();
+        //$model['allstar']  = array();
+        //$model['extra']  = array();
+        $model['programs']  = array();
+        $model['genders']  = array();
+        $model['ages']  = array();
 
         $searches = $project->getSearches();
 

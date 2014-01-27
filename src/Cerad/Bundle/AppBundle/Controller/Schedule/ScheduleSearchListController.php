@@ -78,12 +78,15 @@ class ScheduleSearchListController extends MyBaseController
         $project = $this->getProject();
         $model['projects'] = array($project->getId());
 
-        $model['teams' ]  = array();
+        //$model['teams' ]  = array();
         $model['fields']  = array();
-        $model['dates' ]  = array();
-        $model['league']  = array();
-        $model['allstar']  = array();
-        $model['extra']  = array();
+        //$model['dates' ]  = array();
+        //$model['league']  = array();
+        //$model['allstar']  = array();
+        //$model['extra']  = array();
+        $model['programs']  = array();
+        $model['genders']  = array();
+        $model['ages']  = array();
 
         $model['searches'] = $searches = $project->getSearches();
 
@@ -91,13 +94,13 @@ class ScheduleSearchListController extends MyBaseController
         {
             $model[$name] = $search['default']; // Array of defaults
         }
-//print_r($model['dates']); die();
 
         // Merge form session
         $session = $request->getSession();
         if ($session->has(self::SESSION_SCHEDULE_SEARCH))
         {
             $modelSession = $session->get(self::SESSION_SCHEDULE_SEARCH);
+//print_r($modelSession); die();
             $model = array_merge($model,$modelSession);
         }
 
