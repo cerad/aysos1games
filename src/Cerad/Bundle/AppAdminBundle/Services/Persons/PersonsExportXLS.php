@@ -2,6 +2,7 @@
 namespace Cerad\Bundle\AppAdminBundle\Services\Persons;
 
 use Cerad\Bundle\PersonBundle\DataTransformer\PhoneTransformer;
+use Cerad\Bundle\AppBundle\DataTransformer\AttendingTransformer;
 
 class PersonsExportXLS
 {
@@ -14,6 +15,8 @@ class PersonsExportXLS
         $this->orgRepo = $orgRepo;
 
         $this->phoneTransformer = new PhoneTransformer();
+        $this->attendingTransformer = new AttendingTransformer();
+
     }
     protected function setColumnWidths($ws,$widths)
     {
@@ -43,8 +46,7 @@ class PersonsExportXLS
                 'ID','Status','Name','Email','Cell Phone',
                 'AYSO ID','Section','Area','Region','Badge','MY','Safe Haven',
                 'Verified','Want Mentor','Upgrading',
-                //'Will Attend','Referee',
-                'Will Attend League','Will Attend AS/Extra','Referee',
+                'Will Attend','Referee',
             )
         );
         $this->writeHeaders($ws,1,$headers);
@@ -99,10 +101,9 @@ class PersonsExportXLS
             /* ========================================================
              * You can test the attending value (we1,we2,we12 to break this
              * Into attendingLeague and attendingASExtra
+             * 27 Jan 2014: RR: Created DataTransformer to do this.
              */
-            //$values[] = $basic['attending'];
-            $values[] = $basic['attendingLeague'];
-            $values[] = $basic['attendingASExtra'];
+            $values[] = $this->attendingTransformer->transform($basic['attending']);
             $values[] = $basic['refereeing'];
 
             $this->setRowValues($ws,$row++,$values);
@@ -126,8 +127,7 @@ class PersonsExportXLS
                 'ID','Status','Official','Email','Cell Phone',
                 'AYSO ID','Section','Area','Region','Badge','MY','Safe Haven',
                 'Verified','Want Mentor','Upgrading',
-                'Will Attend League','Will Attend AS/Extra','Referee',
-                //'Will Attend','Referee',
+                'Will Attend','Referee',
             )
         );
         $this->writeHeaders($ws,1,$headers);
@@ -181,9 +181,7 @@ class PersonsExportXLS
             $values[] = $cert->getUpgrading();
 
             // See note about getting these values from attending
-            //$values[] = $basic['attending'];
-            $values[] = $basic['attendingLeague'];
-            $values[] = $basic['attendingASExtra'];
+            $values[] = $this->attendingTransformer->transform($basic['attending']);
             $values[] = $basic['refereeing'];
 
             $this->setRowValues($ws,$row++,$values);

@@ -2,6 +2,7 @@
 namespace Cerad\Bundle\AppBundle\Officials;
 
 use Cerad\Bundle\PersonBundle\DataTransformer\PhoneTransformer;
+use Cerad\Bundle\AppBundle\DataTransformer\AttendingTransformer;
 
 class ExportOfficialsXLS
 {
@@ -42,7 +43,7 @@ class ExportOfficialsXLS
             array(
                 'ID','Status','Name','Email','Cell Phone',
                 'AYSO ID','Area','Region','Badge','Verified','Want Mentor','Upgrading',
-                'Attend','Referee',
+                'Attending','Referee',
             )
         );
         $this->writeHeaders($ws,1,$headers);
@@ -89,8 +90,7 @@ class ExportOfficialsXLS
             $values[] = $basic['wantMentor'];
             $values[] = $cert->getUpgrading();
 
-            $values[] = $basic['attendingLeague'];
-            $values[] = $basic['attendingASExtra'];
+            $values[] = $this->attendingTransformer->transform($basic['attending']);
             $values[] = $basic['refereeing'];
 
             $this->setRowValues($ws,$row++,$values);
@@ -109,7 +109,7 @@ class ExportOfficialsXLS
             array(
                 'ID','Status','Official','Email','Cell Phone',
                 'AYSO ID','Area','Region','Badge','Verified','Want Mentor','Upgrading',
-                'Attend','Referee',
+                'Attending','Referee',
             )
         );
         $this->writeHeaders($ws,1,$headers);
@@ -156,8 +156,7 @@ class ExportOfficialsXLS
             $values[] = $basic['wantMentor'];
             $values[] = $cert->getUpgrading();
 
-            $values[] = $basic['attendingLeague'];
-            $values[] = $basic['attendingASExtra'];
+            $values[] = $this->attendingTransformer->transform($basic['attending']);
             $values[] = $basic['refereeing'];
 
             $this->setRowValues($ws,$row++,$values);

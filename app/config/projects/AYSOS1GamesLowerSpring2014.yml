@@ -45,6 +45,16 @@ AYSOS1GamesLowerSpring2014:
           '2014-03-01': Sat 3/01
           '2014-03-02': Sun 3/02
           
+      dow:
+        type:     checkbox
+        label:    Day of Week
+        default: ['All','Sat','Sun']
+        choices:
+          'All'   : All
+          'Fri'   : Fri
+          'Sat'   : Sat
+          'Sun'   : Sun
+          
       programs:
         type:     checkbox
         label:    Programs

@@ -34,6 +34,13 @@ class ScheduleSearchListController extends MyBaseController
             return $this->redirect('cerad_tourn_schedule_list');
         }
 
+        // Hack in levels for now
+        $levelRepo = $this->get('cerad_level.level_repository');
+        $levelKeys = $levelRepo->queryKeys($model);
+        if (count($levelKeys))
+        {
+            $model['levels'] = $levelKeys;
+        }
         // Query for the games
         $gameRepo = $this->get('cerad_game.game_repository');
         $games = $gameRepo->queryGameSchedule($model);
@@ -80,7 +87,8 @@ class ScheduleSearchListController extends MyBaseController
 
         //$model['teams' ]  = array();
         $model['fields']  = array();
-        //$model['dates' ]  = array();
+        $model['dow']  = array();
+        $model['dates' ]  = array();
         //$model['league']  = array();
         //$model['allstar']  = array();
         //$model['extra']  = array();
@@ -100,7 +108,6 @@ class ScheduleSearchListController extends MyBaseController
         if ($session->has(self::SESSION_SCHEDULE_SEARCH))
         {
             $modelSession = $session->get(self::SESSION_SCHEDULE_SEARCH);
-//print_r($modelSession); die();
             $model = array_merge($model,$modelSession);
         }
 

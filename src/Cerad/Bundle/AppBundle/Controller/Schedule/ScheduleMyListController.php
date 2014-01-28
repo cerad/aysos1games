@@ -35,6 +35,14 @@ class ScheduleMyListController extends MyBaseController
             return $this->redirect( $route);
         }
 
+        // Hack in levels for now
+        $levelRepo = $this->get('cerad_level.level_repository');
+        $levelKeys = $levelRepo->queryKeys($model);
+        if (count($levelKeys))
+        {
+            $model['levels'] = $levelKeys;
+        }
+
         // Query for the games
         //$gameRepo = $this->get('cerad_game.game_repository');
         //$games = $gameRepo->queryGameSchedule($model);

@@ -36,6 +36,13 @@ class ScheduleOfficialListController extends MyBaseController
             return $this->redirect('cerad_tourn_schedule_official_list');
         }
 
+        // Hack in levels for now
+        $levelRepo = $this->get('cerad_level.level_repository');
+        $levelKeys = $levelRepo->queryKeys($model);
+        if (count($levelKeys))
+        {
+            $model['levels'] = $levelKeys;
+        }
         // Query for the games
         $gameRepo = $this->get('cerad_game.game_repository');
         $games = $gameRepo->queryGameSchedule($model);
@@ -81,6 +88,7 @@ class ScheduleOfficialListController extends MyBaseController
         $model['projects'] = array($project->getId());
 
         //$model['teams' ]  = array();
+        $model['dow' ]  = array();
         $model['fields']  = array();
         //$model['dates' ]  = array();
         //$model['league']  = array();

@@ -1,6 +1,8 @@
 <?php
 namespace Cerad\Bundle\AppBundle\TwigExtension;
 
+use Cerad\Bundle\AppBundle\DataTransformer\AttendingTransformer;
+
 class AppExtension extends \Twig_Extension
 {
     protected $env;
@@ -23,6 +25,12 @@ class AppExtension extends \Twig_Extension
     {
         return twig_escape_filter($this->env,$string);
     }
+    public function getFilters()
+    {
+        return array(
+            'cerad_plan_attending_desc' => new \Twig_Filter_Method($this, 'attendDesc'),
+        );
+    }
     public function getFunctions()
     {
         return array(
@@ -41,5 +49,15 @@ class AppExtension extends \Twig_Extension
 
         return $islocal;
     }
+    // Return attending text description
+    protected $attendingTransformer;
+
+    public function attendDesc($value)
+    {
+        if (!$this->attendingTransformer) $this->attendingTransformer = new AttendingTransformer();
+
+        return $this->attendingTransformer->transform($value);
+    }
+
 }
 ?>

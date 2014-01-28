@@ -9,8 +9,8 @@ cerad_tourn_admin:
 cerad_tourn_admin_persons_list:
     pattern:  /admin/persons/list.{_format}
     defaults:
-        _controller: CeradTournAdminBundle:Persons/PersonsList:list
-        _template: '@CeradTournAdmin/Persons/List/PersonsListIndex.html.twig'
+        _controller: CeradAppAdminBundle:Persons/PersonsList:list
+        _template: '@CeradAppAdmin/Persons/List/PersonsListIndex.html.twig'
         _format: html
     requirements:
         _format:  html|csv|xls|pdf
@@ -18,8 +18,8 @@ cerad_tourn_admin_persons_list:
 cerad_tourn_admin_unapproved_persons_list:
     pattern:  /admin/persons/unlist.{_format}
     defaults:
-        _controller: CeradAppAdminBundle:Persons/UnapprovedPersonsList:list
-        _template: '@CeradTournAdmin/Persons/List/PersonsListIndex.html.twig'
+        _controller: CeradAppAdminBundle:Persons/UnverifiedPersonsList:list
+        _template: '@CeradAppAdmin/Persons/List/PersonsUnListIndex.html.twig'
         _format: html
     requirements:
         _format:  html|csv|xls|pdf

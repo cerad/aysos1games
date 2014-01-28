@@ -1,8 +1,9 @@
 <?php
-namespace Cerad\Bundle\TournAdminBundle\Controller\Persons;
+namespace Cerad\Bundle\AppAdminBundle\Controller\Persons;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+//use Cerad\Bundle\AppBundle\DataTransformer\AttendingTransformer;
 
 use Cerad\Bundle\TournAdminBundle\Controller\BaseController as MyBaseController;
 
@@ -12,49 +13,68 @@ class PersonsListController extends MyBaseController
     {
         // Security
         if (!$this->hasRoleAdmin()) { return $this->redirect('cerad_tourn_welcome'); }
-        
+
         $model = $this->createModel($request);
         if (isset($model['response'])) return $model['response'];
-        
+
         $project = $model['project'];
         $persons = $model['persons'];
-        
-        if ($_format == 'xls') 
+        $link = $model['link'];
+
+        if ($_format == 'xls')
         {
             $export = $this->get('cerad_tourn.officials.export_xls');
 
             $export->generate($project,$persons);
-            
-            $outFileName = 'Persons' . date('Ymd-Hi') . '.xls';
-        
+
+            $outFileName = $this->getOutFilename();
+
             $response = new Response();
             $response->setContent($export->getBuffer());
             $response->headers->set('Content-Type', 'application/vnd.ms-excel');
             $response->headers->set('Content-Disposition', "attachment; filename=\"$outFileName\"");
-            
+
             return $response;
-           
+
         }
         $tplData = array();
         $tplData['project'] = $project;
         $tplData['persons'] = $persons;
         $tplData['fedRole'] = $project->getFedRole();
-        
+        $tplData['link'] = $link;
+
         $tplName = $request->get('_template');
-        return $this->render($tplName,$tplData);   
+        return $this->render($tplName,$tplData);
     }
     public function createModel(Request $request)
     {
         $project = $this->getProject();
-        
+
         $personRepo = $this->get('cerad_person.person_repository');
         $persons = $personRepo->query(array($project->getId()));
-        
+
         $model = array();
         $model['slug']    = $project->getSlug();
         $model['project'] = $project;
-        $model['persons'] = $persons;
+        $model['persons'] = $this->filterPersons($persons);
+        $model['link'] = $this->getLink();
+
         return $model;
+    }
+
+    public function filterPersons( array $persons )
+    {
+      return $persons;
+    }
+
+    public function getLink()
+    {
+      return 'cerad_tourn_admin_persons_list';
+    }
+
+    public function getOutFilename()
+    {
+      return 'Persons' . date('Ymd-Hi') . '.xls';
     }
 }
 ?>

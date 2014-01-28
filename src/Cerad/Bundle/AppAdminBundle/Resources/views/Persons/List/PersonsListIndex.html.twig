@@ -1,5 +1,5 @@
-{# @CeradTournAdmin/Persons/List/PersonsListIndex.html.twig   #}
-{% extends '@CeradTournAdmin/Layout.html.twig' %}
+{# @CeradAppAdmin/Persons/List/PersonsListIndex.html.twig   #}
+{% extends '@CeradAppAdmin/Layout.html.twig' %}
 
 {% block content %}
 <style>
@@ -8,8 +8,10 @@
 .certSafeHaven_badge-Coach { background-color: lightgreen; }
 .certSafeHaven_badge-Referee { background-color: lightgreen; }
 </style>
-<div style="padding:0 2em 1em 2em; float: left;"><a href="{{ path('cerad_tourn_admin_persons_list', { '_format': 'xls'}) }}">Export to Excel</a></div>
-<!--<div style="padding: 0 2em 1em 0; float: left;"><a href="{{ path('cerad_tourn_admin_persons_list', { '_format': 'csv'}) }}"> Export to Text</a></div>
+{% set hrefLink = path(link, { '_format': 'xls'}) %}
+<div style="padding:0 2em 1em 2em; float: left;"><a href={{ hrefLink }}>Export to Excel</a></div>
+<!--
+<div style="padding: 0 2em 1em 0; float: left;"><a href="{{ path('cerad_tourn_admin_persons_list', { '_format': 'csv'}) }}"> Export to Text</a></div>
 -->
 
 <table id="person-list" class="app_table">
@@ -55,7 +57,7 @@
         <p>REF: {{ certReferee.badge | replace('_', ' ') }}</p>
     </td>
     <td style="vertical-align: top;">
-        <p>Will Attend:  {{ plan.willAttend  }}</p>
+        <p>Will Attend:  {{ plan.willAttend | cerad_plan_attending_desc }}</p>
         <p>Will Referee: {{ plan.willReferee }}</p>
         <p>Will Mentor:  {{ plan.willMentor  }}</p>
         <p>Want Mentor:  {{ plan.wantMentor  }}</p>

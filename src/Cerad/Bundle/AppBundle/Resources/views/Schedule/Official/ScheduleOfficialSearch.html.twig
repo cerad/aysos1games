@@ -22,6 +22,12 @@
       <!--{% set items = form.extra %}-->
       <!--<td>{% include '@CeradTourn/Schedule/ScheduleSearchCheckboxes.html.twig' %}</td>-->
       <!---->
+
+      {% if form.dow is defined %}
+      {% set items = form.dow %}
+      <td>{% include '@CeradTourn/Schedule/ScheduleSearchCheckboxes.html.twig' %}</td>
+      {% endif %}
+
       {% if form.programs is defined %}
       {% set items = form.programs %}
       <td>{% include '@CeradTourn/Schedule/ScheduleSearchCheckboxes.html.twig' %}</td>

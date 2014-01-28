@@ -82,7 +82,6 @@ services:
             - '@cerad_tourn.excel'
 
 # Twig extensions
-# 15 Jan 2014 - Moved to TournBundle
     cerad_app.twig_extension:
         class:  Cerad\Bundle\AppBundle\TwigExtension\AppExtension
         arguments:  
@@ -90,6 +89,7 @@ services:
         tags:
             - { name: twig.extension }
 
+# 15 Jan 2014 - Moved to TournBundle
    #cerad_org.twig_extension:
    #    class:  Cerad\Bundle\AppBundle\TwigExtension\OrgExtension
    #    arguments:  
