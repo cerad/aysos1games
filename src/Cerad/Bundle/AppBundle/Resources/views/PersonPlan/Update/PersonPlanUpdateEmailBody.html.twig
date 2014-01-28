@@ -17,7 +17,7 @@ Your plans have been updated:
     Phone: {{ person.phone | cerad_phone }}
 
 {% set basic = plan.basic %}
-    Will Attend:  {{ basic.attending }}
+    Will Attend:  {{ basic.attending | cerad_plan_attending_desc }}
     Will Referee: {{ basic.refereeing }}
 
   Your Notes:

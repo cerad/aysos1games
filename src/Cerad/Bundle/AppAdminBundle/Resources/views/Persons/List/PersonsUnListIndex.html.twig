@@ -10,6 +10,8 @@
 </style>
 {% set hrefLink = path(link, { '_format': 'xls'}) %}
 <div style="padding:0 2em 1em 2em; float: left;"><a href={{ hrefLink }}>Export to Excel</a></div>
+<div style="padding:0 2em 1em 2em; float: right;"><a href={{ path('cerad_tourn_admin_persons_list') }}>View Registered Persons</a></div>
+
 <!--<div style="padding: 0 2em 1em 0; float: left;"><a href="{{ path('cerad_tourn_admin_persons_list', { '_format': 'csv'}) }}"> Export to Text</a></div>
 -->
 
@@ -41,7 +43,7 @@
         <p>Role: {{ user.roles|join(',') }}</p>
     </td>
     <td style="vertical-align: top;">
-        <p>Name: <a href="{{ path('cerad_tourn_admin_person_plan_update',{ 'person' : person.id }) }}">{{ name.full }}</a></p>
+        <p>Name: <a href="{{ path('cerad_tourn_admin_unverified_person_plan_update',{ 'person' : person.id }) }}">{{ name.full }}</a></p>
         <p>First: {{ name.first   }}</p>
         <p>Last: {{ name.last    }}</p>
         <p>Email: {{ person.email }}</p>

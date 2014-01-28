@@ -5,208 +5,166 @@ use Symfony\Component\HttpFoundation\Request;
 
 use Cerad\Bundle\TournBundle\Controller\BaseController as MyBaseController;
 
-use Cerad\Bundle\TournBundle\FormType\DynamicFormType;
+use Cerad\Bundle\TournAdminBundle\FormType\PersonPlan\Update\UserFormType;
+use Cerad\Bundle\TournAdminBundle\FormType\PersonPlan\Update\PersonFormType;
+use Cerad\Bundle\TournAdminBundle\FormType\PersonPlan\Update\PersonPlanFormType;
 
-/* ========================================================
- * Person Plan Editor
- * Passing the person for now because might end up with people with no plans
+use Cerad\Bundle\TournAdminBundle\FormType\PersonPlan\Update\AYSO\VolFormType;
+use Cerad\Bundle\TournAdminBundle\FormType\PersonPlan\Update\AYSO\RegionFormType;
+use Cerad\Bundle\TournAdminBundle\FormType\PersonPlan\Update\AYSO\RefereeCertFormType;
+use Cerad\Bundle\TournAdminBundle\FormType\PersonPlan\Update\AYSO\SafeHavenCertFormType;
+
+/* =================================================================
+ * Currently only the pool play games are exported
+ * But eventually want to add playoffs/champions as well
  */
 class PersonPlanUpdateController extends MyBaseController
 {
-    public function updateAction(Request $request, $id = null)
+    public function updateAction(Request $request)
     {
-        // Security
-        if (!$this->hasRoleUser()) return $this->redirect('cerad_tourn_welcome');
-
-        // Document
-        $personId = $id;
-        $project = $this->getProject();
-
         // Simple model
-        $model1 = $this->createModel($project,$personId);
+        $model = $this->createModel($request);
+        if ($model['response']) return $model['response'];
 
-        // This could also be passed in
-        $form = $this->createModelForm($model1);
+        $form = $this->createModelForm($request,$model);
+
         $form->handleRequest($request);
 
         if ($form->isValid())
         {
-            // Maybe dispatch something to adjust form
-            $model2 = $form->getData();
+            $model = $form->getData($model);
 
-            $model3 = $this->processModel($model2);
+            $this->processModel($model);
 
-            $this->sendEmail($model3);
-
-            return $this->redirect('cerad_tourn_home');
+            $route = $request->get('_route');
+            return $this->redirect( $route,array('person' => $model['person']->getId()));
         }
-
-        // Template stuff
+        // And render
         $tplData = array();
-        $tplData['msg'    ] = null; // $msg; from flash bag
-        $tplData['form'   ] = $form->createView();
-
-        $tplData['plan'   ] = $model1['plan'];
-        $tplData['person' ] = $model1['person'];
-        $tplData['project'] = $model1['project'];
-        $tplData['link'   ] = $model1['link'];
-
-        return $this->render('@CeradTourn\PersonPlan\Update\PersonPlanUpdateIndex.html.twig',$tplData);
+        $tplData['form']   = $form->createView();
+        $tplData['person'] = $model['person'];
+        $tplData['link'] = $model['link'];
+        return $this->render($request->get('_template'),$tplData);
     }
-
-    protected function createModel($project,$personId)
-    {
-        $personRepo = $this->get('cerad_person.person_repository');
-        $person = null;
-
-        // If passed a plan then use it
-        if ($personId) $person = $personRepo->find($personId);
-        else
-        {
-            $person = $this->getUserPerson(false);
-        }
-        if (!$person) throw new \Exception('Person not found in plan update');
-
-        $plan = $person->getPlan($project->getId());
-        $plan->mergeBasicProps($project->getBasic());
-
-        // Pack it up
-        $model = array();
-        $model['plan'  ]  = $plan;
-        $model['basic' ]  = $plan->getBasic();
-        $model['notes' ]  = $plan->getNotes();
-        $model['person']  = $person;
-        $model['project'] = $project;
-        $model['link'  ] =  $this->getLink();
-
-        return $model;
-    }
-    protected function createModelForm($model)
-    {
-        $project = $model['project'];
-
-        $basicType = new DynamicFormType('basic',$project->getBasic());
-
-        $formOptions = array(
-            'validation_groups'  => array('basic'),
-            'cascade_validation' => true,
-        );
-
-        $builder = $this->createFormBuilder($model,$formOptions);
-
-        $builder->add('basic',$basicType, array('label' => false));
-
-/* ==============================
- * Does not quit work
-        $builder->add('notes','textarea', array(
-            'label' => false,
-            'required' => false,
-            'attr' => array('cols' => 50, 'rows' => 5)
-        ));
-        */
-        return $builder->getForm();
-    }
-    /* ===============================================
-     * Lot's of possible processing to do
-     * All ends with a plan
-     */
     protected function processModel($model)
     {
         $personRepo = $this->get('cerad_person.person_repository');
 
-        // Unpack dto
-        $plan   = $model['plan'];
-        $basic  = $model['basic'];
-        $person = $model['person'];
-
-        $basic['notes'] = strip_tags($basic['notes']);
-
-        if (!$plan->getPersonName()) $plan->setPersonName($person->getName()->full);
-
-        $plan->setBasic($basic);
-        $plan->setUpdatedOn();
-
-        // And save
-        $personRepo->save($person);
+        // See if the aysoid has changed
+        if ($model['fedKey'] != $model['personFed']->getFedKey())
+        {
+            // TODO: Need to see if changes fedKey already exists
+            // If so then assorted logic
+            $newFedKey = $model['personFed']->getFedKey();
+            $existingPersonFed = $personRepo->findFedByFedKey($newFedKey);
+            if ($existingPersonFed)
+            {
+                die('AYSOID already exists');
+            }
+        }
+        // Commit
         $personRepo->commit();
 
-        return $model;
+        // Do some stuff for the user as well
+        $user = $model['user'];
+        if ($user->getId())
+        {
+            // Commit it
+            $userRepo = $this->get('cerad_user.user_repository');
+            $userRepo->commit();
+        }
+        return;
     }
-    /* ============================================
-     * Should probably be moved to a listener
+    /* ===============================================
+     * Pull a big tree
+     * Want to flatten it?
      */
-    protected function sendEmail($model)
+    protected function createModel(Request $request)
     {
-        $project = $model['project'];
-        $person  = $model['person'];
-        $plan    = $model['plan'];
+        // Back and forth on this
+        $model = array();
+        $model['response'] = null;
 
-        $personFed = $person->getFed($project->getFedRoleId());
+        // Need current project
+        $project = $this->getProject();
+        $model['project'] = $project;
 
-        $prefix = $project->getPrefix(); // OpenCup2013
+        // Person of interest
+        $personRepo = $this->get('cerad_person.person_repository');
+        $personId = $request->get('person');
+        $person = $personRepo->find($personId);
+        if (!$person)
+        {
+            $model['repsonse'] = $this->redirect('cerad_tourn_welcome');
+            return $model;
+        }
+        $model['person'] = $person;
 
-        $assignor = $project->getAssignor();
+        // Any account
+        $userRepo = $this->get('cerad_user.user_repository');
+        $user = $userRepo->findOneByPersonGuid($person->getGuid());
+        if (!$user) $user = $userRepo->createUser();
+        $model['user'] = $user;
 
-        $assignorName  = $assignor['name'];
-        $assignorEmail = $assignor['email'];
+        // The plan
+        $plan = $person->getPlan($project->getId());
+        $model['plan'] = $plan;
 
-        $adminName =  'Art Hundiak';
-        $adminEmail = 'ahundiak@gmail.com';
+        // The fed
+        $personFed     = $person->getFed($project->getFedRole());
+        $certReferee   = $personFed->getCertReferee();
+        $certSafeHaven = $personFed->getCertSafeHaven();
 
-        $personName = $person->getName();
+        $model['personFed']     = $personFed;
+        $model['certReferee']   = $certReferee;
+        $model['certSafeHaven'] = $certSafeHaven;
 
-        $refereeName  = $personName->full;
-        $refereeEmail = $person->getEmail();
+        // Because changing this requires extra effort
+        $model['fedKey'] = $personFed->getFedKey();
 
-        /* =================================================
-         * Use templates for email subject and body
-         */
-        $tplData = array();
-        $tplData['plan']        = $plan;
-        $tplData['person']      = $person;
+        $model['link'] = $this->getLink();
 
-        $tplData['fed']         = $personFed;
-      //$tplData['org']         = $personFed->getOrgKey();
-        $tplData['certReferee'] = $personFed->getCertReferee();
-
-        $tplData['project']  = $project;
-        $tplData['assignor'] = $assignor;
-
-        $subject = $this->renderView('@CeradTourn\PersonPlan\Update\PersonPlanUpdateEmailSubject.html.twig',$tplData);
-        $body    = $this->renderView('@CeradTourn\PersonPlan\Update\PersonPlanUpdateEmailBody.html.twig',   $tplData);
-
-        // die(nl2br($body));
-
-        // This goes to the assignor
-        $message1 = \Swift_Message::newInstance();
-        $message1->setSubject($subject);
-        $message1->setBody($body);
-        $message1->setFrom(array('admin@zayso.org' => $prefix));
-        $message1->setBcc (array($adminEmail => $adminName));
-
-        $message1->setTo     (array($assignorEmail => $assignorName));
-        $message1->setReplyTo(array($refereeEmail  => $refereeName));
-
-        $this->get('mailer')->send($message1);
-
-        // This goes to the referee
-        $message2 = \Swift_Message::newInstance();
-        $message2->setSubject($subject);
-        $message2->setBody($body);
-        $message2->setFrom(array('admin@zayso.org' => $prefix));
-
-        $message2->setTo     (array($refereeEmail  => $refereeName));
-        $message2->setReplyTo(array($assignorEmail => $assignorName));
-
-        $this->get('mailer')->send($message2);
-
+        // Done
         return $model;
     }
+    /* =============================================================
+     * For now we break things up into individual components
+     * Makes it easier to customize for a given tournamnt
+     * Might merge some of it later
+     */
+    protected function createModelForm($request, $model)
+    {
+        $person = $model['person'];
 
-    public function getLink()
+        $builder = $this->createFormBuilder($model);
+
+        $route = $request->get('_route');
+        $builder->setAction($this->generateUrl($route,array('person' => $person->getId())));
+        $builder->setMethod('POST');
+
+        $builder->add('user',          new UserFormType());
+        $builder->add('person',        new PersonFormType());
+        $builder->add('personFed',     new VolFormType());
+        $builder->add('plan',          new PersonPlanFormType());
+        $builder->add('certReferee',   new RefereeCertFormType());
+        $builder->add('certSafeHaven', new SafeHavenCertFormType());
+
+        $builder->add('update', 'submit', array(
+            'label' => 'Update Person',
+            'attr'  => array('class' => 'submit'),
+        ));
+
+        return $builder->getForm();
+    }
+
+    public function filterPersons( array $persons )
+    {
+      return $persons;
+    }
+
+    protected function getLink()
     {
       return 'cerad_tourn_admin_persons_list';
     }
 
 }
-?>

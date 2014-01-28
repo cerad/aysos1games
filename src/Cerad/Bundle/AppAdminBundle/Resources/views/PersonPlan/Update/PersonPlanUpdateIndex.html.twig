@@ -39,7 +39,7 @@
     <label for="form_personFed_person" class="required">Person Verified</label>
     {{ form.person.name.full.vars.value }}
     {{ form_widget(form.personFed.personVerified) }}
-</div>        
+</div>
 {{ form_row(form.personFed.memYear,     { 'label': 'Mem Year  ' } )      }}
 {{ form_row(form.certSafeHaven.badge,   { 'label': 'Safe Haven' } )      }}
 </fieldset>
@@ -53,12 +53,15 @@
 
 {{ form_row(form.certReferee.badgeDate,{ 'label': 'Badge   Date' } ) }}
 {{ form_row(form.certReferee.roleDate, { 'label': 'Referee Started Date' } ) }}
-        
+
 {{ form_row(form.certReferee.upgrading, { 'label': 'Upgrading' } ) }}
 </fieldset>
 
-<a href="{{ path('cerad_tourn_admin_persons_list') }}#person-{{ person.id }}">Back to Persons</a>
 {{ form_widget(form.update) }}
+
+{% set hrefLink = path(link, { '_format': 'html'}) %}
+<p><a href="{{ hrefLink }}">Back to Persons</a></p>
+
 {{ form_rest(form) }}
 {{ form_end(form)  }}
 

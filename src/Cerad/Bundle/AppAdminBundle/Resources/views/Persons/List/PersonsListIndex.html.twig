@@ -10,6 +10,8 @@
 </style>
 {% set hrefLink = path(link, { '_format': 'xls'}) %}
 <div style="padding:0 2em 1em 2em; float: left;"><a href={{ hrefLink }}>Export to Excel</a></div>
+<div style="padding:0 2em 1em 2em; float: right;"><a href={{ path('cerad_tourn_admin_unapproved_persons_list') }}>View Unverified Registered Persons</a></div>
+
 <!--
 <div style="padding: 0 2em 1em 0; float: left;"><a href="{{ path('cerad_tourn_admin_persons_list', { '_format': 'csv'}) }}"> Export to Text</a></div>
 -->
