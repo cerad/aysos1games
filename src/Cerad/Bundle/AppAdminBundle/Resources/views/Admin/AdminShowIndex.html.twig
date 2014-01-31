@@ -33,9 +33,10 @@
     <!--<li><a href="">Update Individual Game Schedule</a></li>-->
 {% endif %}
 {% if is_granted('ROLE_ASSIGNOR') %}
-    <li><a href="{{ path('cerad_tourn_schedule_official_list') }}">View Referee Schedule</a></li>
-    <li><a href="{{ path('cerad_tourn_schedule_official_list', { '_format': 'xls'}) }}">Export Referee Schedule (Excel)</a></li>
-    <li><a href="{{ path('cerad_tourn_admin_schedule_officials_import') }}">Import Referee Schedule (Excel)</a></li>
+    <li><a href="{{ path('cerad_tourn_schedule_official_list') }}">View Referee Assignments</a></li>
+    <li><a href="{{ path('cerad_tourn_unassigned_matches') }}">View Unassigned Matches</a></li>
+    <li><a href="{{ path('cerad_tourn_schedule_official_list', { '_format': 'xls'}) }}">Export Referee Assignments (Excel)</a></li>
+    <li><a href="{{ path('cerad_tourn_admin_schedule_officials_import') }}">Import Referee Assignments (Excel)</a></li>
   </ul>
 {% endif %}
 {% if is_granted('ROLE_SCORE_ADMIN') %}

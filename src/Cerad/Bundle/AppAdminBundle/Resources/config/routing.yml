@@ -90,3 +90,14 @@ cerad_tourn_admin_results_export:
         _format: xls
     requirements:
         _format:  html|csv|xls|pdf
+
+# Schedule and results
+cerad_tourn_unassigned_matches:
+    pattern:  /officials/unassigned.{_format}
+    defaults: 
+        _controller: CeradAppAdminBundle:Schedule/Officials/UnassignedMatchesList:list
+        _template: '@CeradAppAdmin/Schedule/Officials/UnassignedMatchesIndex.html.twig'
+        _format: html
+    requirements:
+        _format:  html|csv|xls|pdf
+        

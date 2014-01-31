@@ -12,17 +12,8 @@
 >
     <fieldset>
     <table>
-      <tr>
-      <!--{% set items = form.league %}-->
-      <!--<td>{% include '@CeradTourn/Schedule/ScheduleSearchCheckboxes.html.twig' %}</td>-->
-      <!---->
-      <!--{% set items = form.allstar %}-->
-      <!--<td>{% include '@CeradTourn/Schedule/ScheduleSearchCheckboxes.html.twig' %}</td>-->
-      <!---->
-      <!--{% set items = form.extra %}-->
-      <!--<td>{% include '@CeradTourn/Schedule/ScheduleSearchCheckboxes.html.twig' %}</td>-->
-      <!---->
 
+      <tr>
       {% if form.dow is defined %}
       {% set items = form.dow %}
       <td>{% include '@CeradTourn/Schedule/ScheduleSearchCheckboxes.html.twig' %}</td>
@@ -42,32 +33,24 @@
       {% set items = form.ages %}
       <td>{% include '@CeradTourn/Schedule/ScheduleSearchCheckboxes.html.twig' %}</td>
       {% endif %}
+     </tr>
 
-        <!--<div id="list_filters">-->
-        <!--        {{ form_row(form.numFilter)      }}-->
-        <!--        {{ form_row(form.teamFilter)     }}-->
-        <!--        {{ form_row(form.officialFilter) }}-->
-        <!--</div>-->
-      </tr>
-      <tr>
-      <!--{% set items = form.dates %}-->
-      <!--<td>{% include '@CeradTourn/Schedule/ScheduleSearchCheckboxes.html.twig' %}</td>-->
-
+    <tr>
       {% if form.fields is defined %}
       {% set items = form.fields %}
-      <td colspan="3">{% include '@CeradTourn/Schedule/ScheduleSearchCheckboxes.html.twig' %}</td>
+      <td colspan="4">{% include '@CeradTourn/Schedule/ScheduleSearchCheckboxes.html.twig' %}</td>
       {% endif %}
+    </tr>
 
-      </tr>
     </table>
     <div style="padding:0 2em; float: left;"><a href="{{ path('cerad_tourn_schedule_official_list', { '_format': 'xls'}) }}">Export to Excel</a></div>
     <div style="padding-right: 2em; float: left;"><a href="{{ path('cerad_tourn_schedule_official_list', { '_format': 'csv'}) }}"> Export to Text</a></div>
 
-        <div class="controls">
-            <input type="submit" name="ScheduleSearchSearch" value="Search Schedule" />
-        </div>
+    <div class="controls">
+        <input type="submit" name="ScheduleSearchSearch" value="Search Schedule" />
+    </div>
     </fieldset>
-{{ form_rest(form) }}
+<!--{{ form_rest(form) }}-->
 </form>
 </div>
 {% endif %}
