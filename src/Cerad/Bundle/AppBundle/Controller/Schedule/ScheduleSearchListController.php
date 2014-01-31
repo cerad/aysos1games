@@ -87,8 +87,8 @@ class ScheduleSearchListController extends MyBaseController
 
         //$model['teams' ]  = array();
         $model['fields']  = array();
-        $model['dow']  = array();
-        $model['dates' ]  = array();
+        //$model['dow']  = array();
+        //$model['dates' ]  = array();
         //$model['league']  = array();
         //$model['allstar']  = array();
         //$model['extra']  = array();

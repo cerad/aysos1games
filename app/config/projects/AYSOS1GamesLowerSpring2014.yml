@@ -31,29 +31,77 @@ AYSOS1GamesLowerSpring2014:
             phone:  ""        
         
     # ==============================================
+    # Hidden from the schedule search form
+    #do_not_searches:
+    #
+    #  dates:
+    #    type:     checkbox
+    #    label:    Days
+    #    default: ['All','2014-02-22','2014-02-23','2014-03-01','2014-03-02']
+    #    choices:
+    #      'All'       : All
+    #      '2014-02-22': Sat 2/23
+    #      '2014-02-23': Sun 2/23
+    #      '2014-03-01': Sat 3/01
+    #      '2014-03-02': Sun 3/02
+    #      
+    #  league:
+    #    type:     checkbox
+    #    label:    League
+    #    default:  [All, AYSO_U10B_League, AYSO_U10G_League, AYSO_U12B_League, AYSO_U12G_League, AYSO_U14B_League, AYSO_U14G_League]
+    #    choices:
+    #      'All'     : All
+    #      'AYSO_U10B_League'   : U10B
+    #      'AYSO_U10G_League'   : U10G
+    #      'AYSO_U12B_League'   : U12B
+    #      'AYSO_U12G_League'   : U12G
+    #      'AYSO_U14B_League'   : U14B
+    #      'AYSO_U14G_League'   : U14G
+    #      
+    #  allstar:
+    #    type:     checkbox
+    #    label:    All-Star
+    #    default: [All,AYSO_U10B_AllStars,AYSO_U10G_AllStars,AYSO_U12B_AllStars,AYSO_U12G_AllStars,AYSO_U14B_AllStars,AYSO_U14G_AllStars]
+    #    choices:
+    #      'All'     : All
+    #      'AYSO_U10B_AllStars' : U10B
+    #      'AYSO_U10G_AllStars' : U10G
+    #      'AYSO_U12B_AllStars' : U12B
+    #      'AYSO_U12G_AllStars' : U12G
+    #      'AYSO_U14B_AllStars' : U14B
+    #      'AYSO_U14G_AllStars' : U14G
+    #      
+    #  extra:
+    #    type:     checkbox
+    #    label:    Extra
+    #    default:  [All,AYSO_U10B_Extra,AYSO_U10G_Extra,AYSO_U11B_Extra,AYSO_U11G_Extra,AYSO_U12B_Extra,AYSO_U12G_Extra,AYSO_U13B_Extra,AYSO_U13G_Extra,AYSO_U14B_Extra,AYSO_U14G_Extra]
+    #    choices:
+    #      'All'     : All
+    #      'AYSO_U10B_Extra'    : U10B
+    #      'AYSO_U10G_Extra'    : U10G
+    #      'AYSO_U11B_Extra'    : U11B
+    #      'AYSO_U11G_Extra'    : U11G
+    #      'AYSO_U12B_Extra'    : U12B
+    #      'AYSO_U12G_Extra'    : U12G
+    #      'AYSO_U13B_Extra'    : U13B
+    #      'AYSO_U13G_Extra'    : U13G
+    #      'AYSO_U14B_Extra'    : U14B
+    #      'AYSO_U14G_Extra'    : U14G
+    #      
+      
+    # ==============================================
     # For the schedule search form
     searches:
       
-      dates:
-        type:     checkbox
-        label:    Days
-        default: ['All','2014-02-22','2014-02-23','2014-03-01','2014-03-02']
-        choices:
-          'All'       : All
-          '2014-02-22': Sat 2/23
-          '2014-02-23': Sun 2/23
-          '2014-03-01': Sat 3/01
-          '2014-03-02': Sun 3/02
-          
-      dow:
-        type:     checkbox
-        label:    Day of Week
-        default: ['All','Sat','Sun']
-        choices:
-          'All'   : All
-          'Fri'   : Fri
-          'Sat'   : Sat
-          'Sun'   : Sun
+      #dow:
+      #  type:     checkbox
+      #  label:    Day of Week
+      #  default: ['All','2014-02-22,2014-03-02','2014-02-23,2014-03-02']
+      #  choices:
+      #    All   : All
+      #    #'Fri'   : Fri
+      #    2014-02-22, 2014-03-02   : Sat
+      #    2014-02-23, 2014-03-02   : Sun
           
       programs:
         type:     checkbox
@@ -84,49 +132,6 @@ AYSOS1GamesLowerSpring2014:
           U11,U12: U12
           U13,U14: U14
         
-      league:
-        type:     checkbox
-        label:    League
-        default:  [All, AYSO_U10B_League, AYSO_U10G_League, AYSO_U12B_League, AYSO_U12G_League, AYSO_U14B_League, AYSO_U14G_League]
-        choices:
-          'All'     : All
-          'AYSO_U10B_League'   : U10B
-          'AYSO_U10G_League'   : U10G
-          'AYSO_U12B_League'   : U12B
-          'AYSO_U12G_League'   : U12G
-          'AYSO_U14B_League'   : U14B
-          'AYSO_U14G_League'   : U14G
-          
-      allstar:
-        type:     checkbox
-        label:    All-Star
-        default: [All,AYSO_U10B_AllStars,AYSO_U10G_AllStars,AYSO_U12B_AllStars,AYSO_U12G_AllStars,AYSO_U14B_AllStars,AYSO_U14G_AllStars]
-        choices:
-          'All'     : All
-          'AYSO_U10B_AllStars' : U10B
-          'AYSO_U10G_AllStars' : U10G
-          'AYSO_U12B_AllStars' : U12B
-          'AYSO_U12G_AllStars' : U12G
-          'AYSO_U14B_AllStars' : U14B
-          'AYSO_U14G_AllStars' : U14G
-          
-      extra:
-        type:     checkbox
-        label:    Extra
-        default:  [All,AYSO_U10B_Extra,AYSO_U10G_Extra,AYSO_U11B_Extra,AYSO_U11G_Extra,AYSO_U12B_Extra,AYSO_U12G_Extra,AYSO_U13B_Extra,AYSO_U13G_Extra,AYSO_U14B_Extra,AYSO_U14G_Extra]
-        choices:
-          'All'     : All
-          'AYSO_U10B_Extra'    : U10B
-          'AYSO_U10G_Extra'    : U10G
-          'AYSO_U11B_Extra'    : U11B
-          'AYSO_U11G_Extra'    : U11G
-          'AYSO_U12B_Extra'    : U12B
-          'AYSO_U12G_Extra'    : U12G
-          'AYSO_U13B_Extra'    : U13B
-          'AYSO_U13G_Extra'    : U13G
-          'AYSO_U14B_Extra'    : U14B
-          'AYSO_U14G_Extra'    : U14G
-          
       fields:
         type:    checkbox
         label:   Fields

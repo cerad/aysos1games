@@ -12,12 +12,7 @@
 >
     <fieldset>
     <table>
-
       <tr>
-      {% if form.dow is defined %}
-      {% set items = form.dow %}
-      <td>{% include '@CeradTourn/Schedule/ScheduleSearchCheckboxes.html.twig' %}</td>
-      {% endif %}
 
       {% if form.programs is defined %}
       {% set items = form.programs %}
@@ -50,7 +45,7 @@
         <input type="submit" name="ScheduleSearchSearch" value="Search Schedule" />
     </div>
     </fieldset>
-<!--{{ form_rest(form) }}-->
+{{ form_rest(form) }}
 </form>
 </div>
 {% endif %}

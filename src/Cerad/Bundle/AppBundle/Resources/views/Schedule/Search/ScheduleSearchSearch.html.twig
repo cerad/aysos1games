@@ -14,12 +14,7 @@
     <table>
       <tr>
 
-      {% if form.dow is defined %}
-      {% set items = form.dow %}
-      <td>{% include '@CeradTourn/Schedule/ScheduleSearchCheckboxes.html.twig' %}</td>
-      {% endif %}
-
-     {% if form.programs is defined %}
+      {% if form.programs is defined %}
       {% set items = form.programs %}
       <td>{% include '@CeradTourn/Schedule/ScheduleSearchCheckboxes.html.twig' %}</td>
       {% endif %}
@@ -44,11 +39,6 @@
     {% endif %}
 
       </tr>
-        <!--<div id="list_filters">-->
-        <!--        {{ form_row(form.numFilter)      }}-->
-        <!--        {{ form_row(form.teamFilter)     }}-->
-        <!--        {{ form_row(form.officialFilter) }}-->
-        <!--</div>-->
 
     </table>
     <div style="padding:0 2em; float: left;"><a href="{{ path('cerad_tourn_schedule_list', { '_format': 'xls'}) }}">Export to Excel</a></div>

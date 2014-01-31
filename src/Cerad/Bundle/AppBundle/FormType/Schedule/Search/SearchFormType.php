@@ -18,10 +18,10 @@ class SearchFormType extends AbstractType
         $subscriber = new SearchSubscriber($builder->getFormFactory());
         $builder->addEventSubscriber($subscriber);
 
-        // The filters
-        $builder->add('numFilter',     'text', array('required' => false, 'attr' => array('size' => 30)));
-        $builder->add('teamFilter',    'text', array('required' => false, 'attr' => array('size' => 30)));
-        $builder->add('officialFilter','text', array('required' => false, 'attr' => array('size' => 30)));
+        //// The filters
+        //$builder->add('numFilter',     'text', array('required' => false, 'attr' => array('size' => 30)));
+        //$builder->add('teamFilter',    'text', array('required' => false, 'attr' => array('size' => 30)));
+        //$builder->add('officialFilter','text', array('required' => false, 'attr' => array('size' => 30)));
 
         return;
 
