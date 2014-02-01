@@ -1,8 +1,6 @@
 <?php
 namespace Cerad\Bundle\AppBundle\Controller\Schedule;
-/* =============================================
- * 17 Jan 2014 - Identical to CeradAdmin - Remove
- */
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -10,7 +8,7 @@ use Cerad\Bundle\TournBundle\Controller\BaseController as MyBaseController;
 
 class ScheduleOfficialListController extends MyBaseController
 {
-    const SESSION_SCHEDULE_OFFICIAL_SEARCH = 'ScheduleOfficialSearch';
+    const SESSION_SCHEDULE_OFFICIAL_SEARCH = 'scheduleOfficialSearch';
 
     /* =====================================================
      * Wanted to just use GET but the dates mess up
@@ -46,6 +44,8 @@ class ScheduleOfficialListController extends MyBaseController
         // Query for the games
         $gameRepo = $this->get('cerad_game.game_repository');
         $games = $gameRepo->queryGameSchedule($model);
+        
+        $games = $this->filterOfficials($games);
 
         // Spreadsheet
         if ($_format == 'xls')
@@ -53,7 +53,7 @@ class ScheduleOfficialListController extends MyBaseController
             $export = $this->get('cerad_tourn.schedule_official.export_xls');
             $response = new Response($export->generate($games));
 
-            $outFileName = 'ScheduleGameOfficials' . date('YmdHi') . '.xls';
+            $outFileName = $this->getFilename() . '.xls';
 
             $response->headers->set('Content-Type',       'application/vnd.ms-excel');
             $response->headers->set('Content-Disposition', sprintf('attachment; filename="%s"',$outFileName));
@@ -65,7 +65,7 @@ class ScheduleOfficialListController extends MyBaseController
             $export = $this->get('cerad_tourn.schedule_official.export_csv');
             $response = new Response($export->generate($games));
 
-            $outFileName = date('YmdHi') . 'ref_schedule' . '.csv';
+            $outFileName = $this->getFilename() . '.csv';
 
             $response->headers->set('Content-Type',       'text/csv;');
             $response->headers->set('Content-Disposition', sprintf('attachment; filename="%s"',$outFileName));
@@ -78,7 +78,10 @@ class ScheduleOfficialListController extends MyBaseController
         $tplData['games']   = $games;
         $tplData['isAdmin'] = $this->hasRoleAdmin();
         $tplData['project'] = $this->getProject();
-        return $this->render('@CeradTourn/Schedule/Official/ScheduleOfficialIndex.html.twig',$tplData);
+
+        $tplData['link'] = $this->getLink();
+
+        return $this->render($request->get('_template'),$tplData);
     }
     public function getModel(Request $request)
     {
@@ -87,18 +90,14 @@ class ScheduleOfficialListController extends MyBaseController
         $project = $this->getProject();
         $model['projects'] = array($project->getId());
 
-        //$model['teams' ]  = array();
-        $model['dow' ]  = array();
+        $model['teams' ]  = array();
         $model['fields']  = array();
-        //$model['dates' ]  = array();
-        //$model['league']  = array();
-        //$model['allstar']  = array();
-        //$model['extra']  = array();
-        $model['programs']  = array();
-        $model['genders']  = array();
-        $model['ages']  = array();
 
         $searches = $project->getSearches();
+      //unset($searches['levels']);
+      //unset($searches['fields']);
+
+      //echo implode(',',array_keys($searches)); die();
 
         foreach($searches as $name => $search)
         {
@@ -116,7 +115,24 @@ class ScheduleOfficialListController extends MyBaseController
         // Do this after merge, otherwise changes get overwritten
         $model['searches'] = $searches;
 
+        $model['link'] = $this->getLink();
+
         // Done
         return $model;
+    }
+
+    public function filterOfficials( array $games )
+    {
+      return $games;
+    }
+
+    public function getLink()
+    {
+      return 'cerad_tourn_schedule_official_list';
+    }
+
+    public function getFilename()
+    {
+      return 'RefSched' . date('YmdHi');
     }
 }

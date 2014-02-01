@@ -1,0 +1,96 @@
+{# @CeradTourn/Schedule/Official/ScheduleOfficialList.html.twig #}
+
+<style>
+    .game_official_state-Accepted { background-color: lightgreen; }
+    .game_official_state-Approved { background-color: lightgreen; }
+    .game_official_state-Declined { background-color: gold; }
+    .game_official_state-Turnback { background-color: lightpink; }
+</style>
+<div class="schedule-game-list">
+    <table class="schedule" border="1" style="max-width: 850px;">
+    <thead>
+        <tr class="tbl-title" ><th colspan="20">Referee Game Schedule - Count: {{ games | length }}</th></tr>
+        <tr class="tbl-hdr">
+            <th>Game</th>
+            <th>DOW</th>
+            <th style="width:10%">Time</th>
+            <th style="width:10%">Field</th>
+          {#<th>Div</th>#}
+            <th style="width:10%">Pool</th>
+            <th>Home/Away</th>
+{% if is_granted('ROLE_USER') %}
+            <th style="width:18%">Referee</th>
+            <th style="width:18%">AR1</th>
+            <th style="width:18%">AR2</th>
+{% endif %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for game in games %}
+        <tr id="ref-sched-{{game.num}}" class="game-status-{{game.status}}">
+            <td>
+                {% if is_granted('ROLE_SCORE_ENTRY') %}
+                <a href="{{ path('cerad_tourn_game_report_update', { 'num': game.num })}}">{{ game.num }}</a>
+                {% else %}
+                {{ game.num }}
+                {% endif %}
+            </td>
+            <td>{{ game.dtBeg.format('D'    ) }}</td>
+            <td>{{ game.dtBeg.format('H:i A') }}</td>
+
+            <td>{{ game.field.name }}</td>
+          {#<td>{{ game.levelId    }}</td>#}
+            <td>{{ game.group      }}</td>
+
+            <td><table>
+                {% for gameTeam in game.teams %}
+                    <tr>
+                      {#<td>{{ gameTeam.group | slice(8) }}:&nbsp;</td>#}
+                        <td>{{ gameTeam.name }}</td>
+                    </tr>
+                {% endfor %}
+            </table></td>
+{% if is_granted('ROLE_USER') %}
+            {% for gameOfficial in game.officials %}
+            <td class="game_official_state-{{ gameOfficial.state }}">
+{% if is_granted('ROLE_ASSIGNOR') %}
+            <a href="{{ path('cerad_tourn_schedule_official_assign', { 'game': game.num, 'slot' : gameOfficial.slot }) }}">
+            {% set gameOfficialName = gameOfficial.personNameFull %}
+            {% if  gameOfficialName == null %}____
+            {% else %}
+               {{ gameOfficialName }} [{{ gameOfficial.state | slice(0,3) }}]
+            {%endif %}
+            </a>
+{% else %}
+            ({{ gameOfficial.state | slice(0,3) }}) {{ gameOfficial.personNameFull }}
+{% endif %} {# ROLE_ASSIGNOR #}
+            </td>
+            {% endfor %} {# gameOfficial #}
+{% endif %} {# ROLE_USER #}
+       </tr>
+        {% endfor %}{# games #}
+    </tbody>
+    </table>
+</div>
+{% block javascripts %}
+    <script type="text/javascript">
+$(document).ready(function()
+{
+    // checkbox all functionality
+    $('.cerad-checkbox-all').change(Cerad.checkboxAll);
+/*
+    // Support using datatables
+    $('#schedule').dataTable(
+    {
+        "bPaginate": false,
+        "bLengthChange": false,
+        "bFilter": false,
+        "bSort": true,
+        "bInfo": false,
+        "bAutoWidth": false,
+        "aaSorting": [[ 2, "asc" ],[ 5, "asc" ],[ 4, "asc" ]]
+    });
+*/
+});
+</script>
+{% endblock %}

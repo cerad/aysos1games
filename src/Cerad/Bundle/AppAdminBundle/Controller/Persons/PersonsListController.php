@@ -19,7 +19,6 @@ class PersonsListController extends MyBaseController
 
         $project = $model['project'];
         $persons = $model['persons'];
-        $link = $model['link'];
 
         if ($_format == 'xls')
         {
@@ -41,7 +40,7 @@ class PersonsListController extends MyBaseController
         $tplData['project'] = $project;
         $tplData['persons'] = $persons;
         $tplData['fedRole'] = $project->getFedRole();
-        $tplData['link'] = $link;
+        $tplData['link'] = $this->getLink();
 
         $tplName = $request->get('_template');
         return $this->render($tplName,$tplData);

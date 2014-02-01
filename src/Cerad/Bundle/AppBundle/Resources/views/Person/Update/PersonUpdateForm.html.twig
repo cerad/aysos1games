@@ -1,4 +1,4 @@
-{# @CeradTourn/Account/Create/AccountCreateForm.html.twig   #}
+{# @CeradTourn/Person/Update/PersonUpdateForm.html.twig   #}
 <form
     id     = "cerad_tourn_person_update"
     class  = "cerad_tourn_person_udpate cerad_common_form1 app_form"
@@ -12,7 +12,7 @@
         {{ form_row(form.personNameLast)  }}
         {{ form_row(form.personNameNick)  }}
         {{ form_row(form.personEmail)     }}
-        {{ form_row(form.personPhone)     }}
+        {{ form_row(form.personPhone,{ 'label': 'Best Phone Number'})  }}
     </fieldset>
     <fieldset><legend><span>Your AYSO Information</span></legend>
        {{ form_row(form.fedKey) }}

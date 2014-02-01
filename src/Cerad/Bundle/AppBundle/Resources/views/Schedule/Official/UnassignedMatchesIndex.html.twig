@@ -1,0 +1,32 @@
+{# @CeradAppAdmin/Schedule/Officials/UnassignedMatchesIndex.html.twig #}
+{% extends '@CeradAppAdmin/Layout.html.twig' %}
+
+{% block content %}
+{% include '@CeradApp/Schedule/Official/AssignmentSearch.html.twig' %}
+{% include '@CeradApp/Schedule/Official/UnassignedMatchesList.html.twig'   %}
+{% endblock %} {# content #}
+
+{% block javascripts %}
+  {#<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.3.min.js"></script>#}
+    <script type="text/javascript" charset="utf8" src="{{  asset('bundles/ceradtourn/js/ceradcore.js')}}"></script>
+    <script type="text/javascript">
+$(document).ready(function()
+{
+    // checkbox all functionality
+    $('.cerad-checkbox-all').change(Cerad.checkboxAll);
+/*
+    // Support using datatables
+    $('#schedule').dataTable(
+    {
+        "bPaginate": false,
+        "bLengthChange": false,
+        "bFilter": false,
+        "bSort": true,
+        "bInfo": false,
+        "bAutoWidth": false,
+        "aaSorting": [[ 2, "asc" ],[ 5, "asc" ],[ 4, "asc" ]]
+    });
+*/
+});
+</script>
+{% endblock %} {# javascripts #}
