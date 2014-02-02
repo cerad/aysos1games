@@ -8,7 +8,7 @@ use Cerad\Bundle\TournBundle\Controller\BaseController as MyBaseController;
 
 class ScheduleSearchListController extends MyBaseController
 {
-    const SESSION_SCHEDULE_SEARCH = 'ScheduleSearchSearch';
+    const SESSION_SCHEDULE_SEARCH = 'scheduleSearchSearch';
 
     /* =====================================================
      * Wanted to just use GET but the dates mess up

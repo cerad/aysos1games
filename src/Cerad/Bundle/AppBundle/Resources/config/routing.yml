@@ -111,7 +111,17 @@ cerad_tourn_unassigned_matches_list:
         _format: html
     requirements:
         _format:  html|csv|xls|pdf
-                  
+
+# 1 Feb 2014: Rick
+cerad_tourn_unregistered_officials_list:
+    pattern:  /officials/list.{_format}
+    defaults: 
+        _controller: CeradAppBundle:Schedule/UnregisteredOfficialsList:list
+        _template: '@CeradApp/Schedule/Official/UnregisteredOfficialsIndex.html.twig'
+        _format: xls
+    requirements:
+        _format:  html|csv|xls|pdf
+                                    
 #cerad_tourn_results_finals:
 #    pattern:  /results/finals.{_format}
 #    defaults:

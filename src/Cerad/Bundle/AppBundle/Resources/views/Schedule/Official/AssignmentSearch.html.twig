@@ -47,13 +47,16 @@
     {% set hrefLink = path(link, { '_format': 'csv'}) %}
     <div style="padding-right: 2em; float: left;"><a href="{{ hrefLink }}">Export to Text</a></div>
 
-    <div style="padding-right: 2em; float: right;"><a href="{{ path('cerad_tourn_schedule_official_list') }}">Show Match Assignments</a></div>
-
-    <div class="controls">
-        <input type="submit" name="UnassignedMatchesSearch" value="Search Schedule" />
+    <div class="controls" style="margin-right:40px; float: right;">
+        <input type="submit" name="scheduleOfficialSearch" value="Search Schedule" />
     </div>
+
+    <div style="padding-right: 2em; float: right;"><a href="{{ path('cerad_tourn_schedule_official_list') }}">Show All Match Assignments</a></div>
+
     </fieldset>
-<!--{{ form_rest(form) }}-->
+<div style="display:none">
+  {{ form_rest(form) }}
+</div>
 </form>
 </div>
 {% endif %}

@@ -31,7 +31,7 @@ class ScheduleOfficialListController extends MyBaseController
 
             $request->getSession()->set(self::SESSION_SCHEDULE_OFFICIAL_SEARCH,$modelPosted);
 
-            return $this->redirect('cerad_tourn_schedule_official_list');
+            return $this->redirect($this->getLink());
         }
 
         // Hack in levels for now
@@ -44,7 +44,7 @@ class ScheduleOfficialListController extends MyBaseController
         // Query for the games
         $gameRepo = $this->get('cerad_game.game_repository');
         $games = $gameRepo->queryGameSchedule($model);
-        
+
         $games = $this->filterOfficials($games);
 
         // Spreadsheet

@@ -145,6 +145,9 @@ class ScheduleOfficialExportXLS
         $ws1 = $ss->createSheet(1);
         $this->processOfficials($ws1,$games);
 
+        $ws2 = $ss->createSheet(2);
+        $this->processUnregisteredOfficials($ws2,$games);
+
         // Output
         $ss->setActiveSheetIndex(0);
         $objWriter = $this->excel->newWriter($ss); // \PHPExcel_IOFactory::createWriter($ss, 'Excel5');
@@ -260,6 +263,68 @@ class ScheduleOfficialExportXLS
             $ws->setCellValueByColumnAndRow($col++,$row,$game->getAwayTeam()->getName());
 
         }}
+        return;
+    }
+
+    /* ===========================================================
+     * Add a sheet listing current assignments for each official
+     * Should probably get moved to it's own processor
+     */
+    protected function processUnregisteredOfficials($ws,$games)
+    {
+        // Make a sorted array of officials from games
+        $officials = array();
+        foreach($games as $game)
+        {
+            foreach($game->getOfficials() as $official)
+            {
+                $name = $official->getPersonNameFull();
+                if ($name)
+                {
+                  if ($official->getPersonGuid() === NULL )
+                  {
+                      $officials[$name][] = $official;
+                  }
+                }
+            }
+        }
+        ksort($officials);
+
+        // Generate
+        $this->generateUnregisteredOfficials($ws,$officials);
+    }
+    /* ========================================================
+     * Generates the officials listing
+     */
+    public function generateUnregisteredOfficials($ws,$officials)
+    {
+        // Only the keys are currently being used
+        $map = array(
+            'Name'     => 'name',
+            'Pos'      => 'pos',
+            'Game'     => 'game',
+        );
+        $ws->setTitle('Unregistered Officials');
+
+        $row = $this->setHeaders($ws,$map);
+
+        foreach($officials as $officialSlots)
+        {
+            foreach($officialSlots as $official)
+            {
+              $row++;
+              $col = 0;
+
+              // Official
+              $name = $official->getPersonNameFull();
+              $pos  = $official->getRole();
+              $game = $official->getGame();
+
+              $ws->setCellValueByColumnAndRow($col++,$row,$name);
+              $ws->setCellValueByColumnAndRow($col++,$row,$pos);
+              $ws->setCellValueByColumnAndRow($col++,$row,$game->getNum());
+            }
+        }
         return;
     }
 }

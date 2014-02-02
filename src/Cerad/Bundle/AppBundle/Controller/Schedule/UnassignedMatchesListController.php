@@ -8,8 +8,6 @@ use Cerad\Bundle\AppBundle\Controller\Schedule\ScheduleOfficialListController as
 
 class UnassignedMatchesListController extends ParentController
 {
-    const SESSION_SCHEDULE_OFFICIAL_SEARCH = 'UnassignedMatchesSearch';
-
     public function filterOfficials( array $games )
     {
       $unassigned = array();
