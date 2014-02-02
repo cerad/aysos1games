@@ -106,7 +106,7 @@ AYSOS1GamesLowerSpring2014:
       programs:
         type:     checkbox
         label:    Programs
-        default:  ['All','League','AllStars','Extra']
+        default:  ['League']
         choices:
           All      : All
           League   : League

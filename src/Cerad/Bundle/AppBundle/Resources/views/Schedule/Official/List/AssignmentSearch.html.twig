@@ -1,4 +1,4 @@
-{# @CeradAppAdmin/Schedule/Official/AssignmentSearch.html.twig #}
+{# @CeradApp/Schedule/Official/List/AssignmentSearch.html.twig #}
 
 {% if searchForm is defined  %}
 {% set form = searchForm     %}
@@ -50,10 +50,12 @@
     <div class="controls" style="margin-right:40px; float: right;">
         <input type="submit" name="scheduleOfficialSearch" value="Search Schedule" />
     </div>
-
-    <div style="padding-right: 2em; float: right;"><a href="{{ path('cerad_tourn_schedule_official_list') }}">Show All Match Assignments</a></div>
-
     </fieldset>
+
+    <div class="controls" style="padding-top: 1em; padding-right: 2em; float: right;">
+      <a href="{{ path('cerad_tourn_schedule_official_list') }}">Show All Match Assignments</a>
+    </div>
+
 <div style="display:none">
   {{ form_rest(form) }}
 </div>

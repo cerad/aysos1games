@@ -107,7 +107,7 @@ cerad_tourn_unassigned_matches_list:
     pattern:  /officials/unassigned.{_format}
     defaults: 
         _controller: CeradAppBundle:Schedule/UnassignedMatchesList:list
-        _template: '@CeradApp/Schedule/Official/UnassignedMatchesIndex.html.twig'
+        _template: '@CeradApp/Schedule/Official/List/UnassignedMatchesIndex.html.twig'
         _format: html
     requirements:
         _format:  html|csv|xls|pdf
@@ -117,7 +117,7 @@ cerad_tourn_unregistered_officials_list:
     pattern:  /officials/list.{_format}
     defaults: 
         _controller: CeradAppBundle:Schedule/UnregisteredOfficialsList:list
-        _template: '@CeradApp/Schedule/Official/UnregisteredOfficialsIndex.html.twig'
+        _template: '@CeradApp/Schedule/Official/List/UnregisteredOfficialsIndex.html.twig'
         _format: xls
     requirements:
         _format:  html|csv|xls|pdf
