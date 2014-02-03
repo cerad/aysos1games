@@ -54,20 +54,20 @@ class LowerLoad
     /* ===============================================================
      * Extract a game
      */
-    protected function processGame($excel,$row)
+    protected function processGame($excel,$item)
     {
         // Need a number
-        $num = (int)$row[0];
+        $num = (int)$item['num'];
         if (!$num) return;
         
-        $date         = $excel->processDate($row[2]);
-        $time         = $excel->processTime($row[5]);
-        $field        = $row[ 4];
-        $div          = $row[ 6];
-        $program      = $row[ 7];
-        $type         = $row[12];
-        $homeTeamName = $row[ 8];
-        $awayTeamName = $row[11];
+        $date         = $excel->processDate($item['date']);
+        $time         = $excel->processTime($item['time']);
+        $fieldName    = $item['fieldName'];
+        $div          = $item['div'];
+        $program      = $item['program'];
+        $type         = $item['type'];
+        $homeTeamName = $item['homeTeamName'];
+        $awayTeamName = $item['awayTeamName'];
         
         // AYSO_U14G_Extra
         $levelKey = sprintf('AYSO_%s_%s',$div,$program);
@@ -77,8 +77,8 @@ class LowerLoad
         if ($gameGroupType != 'PP') 
         {
             $gameGroup     = sprintf('%s %s %s',$program,$div,$type);          // U14G SF1
-            $homeTeamGroup = sprintf('%s %s %s',$program,$div,$gameGroupType); // U14G SF
-            $awayTeamGroup = sprintf('%s %s %s',$program,$div,$gameGroupType);
+            $homeTeamGroup = null; // sprintf('%s %s %s',$program,$div,$gameGroupType); // U14G SF
+            $awayTeamGroup = null; // sprintf('%s %s %s',$program,$div,$gameGroupType);
         }
         else
         {
@@ -103,7 +103,7 @@ class LowerLoad
         $game->setGroupType($gameGroupType);
         $game->setLevelId  ($levelKey);
         
-        $game->setField($this->processField($field));
+        $game->setField($this->processField($fieldName));
         
         // DateTime
         $dt = $date . ' ' . $time;
@@ -182,9 +182,18 @@ class LowerLoad
         // Games
         $gameWs = $reader->getSheetByName('Schedule');
         $gameRows = $gameWs->toArray();
+        
+        $gameHeaders = array_shift($gameRows);
+        $gameIndexes = $this->processHeaders($gameHeaders);
+        
         foreach($gameRows as $row)
         {
-            $this->processGame($excel,$row);
+            $item = $gameIndexes;
+            foreach($gameIndexes as $key => $index)
+            {
+                $item[$key] = trim($row[$index]);
+            }
+            $this->processGame($excel,$item);
         }
         $this->gameRepo->commit();
         
@@ -219,6 +228,46 @@ class LowerLoad
             
             $this->pools[$teamKey] = array('num' => $poolNum, 'index' => $this->poolIndex);
         }
+    }
+    /* ========================================================
+     * Returns an array of fields mapped to offset
+     * If required fields are not found then return null
+     */
+    protected function processHeaders($headers)
+    {
+        $map = array(    
+            'Game #'    => 'num',
+            'Date'      => 'date',
+            'Time'      => 'time',
+            'Field'     => 'fieldName',
+            'Division'  => 'div',
+            'Program'   => 'program',
+            'Home Team' => 'homeTeamName',
+            'Visiting Team' => 'awayTeamName',
+            'Type'      => 'type',
+        );
+        $index = array();
+        foreach($map as $key)
+        {
+            $indexes[$key] = null;
+        }
+        foreach($headers as $index => $header)
+        {
+            if (isset($map[$header])) $indexes[$map[$header]] = $index;
+        }
+
+        $missing = array();
+        foreach(array('program','type') as $key)
+        {
+            if ($indexes[$key] === null) $missing = $key;
+        }
+        if (count($missing))
+        {
+            print_r($missing);
+            die("*** MISSING\n");
+            return null;
+        }
+        return $indexes;
     }
 }
 ?>
