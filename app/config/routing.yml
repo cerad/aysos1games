@@ -2,6 +2,11 @@
 # Want to start using the TournBundle routes
 # Still override if needed
 
+# 04 Feb 2014 - Try moving some routes back to the bundles to which they belong
+cerad_game:
+    resource: "@CeradGameBundle/Resources/config/routing.yml"
+    prefix:   /
+    
 cerad_tourn:
     resource: "@CeradTournBundle/Resources/config/routing.yml"
     prefix:   /

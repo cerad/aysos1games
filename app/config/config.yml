@@ -38,6 +38,7 @@ twig:
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
     paths:
+        "%kernel.root_dir%/../src/Cerad/Bundle/AppBundle/Resources/views/CeradGame":  CeradGame
         "%kernel.root_dir%/../src/Cerad/Bundle/AppBundle/Resources/views":      CeradTourn
         "%kernel.root_dir%/../src/Cerad/Bundle/AppAdminBundle/Resources/views": CeradTournAdmin
         

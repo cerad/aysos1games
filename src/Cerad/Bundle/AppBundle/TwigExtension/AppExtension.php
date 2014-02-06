@@ -35,6 +35,9 @@ class AppExtension extends \Twig_Extension
     {
         return array(
             'cerad_tourn_is_local' => new \Twig_Function_Method($this, 'isLocal'),
+            
+            'cerad_tourn_game_official_is_user_updateable' => 
+                new \Twig_Function_Method($this, 'gameOfficialIsUserUpdateable'),
         );
     }
     public function isLocal()
