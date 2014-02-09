@@ -36,21 +36,12 @@ class PlayoffResultsController extends MyBaseController
         $project = $this->getProject();
         $model['project'] = $project;
 
-        // Optional Division comes from request or session
-        $session = $request->getSession();
-        $div = $request->get('div');
-        //if (!$div)
-        //{
-        //    // Maybe should do a redirect here?
-        //    $div = $session->get(self::SESSION_RESULTS_PLAYOFF_DIV);
-        //}
-        //$session->set(self::SESSION_RESULTS_PLAYOFF_DIV,$div);
-
         // Pull the games
         $gameRepo = $this->get('cerad_game.game_repository');
+        
         $criteria = array();
-        $criteria['projects' ] = $project->getId();
-        if ($div) $criteria['levels'] = $div;
+        $criteria['projects' ] = $project->getKey();
+        $criteria['levels'] = $this->getLevels($request);;
 
         $criteria['groupTypes'] = 'SF';
         $model['gamesSF'] = $gameRepo->queryGameSchedule($criteria);
@@ -62,5 +53,28 @@ class PlayoffResultsController extends MyBaseController
         $model['gamesFM'] = $gameRepo->queryGameSchedule($criteria);
 
         return $model;
+    }
+    protected function getLevels($request)
+    {   
+        // Deal with program,age,gender
+        $age     = $request->get('age');
+        $gender  = $request->get('gender');
+        $program = $request->get('program');
+        
+        $criteria = array
+        (
+            'ages'     => $age,
+            'genders'  => $gender,
+            'programs' => $program,
+        );
+        $levelRepo = $this->get('cerad_level.level_repository');
+        $levelKeys = $levelRepo->queryKeys($criteria);
+        
+        // Add in individual levels (previously called div)
+        // TODO: Make this part of queryKeys
+        $level = $request->get('level');
+        if ($level) array_merge($levelKeys,explode(',',$level));
+         
+        return $levelKeys;
     }
 }
