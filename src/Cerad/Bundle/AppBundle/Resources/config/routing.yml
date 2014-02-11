@@ -63,7 +63,7 @@ cerad_tourn_schedule_my_list:
     pattern:  /schedule/my.{_format}
     defaults: 
         _controller: CeradAppBundle:Schedule/ScheduleMyList:list
-        _template: '@CeradApp/Schedule/My/ScheduleMyIndex.html.twig'
+        _template: '@CeradTourn/Schedule/My/ScheduleMyIndex.html.twig'
         _format: html
     requirements:
         _format: html|csv|xls|pdf
@@ -89,6 +89,7 @@ cerad_tourn_schedule_list:
     pattern:  /schedule/search.{_format}
     defaults:
         _controller: CeradAppBundle:Schedule/ScheduleSearchList:list 
+        _template: '@CeradTourn/Schedule/Search/ScheduleSearchIndex.html.twig'
         _format: html
     requirements:
         _format:  html|csv|xls|pdf
@@ -97,7 +98,7 @@ cerad_tourn_schedule_official_list:
     pattern:  /schedule/official.{_format}
     defaults: 
         _controller: CeradAppBundle:Schedule/ScheduleOfficialList:list
-        _template: '@CeradApp/Schedule/Official/List/ScheduleOfficialIndex.html.twig'
+        _template: '@CeradTourn/Schedule/Official/List/ScheduleOfficialIndex.html.twig'
         _format: html
     requirements:
         _format:  html|csv|xls|pdf
@@ -107,7 +108,7 @@ cerad_tourn_unassigned_matches_list:
     pattern:  /officials/unassigned.{_format}
     defaults: 
         _controller: CeradAppBundle:Schedule/UnassignedMatchesList:list
-        _template: '@CeradApp/Schedule/Official/List/UnassignedMatchesIndex.html.twig'
+        _template: '@CeradTourn/Schedule/Official/List/UnassignedMatchesIndex.html.twig'
         _format: html
     requirements:
         _format:  html|csv|xls|pdf
@@ -117,7 +118,7 @@ cerad_tourn_unregistered_officials_list:
     pattern:  /officials/list.{_format}
     defaults: 
         _controller: CeradAppBundle:Schedule/UnregisteredOfficialsList:list
-        _template: '@CeradApp/Schedule/Official/List/UnregisteredOfficialsIndex.html.twig'
+        _template: '@CeradTourn/Schedule/Official/List/UnregisteredOfficialsIndex.html.twig'
         _format: xls
     requirements:
         _format:  html|csv|xls|pdf

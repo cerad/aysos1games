@@ -14,11 +14,11 @@
     <table>
       <tr>
 
-      {% if form.dates is defined %}{% if is_granted('ROLE_SUPER_ADMIN') %}
+      {% if form.dates is defined %}
       {% set items = form.dates %}
       <td>{% include '@CeradTourn/Schedule/ScheduleSearchCheckboxes.html.twig' %}</td>
-      {% endif %}{% endif %}
-      
+      {% endif %}
+
       {% if form.programs is defined %}
       {% set items = form.programs %}
       <td>{% include '@CeradTourn/Schedule/ScheduleSearchCheckboxes.html.twig' %}</td>

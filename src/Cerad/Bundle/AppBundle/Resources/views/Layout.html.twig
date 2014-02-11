@@ -29,9 +29,9 @@
   </li>
   <li><a href="{{ url('cerad_tourn_schedule_list') }}">Schedule</a>
   </li>
-  <li><a href="#">Pool Play</a>
+  <li><a href="{{ path('cerad_tourn_results_poolplay') }}">Pool Play</a>
     <ul>
-      <li><a href="#">League</a>
+      <li><a href="{{ path('cerad_tourn_results_poolplay', { 'program': 'League'}) }}">League</a>
         <ul>
           <a href="{{ path('cerad_tourn_results_poolplay', { 'div': 'AYSO_U10B_League'}) }}">U10 Boys </a>
           <a href="{{ path('cerad_tourn_results_poolplay', { 'div': 'AYSO_U10G_League'}) }}">U10 Girls</a>
@@ -41,7 +41,7 @@
           <a href="{{ path('cerad_tourn_results_poolplay', { 'div': 'AYSO_U14G_League'}) }}">U14 Girls</a>
         </ul>
       </li>
-      <li><a href="#">All-Stars</a>
+      <li><a href="{{ path('cerad_tourn_results_poolplay', { 'program': 'AllStars'}) }}">All-Stars</a>
         <ul>
           <a href="{{ path('cerad_tourn_results_poolplay', { 'div': 'AYSO_U10B_AllStars'}) }}">U10 Boys </a>
           <a href="{{ path('cerad_tourn_results_poolplay', { 'div': 'AYSO_U10G_AllStars'}) }}">U10 Girls</a>
@@ -70,7 +70,7 @@
     </ul>
   <li><a href="{{ url('cerad_tourn_results_playoff') }}">Playoffs</a>
     <ul>
-      <li><a href="{{ url('cerad_tourn_results_playoff') }}">League</a>
+      <li><a href="{{ url('cerad_tourn_results_playoff', { 'program': 'League'}) }}">League</a>
         <ul>
           <a href="{{ path('cerad_tourn_results_playoff', { 'div': 'AYSO_U10B_League'}) }}">U10 Boys </a>
           <a href="{{ path('cerad_tourn_results_playoff', { 'div': 'AYSO_U10G_League'}) }}">U10 Girls</a>
@@ -80,7 +80,7 @@
           <a href="{{ path('cerad_tourn_results_playoff', { 'div': 'AYSO_U14G_League'}) }}">U14 Girls</a>
         </ul>
       </li>
-      <li><a href="{{ url('cerad_tourn_results_playoff') }}">All-Stars</a>
+      <li><a href="{{ url('cerad_tourn_results_playoff', { 'program': 'AllStars'}) }}">All-Stars</a>
         <ul>
           <a href="{{ path('cerad_tourn_results_playoff', { 'div': 'AYSO_U10B_AllStars'}) }}">U10 Boys </a>
           <a href="{{ path('cerad_tourn_results_playoff', { 'div': 'AYSO_U10G_AllStars'}) }}">U10 Girls</a>
@@ -90,7 +90,7 @@
           <a href="{{ path('cerad_tourn_results_playoff', { 'div': 'AYSO_U14G_AllStars'}) }}">U14 Girls</a>
         </ul>
       </li>
-      <li><a href="{{ url('cerad_tourn_results_playoff') }}">Extra</a>
+      <li><a href="{{ url('cerad_tourn_results_playoff', { 'program': 'Extra'}) }}">Extra</a>
         <ul>
           <a href="{{ path('cerad_tourn_results_playoff', { 'div': 'AYSO_U10B_Extra'}) }}">U10 Boys </a>
           <a href="{{ path('cerad_tourn_results_playoff', { 'div': 'AYSO_U10G_Extra'}) }}">U10 Girls</a>
