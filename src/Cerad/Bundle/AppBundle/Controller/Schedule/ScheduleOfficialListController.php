@@ -165,7 +165,7 @@ class ScheduleOfficialListController extends MyBaseController
     }
     protected function isGameOfficialUserUpdateable($userPerson,$game,$gameOfficial)
     {
-        if (!$gameOfficial->isUserAssignable()) return false;
+        if (!$gameOfficial->isAssignableByUser()) return false;
         
         // Open slots or if needed slots can be assigned
         switch($gameOfficial->getAssignState())

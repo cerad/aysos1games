@@ -1,7 +1,11 @@
 AYSOS1GamesLowerSpring2014:  
     info:
         id: AYSOS1GamesLowerSpring2014
+        
         group: AYSOS1GamesLower
+        
+        slug: s1games-lower-2014
+        
         slugs:
             - s1games
             - s1game2014
