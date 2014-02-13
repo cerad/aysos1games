@@ -10,7 +10,7 @@ security:
         ROLE_SCORE_ENTRY: [ROLE_USER, ROLE_SCORE_ENTRY]
         ROLE_SCORE_ADMIN: [ROLE_USER, ROLE_SCORE_ENTRY, ROLE_SCORE_ADMIN]
         ROLE_ASSIGNOR:    [ROLE_USER, ROLE_ASSIGNOR]
-        ROLE_ADMIN:       [ROLE_USER, ROLE_ASSIGNOR, ROLE_SCORE_ADMIN, ROLE_ADMIN]
+        ROLE_ADMIN:       [ROLE_USER, ROLE_ASSIGNOR, ROLE_SCORE_ADMIN, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ASSIGNOR, ROLE_SCORE_ADMIN, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
@@ -30,6 +30,7 @@ security:
         main:
             pattern:   ^/         
             anonymous: ~
+            switch_user: true
             
             form_login:
                 provider:            cerad_tourn_account_user_provider

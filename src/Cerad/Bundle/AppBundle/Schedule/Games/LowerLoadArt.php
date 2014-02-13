@@ -5,9 +5,9 @@ use Cerad\Component\Excel\Excel;
 
 /* =======================================================
  * Intended to load a fresh game schedule
- * 13 Feb 2014 - Read the Rick schedule directly
+ * This version read the Art format which included a pools sheet
  */
-class LowerLoad
+class LowerLoadArt
 {
     protected $results;
     protected $projectKey;
@@ -64,22 +64,36 @@ class LowerLoad
         $date         = $excel->processDate($item['date']);
         $time         = $excel->processTime($item['time']);
         $fieldName    = $item['fieldName'];
-        $levelKey     = $item['level'];
-        $gameGroup    = $item['group'];
+        $div          = $item['div'];
+        $program      = $item['program'];
         $type         = $item['type'];
+        $homeTeamName = $item['homeTeamName'];
+        $awayTeamName = $item['awayTeamName'];
         
-        $homeTeamGroup = $item['homeTeamGroup'];
-        $awayTeamGroup = $item['awayTeamGroup'];
-        
-        $homeTeamName  = $item['homeTeamName'];
-        $awayTeamName  = $item['awayTeamName'];
+        // AYSO_U14G_Extra
+        $levelKey = sprintf('AYSO_%s_%s',$div,$program);
         
         // PP QF SF FM CM
         $gameGroupType = substr($type,0,2);
         if ($gameGroupType != 'PP') 
         {
-            $homeTeamGroup = null;
-            $awayTeamGroup = null;
+            $gameGroup     = sprintf('%s %s %s',$program,$div,$type);          // U14G SF1
+            $homeTeamGroup = null; // sprintf('%s %s %s',$program,$div,$gameGroupType); // U14G SF
+            $awayTeamGroup = null; // sprintf('%s %s %s',$program,$div,$gameGroupType);
+        }
+        else
+        {
+            // AYSO_U14G_League R1
+            $homeTeamKey = sprintf("AYSO_%s_%s %s",$div,$program,$homeTeamName);
+            $awayTeamKey = sprintf("AYSO_%s_%s %s",$div,$program,$awayTeamName);
+            
+            $homeTeamPool = $this->pools[$homeTeamKey];
+            $awayTeamPool = $this->pools[$awayTeamKey];
+            
+            $gameGroup = sprintf('%s %s PP %d',$program,$div,$homeTeamPool['num']);
+            
+            $homeTeamGroup = sprintf('%s %s PP %d-%d',$program,$div,$homeTeamPool['num'],$homeTeamPool['index']);
+            $awayTeamGroup = sprintf('%s %s PP %d-%d',$program,$div,$awayTeamPool['num'],$awayTeamPool['index']);
         }
         // Build up the game
         $gameRepo = $this->gameRepo;
@@ -87,7 +101,7 @@ class LowerLoad
         $game->setNum($num);
         $game->setProjectId($this->projectKey);
         $game->setGroup    ($gameGroup);
-        $game->setGroupType($gameGroupType); // Why do I strip the number off here? SF1 vs SF
+        $game->setGroupType($gameGroupType);
         $game->setLevelId  ($levelKey);
         
         $game->setField($this->processField($fieldName));
@@ -157,13 +171,22 @@ class LowerLoad
         
         $reader = $excel->load($params['filepath']);
         
+        // Pools
+        $poolWs   = $reader->getSheetByName('Pools');
+        $poolRows = $poolWs->toArray();
+        $poolHeaders = $poolRows[0];
+        $this->pools = array();
+        foreach($poolRows as $row)
+        {
+            $this->processPool($poolHeaders,$row);
+        }
         // Games
-        $gameWs = $reader->getSheetByName('Complete Schedule');
+        $gameWs = $reader->getSheetByName('Schedule');
         $gameRows = $gameWs->toArray();
         
         $gameHeaders = array_shift($gameRows);
         $gameIndexes = $this->processHeaders($gameHeaders);
-      
+        
         foreach($gameRows as $row)
         {
             $item = $gameIndexes;
@@ -177,6 +200,36 @@ class LowerLoad
         
         return $this->results;
     }
+    /* =====================================================
+     * Extract a pool
+     */
+    protected $poolNum;
+    protected $poolIndex;
+    
+    protected function processPool($headers,$row)
+    {
+        $program = $row[0];
+        $poolNum = (int)$row[1];
+        if (!$poolNum) return;
+        
+        if ($poolNum == $this->poolNum) $this->poolIndex++;
+        else
+        {
+            $this->poolNum = $poolNum;
+            $this->poolIndex = 1;
+        }
+        for($i = 2; $i < 8; $i++)
+        {
+            $div = $headers[$i];
+            $area = $row[$i];
+            
+            $teamKey  = sprintf("AYSO_%s_%s %s",$div,$program,$area);
+            
+          //echo sprintf("%s %d %d\n",$teamKey,$poolNum,$this->poolIndex);
+            
+            $this->pools[$teamKey] = array('num' => $poolNum, 'index' => $this->poolIndex);
+        }
+    }
     /* ========================================================
      * Returns an array of fields mapped to offset
      * If required fields are not found then return null
@@ -184,19 +237,15 @@ class LowerLoad
     protected function processHeaders($headers)
     {
         $map = array(    
-            'Game #' => 'num',
-            'Date'   => 'date',
-            'Time'   => 'time',
-            'Field'  => 'fieldName',
-            'Level'  => 'level',
-            'Group'  => 'group',
-            'GT'     => 'type',
-            
-            'HT Group' => 'homeTeamGroup',
-            'AT Group' => 'awayTeamGroup',
-            
-            'Home Team'     => 'homeTeamName',
+            'Game #'    => 'num',
+            'Date'      => 'date',
+            'Time'      => 'time',
+            'Field'     => 'fieldName',
+            'Division'  => 'div',
+            'Program'   => 'program',
+            'Home Team' => 'homeTeamName',
             'Visiting Team' => 'awayTeamName',
+            'Type'      => 'type',
         );
         $index = array();
         foreach($map as $key)
@@ -211,7 +260,7 @@ class LowerLoad
         $missing = array();
         foreach(array('program','type') as $key)
         {
-            // if ($indexes[$key] === null) $missing = $key;
+            if ($indexes[$key] === null) $missing = $key;
         }
         if (count($missing))
         {
