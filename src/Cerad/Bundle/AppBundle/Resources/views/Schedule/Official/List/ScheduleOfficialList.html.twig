@@ -72,10 +72,12 @@
             <a href="{{ path('cerad_game__project__game_official__assign_by_user', 
                 { '_game': game.num, '_game_official' : gameOfficial.slot,  '_project' : 's1games' }) }}">{{ out }}</a>
 {% endif %}
-{% else %}
-            <a href="{{ path('cerad_game__game_official__user_assign_slot', 
-                { '_game': game.num, '_game_official' : gameOfficial.slot,  '_project' : 's1games' }) }}">{{ out }}</a>              
-{% endif %} {# ROLE_ASSIGNOR #}
+{% else  %} {# ROLE_ASSIGNOR #}
+{% if gameOfficial.isUserUpdateable %}           
+            <a href="{{ path('cerad_game__project__game_official__assign_by_user', 
+                { '_game': game.num, '_game_official' : gameOfficial.slot,  '_project' : 's1games' }) }}">{{ out }}</a>
+{% endif %}          
+{% endif %} {# ROLE_USER #}
             </td>
             {% endfor %} {# gameOfficial #}
 {% endif %} {# ROLE_USER #}
