@@ -13,7 +13,7 @@ class ScheduleSearchExportCSV
         // Header
         $row = array(
             "Game","Date","DOW","Time","Field",
-            "Pool","Div","Home Team","Away Team",
+            "Group","GT","Home Team","Away Team",
         );
         fputcsv($fp,$row);
 
@@ -35,7 +35,7 @@ class ScheduleSearchExportCSV
             $row[] = $game->getField()->getName();
 
             $row[] = $game->getGroup();
-            $row[] = $game->getLevelId();
+            $row[] = $game->getGroupType();
             $row[] = $game->getHomeTeam()->getName();
             $row[] = $game->getAwayTeam()->getName();
 

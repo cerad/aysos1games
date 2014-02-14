@@ -49,9 +49,10 @@ class ScheduleSearchListController extends MyBaseController
         if ($_format == 'xls')
         {
             $export = $this->get('cerad_tourn.schedule_search.export_xls');
-            $response = new Response($export->generate($games));
+            $export->generate($games);
+            $response = new Response($export->getBuffer());
 
-            $outFileName = date('YmdHi') . '_schedule' . '.xls';
+            $outFileName = 'S1GamesSchedule' . date('Ymd-Hi') . '.xlsx';
 
             $response->headers->set('Content-Type',       'application/vnd.ms-excel');
             $response->headers->set('Content-Disposition', sprintf('attachment; filename="%s"',$outFileName));

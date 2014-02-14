@@ -1,10 +1,12 @@
 <?php
 namespace Cerad\Bundle\AppBundle\Schedule\My;
 
+use Cerad\Component\Excel\Export as BaseExport;
+
 /* ============================================
  * Basic referee schedule exporter
  */
-class ScheduleMyExportXLS
+class ScheduleMyExportXLS extends BaseExport
 {
     protected $counts = array();
 
@@ -14,7 +16,7 @@ class ScheduleMyExportXLS
 
         'DOW' =>  5, 'Date' =>  12, 'Time' => 10,
 
-        'Venue' =>  8, 'Field' =>  6, 'Type' => 5, 'Pool' => 12,
+        'Venue' =>  8, 'Field' =>  6, 'GT' => 4, 'Group' => 20,
 
         'Home Team' => 26, 'Away Team' => 26,
 
@@ -24,10 +26,6 @@ class ScheduleMyExportXLS
     (
         'Game',
     );
-    public function __construct($excel)
-    {
-        $this->excel = $excel;
-    }
     protected function setHeaders($ws,$map,$row = 1)
     {
         $col = 0;
@@ -64,8 +62,8 @@ class ScheduleMyExportXLS
             'Time'     => 'time',
             'Venue'    => 'venue',
             'Field'    => 'field',
-            'Type'     => 'type',
-            'Pool'     => 'pool',
+            'Group'    => 'group',
+            'GT'       => 'GT',
 
             'Home Team' => 'homeTeam',
             'Away Team' => 'awayTeam',
@@ -106,7 +104,7 @@ class ScheduleMyExportXLS
             $ws->setCellValueByColumnAndRow($col++,$row,$game->getField()->getVenue());
             $ws->setCellValueByColumnAndRow($col++,$row,$game->getField()->getName ());
             $ws->setCellValueByColumnAndRow($col++,$row,$game->getGroup());
-            $ws->setCellValueByColumnAndRow($col++,$row,$game->getLevelId());
+            $ws->setCellValueByColumnAndRow($col++,$row,$game->getGroupType());
 
             $ws->setCellValueByColumnAndRow($col++,$row,$game->getHomeTeam()->getName());
             $ws->setCellValueByColumnAndRow($col++,$row,$game->getAwayTeam()->getName());
@@ -122,7 +120,7 @@ class ScheduleMyExportXLS
     public function generate($games)
     {
         // Spreadsheet
-        $ss = $this->excel->newSpreadSheet();
+        $ss = $this->ss = $this->createSpreadSheet();
         $ws = $ss->getSheet(0);
 
         $ws->getPageSetup()->setOrientation(\PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
@@ -136,11 +134,6 @@ class ScheduleMyExportXLS
 
         // Output
         $ss->setActiveSheetIndex(0);
-        $objWriter = $this->excel->newWriter($ss); // \PHPExcel_IOFactory::createWriter($ss, 'Excel5');
-
-        ob_start();
-        $objWriter->save('php://output'); // Instead of file name
-        return ob_get_clean();
     }
 }
 ?>

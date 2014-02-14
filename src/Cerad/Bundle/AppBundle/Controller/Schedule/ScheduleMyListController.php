@@ -51,9 +51,10 @@ class ScheduleMyListController extends MyBaseController
         if ($_format == 'xls')
         {
             $export = $this->get('cerad_tourn.schedule_my.export_xls');
-            $response = new Response($export->generate($model['games']));
+            $export->generate($model['games']);
+            $response = new Response($export->getBuffer());
 
-            $outFileName = 'MySched' . date('YmdHi') . '.xls';
+            $outFileName = 'MySched' . date('Ymd-Hi') . '.xlsx';
 
             $response->headers->set('Content-Type',       'application/vnd.ms-excel');
             $response->headers->set('Content-Disposition', sprintf('attachment; filename="%s"',$outFileName));
@@ -65,7 +66,7 @@ class ScheduleMyListController extends MyBaseController
             $export = $this->get('cerad_tourn.schedule_my.export_csv');
             $response = new Response($export->generate($model['games']));
 
-            $outFileName = 'MySched' . date('YmdHi') . '.csv';
+            $outFileName = 'MySched' . date('Ymd-Hi') . '.csv';
 
             $response->headers->set('Content-Type',       'text/csv;');
             $response->headers->set('Content-Disposition', sprintf('attachment; filename="%s"',$outFileName));
