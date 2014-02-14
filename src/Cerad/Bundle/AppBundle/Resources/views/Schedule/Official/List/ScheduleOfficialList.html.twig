@@ -9,7 +9,7 @@
 <div class="schedule-game-list">
     <table class="schedule" border="1" style="max-width: 850px;">
     <thead>
-        <tr class="tbl-title" ><th colspan="20">Referee Game Schedule - Count: {{ games | length }}</th></tr>
+        <tr class="tbl-title" ><th colspan="30">Referee Game Schedule - Count: {{ games | length }}</th></tr>
         <tr class="tbl-hdr">
             <th>Game</th>
             <th>DOW</th>
@@ -42,7 +42,7 @@
             <td>{{ game.dtBeg.format('D'    ) }}</td>
             <td>{{ game.dtBeg.format('H:i A') }}</td>
 
-            <td>{{ game.field.name }}</td>
+            <td><a href="http://ayso1ref.com/lib/pdf/Riverside_Ab_Brown.pdf" target="_parent|_blank">{{ game.field.name }}</a></td>
           {#<td>{{ game.levelId    }}</td>#}
             <td>{{ game.group      }}</td>
 
@@ -54,33 +54,27 @@
                     </tr>
                 {% endfor %}
             </table></td>
-{% if is_granted('ROLE_USER') %}
+          {% if is_granted('ROLE_USER') %}
             {% for gameOfficial in game.officials %}
             <td class="game_official_state-{{ gameOfficial.state }}">
-                
+
             {% set gameOfficialName  = gameOfficial.personNameFull %}
             {% set gameOfficialState = gameOfficial.state | slice(0,3) %}
             {% if  gameOfficialName == null %}{% set out = '____' %}
             {% else %}
-               {% set out =  gameOfficialName ~ '[' ~ gameOfficialState ~ ']' %}
-            {%endif %}
-               
-{% if is_granted('ROLE_ASSIGNOR') %}
-            <a href="{{ path('cerad_game__project__game_officials__assign_by_assignor', 
-                { '_game': game.num, '_project' : 's1games' }) }}">{{ out }}</a><br />
-{% if gameOfficial.isUserUpdateable %}           
-            <a href="{{ path('cerad_game__project__game_official__assign_by_user', 
-                { '_game': game.num, '_game_official' : gameOfficial.slot,  '_project' : 's1games' }) }}">{{ out }}</a>
-{% endif %}
-{% else  %} {# ROLE_ASSIGNOR #}
-{% if gameOfficial.isUserUpdateable %}           
-            <a href="{{ path('cerad_game__project__game_official__assign_by_user', 
-                { '_game': game.num, '_game_official' : gameOfficial.slot,  '_project' : 's1games' }) }}">{{ out }}</a>
-{% endif %}          
-{% endif %} {# ROLE_USER #}
+              {% set out =  gameOfficialName ~ '[' ~ gameOfficialState ~ ']' %}
+            {% endif %}
+
+            {% if is_granted('ROLE_ASSIGNOR') %}
+              <a href="{{ path('cerad_game__project__game_officials__assign_by_assignor',
+                    { '_game': game.num, '_project' : 's1games' }) }}">{{ out }}</a><br />
+            {% endif %} {# ROLE_ASSIGNOR #}
+            {% if gameOfficial.isUserUpdateable %}
+              <a href="{{ path('cerad_game__project__game_official__assign_by_user',
+                { '_game': game.num, '_game_official' : gameOfficial.slot,  '_project' : 's1games' }) }}">{{ out }}</a>{% endif %}  {# gameOfficial.isUserUpdateable #}
             </td>
             {% endfor %} {# gameOfficial #}
-{% endif %} {# ROLE_USER #}
+          {% endif %} {# ROLE_USER #}
        </tr>
         {% endfor %}{# games #}
     </tbody>

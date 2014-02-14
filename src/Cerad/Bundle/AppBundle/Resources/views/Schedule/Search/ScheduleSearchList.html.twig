@@ -3,7 +3,7 @@
 <div class="schedule-game-list">
     <table class="schedule" border="1" style="max-width: 850px;">
     <thead>
-        <tr class="tbl-title" ><th colspan="20">Game Schedule - Count: {{ games | length }}</th></tr>
+        <tr class="tbl-title" ><th colspan="30">Game Schedule - Count: {{ games | length }}</th></tr>
         <tr class="tbl-hdr">
             <th>Game</th>
             <th>DOW</th>
@@ -23,6 +23,10 @@
                 <a href="{{ path('cerad_tourn_game_report_update', { 'num': game.num })}}">{{ game.num }}</a>
                 {% else %}
                 {{ game.num }}
+                {% endif %}
+                {% if is_granted('ROLE_SCORE_ADMIN') %}
+                <br />
+                <a href="{{ path('cerad_game__project__game__update__by_scorer', { '_game': game.num, '_project': 's1games' })}}">Update</a>
                 {% endif %}
             </td>
             <td>{{ game.dtBeg.format('D'    ) }}</td>

@@ -27,7 +27,11 @@
   <li>
     <a href="http://ayso1ref.com/lib/pdf/Riverside_Ab_Brown.pdf" target="_blank">Fields</a>
   </li>
-  <li><a href="{{ url('cerad_tourn_schedule_list') }}">Schedule</a>
+  {% if is_granted('ROLE_USER') %}
+    <li><a href="{{ path('cerad_tourn_schedule_official_list') }}">Schedule</a>
+  {% else %}
+    <li><a href="{{ path('cerad_tourn_schedule_list') }}">Schedule</a>
+  {% endif %}
   </li>
   <li><a href="{{ path('cerad_tourn_results_poolplay') }}">Pool Play</a>
     <ul>
