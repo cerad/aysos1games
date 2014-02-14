@@ -1,10 +1,12 @@
 <?php
 namespace Cerad\Bundle\AppBundle\Schedule\Official;
 
+use Cerad\Component\Excel\Export as BaseExport;
+
 /* ============================================
  * Basic referee schedule exporter
  */
-class ScheduleOfficialExportXLS
+class ScheduleOfficialExportXLS extends BaseExport
 {
     protected $counts = array();
 
@@ -14,7 +16,10 @@ class ScheduleOfficialExportXLS
 
         'DOW' =>  5, 'Date' =>  12, 'Time' => 10,
 
-        'Venue' =>  8, 'Field' =>  6, 'Type' => 5, 'Pool' => 12,
+        'Venue' =>  8, 'Field' =>  10, 
+        
+      //'Level' => 16, 'Pool'  => 12, 'Type' => 5,
+        'Level' => 16, 'Group' => 10, 'GT' => 4,
 
         'Home Team' => 26, 'Away Team' => 26,
 
@@ -26,10 +31,6 @@ class ScheduleOfficialExportXLS
     (
         'Game',
     );
-    public function __construct($excel)
-    {
-        $this->excel = $excel;
-    }
     protected function setHeaders($ws,$map,$row = 1)
     {
         $col = 0;
@@ -69,8 +70,8 @@ class ScheduleOfficialExportXLS
             'Time'     => 'time',
             'Venue'    => 'venue',
             'Field'    => 'field',
-            'Type'     => 'type',
-            'Pool'     => 'pool',
+            'Group'    => 'group',
+            'GT'       => 'GT',
 
             'Home Team' => 'homeTeam',
             'Away Team' => 'awayTeam',
@@ -111,7 +112,7 @@ class ScheduleOfficialExportXLS
             $ws->setCellValueByColumnAndRow($col++,$row,$game->getField()->getVenue());
             $ws->setCellValueByColumnAndRow($col++,$row,$game->getField()->getName ());
             $ws->setCellValueByColumnAndRow($col++,$row,$game->getGroup());
-            $ws->setCellValueByColumnAndRow($col++,$row,$game->getLevelId());
+            $ws->setCellValueByColumnAndRow($col++,$row,$game->getGroupType());
 
             $ws->setCellValueByColumnAndRow($col++,$row,$game->getHomeTeam()->getName());
             $ws->setCellValueByColumnAndRow($col++,$row,$game->getAwayTeam()->getName());
@@ -130,7 +131,8 @@ class ScheduleOfficialExportXLS
     public function generate($games)
     {
         // Spreadsheet
-        $ss = $this->excel->newSpreadSheet();
+        $this->ss = $ss = $this->createSpreadSheet();
+        
         $ws = $ss->getSheet(0);
 
         $ws->getPageSetup()->setOrientation(\PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
@@ -148,13 +150,8 @@ class ScheduleOfficialExportXLS
         $ws2 = $ss->createSheet(2);
         $this->processUnregisteredOfficials($ws2,$games);
 
-        // Output
+        // Done
         $ss->setActiveSheetIndex(0);
-        $objWriter = $this->excel->newWriter($ss); // \PHPExcel_IOFactory::createWriter($ss, 'Excel5');
-
-        ob_start();
-        $objWriter->save('php://output'); // Instead of file name
-        return ob_get_clean();
     }
     /* ===========================================================
      * Add a sheet listing current assignments for each official
@@ -197,8 +194,8 @@ class ScheduleOfficialExportXLS
             'Time'     => 'time',
             'Venue'    => 'venue',
             'Field'    => 'field',
-            'Type'     => 'type',
-            'Pool'     => 'pool',
+            'Group'    => 'group',
+            'GT'       => 'GT',
 
             'Home Team' => 'homeTeam',
             'Away Team' => 'awayTeam',
@@ -257,7 +254,7 @@ class ScheduleOfficialExportXLS
             $ws->setCellValueByColumnAndRow($col++,$row,$game->getField()->getVenue());
             $ws->setCellValueByColumnAndRow($col++,$row,$game->getField()->getName ());
             $ws->setCellValueByColumnAndRow($col++,$row,$game->getGroup());
-            $ws->setCellValueByColumnAndRow($col++,$row,$game->getLevelId());
+            $ws->setCellValueByColumnAndRow($col++,$row,$game->getGroupType());
 
             $ws->setCellValueByColumnAndRow($col++,$row,$game->getHomeTeam()->getName());
             $ws->setCellValueByColumnAndRow($col++,$row,$game->getAwayTeam()->getName());

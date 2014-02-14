@@ -51,9 +51,10 @@ class ScheduleOfficialListController extends MyBaseController
         if ($_format == 'xls')
         {
             $export = $this->get('cerad_tourn.schedule_official.export_xls');
-            $response = new Response($export->generate($games));
+            $export->generate($games);
+            $response = new Response($export->getBuffer());
 
-            $outFileName = $this->getFilename() . '.xls';
+            $outFileName = $this->getFilename() . '.xlsx';
 
             $response->headers->set('Content-Type',       'application/vnd.ms-excel');
             $response->headers->set('Content-Disposition', sprintf('attachment; filename="%s"',$outFileName));
@@ -208,6 +209,6 @@ class ScheduleOfficialListController extends MyBaseController
 
     public function getFilename()
     {
-      return 'RefSched' . date('YmdHi');
+      return 'RefSched' . date('Ymd-Hi');
     }
 }

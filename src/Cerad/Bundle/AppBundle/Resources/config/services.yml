@@ -75,8 +75,6 @@ services:
 
     cerad_tourn.schedule_official.export_xls:
         class:  Cerad\Bundle\AppBundle\Schedule\Official\ScheduleOfficialExportXLS
-        arguments:  
-            - '@cerad_tourn.excel'
 
     cerad_tourn.schedule_official.export_csv:
         class:  Cerad\Bundle\AppBundle\Schedule\Official\ScheduleOfficialExportCSV
