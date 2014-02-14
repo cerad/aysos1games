@@ -54,27 +54,13 @@
                     </tr>
                 {% endfor %}
             </table></td>
-          {% if is_granted('ROLE_USER') %}
-            {% for gameOfficial in game.officials %}
-            <td class="game_official_state-{{ gameOfficial.state }}">
-
-            {% set gameOfficialName  = gameOfficial.personNameFull %}
-            {% set gameOfficialState = gameOfficial.state | slice(0,3) %}
-            {% if  gameOfficialName == null %}{% set out = '____' %}
-            {% else %}
-              {% set out =  gameOfficialName ~ '[' ~ gameOfficialState ~ ']' %}
-            {% endif %}
-
-            {% if is_granted('ROLE_ASSIGNOR') %}
-              <a href="{{ path('cerad_game__project__game_officials__assign_by_assignor',
-                    { '_game': game.num, '_project' : 's1games' }) }}">{{ out }}</a><br />
-            {% endif %} {# ROLE_ASSIGNOR #}
-            {% if gameOfficial.isUserUpdateable %}
-              <a href="{{ path('cerad_game__project__game_official__assign_by_user',
-                { '_game': game.num, '_game_official' : gameOfficial.slot,  '_project' : 's1games' }) }}">{{ out }}</a>{% endif %}  {# gameOfficial.isUserUpdateable #}
-            </td>
-            {% endfor %} {# gameOfficial #}
-          {% endif %} {# ROLE_USER #}
+{% if is_granted('ROLE_USER') %}
+  {% for gameOfficial in game.officials %}
+    <td class="game_official_state-{{ gameOfficial.state }}">
+      {% include '@CeradTourn/Schedule/Official/List/ScheduleOfficialSlot.html.twig'   %}
+    </td>
+  {% endfor %}
+{% endif %}
        </tr>
         {% endfor %}{# games #}
     </tbody>
