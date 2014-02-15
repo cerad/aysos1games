@@ -115,21 +115,20 @@
   <li style="float:right"><a href="{{ url('cerad_tourn_welcome') }}">Login</a></li>
 </ul>
 </div>
-
-{% endif %}
-
-{% if cerad_tourn_show('layout_userinfo') %}
-{% block layout_userinfo %}
-<div id="layout-userinfo">
-    {% render(controller('CeradTournBundle:Tourn/TournUserInfo:render')) %}
-</div>
-{% endblock %}
 {% endif %}
 
 {% if cerad_tourn_show('layout_topmenu') %}
 {% block layout_topmenu %}
 <div id="layout-topmenu">
     {% render(controller('CeradTournBundle:Tourn/TournTopMenu:render')) %}
+</div>
+{% endblock %}
+{% endif %}
+
+{% if cerad_tourn_show('layout_userinfo') %}
+{% block layout_userinfo %}
+<div id="layout-userinfo">
+    {% render(controller('CeradTournBundle:Tourn/TournUserInfo:render')) %}
 </div>
 {% endblock %}
 {% endif %}
