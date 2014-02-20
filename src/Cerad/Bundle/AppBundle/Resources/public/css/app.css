@@ -117,6 +117,7 @@ em{
 ,#layout-userinfo *
 {
   font-size:  small;
+  height: 1em;
 }
 
 #layout-userinfo p#user_name

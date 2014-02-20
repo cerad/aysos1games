@@ -111,7 +111,8 @@ AYSOS1GamesLowerSpring2014:
       dates:
           type:     checkbox
           label:    Days
-          default: ['All','2014-02-22','2014-02-23','2014-03-01','2014-03-02']
+          default: ['All','2014-02-22','2014-02-23']
+          #default: ['All','2014-03-01','2014-03-02']
           choices:
               'All'       : All
               '2014-02-22': Sat 2/23
