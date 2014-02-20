@@ -9,7 +9,7 @@ class ResultsExportXLS
     protected $counts = array();
 
      protected $dRec = array(
-        'hdr' => "AYSO Section One -- U16/U19 Playoffs 2013",
+        'hdr' => "AYSO Section One U10/U12/U14 Playoffs 2014",
         'results' => "POOL PLAY: Saturday November 23, 2013",
         'standings' => 'STANDINGS',
     );
@@ -30,9 +30,9 @@ class ResultsExportXLS
 
     protected $dU12BFields = array(
       'sf1' => "Game #153 - Sunday Feb 23 - 11:00 AM - Blue 2",
-      'sf2' => "Game #Game #154 - Sunday Feb 23 - 11:00 AM - Blue 3",
-      'fin' => "Game #Game #165 - Sunday Feb 23 - 3:00 PM - Blue 2",
-      'con' => "Game #Game #166 - Sunday Feb 23 - 3:00 PM - Blue 3",
+      'sf2' => "Game #154 - Sunday Feb 23 - 11:00 AM - Blue 3",
+      'fin' => "Game #165 - Sunday Feb 23 - 3:00 PM - Blue 2",
+      'con' => "Game #166 - Sunday Feb 23 - 3:00 PM - Blue 3",
     );
 
     protected $dU12GFields = array(
@@ -195,7 +195,6 @@ class ResultsExportXLS
             if ( $row == $topRow )
             {
               $ws->setCellValueByColumnAndRow($col,$row,'POOL ' . substr($game->getGroup(), -1) );
- print_r("generatePoolGames:begin:".$game->getGroup()." ".$game->getNum()."<br/>");
             }
 
             $gameReport = $game->getReport();
@@ -244,7 +243,7 @@ class ResultsExportXLS
                 $ws->setCellValueByColumnAndRow($col++,$row,$report->getPointsEarned() ); // Total Points
                 $ws->setCellValueByColumnAndRow($col++,$row,$report->getSportsmanship()); //Sports Points
              }
-        }
+       }
 
         //clear separator column header cell
         $ws->setCellValueByColumnAndRow(7,$topRow,'');
@@ -265,7 +264,6 @@ class ResultsExportXLS
             $ws->setCellValueByColumnAndRow($col++,$topRow,$report->getGoalsAllowed() );
             $ws->setCellValueByColumnAndRow($col++,$topRow,$report->getGoalDifferential() );
             $ws->setCellValueByColumnAndRow($col++,$topRow,$report->getSportsmanship() );
- print_r("generatePoolGames:return:".$team->getName()."<br/>");
         }
         return;
     }
@@ -301,7 +299,6 @@ class ResultsExportXLS
             $col = 1;
 
             $team = $report->getTeam();
-print_r("generatePoolTeams:begin:".$team->getGroup()." ".$team->getName()."<br/>");
 
             $ws->setCellValueByColumnAndRow($col++,$row,$team->getGroup());
             $ws->setCellValueByColumnAndRow($col++,$row,$team->getName());
@@ -335,7 +332,6 @@ print_r("generatePoolTeams:begin:".$team->getGroup()." ".$team->getName()."<br/>
           //  $ws->setCellValueByColumnAndRow($col++,$row,$report->getPointsEarned());
           //  $ws->setCellValueByColumnAndRow($col++,$row,$report->getSportsmanship());
         }
-  print_r("generatePoolGames:return:".$team->getName()."<br/>");
        return;
     }
     /* ===================================================================
@@ -350,22 +346,24 @@ print_r("generatePoolTeams:begin:".$team->getGroup()." ".$team->getName()."<br/>
      */
     public function generatePoolPlay($project,$pools)
     {
+      try {
       // Spreadsheet
       $this->ss = $ss = $this->excel->newSpreadSheet();
       $sheetIndex = 0;
 
       // Individual sheets for division
-      $keyx2 = null;
+      $keyx2 = "x x x x";
       foreach($pools as $key => $pool)
       {
         $Values = explode(' ',$key);
+        $Valuesx2 = explode(' ',$keyx2);
         $Keys = array('program','div','pool','team');
         $Key = array_combine($Keys, $Values);
+        $Keyx2 = array_combine($Keys, $Valuesx2);
 
-        if (count($pool['teams'])) {
-
+        if (count($pool['teams']) AND $Key['program'] == 'League') {
           // key = U19B PP Bracket
-          if (substr($keyx2,0,7) == $Key['div'])
+          if ($Keyx2['div'] == $Key['div'])
           {
               $gameRow += 3;
               $teamRow += 3;
@@ -389,11 +387,11 @@ print_r("generatePoolTeams:begin:".$team->getGroup()." ".$team->getName()."<br/>
 
           if (substr($Key['div'],-1) == 'B')
           {
-            $divTitle = $Key['div'] . ' Boys';
+            $divTitle = substr($Key['div'],0,-1) . ' Boys';
           }
           else
           {
-            $divTitle = $Key['div'] . ' Girls';
+            $divTitle = substr($Key['div'],0,-1) . ' Girls';
           }
 
           $gameWS->setCellValueByColumnAndRow(1, 1, $divTitle);
@@ -450,7 +448,19 @@ print_r("generatePoolTeams:begin:".$team->getGroup()." ".$team->getName()."<br/>
 
           $gameWS->setShowGridlines(false);
           $gameWS->getColumnDimension('H')->setWidth(3);
-          $this->pageSetup($gameWS,"B1:V38",1);
+          $pageMargins = $teamWS->getPageMargins();
+
+          // margin is set in inches
+          $margin = 0;
+
+          $pageMargins->setTop($margin);
+          $pageMargins->setBottom($margin+0.25);
+          $pageMargins->setLeft($margin);
+          $pageMargins->setRight($margin);
+          //##U16U19
+          //$this->pageSetup($gameWS,"B1:V38",1);
+          ##U10-U14
+          $this->pageSetup($gameWS,"B1:V61",1);
 
           $this->generatePoolTeams($teamWS,$pool['teams'],$teamRow);
 
@@ -461,13 +471,21 @@ print_r("generatePoolTeams:begin:".$team->getGroup()." ".$team->getName()."<br/>
              'wrap' => true,
             )
           );
-          $highestColumm = $teamWS->getHighestColumn();
+          $highestColumn = $teamWS->getHighestColumn();
           $highestRow = $teamWS->getHighestRow();
-          $rng = "A1:Z1000";
+          $rng = "A1:Z100";
 
           $teamWS->getStyle($rng)->applyFromArray($styleArray);
+          $pageMargins = $teamWS->getPageMargins();
 
-          $this->pageSetup($teamWS, "b3:m24", 1);
+          // margin is set in inches
+          $margin = 0;
+
+          $pageMargins->setTop($margin);
+          $pageMargins->setBottom($margin+0.25);
+          $pageMargins->setLeft($margin);
+          $pageMargins->setRight($margin);
+          $this->pageSetup($teamWS, "b3:m28", 1);
 
           $keyx2 = $key;
         }
@@ -476,7 +494,10 @@ print_r("generatePoolTeams:begin:".$team->getGroup()." ".$team->getName()."<br/>
       // Return the spreadsheet
       $ss->setActiveSheetIndex(0);
       return $ss;
-
+      }
+      catch (Exception $e){
+        echo "Caught exception processing {$Key['program']}:{$Key['div']}:{$Key['pool']}: ",  $e->getMessage(), "<br>";
+      }
     }
     /* =======================================================
      * Called by controller to get the content
@@ -668,18 +689,18 @@ print_r("generatePoolTeams:begin:".$team->getGroup()." ".$team->getName()."<br/>
 
     protected function FormatU10U14PlayoffSummary($ws, $dFields)
     {
-      //$this->FormatPlayoffHeader ($ws,$this->dRec);
-      //$this->FormatPlayoffResults ($ws,"B4:G16","B4:G4","B5:G16"); //Pool 1 Results
-      //$this->FormatPlayoffResults ($ws,"I4:N16","I4:N4","I5:N16");  //Pool 1 Standings
-      //
-      //$this->FormatPlayoffResults ($ws,"B19:G31","B19:G19","B20:G31"); //Pool 2 Results
-      //$this->FormatPlayoffResults ($ws,"I19:N31","I19:N19","I20:N31"); //Pool 2 Standings
-      //
-      //$this->FormatPlayoffResults ($ws,"B22:G28","B22:G22","B23:G28");  //Pool 3 Results
-      //$this->FormatPlayoffResults ($ws,"I22:N25","I22:N22","I23:N25");  //Pool 3 Standings
-      //
-      //$this->FormatPlayoffResults ($ws,"B31:G37","B31:G31","B32:G37"); //Pool 4 Results
-      //$this->FormatPlayoffResults ($ws,"I31:N34","I31:N31","I32:N34"); //Pool 4 Standings
+      $this->FormatPlayoffHeader ($ws,$this->dRec);
+      $this->FormatPlayoffResults ($ws,"B4:G16","B4:G4","B5:G16"); //Pool 1 Results
+      $this->FormatPlayoffResults ($ws,"I4:N8","I4:N4","I5:N8");  //Pool 1 Standings
+
+      $this->FormatPlayoffResults ($ws,"B19:G31","B19:G19","B20:G31"); //Pool 2 Results
+      $this->FormatPlayoffResults ($ws,"I19:N23","I19:N19","I20:N23"); //Pool 2 Standings
+
+      $this->FormatPlayoffResults ($ws,"B34:G46","B34:G34","B35:G46");  //Pool 3 Results
+      $this->FormatPlayoffResults ($ws,"I34:N38","I34:N34","I34:N38");  //Pool 3 Standings
+
+      $this->FormatPlayoffResults ($ws,"B49:G61","B49:G49","B50:G61"); //Pool 4 Results
+      $this->FormatPlayoffResults ($ws,"I49:N53","I49:N49","I50:N53"); //Pool 4 Standings
 
       $this->AddPlayoffSummaries ($ws,$dFields);
     }
@@ -704,6 +725,8 @@ print_r("generatePoolTeams:begin:".$team->getGroup()." ".$team->getName()."<br/>
 
     protected function AddPlayoffSummaries($ws,$dFields)
     {
+      $sf1 = explode('-', $dFields['sf1']);
+      $sf2 = explode('-', $dFields['sf2']);
 
       $this->pFormatTitle($ws,"s3","Semi Finals");
       $this->pFormatWP($ws,"q4","Winner Pool 1");
@@ -720,15 +743,15 @@ print_r("generatePoolTeams:begin:".$team->getGroup()." ".$team->getName()."<br/>
       $this->pFormatField ($ws,"s18", $dFields['sf2']);
 
       $this->pFormatTitle ($ws,"s21", "Championship Match");
-      $this->pFormatWP ($ws,"q22","Winner Game #49");
-      $this->pFormatWP ($ws,"u22","Winner Game #50");
+      $this->pFormatWP ($ws,"q22","Winner ".trim($sf1[0]));
+      $this->pFormatWP ($ws,"u22","Winner ".trim($sf2[0]));
       $this->pFormatEntry ($ws,"p25:r25");
       $this->pFormatEntry ($ws,"t25:v25");
       $this->pFormatField ($ws,"s27", $dFields['fin']);
 
       $this->pFormatTitle ($ws,"s30", "Consolation Match");
-      $this->pFormatWP ($ws,"q31","Winner Game #49");
-      $this->pFormatWP ($ws,"u31","Winner Game #50");
+      $this->pFormatWP ($ws,"q31","Loser ".trim($sf1[0]));
+      $this->pFormatWP ($ws,"u31","Loser ".trim($sf2[0]));
       $this->pFormatEntry ($ws,"p34:r34");
       $this->pFormatEntry ($ws,"t34:v34");
       $this->pFormatField ($ws,"s36", $dFields['con']);

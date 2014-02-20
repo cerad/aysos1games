@@ -16,9 +16,10 @@ AYSOS1GamesLowerSpring2014:
         fedId:     AYSO
         fedRoleId: AYSOV
                 
-        title:   "AYSO Section One U10/U12/U14 Games 2014"
-        desc:    "AYSO Section One U10/U12/U14 Games -- Ab Brown Complex, Riverside -- 22-23 Feb & 1-2 Mar 2014"
-                          
+        title:   "AYSO Section One U10/U12/U14 Playoffs 2014"
+        desc:    "AYSO Section One U10/U12/U14 Playoffs -- Ab Brown Complex, Riverside -- 22-23 Feb & 1-2 Mar 2014"
+        resultsXLS "POOL PLAY: Saturday November 23, 2013"
+        
         results: s1games
 
         submit:  "Emails your application to Art Hundiak and yourself."
