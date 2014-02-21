@@ -6,83 +6,256 @@ namespace Cerad\Bundle\AppBundle\Results;
  */
 class ResultsExportXLS
 {
+    protected $exportIf = array();
+
+    public function getExports () { return $this->exportIf; }
+    public function setExports ($value) { $this->exportIf = $value; }
+
     protected $counts = array();
 
-     protected $dRec = array(
-        'hdr' => "AYSO Section One U10/U12/U14 Playoffs 2014",
-        'results' => "POOL PLAY: Saturday November 23, 2013",
-        'standings' => 'STANDINGS',
+    protected $dRec = array(
+      'hdr' => "AYSO Section One U10/U12/U14 Playoffs 2014",
+      'results' => "POOL PLAY: Saturday November 23, 2013",
+      'standings' => 'STANDINGS',
     );
 
-    protected $dU10BFields = array(
+  protected $poFields = array(
+    'U10BLeague' => array(
       'sf1' => "Game #149 - Sunday Feb 23 - 9:00 AM - Green 1",
       'sf2' => "Game #150 - Sunday Feb 23 - 9:00 AM - Yellow 2",
       'fin' => "Game #161 - Sunday Feb 23 - 1:00 PM - Green 1",
       'con' => "Game #162 - Sunday Feb 23 - 1:00 PM - Yellow 2",
-    );
-
-    protected $dU10GFields = array(
+    ),
+    'U10GLeague' => array(
       'sf1' => "Game #155 - Sunday Feb 23 - 11:00 AM - Green 1",
       'sf2' => "Game #156 - Sunday Feb 23 - 11:00 AM - Yellow 2",
       'fin' => "Game #167 - Sunday Feb 23 - 3:00 PM - Green 1",
       'con' => "Game #168 - Sunday Feb 23 - 3:00 PM - Yellow 2",
-    );
-
-    protected $dU12BFields = array(
+    ),
+    'U12BLeague' => array(
       'sf1' => "Game #153 - Sunday Feb 23 - 11:00 AM - Blue 2",
       'sf2' => "Game #154 - Sunday Feb 23 - 11:00 AM - Blue 3",
       'fin' => "Game #165 - Sunday Feb 23 - 3:00 PM - Blue 2",
       'con' => "Game #166 - Sunday Feb 23 - 3:00 PM - Blue 3",
-    );
-
-    protected $dU12GFields = array(
+    ),
+    'U12GLeague' => array(
       'sf1' => "Game #147 - Sunday Feb 23 - 9:00 AM - Blue 2",
       'sf2' => "Game #148 - Sunday Feb 23 - 9:00 AM - Blue 3",
       'fin' => "Game #159 - Sunday Feb 23 - 1:00 PM - Blue 2",
       'con' => "Game #160 - Sunday Feb 23 - 1:00 PM - Blue 3",
-    );
-
-    protected $dU14BFields = array(
+    ),
+    'U14BLeague' => array(
       'sf1' => "Game #145 - Sunday Feb 23 - 9:00 AM - White 2",
       'sf2' => "Game #146 - Sunday Feb 23 - 9:00 AM - Red 2",
       'fin' => "Game #157 - Sunday Feb 23 - 1:00 PM - White 2",
       'con' => "Game #158 - Sunday Feb 23 - 1:00 PM - Red 2",
-    );
-
-    protected $dU14GFields = array(
+    ),
+    'U14GLeague' => array(
       'sf1' => "Game #151 - Sunday Feb 23 - 11:00 AM - White 2",
       'sf2' => "Game #152 - Sunday Feb 23 - 11:00 AM - Red 2",
       'fin' => "Game #163 - Sunday Feb 23 - 3:00 PM - White 2",
       'con' => "Game #164 - Sunday Feb 23 - 3:00 PM - Red 2",
-    );
-
-    protected $dU16BFields = array(
+    ),
+    'U10BAllStars' => array(
+      'sf1' => "Game #283 - Sunday Mar 2 - 11:00 AM - Green 2",
+      'sf2' => "Game #284 - Sunday Mar 2 - 11:00 AM - Yellow 1",
+      'fin' => "Game #295 - Sunday Mar 2 - 3:00 PM - Green 2",
+      'con' => "Game #296 - Sunday Mar 2 - 3:00 PM - Yellow 1",
+    ),
+    'U10GAllStars' => array(
+      'sf1' => "Game #277 - Sunday Mar 2 - 9:00 AM - Green 2",
+      'sf2' => "Game #278 - Sunday Mar 2 - 9:00 AM - Yellow 1",
+      'fin' => "Game #289 - Sunday Mar 2 - 1:00 PM - Green 2",
+      'con' => "Game #290 - Sunday Mar 2 - 1:00 PM - Yellow 1",
+    ),
+    'U12BAllStars' => array(
+      'sf1' => "Game #275 - Sunday Mar 2 - 9:00 AM - Blue 2",
+      'sf2' => "Game #276 - Sunday Mar 2 - 9:00 AM - Blue 3",
+      'fin' => "Game #287 - Sunday Mar 2 - 1:00 PM - Blue 2",
+      'con' => "Game #288 - Sunday Mar 2 - 1:00 PM - Blue 3",
+    ),
+    'U12GAllStars' => array(
+      'sf1' => "Game #281 - Sunday Mar 2 - 11:00 AM - Blue 2",
+      'sf2' => "Game #282 - Sunday Mar 2 - 11:00 AM - Blue 3",
+      'fin' => "Game #293 - Sunday Mar 2 - 3:00 PM - Blue 2",
+      'con' => "Game #294 - Sunday Mar 2 - 3:00 PM - Blue 3",
+    ),
+    'U14BAllStars' => array(
+      'sf1' => "Game #279 - Sunday Mar 2 - 11:00 AM - White 2",
+      'sf2' => "Game #280 - Sunday Mar 2 - 11:00 AM - Red 2",
+      'fin' => "Game #291 - Sunday Mar 2 - 3:00 PM - White 2",
+      'con' => "Game #292 - Sunday Mar 2 - 3:00 PM - Red 2",
+    ),
+    'U14GAllStars' => array(
+      'sf1' => "Game #273 - Sunday Mar 2 - 9:00 AM - White 2",
+      'sf2' => "Game #274 - Sunday Mar 2 - 9:00 AM - Red 2",
+      'fin' => "Game #285 - Sunday Mar 2 - 1:00 PM - White 2",
+      'con' => "Game #286 - Sunday Mar 2 - 1:00 PM - Red 2",
+    ),
+    'U10BExtra' => array(
+      'sf1' => "Game #311 - Saturday Mar 1 - 11:00 AM - Green 1",
+      'sf2' => "Game #312 - Saturday Mar 1 - 11:00 AM - Green 2",
+      'fin' => "Game #323 - Saturday Mar 1 - 3:00 PM - Green 1",
+      'con' => "Game #324 - Saturday Mar 1 - 3:00 PM - Green 2",
+    ),
+    'U10GExtra' => array(
+      'sf1' => "Game #305 - Saturday Mar 1 - 9:00 AM - Green 1",
+      'sf2' => "Game #306 - Saturday Mar 1 - 9:00 AM - Green 2",
+      'fin' => "Game #317 - Saturday Mar 1 - 1:00 PM - Green 1",
+      'con' => "Game #318 - Saturday Mar 1 - 1:00 PM - Green 2",
+    ),
+    'U11BExtra' => array(
+      'sf1' => "Game #331 - Sunday Mar 2 - 11:00 AM - Blue 4",
+      'sf2' => "Game #332 - Sunday Mar 2 - 11:00 AM - Blue 5",
+      'fin' => "Game #339 - Sunday Mar 2 - 3:00 PM - Blue 4",
+      'con' => "Game #340 - Sunday Mar 2 - 3:00 PM - Blue 5",
+    ),
+    'U11GExtra' => array(
+      'sf1' => "Game #327 - Sunday Mar 2 - 9:00 AM - Blue 4",
+      'sf2' => "Game #328 - Sunday Mar 2 - 9:00 AM - Blue 5",
+      'fin' => "Game #335 - Sunday Mar 2 - 1:00 PM - Blue 4",
+      'con' => "Game #336 - Sunday Mar 2 - 1:00 PM - Blue 5",
+    ),
+    'U12BExtra' => array(
+      'sf1' => "Game #309 - Saturday Mar 1 - 11:00 AM - Blue 6",
+      'sf2' => "Game #310 - Saturday Mar 1 - 11:00 AM - Blue 1",
+      'fin' => "Game #321 - Saturday Mar 1 - 3:00 PM - Blue 6",
+      'con' => "Game #322 - Saturday Mar 1 - 3:00 PM - Blue 1",
+    ),
+    'U12GExtra' => array(
+      'sf1' => "Game #303 - Saturday Mar 1 - 9:00 AM - Blue 6",
+      'sf2' => "Game #304 - Saturday Mar 1 - 9:00 AM - Blue 1",
+      'fin' => "Game #315 - Saturday Mar 1 - 1:00 PM - Blue 6",
+      'con' => "Game #316 - Saturday Mar 1 - 1:00 PM - Blue 1",
+    ),
+    'U13BExtra' => array(
+      'sf1' => "Game #329 - Sunday Mar 2 - 11:00 AM - White 3",
+      'sf2' => "Game #330 - Sunday Mar 2 - 11:00 AM - White 4",
+      'fin' => "Game #337 - Sunday Mar 2 - 3:00 PM - White 3",
+      'con' => "Game #338 - Sunday Mar 2 - 3:00 PM - White 4",
+    ),
+    'U13GExtra' => array(
+      'sf1' => "Game #325 - Sunday Mar 2 - 9:00 AM - White 3",
+      'sf2' => "Game #326 - Sunday Mar 2 - 9:00 AM - White 4",
+      'fin' => "Game #333 - Sunday Mar 2 - 1:00 PM - White 3",
+      'con' => "Game #334 - Sunday Mar 2 - 1:00 PM - White 4",
+    ),
+    'U14BExtra' => array(
+      'sf1' => "Game #307 - Saturday Mar 1 - 11:00 AM - Red 1",
+      'sf2' => "Game #308 - Saturday Mar 1 - 11:00 AM - Red 2",
+      'fin' => "Game #319 - Saturday Mar 1 - 3:00 PM - Red 1",
+      'con' => "Game #320 - Saturday Mar 1 - 3:00 PM - Red 2",
+    ),
+    'U14GExtra' => array(
+      'sf1' => "Game #301 - Saturday Mar 1 - 9:00 AM - Red 1",
+      'sf2' => "Game #302 - Saturday Mar 1 - 9:00 AM - Red 2",
+      'fin' => "Game #313 - Saturday Mar 1 - 1:00 PM - Red 1",
+      'con' => "Game #314 - Saturday Mar 1 - 1:00 PM - Red 2",
+    ),
+    'U16B' => array(
       'sf1' => "Game #49 - Sunday - Nov. 24th -  8:30am - Ayala 9",
       'sf2' => "Game #50 - Sunday - Nov. 24th -  8:30am - Ayala 10",
       'fin' => "Game #57 - Sunday - Nov. 24th - 12:30pm - Ayala 9",
       'con' => "Game #58 - Sunday - Nov. 24th - 12:30pm - Ayala 10",
-    );
-
-    protected $dU16GFields = array(
+    ),
+    'U16G' => array(
       'sf1' => "Game #51 - Sunday - Nov. 24th -  8:30am - Ayala 11",
       'sf2' => "Game #52 - Sunday - Nov. 24th -  8:30am - Ayala 12",
       'fin' => "Game #59 - Sunday - Nov. 24th - 12:30pm - Ayala 11",
       'con' => "Game #60 - Sunday - Nov. 24th - 12:30pm - Ayala 12",
-    );
-
-    protected $dU19BFields = array(
+    ),
+    'U19B' => array(
       'sf1' => "Game #53 - Sunday - Nov. 24th - 10:30am - Ayala 9",
       'sf2' => "Game #54 - Sunday - Nov. 24th - 10:30am - Ayala 10",
       'fin' => "Game #61 - Sunday - Nov. 24th -  2:30pm - Ayala 9",
       'con' => "Game #62 - Sunday - Nov. 24th -  2:30pm - Ayala 10",
-    );
-
-    protected $dU19GFields = array(
+    ),
+    'U19G' => array(
       'sf1' => "Game #55 - Sunday - Nov. 24th - 10:30am - Ayala 11",
       'sf2' => "Game #56 - Sunday - Nov. 24th - 10:30am - Ayala 12",
       'fin' => "Game #63 - Sunday - Nov. 24th -  2:30pm - Ayala 11",
       'con' => "Game #64 - Sunday - Nov. 24th -  2:30pm - Ayala 12",
-    );
+    ),
+  );
+
+  protected $regionsXLS = array(
+    ##League, AllStars, Extra, U16U19
+    'League' => array(
+      ##pool number
+      1 => array(
+        'Results' => array("B4:G16","B4:G4","B5:G16"),
+        'Standings' => array("I4:N8","I4:N4","I5:N8"),
+      ),
+      2 => array(
+        'Results' => array("B19:G31","B19:G19","B20:G31"),
+        'Standings' => array("I19:N23","I19:N19","I20:N23"),
+      ),
+      3 => array(
+        'Results' => array("B34:G46","B34:G34","B35:G46"),
+        'Standings' => array("I34:N38","I34:N34","I34:N38"),
+      ),
+      4 => array(
+        'Results' =>array("B49:G61","B49:G49","B50:G61"),
+        'Standings' => array("I49:N53","I49:N49","I50:N53"),
+      ),
+    ),
+    'Extra' => array(
+      ##pool number
+      1 => array(
+        'Results' => array("B4:G16","B4:G4","B5:G16"),
+        'Standings' => array("I4:N8","I4:N4","I5:N8"),
+      ),
+      2 => array(
+        'Results' => array("B19:G31","B19:G19","B20:G31"),
+        'Standings' => array("I19:N23","I19:N19","I20:N23"),
+      ),
+      //3 => array(
+      //  'Results' => array("B34:G46","B34:G34","B35:G46"),
+      //  'Standings' => array("I34:N38","I34:N34","I34:N38"),
+      //),
+      //4 => array(
+      //  'Results' =>array("B49:G61","B49:G49","B50:G61"),
+      //  'Standings' => array("I49:N53","I49:N49","I50:N53"),
+      //),
+    ),
+    'AllStars' => array(
+      ##pool number
+      1 => array(
+        'Results' => array("B4:G16","B4:G4","B5:G16"),
+        'Standings' => array("I4:N8","I4:N4","I5:N8"),
+      ),
+      2 => array(
+        'Results' => array("B19:G31","B19:G19","B20:G31"),
+        'Standings' => array("I19:N23","I19:N19","I20:N23"),
+      ),
+      //3 => array(
+      //  'Results' => array("B34:G46","B34:G34","B35:G46"),
+      //  'Standings' => array("I34:N38","I34:N34","I34:N38"),
+      //),
+      //4 => array(
+      //  'Results' =>array("B49:G61","B49:G49","B50:G61"),
+      //  'Standings' => array("I49:N53","I49:N49","I50:N53"),
+      //),
+    ),
+    'U16U19' => array(
+      1 => array(
+        'Results' => array("B4:G10","B4:G4","B5:G10"),
+        'Standings' => array("I4:N7","I4:N4","I5:N10"),
+      ),
+      2 => array(
+        'Results' => array("B13:G19","B13:G13","B14:G19"),
+        'Standings' => array("I13:N16","I13:N13","I14:N16"),
+      ),
+      3 => array(
+        'Results' => array("B22:G28","B22:G22","B23:G28"),
+        'Standings' => array("I22:N25","I22:N22","I23:N25"),
+      ),
+      4 => array(
+        'Results' =>array("B31:G37","B31:G31","B32:G37"),
+        'Standings' => array("I31:N34","I31:N31","I32:N34"),
+      ),
+    ),
+  );
 
     protected $widths = array
     (
@@ -112,6 +285,7 @@ class ResultsExportXLS
     public function __construct($excel)
     {
         $this->excel = $excel;
+        $this->setExports(array('League'));
     }
     protected function setHeaders($ws,$map,$row = 0)
     {
@@ -361,9 +535,12 @@ class ResultsExportXLS
         $Key = array_combine($Keys, $Values);
         $Keyx2 = array_combine($Keys, $Valuesx2);
 
-        if (count($pool['teams']) AND $Key['program'] == 'League') {
+//$varDump=array('program'=>$Key['program'], 'exportIf'=>$this->exportIf);
+//var_dump($varDump);
+//print_r("<br>****************<br>");
+        if (count($pool['teams']) AND in_array($Key['program'], $this->exportIf, true) ) {
           // key = U19B PP Bracket
-          if ($Keyx2['div'] == $Key['div'])
+          if ($Keyx2['div'] . $Keyx2['program'] == $Key['div'] . $Keyx2['program'])
           {
               $gameRow += 3;
               $teamRow += 3;
@@ -372,13 +549,13 @@ class ResultsExportXLS
           {
               $gameWS = $ss->createSheet($sheetIndex++);
               //$this->pageSetup($gameWS);
-              $gameWS->setTitle('Games ' . $Key['div']);
+              $gameWS->setTitle('Games ' . $Key['div'] . ' ' . $Key['program']);
 
               $gameRow = 4;
 
               $teamWS = $ss->createSheet($sheetIndex++);
               //$this->pageSetup($teamWS,1);
-              $teamWS->setTitle('Teams ' . $Key['div']);
+              $teamWS->setTitle('Teams ' . $Key['div'] . ' ' . $Key['program']);
               $teamRow = 3;
           }
           // Gets called for once for A B C D etc
@@ -387,11 +564,11 @@ class ResultsExportXLS
 
           if (substr($Key['div'],-1) == 'B')
           {
-            $divTitle = substr($Key['div'],0,-1) . ' Boys';
+            $divTitle = substr($Key['div'],0,-1) . ' Boys ' . $Key['program'];
           }
           else
           {
-            $divTitle = substr($Key['div'],0,-1) . ' Girls';
+            $divTitle = substr($Key['div'],0,-1) . ' Girls ' . $Key['program'];
           }
 
           $gameWS->setCellValueByColumnAndRow(1, 1, $divTitle);
@@ -401,50 +578,14 @@ class ResultsExportXLS
 
           $this->generatePoolGames($gameWS,$pool['games'],$pool['teams'],$gameRow);
 
-          if ( $Key['div'] == 'U10B' )
+          try
           {
-            $this->FormatU10U14PlayoffSummary($gameWS, $this->dU10BFields);
+            $this->FormatResults($gameWS, $Key['program'], $Key['div']);
           }
-          elseif ( $Key['div'] == 'U10G'  )
+          catch (Exception $e)
           {
-            $this->FormatU10U14PlayoffSummary($gameWS, $this->dU10GFields);
+            throw new Exception('Unrecognized key in ResultsExportXLS:' . $key);
           }
-          elseif ( $Key['div'] == 'U12B'  )
-          {
-            $this->FormatU10U14PlayoffSummary($gameWS, $this->dU12BFields);
-          }
-          elseif ( $Key['div'] == 'U12G'  )
-          {
-            $this->FormatU10U14PlayoffSummary($gameWS, $this->dU12GFields);
-          }
-          elseif ( $Key['div'] == 'U14B'  )
-          {
-            $this->FormatU10U14PlayoffSummary($gameWS, $this->dU14BFields);
-          }
-          elseif ( $Key['div'] == 'U14G'  )
-          {
-            $this->FormatU10U14PlayoffSummary($gameWS, $this->dU14GFields);
-          }
-           elseif ( $Key['div'] == 'U16B' )
-          {
-            $this->FormatU16U19PlayoffSummary($gameWS, $this->dU16BFields);
-          }
-          elseif ( $Key['div'] == 'U16G' )
-          {
-            $this->FormatU16U19PlayoffSummary($gameWS, $this->dU16GFields);
-          }
-          elseif ( $Key['div'] == 'U19B' )
-          {
-            $this->FormatU16U19PlayoffSummary($gameWS, $this->dU19BFields);
-          }
-          elseif ( $Key['div'] == 'U19G' )
-          {
-            $this->FormatU16U19PlayoffSummary($gameWS, $this->dU19GFields);
-          }
-          else
-          {
-            //throw new Exception('Unrecognized key in ResultsExportXLS:' . $key);
-          };
 
           $gameWS->setShowGridlines(false);
           $gameWS->getColumnDimension('H')->setWidth(3);
@@ -571,8 +712,10 @@ class ResultsExportXLS
 
     }
 
-    protected function FormatPlayoffResults($ws, $r, $h, $d)
+    protected function FormatPlayoffResults($ws, $p)
     {
+      list($r, $h, $d) = $p;
+
       //format the header range $h
       $styleArray = array(
         'font' => array(
@@ -687,40 +830,16 @@ class ResultsExportXLS
 
     }
 
-    protected function FormatU10U14PlayoffSummary($ws, $dFields)
+    protected function FormatResults($ws, $prog, $div)
     {
       $this->FormatPlayoffHeader ($ws,$this->dRec);
-      $this->FormatPlayoffResults ($ws,"B4:G16","B4:G4","B5:G16"); //Pool 1 Results
-      $this->FormatPlayoffResults ($ws,"I4:N8","I4:N4","I5:N8");  //Pool 1 Standings
 
-      $this->FormatPlayoffResults ($ws,"B19:G31","B19:G19","B20:G31"); //Pool 2 Results
-      $this->FormatPlayoffResults ($ws,"I19:N23","I19:N19","I20:N23"); //Pool 2 Standings
-
-      $this->FormatPlayoffResults ($ws,"B34:G46","B34:G34","B35:G46");  //Pool 3 Results
-      $this->FormatPlayoffResults ($ws,"I34:N38","I34:N34","I34:N38");  //Pool 3 Standings
-
-      $this->FormatPlayoffResults ($ws,"B49:G61","B49:G49","B50:G61"); //Pool 4 Results
-      $this->FormatPlayoffResults ($ws,"I49:N53","I49:N49","I50:N53"); //Pool 4 Standings
-
-      $this->AddPlayoffSummaries ($ws,$dFields);
-    }
-
-    protected function FormatU16U19PlayoffSummary($ws, $dFields)
-    {
-      $this->FormatPlayoffHeader ($ws,$this->dRec);
-      $this->FormatPlayoffResults ($ws,"B4:G10","B4:G4","B5:G10"); //Pool 1 Results
-      $this->FormatPlayoffResults ($ws,"I4:N7","I4:N4","I5:N10");  //Pool 1 Standings
-
-      $this->FormatPlayoffResults ($ws,"B13:G19","B13:G13","B14:G19"); //Pool 2 Results
-      $this->FormatPlayoffResults ($ws,"I13:N16","I13:N13","I14:N16"); //Pool 2 Standings
-
-      $this->FormatPlayoffResults ($ws,"B22:G28","B22:G22","B23:G28");  //Pool 3 Results
-      $this->FormatPlayoffResults ($ws,"I22:N25","I22:N22","I23:N25");  //Pool 3 Standings
-
-      $this->FormatPlayoffResults ($ws,"B31:G37","B31:G31","B32:G37"); //Pool 4 Results
-      $this->FormatPlayoffResults ($ws,"I31:N34","I31:N31","I32:N34"); //Pool 4 Standings
-
-      $this->AddPlayoffSummaries ($ws,$dFields);
+      foreach ($this->regionsXLS[$prog] as $pool){
+        $this->FormatPlayoffResults ($ws,$pool['Results']); //Pool Results
+        $this->FormatPlayoffResults ($ws,$pool['Standings']);  //Pool Standings
+      }
+print_r($div.$prog);die();
+      $this->AddPlayoffSummaries ($ws,$this->poFields[$div.$prog]);
     }
 
     protected function AddPlayoffSummaries($ws,$dFields)
