@@ -838,7 +838,6 @@ class ResultsExportXLS
         $this->FormatPlayoffResults ($ws,$pool['Results']); //Pool Results
         $this->FormatPlayoffResults ($ws,$pool['Standings']);  //Pool Standings
       }
-print_r($div.$prog);die();
       $this->AddPlayoffSummaries ($ws,$this->poFields[$div.$prog]);
     }
 
