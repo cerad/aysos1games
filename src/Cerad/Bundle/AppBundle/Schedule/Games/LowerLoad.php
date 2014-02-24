@@ -117,8 +117,8 @@ class LowerLoad
         $homeTeam->setLevelId($levelKey);
         $awayTeam->setLevelId($levelKey);
         
-        $homeTeam->setGroup($awayTeamGroup);
-        $awayTeam->setGroup($homeTeamGroup);
+        $homeTeam->setGroup($homeTeamGroup);
+        $awayTeam->setGroup($awayTeamGroup);
         
         // Allocate three referees
         $officials = array(1 => 'CR', 2 => 'AR 1', 3 => 'AR 2');
@@ -133,7 +133,8 @@ class LowerLoad
                 $game->addOfficial($official);
             }
         }
-
+echo sprintf("Game %d %s %s %s\n",$gameNum,$gameGroup,$homeTeamGroup,$awayTeamGroup);
+die();
         // And save
         $gameRepo->save($game);
         $this->results->countGames++;
