@@ -122,11 +122,7 @@ padding-left: 3%;">{{ awayTeam.role }} : {{ awayTeam.name }}</td></tr>
     <td style="min-width:275px;">&nbsp;</td>
     <td style="min-width:275px;">&nbsp;</td>
     <td style="min-width:100px;"><input type="submit" name="gameReportUpdate" value="Save" /></td>
-{% if is_granted('ROLE_ASSIGNOR') %}
-    <td style="min-width:225px;"><a href="{{ path('cerad_tourn_schedule_official_list') }}">Return to Schedule</a></td>
-{% else %}
     <td style="min-width:225px;"><a href="{{ path('cerad_tourn_schedule_list') }}">Return to Schedule</a></td>
-{% endif %}
   </tr>
 </table>
 <hr>

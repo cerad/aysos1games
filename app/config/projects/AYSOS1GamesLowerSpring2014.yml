@@ -112,8 +112,8 @@ AYSOS1GamesLowerSpring2014:
       dates:
           type:     checkbox
           label:    Days
-          default: ['All','2014-02-22','2014-02-23']
-          #default: ['All','2014-03-01','2014-03-02']
+          #default: ['All','2014-02-22','2014-02-23']
+          default: ['All','2014-03-01','2014-03-02']
           choices:
               'All'       : All
               '2014-02-22': Sat 2/22
@@ -121,10 +121,20 @@ AYSOS1GamesLowerSpring2014:
               '2014-03-01': Sat 3/01
               '2014-03-02': Sun 3/02
           
+      ages:
+        type:     checkbox
+        label:    Ages
+        default:  [All, 'U10','U11,U12','U13,U14']
+        choices:
+          All:     All
+          U10:     U10
+          U11,U12: U12
+          U13,U14: U14
+        
       programs:
         type:     checkbox
         label:    Programs
-        default:  ['League']
+        default:  ['AllStars', 'Extra']
         choices:
           All      : All
           League   : League
@@ -140,16 +150,6 @@ AYSOS1GamesLowerSpring2014:
           B:    Boys
           G:    Girls
           
-      ages:
-        type:     checkbox
-        label:    Ages
-        default:  [All, 'U10','U11,U12','U13,U14']
-        choices:
-          All:     All
-          U10:     U10
-          U11,U12: U12
-          U13,U14: U14
-        
       fields:
         type:    checkbox
         label:   Fields

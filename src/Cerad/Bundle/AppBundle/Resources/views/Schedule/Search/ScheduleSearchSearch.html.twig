@@ -19,11 +19,6 @@
       <td>{% include '@CeradTourn/Schedule/ScheduleSearchCheckboxes.html.twig' %}</td>
       {% endif %}
 
-      {% if form.programs is defined %}
-      {% set items = form.programs %}
-      <td>{% include '@CeradTourn/Schedule/ScheduleSearchCheckboxes.html.twig' %}</td>
-      {% endif %}
-
       {% if form.genders is defined %}
       {% set items = form.genders %}
       <td>{% include '@CeradTourn/Schedule/ScheduleSearchCheckboxes.html.twig' %}</td>
@@ -32,6 +27,11 @@
       {% if form.ages is defined %}
       {% set items = form.ages %}
       <td>{% include '@CeradTourn/Schedule/ScheduleSearchCheckboxes.html.twig' %}</td>
+
+      {% if form.programs is defined %}
+      {% set items = form.programs %}
+      <td>{% include '@CeradTourn/Schedule/ScheduleSearchCheckboxes.html.twig' %}</td>
+      {% endif %}
     {% endif %}
 
       </tr>
