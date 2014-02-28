@@ -13,8 +13,8 @@
     <fieldset>
     <table>
       <tr>
-      {% if form.dow is defined %}
-      {% set items = form.dow %}
+      {% if form.dates is defined %}
+      {% set items = form.dates %}
       <td>{% include '@CeradTourn/Schedule/ScheduleSearchCheckboxes.html.twig' %}</td>
       {% endif %}
 
@@ -27,7 +27,7 @@
       {% set items = form.ages %}
       <td>{% include '@CeradTourn/Schedule/ScheduleSearchCheckboxes.html.twig' %}</td>
     {% endif %}
-    
+
       {% if form.programs is defined %}
       {% set items = form.programs %}
       <td>{% include '@CeradTourn/Schedule/ScheduleSearchCheckboxes.html.twig' %}</td>
