@@ -252,8 +252,8 @@ form#cerad_tourn_schedule_official_search fieldset
 ,form#cerad_tourn_schedule_search fieldset
 ,form#cerad_tourn_unassigned_matches_search fieldset
 {
-  padding-left: 2%;
-  line-height: 2em;
+/*  padding-left: 2%;
+  line-height: 2em;*/
 }
 
 form#cerad_tourn_schedule_official_search fieldset div label
