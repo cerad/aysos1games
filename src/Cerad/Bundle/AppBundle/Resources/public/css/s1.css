@@ -443,3 +443,9 @@ button#form_update.submit
 {
   margin-right: 20px;
 }
+
+input#form_homeTeam_role
+,input#form_awayTeam_role
+{
+  width: 80px;
+}
