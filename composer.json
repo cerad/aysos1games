@@ -9,6 +9,10 @@
     "repositories": [
         {
             "type": "vcs",
+            "url": "https://github.com/cerad/cerad2"
+        },
+        {
+            "type": "vcs",
             "url": "https://github.com/cerad/FOSUserBundle"
         }
     ],
@@ -27,7 +31,9 @@
         "incenteev/composer-parameter-handler": "~2.0",
         
         "phpoffice/phpexcel": "1.7.9",
-        "friendsofsymfony/user-bundle": "dev-master"
+        "friendsofsymfony/user-bundle": "dev-master",
+        "cerad/cerad": "v2013.12.03"
+
     },
     "scripts": {
         "post-install-cmd": [
