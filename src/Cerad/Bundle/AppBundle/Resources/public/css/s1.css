@@ -84,7 +84,7 @@ form
 #layout-header
 ,#layout-content
 {
-  padding: 10px 0;
+  padding-top: 10px;
 }
 
 #layout-topmenu
@@ -252,8 +252,8 @@ form#cerad_tourn_schedule_official_search fieldset
 ,form#cerad_tourn_schedule_search fieldset
 ,form#cerad_tourn_unassigned_matches_search fieldset
 {
-  padding-left: 2%;
-  line-height: 2em;
+/*  padding-left: 2%;
+  line-height: 2em;*/
 }
 
 form#cerad_tourn_schedule_official_search fieldset div label
@@ -398,4 +398,53 @@ table#person-list td
   {
     display:none;
   }
+}
+
+/* 2014-02-28: rr: Styling for update-by-scorer */
+
+#layout-content form
+{
+  padding-bottom: 20px;
+}
+
+#layout-content form > div
+{
+  padding: 8px 0 7px;
+  line-height: 2em;
+}
+
+#layout-content input
+,#layout-content select
+{
+  margin: 6px;
+}
+
+#form_dtBeg
+{
+  padding-top: 0;
+  display: inline-flex;
+}
+
+#form_dtBeg_date
+{
+  float: left;
+  padding-right: 20px;
+}
+
+button#form_update.submit
+,button#form_reset.submit
+{
+  margin: 20px 30px 0 0;
+  padding: 5px 20px;
+}
+
+#layout-content form > div label.required
+{
+  margin-right: 20px;
+}
+
+input#form_homeTeam_role
+,input#form_awayTeam_role
+{
+  width: 80px;
 }

@@ -113,7 +113,7 @@ AYSOS1GamesLowerSpring2014:
           type:     checkbox
           label:    Days
           #default: ['All','2014-02-22','2014-02-23']
-          default: ['All','2014-03-01','2014-03-02']
+          default: ['2014-03-02']
           choices:
               'All'       : All
               '2014-02-22': Sat 2/22
@@ -165,14 +165,14 @@ AYSOS1GamesLowerSpring2014:
           'Green 1' : 'Green1'
           'Green 2' : 'Green2'
           'Green 3' : 'Green3'
-          'Murphy 1' : 'Murphy1'
+          #'Murphy 1' : 'Murphy1'
           'Murphy 2' : 'Murphy2'
           'Red 1' : 'Red1'
           'Red 2' : 'Red2'
           'White 1' : 'White1'
           'White 2' : 'White2'
           'White 3' : 'White3'
-          'White 4' : 'White4'
+          #'White 4' : 'White4'
           'Yellow 1' : 'Yellow1'
           'Yellow 2' : 'Yellow2'
           'Yellow 3' : 'Yellow3'
