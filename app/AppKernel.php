@@ -27,10 +27,13 @@ class AppKernel extends Kernel
             new Cerad\Bundle\EaysoBundle  \CeradEaysoBundle(),
             new Cerad\Bundle\OrgBundle    \CeradOrgBundle(),
 
-            new Cerad\Bundle\TournBundle  \CeradTournBundle(),
+            new Cerad\Bundle\TournBundle\CeradTournBundle(),
             new Cerad\Bundle\TournAdminBundle\CeradTournAdminBundle(),
-            new Cerad\Bundle\AppBundle    \CeradAppBundle(),
-            new Cerad\Bundle\AppAdminBundle    \CeradAppAdminBundle(),
+            new Cerad\Bundle\AppBundle\CeradAppBundle(),
+            new Cerad\Bundle\AppAdminBundle\CeradAppAdminBundle(),
+            
+            new Cerad\Bundle\AppCeradBundle\CeradAppCeradBundle(),
+            
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
